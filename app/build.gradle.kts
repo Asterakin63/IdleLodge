@@ -1,4 +1,4 @@
-plugins {
+﻿plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
@@ -9,14 +9,14 @@ plugins {
 
 android {
     namespace = "com.idlelodge"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.idlelodge"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1000
-        versionName = "0.1.0"
+        targetSdk = 36
+        versionCode = 2000
+        versionName = "0.1.1"
 
         // Nightly channel (-PnightlyBuild=N): publishes as <stable>.N with
         // versionCode <stableCode>+N. Requires the thousands versionCode

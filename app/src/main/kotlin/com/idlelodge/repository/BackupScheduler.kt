@@ -41,7 +41,16 @@ class BackupScheduler @Inject constructor(
         // (INTERVAL_HOUR, INTERVAL_DAY, etc.). Passing 7*INTERVAL_DAY is silently
         // ignored and the alarm fires once then stops. Use setExactAndAllowWhileIdle
         // instead and reschedule manually inside performBackup after each firing.
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, firstFire, pi)
+        setAlarm(firstFire, pi)
+    }
+
+    /** Exact when the user granted exact alarms, otherwise a Doze-friendly inexact alarm. */
+    private fun setAlarm(triggerAt: Long, pi: PendingIntent) {
+        try {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+        } catch (_: SecurityException) {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+        }
     }
 
     /** Reschedule the next alarm occurrence after a backup firing (successful or not). */
@@ -59,7 +68,7 @@ class BackupScheduler @Inject constructor(
         // happening at 5am (playtester report after v1.14.3).
         val nextFire = if (frequency == "hourly") System.currentTimeMillis() + intervalMs(frequency)
                        else nextFiveAm(frequency)
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextFire, pi)
+        setAlarm(nextFire, pi)
     }
 
     private fun intervalMs(frequency: String): Long = when (frequency) {

@@ -286,6 +286,8 @@
     <string name="settings_title">Settings</string>
     <string name="settings_notifications">Session Notifications</string>
     <string name="settings_notifications_desc">Show an alert when your work is complete</string>
+    <string name="settings_exact_alarms">On-time alarms</string>
+    <string name="settings_exact_alarms_desc">Allow exact alarms so your work completes at the exact minute (otherwise Android may delay it a little)</string>
     <string name="settings_battery_optimization">Battery Optimization</string>
     <string name="settings_battery_optimization_desc">Disable battery optimization for Idle Lodge to receive timely session alerts</string>
     <string name="settings_battery_optimization_btn">Adjust Setting</string>

@@ -284,6 +284,8 @@
     <string name="settings_title">Paramètres</string>
     <string name="settings_notifications">Notifications de session</string>
     <string name="settings_notifications_desc">Afficher une alerte lorsque votre ouvrage est achevé</string>
+    <string name="settings_exact_alarms">Alarmes à l\'heure</string>
+    <string name="settings_exact_alarms_desc">Autoriser les alarmes exactes pour que vos travaux s\'achèvent à la minute près (sinon Android peut les retarder un peu)</string>
     <string name="settings_battery_optimization">Optimisation de la batterie</string>
     <string name="settings_battery_optimization_desc">Désactivez l\'optimisation de la batterie pour Idle Loge afin de recevoir les alertes de session à temps</string>
     <string name="settings_battery_optimization_btn">Ajuster le paramètre</string>
