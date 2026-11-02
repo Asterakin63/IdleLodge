@@ -1,0 +1,671 @@
+package com.idlelodge.ui.viewmodel
+
+import com.idlelodge.util.withAppLocale
+
+import android.content.Context
+import androidx.annotation.StringRes
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.idlelodge.R
+import com.idlelodge.data.json.DungeonData
+import com.idlelodge.data.json.EnemyData
+import com.idlelodge.data.json.EquipmentData
+import com.idlelodge.data.json.SpellData
+import com.idlelodge.data.model.EquipSlot
+import com.idlelodge.data.model.OwnedPet
+import com.idlelodge.data.model.SkillSession
+import com.idlelodge.data.model.PlayerFlags
+import com.idlelodge.data.model.SessionFrame
+import com.idlelodge.data.model.Skills
+import com.idlelodge.data.model.QueuedAction
+import com.idlelodge.repository.BoostRepository
+import com.idlelodge.repository.ChurchRepository
+import com.idlelodge.repository.blessingPrayerCapeMult
+import com.idlelodge.repository.FoodReservation
+import com.idlelodge.repository.GameDataRepository
+import com.idlelodge.repository.GuildRepository
+import com.idlelodge.repository.PlayerRepository
+import com.idlelodge.repository.QueuedSessionStarter
+import com.idlelodge.repository.QuestRepository
+import com.idlelodge.repository.SessionRepository
+import com.idlelodge.repository.SaveSlotRepository
+import com.idlelodge.repository.SlayerRepository
+import com.idlelodge.repository.TownRepository
+import com.idlelodge.simulator.HeirloomStats
+import com.idlelodge.simulator.CombatSimulator
+import com.idlelodge.simulator.SkillSimulator
+import com.idlelodge.simulator.TowerScaling
+import com.idlelodge.util.GameStrings
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
+import javax.inject.Inject
+import kotlin.math.roundToInt
+
+data class TowerUiState(
+    val isLoading: Boolean = true,
+    val currentFloor: Int = 0,
+    val nextFloorToQueue: Int = 1,
+    val enemyStrengthPct: Int = 0,
+    val bestFloor: Int = 0,
+    val towerSession: SkillSession? = null,
+    val claimableMilestones: List<Int> = emptyList(),
+    val claimedMilestones: List<Int> = emptyList(),
+    val snackbarMessage: String? = null,
+    val startingSession: Boolean = false,
+    val selectedWeaponSlot: String? = null,
+    val equippedWeapons: Map<String, EquipmentData> = emptyMap(),
+    val selectedArrowKey: String? = null,
+    val selectedSpell: SpellData? = null,
+    val availableSpells: List<SpellData> = emptyList(),
+    val magicLevel: Int = 1,
+    val inventory: Map<String, Int> = emptyMap(),
+    val selectedPotionKey: String? = null,
+    val availablePotions: Map<String, Int> = emptyMap(),
+    val isQueueFull: Boolean = false,
+)
+
+data class TowerMilestone(
+    val floor: Int,
+    /** Reward text resource; item display names fill its %s placeholders (issue #1426). */
+    @StringRes val descriptionRes: Int,
+    /** Item keys whose localised names fill the description placeholders, in order. */
+    val itemKeys: List<String> = emptyList(),
+)
+
+@HiltViewModel
+class TowerViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
+    @ApplicationContext private val context: Context,
+    private val playerRepo: PlayerRepository,
+    private val sessionRepo: SessionRepository,
+    private val gameData: GameDataRepository,
+    private val queuedSessionStarter: QueuedSessionStarter,
+    private val questRepo: QuestRepository,
+    private val guildRepo: GuildRepository,
+    private val slayerRepo: SlayerRepository,
+    private val townRepo: TownRepository,
+    private val saveSlotRepo: SaveSlotRepository,
+    private val json: Json,
+) : ViewModel() {
+
+    val potionEffects: Map<String, Map<String, Int>> = gameData.potionEffects
+
+    init {
+        // Transient loadout picks belong to the character that made them; without this reset
+        // the cached values override the next character's saved loadout after a slot switch.
+        viewModelScope.launch {
+            saveSlotRepo.switchEvents.collect {
+                _extra.update {
+                    it.copy(
+                        selectedSpell      = null,
+                        selectedArrowKey   = null,
+                        selectedPotionKey  = null,
+                        selectedWeaponSlot = null,
+                    )
+                }
+            }
+        }
+    }
+
+    init {
+        // Tower Boots and Tower Plateskirt joined the floor 150 milestone after many players had already
+        // claimed it; grant them once retroactively since milestones can't be re-claimed
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            if (150 in flags.towerMilestonesClaimed) {
+                val inventory: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
+                if ("tower_boots" !in inventory) {
+                    playerRepo.addItems(mapOf("tower_boots" to 1))
+                }
+                if ("tower_plateskirt" !in inventory) {
+                    playerRepo.addItems(mapOf("tower_plateskirt" to 1))
+                }
+            }
+        }
+    }
+
+    companion object {
+        /** Floors between death-recovery checkpoints — see the playerDied branch in collectSession(). */
+        const val TOWER_CHECKPOINT_INTERVAL = 25
+        private val ARROW_TIERS = listOf(
+            "runite_arrow", "adamantite_arrow", "mithril_arrow",
+            "steel_arrow", "iron_arrow", "bronze_arrow",
+        )
+        private val ARROW_STRENGTH_BONUS = mapOf(
+            "bronze_arrow"     to 7,
+            "iron_arrow"       to 10,
+            "steel_arrow"      to 16,
+            "mithril_arrow"    to 22,
+            "adamantite_arrow" to 31,
+            "runite_arrow"     to 49,
+        )
+
+
+        val MILESTONES: List<TowerMilestone> = listOf(
+            TowerMilestone(10,  R.string.tower_milestone_ring, listOf("tower_ring")),
+            TowerMilestone(20,  R.string.tower_milestone_xp_1pct),
+            TowerMilestone(30,  R.string.tower_milestone_coins_5k),
+            TowerMilestone(40,  R.string.tower_milestone_shield, listOf("tower_shield")),
+            TowerMilestone(50,  R.string.tower_milestone_amulet, listOf("tower_amulet")),
+            TowerMilestone(60,  R.string.tower_milestone_hp_50),
+            TowerMilestone(70,  R.string.tower_milestone_xp_2pct),
+            TowerMilestone(80,  R.string.tower_milestone_coins_25k),
+            TowerMilestone(90,  R.string.tower_milestone_helm, listOf("tower_helm")),
+            TowerMilestone(100, R.string.tower_milestone_pet),
+            TowerMilestone(110, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(120, R.string.tower_milestone_plate, listOf("tower_body")),
+            TowerMilestone(130, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(140, R.string.tower_milestone_coins_100k),
+            TowerMilestone(150, R.string.tower_milestone_legs_set, listOf("tower_legs", "tower_boots", "tower_plateskirt")),
+            TowerMilestone(160, R.string.tower_milestone_hp_50),
+            TowerMilestone(170, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(180, R.string.tower_milestone_sword, listOf("tower_sword")),
+            TowerMilestone(190, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(200, R.string.tower_milestone_cape, listOf("tower_cape")),
+            TowerMilestone(210, R.string.tower_milestone_hp_50),
+            TowerMilestone(220, R.string.tower_milestone_crossbow, listOf("tower_crossbow")),
+            TowerMilestone(230, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(240, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(250, R.string.tower_milestone_staff, listOf("void_staff")),
+        )
+    }
+
+    private val _extra = MutableStateFlow(TowerUiState())
+
+    val uiState = combine(
+        playerRepo.playerFlow,
+        sessionRepo.activeSessionFlow,
+        _extra,
+    ) { player, session, extra ->
+        val towerSession = session?.takeIf { it.skillName == "tower" }
+        if (player == null) {
+            extra.copy(towerSession = towerSession)
+        } else {
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val equipped: Map<String, String?> = try { json.decodeFromString(player.equipped) } catch (_: Exception) { emptyMap() }
+            val levels: Map<String, Int> = try { json.decodeFromString(player.skillLevels) } catch (_: Exception) { emptyMap() }
+            val inventory: Map<String, Int> = try { json.decodeFromString(player.inventory) } catch (_: Exception) { emptyMap() }
+            val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
+            val equippedWeapons = EquipSlot.WEAPON_SLOTS.mapNotNull { slot ->
+                val key = equipped[slot] ?: return@mapNotNull null
+                val data = equipMap[key] ?: return@mapNotNull null
+                slot to data
+            }.toMap()
+            val claimable = MILESTONES.map { it.floor }.filter { floor ->
+                floor <= flags.towerBestFloor && floor !in flags.towerMilestonesClaimed
+            }
+            val lastQueuedFloor = flags.sessionQueue
+                .lastOrNull { it.skillName == "tower" }
+                ?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+            val runningFloor = lastQueuedFloor
+                ?: towerSession?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+                ?: flags.towerCurrentFloor
+            val enemyStrengthPct = ((TowerScaling.hpScalingMult(flags.towerCurrentFloor) - 1f) * 100).roundToInt()
+            val magicLevel = levels[Skills.MAGIC] ?: 1
+            extra.copy(
+                isLoading           = false,
+                currentFloor        = flags.towerCurrentFloor,
+                nextFloorToQueue    = runningFloor + 1,
+                enemyStrengthPct    = enemyStrengthPct,
+                bestFloor           = flags.towerBestFloor,
+                towerSession        = towerSession,
+                claimableMilestones = claimable,
+                claimedMilestones   = flags.towerMilestonesClaimed,
+                equippedWeapons     = equippedWeapons,
+                selectedWeaponSlot  = extra.selectedWeaponSlot ?: flags.activeWeaponSlot,
+                selectedArrowKey    = extra.selectedArrowKey ?: flags.equippedArrows,
+                selectedSpell       = resolveSpell(extra.selectedSpell, flags, magicLevel),
+                availableSpells     = gameData.spells.values.toList(),
+                magicLevel          = magicLevel,
+                inventory           = inventory,
+                selectedPotionKey   = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
+                availablePotions    = inventory.filterKeys { it in gameData.potionEffects },
+                isQueueFull         = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), TowerUiState())
+
+    private fun buildFloorDungeon(floor: Int): DungeonData = DungeonData(
+        name             = "tower_floor_$floor",
+        displayName      = context.withAppLocale().getString(R.string.tower_floor_label, floor),
+        description      = context.withAppLocale().getString(R.string.tower_floor_desc, floor),
+        recommendedLevel = (floor * 2).coerceAtMost(200),
+        encounterRate    = 0.65,
+        enemySpawns      = TowerScaling.tierFor(floor),
+    )
+
+    private fun scaledEnemies(floor: Int): Map<String, EnemyData> =
+        TowerScaling.scaledEnemies(floor, gameData.enemies)
+
+    private fun petBoostFor(petsJson: String, ironman: Boolean = false): Int {
+        if (ironman) return 0
+        val pets = try { json.decodeFromString<List<OwnedPet>>(petsJson) } catch (_: Exception) { return 0 }
+        return pets.sumOf { pet ->
+            val pd = gameData.pets[pet.id]
+            if (pd != null && (pd.boostedSkill == "combat" || pd.boostedSkill == "all")) pd.boostPercent else 0
+        }
+    }
+
+    fun startFloor() {
+        viewModelScope.launch {
+            if (sessionRepo.getActiveSession() != null) {
+                // No food warning here by design (pre-existing; JD-A-003): tower starts
+                // never warned. The sim input below reserves honestly, and a starved
+                // run simply dies and stops the climb.
+                val player  = playerRepo.getOrCreatePlayer()
+                val agility = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+                val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val activeSession = sessionRepo.getActiveSession()
+                val lastQueuedFloor = flags.sessionQueue
+                    .lastOrNull { it.skillName == "tower" }
+                    ?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+                val runningFloor = lastQueuedFloor
+                    ?: activeSession?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+                    ?: flags.towerCurrentFloor
+                val nextFloor = runningFloor + 1
+                val enqueued = playerRepo.enqueueAction(
+                    QueuedAction(
+                        skillName           = "tower",
+                        activityKey         = "tower_floor_$nextFloor",
+                        skillDisplayName    = "Infinite Tower: Floor $nextFloor",
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)),
+                    )
+                )
+                if (enqueued) queuedSessionStarter.startNextQueued()
+                _extra.update {
+                    it.copy(
+                        snackbarMessage = if (enqueued)
+                            context.withAppLocale().let { ctx -> ctx.getString(R.string.snackbar_added_to_queue, ctx.getString(R.string.code_tower_name)) }
+                        else
+                            context.withAppLocale().getString(R.string.snackbar_queue_full),
+                    )
+                }
+                return@launch
+            }
+            _extra.update { it.copy(startingSession = true) }
+            try {
+                val player     = playerRepo.getOrCreatePlayer()
+                val levels:    Map<String, Int>      = json.decodeFromString(player.skillLevels)
+                val equipped:  Map<String, String?>  = json.decodeFromString(player.equipped)
+                val inventory: Map<String, Int>      = json.decodeFromString(player.inventory)
+                val flags: PlayerFlags               = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
+
+                val floor = flags.towerCurrentFloor + 1
+
+                val activeWeaponSlot = _extra.value.selectedWeaponSlot
+                    ?: flags.activeWeaponSlot
+                    ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
+                    ?: EquipSlot.WEAPON
+                val weaponKey = equipped[activeWeaponSlot]
+                val weapon    = weaponKey?.let { equipMap[it] }
+                val combatStyle = when (weapon?.combatStyle) {
+                    "ranged"   -> "ranged"
+                    "magic"    -> "magic"
+                    "strength" -> "strength"
+                    else       -> "attack"
+                }
+
+                val totalAttackBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
+                    val eq = equipMap[equipped[slot]] ?: return@sumOf 0
+                    eq.attackBonus + when (combatStyle) {
+                        "ranged" -> eq.rangedAttackBonus ?: 0
+                        "magic"  -> eq.magicAttackBonus  ?: 0
+                        else     -> 0
+                    }
+                } + (weapon?.attackBonus ?: 0) + when (combatStyle) {
+                    "ranged" -> weapon?.rangedAttackBonus ?: 0
+                    "magic"  -> weapon?.magicAttackBonus  ?: 0
+                    else     -> 0
+                }
+                val totalStrengthBonus = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
+                val totalDefenseBonus  = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
+                val totalRangedStrBonus = if (combatStyle == "ranged") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
+                } else 0
+                val totalMagicDmgBonus = if (combatStyle == "magic") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
+                } else 0
+
+                val selectedSpell = resolveSpell(_extra.value.selectedSpell, flags, levels[Skills.MAGIC] ?: 1)
+                val preferredArrow  = (_extra.value.selectedArrowKey ?: flags.equippedArrows)?.takeIf { (inventory[it] ?: 0) > 0 }
+
+                val potionKey     = _extra.value.selectedPotionKey
+                    ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
+                val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
+                    playerRepo.consumeItems(mapOf(potionKey to 1))
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
+                } else emptyMap()
+
+                val towerHpBonus = flags.towerHpBonus
+
+                val dungeon    = buildFloorDungeon(floor)
+                val enemies    = scaledEnemies(floor)
+                val foodHeal   = boostRepo.boostedFoodHeal(flags, gameData.foodHealValues)
+                val availableFood = FoodReservation.available(inventory, flags.equippedFood.keys, sessionRepo.pendingFoodConsumed())
+                val orderedTowerArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedTowerArrowKeys.associateWith { inventory[it] ?: 0 }
+
+                val staffCoversRune = combatStyle == "magic" && selectedSpell != null &&
+                    (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
+                val runeKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
+                val runeCost = selectedSpell?.runeCost ?: 1
+
+                val weaponAttackSpeed = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC
+                val neededRunes = 60 * CombatSimulator.playerTicksPerFrame(weaponAttackSpeed) * runeCost
+                if (runeKey != null && (inventory[runeKey] ?: 0) < neededRunes) {
+                    _extra.update { it.copy(
+                        snackbarMessage = context.withAppLocale().getString(R.string.tower_not_enough_runes, GameStrings.itemName(context, runeKey)),
+                        startingSession = false,
+                    ) }
+                    return@launch
+                }
+
+                val result = CombatSimulator.simulateDungeon(
+                    dungeon             = dungeon,
+                    enemies             = enemies,
+                    playerAttack        = (levels[Skills.ATTACK]    ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags, levels[Skills.ATTACK] ?: 1),
+                    playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags, levels[Skills.STRENGTH] ?: 1),
+                    playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + boostRepo.combatStatBonus(Skills.DEFENSE, flags, levels[Skills.DEFENSE] ?: 1),
+                    blessingDefBonus    = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData), gameData.blessings),
+                    playerHp            = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags, levels[Skills.HITPOINTS] ?: 1) + towerHpBonus,
+                    weaponAttackBonus   = totalAttackBonus,
+                    weaponStrengthBonus = totalStrengthBonus,
+                    combatStyle         = combatStyle,
+                    playerRanged        = (levels[Skills.RANGED] ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags, levels[Skills.RANGED] ?: 1),
+                    playerMagic         = (levels[Skills.MAGIC]  ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags, levels[Skills.MAGIC] ?: 1),
+                    rangedGearStrengthBonus = totalRangedStrBonus,
+                    spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
+                    agilityLevel        = levels[Skills.AGILITY] ?: 1,
+                    floorReductionMin     = boostRepo.sessionFloorReductionMin(flags),
+                    petBoostPct         = petBoostFor(player.pets, flags.ironman),
+                    equippedFood        = availableFood,
+                    foodHealValues      = foodHeal,
+                    potionBonuses       = potionBonuses,
+                    availableArrows     = availableArrows,
+                    arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
+                    runeKey             = runeKey,
+                    runeCostPerAttack   = runeCost,
+                    attackSpeedSec      = weaponAttackSpeed,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
+                    foodEatOrder        = flags.foodEatOrder,
+                    chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
+                    doubleHitChance     = boostRepo.doubleHitChance(flags),
+                    secondChance        = boostRepo.secondChanceActive(flags),
+                )
+
+                // Runes are consumed after the session, not upfront.
+                val framesJson = json.encodeToString(
+                    json.serializersModule.serializer<List<SessionFrame>>(),
+                    result.frames,
+                )
+                val alarmOffsetMs = CombatSimulator.deathAlarmOffsetMs(result.frames, result.durationMs / 60L)
+
+                sessionRepo.startSession(
+                    skillName        = "tower",
+                    activityKey      = "tower_floor_$floor",
+                    frames           = framesJson,
+                    durationMs       = result.durationMs,
+                    skillDisplayName = "Infinite Tower: Floor $floor",
+                    alarmOffsetMs    = alarmOffsetMs,
+                    weaponSlot       = activeWeaponSlot,
+                )
+            } catch (e: Exception) {
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
+            } finally {
+                _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
+            }
+        }
+    }
+
+    fun selectWeaponSlot(slot: String) {
+        _extra.update { it.copy(selectedWeaponSlot = slot) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            playerRepo.updateFlags(flags.copy(activeWeaponSlot = slot))
+            EquipSlot.combatStyleForSlot(slot)?.let { style -> playerRepo.applyLoadout(style, gameData.equipment) }
+        }
+    }
+
+    fun selectArrow(key: String?) {
+        _extra.update { it.copy(selectedArrowKey = key) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                equippedArrows = key,
+                rangedLoadoutArrowKey = if (activeStyle == "ranged") key else flags.rangedLoadoutArrowKey,
+            ))
+        }
+    }
+
+    /**
+     * The in-memory pick, unless it's above [magicLevel] (a Magic prestige since it was picked) —
+     * then the saved spell, which prestige already downgraded.
+     */
+    private fun resolveSpell(picked: SpellData?, flags: PlayerFlags, magicLevel: Int): SpellData? =
+        picked?.takeIf { it.magicLevelRequired <= magicLevel } ?: flags.activeSpell?.let { gameData.spells[it] }
+
+    fun selectSpell(spell: SpellData?) {
+        _extra.update { it.copy(selectedSpell = spell) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                activeSpell = spell?.name,
+                magicLoadoutSpellName = if (activeStyle == "magic") spell?.name else flags.magicLoadoutSpellName,
+            ))
+        }
+    }
+
+    fun selectPotion(key: String?) {
+        _extra.update { it.copy(selectedPotionKey = key) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            playerRepo.updateFlags(flags.copy(activePotionKey = key))
+        }
+    }
+
+    fun collectFloor() {
+        viewModelScope.launch {
+            val latest = sessionRepo.getActiveSession()
+            if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt && sessionRepo.hasTrustedClock(latest)) {
+                sessionRepo.markCompleted(latest.sessionId)
+            }
+            var session: SkillSession? =
+                sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+                    ?: return@launch
+
+            // Drain every backlogged floor (oldest first) in one call, so floors that
+            // finished offline while multiple were queued don't get silently skipped.
+            while (session != null) {
+            val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+
+            val currentLevels = playerRepo.getSkillLevels()
+            // Prestige mid-floor forfeits only the XP; loot, coins, kills, and floor progress
+            // still pay out below.
+            val grantXp = isSkillSessionStillEligible(session, currentLevels, gameData)
+
+            val playerDied = frames.any { it.died }
+
+            val totalXpPerSkill = mutableMapOf<String, Long>()
+            val allItems        = mutableMapOf<String, Int>()
+            val allFoodConsumed = mutableMapOf<String, Int>()
+            val allKillsByEnemy = mutableMapOf<String, Int>()
+            val allArrowsConsumed = mutableMapOf<String, Int>()
+            val allRunesConsumed  = mutableMapOf<String, Int>()
+            for (frame in frames) {
+                for ((skill, xp) in frame.xpBySkill)      totalXpPerSkill[skill] = (totalXpPerSkill[skill] ?: 0L) + xp
+                for ((item,  qty) in frame.items)          allItems[item]         = (allItems[item] ?: 0) + qty
+                for ((food,  qty) in frame.foodConsumed)   allFoodConsumed[food]  = (allFoodConsumed[food] ?: 0) + qty
+                for ((enemy, qty) in frame.killsByEnemy)   allKillsByEnemy[enemy] = (allKillsByEnemy[enemy] ?: 0) + qty
+                for ((arrow, qty) in frame.arrowsConsumed) allArrowsConsumed[arrow] = (allArrowsConsumed[arrow] ?: 0) + qty
+                for ((rune,  qty) in frame.runesConsumed)  allRunesConsumed[rune]   = (allRunesConsumed[rune] ?: 0) + qty
+            }
+
+            if (!playerDied && allKillsByEnemy.isNotEmpty()) {
+                val combatStyle = detectCombatStyle(totalXpPerSkill)
+                questRepo.recordCombat(
+                    dungeonKey        = session.activityKey,
+                    killsByEnemy      = allKillsByEnemy,
+                    loot              = allItems,
+                    combatStyle       = combatStyle,
+                    foodConsumedTotal = allFoodConsumed.values.sum(),
+                )
+                playerRepo.recordDailyKills(allKillsByEnemy)
+                guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
+                var slayerXp = 0L
+                for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
+                if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
+            }
+
+            if (playerDied) {
+                val keep = boostRepo.deathKeepFraction(playerRepo.getFlags())
+                totalXpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * keep).toLong()) }
+                allItems.replaceAll { _, qty -> maxOf(0, (qty * keep).toInt()) }
+                allItems.entries.removeIf { it.value == 0 }
+            }
+
+            var coinsGained = allItems.remove("coins")?.toLong() ?: 0L
+
+            val flags         = playerRepo.getFlags()
+            val towerXpMult   = if (flags.ironman) 1.0 else 1.0 + flags.towerXpBonusPct / 100.0
+            val towerCoinMult = if (flags.ironman) 1.0 else 1.0 + flags.towerCoinBonusPct / 100.0
+
+            // Apply only the tower bonus here; applyMultiSkillResults handles boost/blessing internally
+            val xpForRepo = if (grantXp) totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() } else emptyMap()
+            coinsGained   = (coinsGained * towerCoinMult).toLong()
+
+            playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained, sessionId = session.sessionId)
+
+            val skillLevels = json.decodeFromString<Map<String, Int>>(playerRepo.getOrCreatePlayer().skillLevels)
+            val rangedLevel = skillLevels[Skills.RANGED] ?: 1
+            val magicLevel  = skillLevels[Skills.MAGIC] ?: 1
+
+            val arrowsReclaimed = allArrowsConsumed.mapValues { (_, qty) -> (qty * (reclaimChance(rangedLevel) + boostRepo.arrowReclaimBonus(flags)).coerceAtMost(0.95)).toInt() }.filterValues { it > 0 }
+            val runesReclaimed  = allRunesConsumed.mapValues { (_, qty) -> (qty * (reclaimChance(magicLevel) + boostRepo.runeReclaimBonus(flags)).coerceAtMost(0.95)).toInt() }.filterValues { it > 0 }
+
+            val finalArrowsConsumed = allArrowsConsumed.mapValues { (k, v) -> v - (arrowsReclaimed[k] ?: 0) }.filterValues { it > 0 }
+            val finalRunesConsumed  = allRunesConsumed.mapValues { (k, v) -> v - (runesReclaimed[k] ?: 0) }.filterValues { it > 0 }
+
+            val totalConsumables = allFoodConsumed + finalArrowsConsumed + finalRunesConsumed
+            if (totalConsumables.isNotEmpty()) playerRepo.consumeItems(totalConsumables)
+
+            val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
+
+            val updatedFlags = playerRepo.getFlags()
+            if (playerDied) {
+                // Death drops you back to your last checkpoint (every 25 floors of your best-ever
+                // progress) instead of all the way to floor 1, so a bad run doesn't erase everything.
+                val checkpointFloor = (updatedFlags.towerBestFloor / TOWER_CHECKPOINT_INTERVAL) * TOWER_CHECKPOINT_INTERVAL
+                playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = checkpointFloor))
+                sessionRepo.deleteSession(session.sessionId)
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.tower_death_reset, floor, checkpointFloor + 1)) }
+            } else {
+                val newBest  = maxOf(updatedFlags.towerBestFloor, floor)
+                val isNewBest = floor > updatedFlags.towerBestFloor
+                val msg = if (isNewBest)
+                    context.withAppLocale().getString(R.string.tower_new_best, floor)
+                else
+                    context.withAppLocale().getString(R.string.tower_floor_cleared, floor)
+                playerRepo.updateFlags(updatedFlags.copy(
+                    towerCurrentFloor = floor,
+                    towerBestFloor    = newBest,
+                ))
+                sessionRepo.deleteSession(session.sessionId)
+                _extra.update { it.copy(snackbarMessage = msg) }
+            }
+            if (!grantXp) {
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.combat_session_voided_prestige)) }
+            }
+            session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+            }
+            queuedSessionStarter.startNextQueued()
+        }
+    }
+
+    fun debugAdvanceTower() {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(
+                towerCurrentFloor = flags.towerCurrentFloor + 1,
+                towerBestFloor    = flags.towerBestFloor + 1
+            ))
+            _extra.update {
+                it.copy(snackbarMessage = context.withAppLocale().getString(R.string.tower_floor_cleared, flags.towerCurrentFloor))
+            }
+        }
+    }
+
+    fun claimMilestone(floor: Int) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            if (floor in flags.towerMilestonesClaimed || floor > flags.towerBestFloor) return@launch
+
+            var newFlags = flags.copy(towerMilestonesClaimed = flags.towerMilestonesClaimed + floor)
+
+            when (floor) {
+                10  -> playerRepo.addItems(mapOf("tower_ring" to 1))
+                20  -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 1)
+                30  -> playerRepo.addCoins(5_000L)
+                40  -> playerRepo.addItems(mapOf("tower_shield" to 1))
+                50  -> playerRepo.addItems(mapOf("tower_amulet" to 1))
+                60  -> newFlags = newFlags.copy(towerHpBonus = newFlags.towerHpBonus + 5)
+                70  -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
+                80  -> playerRepo.addCoins(25_000L)
+                90  -> playerRepo.addItems(mapOf("tower_helm" to 1))
+                100 -> {
+                    val existingPets: List<OwnedPet> = try {
+                        json.decodeFromString(playerRepo.getOrCreatePlayer().pets)
+                    } catch (_: Exception) { emptyList() }
+                    if (existingPets.none { it.id == "tower_pet" }) {
+                        playerRepo.updatePets(existingPets + OwnedPet("tower_pet"))
+                    }
+                }
+                110 -> newFlags = newFlags.copy(towerCoinBonusPct = newFlags.towerCoinBonusPct + 1)
+                120 -> playerRepo.addItems(mapOf("tower_body" to 1))
+                130 -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
+                140 -> playerRepo.addCoins(100_000L)
+                150 -> playerRepo.addItems(mapOf("tower_legs" to 1, "tower_boots" to 1, "tower_plateskirt" to 1))
+                160 -> newFlags = newFlags.copy(towerHpBonus = newFlags.towerHpBonus + 5)
+                170 -> newFlags = newFlags.copy(towerCoinBonusPct = newFlags.towerCoinBonusPct + 1)
+                180 -> playerRepo.addItems(mapOf("tower_sword" to 1))
+                190 -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
+                200 -> {
+                    playerRepo.addItems(mapOf("tower_cape" to 1))
+                    playerRepo.addCoins(500_000L)
+                }
+                210 -> newFlags = newFlags.copy(towerHpBonus = newFlags.towerHpBonus + 5)
+                220 -> playerRepo.addItems(mapOf("tower_crossbow" to 1))
+                230 -> newFlags = newFlags.copy(towerCoinBonusPct = newFlags.towerCoinBonusPct + 1)
+                240 -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
+                250 -> {
+                    playerRepo.addItems(mapOf("void_staff" to 1))
+                    playerRepo.addCoins(1_000_000L)
+                }
+            }
+            playerRepo.updateFlags(newFlags)
+        }
+    }
+
+    fun snackbarConsumed() {
+        _extra.update { it.copy(snackbarMessage = null) }
+    }
+
+    /** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */
+    private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50
+}

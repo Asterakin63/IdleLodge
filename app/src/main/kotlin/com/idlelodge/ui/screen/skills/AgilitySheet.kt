@@ -1,0 +1,91 @@
+package com.idlelodge.ui.screen.skills
+
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.idlelodge.R
+import com.idlelodge.data.json.AgilityCourseData
+import com.idlelodge.data.model.Skills
+import com.idlelodge.simulator.SkillSimulator
+import com.idlelodge.simulator.XpTable
+import com.idlelodge.util.GameStrings
+import com.idlelodge.ui.viewmodel.QuestIndicator
+
+
+@Composable
+internal fun AgilitySheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
+    courses: Map<String, AgilityCourseData>,
+    isStarting: Boolean,
+    hasActiveSession: Boolean,
+    isQueueFull: Boolean,
+    sessionDurationMs: Long,
+    currentXp: Long = 0L,
+    efficiency: Float = 1f,
+    petBoostPct: Int = 0,
+    xpBonusMult: Float = 1f,
+    activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    isIsle: Boolean = false,
+    onSelect: (String) -> Unit,
+) {
+    val context = LocalContext.current
+    val scrollState = rememberScrollState()
+    val currentAgilityLevel = XpTable.levelForXp(currentXp)
+    Column(Modifier.padding(bottom = 24.dp)) {
+        Text(
+            text     = stringResource(R.string.label_choose_activity),
+            style    = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+        )
+        val agilityCutMin = if (isIsle) 15 else 20
+        val agilityFloorMin = if (isIsle) 45 else 40
+        Text(
+            text     = stringResource(R.string.skill_agility_desc, agilityCutMin, agilityFloorMin),
+            style    = MaterialTheme.typography.bodySmall,
+            color    = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+        )
+        guildDailyButton?.invoke()
+        if (sessionDurationMs > 0) {
+            Text(
+                text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),
+                style    = MaterialTheme.typography.bodySmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+            )
+        }
+        HorizontalDivider()
+        Column(Modifier.verticalScroll(scrollState, flingBehavior = rememberTapFriendlyFlingBehavior())) {
+            courses.entries
+                .sortedBy { it.value.levelRequired }
+                .forEach { (key, course) ->
+                    val xpGain = (SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel, efficiency) * (1 + petBoostPct / 100f) * xpBonusMult).toLong()
+                    ActivityRow(
+                        name             = GameStrings.agilityCourse(context, key),
+                        detail           = context.getString(R.string.skills_agility_course_detail, course.levelRequired, course.xpPerSuccess),
+                        projectedLabel   = projectedXpLabel(currentXp, xpGain),
+                        isStarting       = isStarting,
+                        hasActiveSession = hasActiveSession,
+                        isQueueFull      = isQueueFull,
+                        questIndicators  = activeQuests["${Skills.AGILITY}:$key"] ?: emptyList(),
+                        onClick          = { onSelect(key) },
+                    )
+                }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Firemaking sheet
+// ---------------------------------------------------------------------------
+

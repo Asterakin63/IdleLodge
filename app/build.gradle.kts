@@ -1,0 +1,150 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+}
+
+android {
+    namespace = "com.idlelodge"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.idlelodge"
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 1000
+        versionName = "0.1.0"
+
+        // Nightly channel (-PnightlyBuild=N): publishes as <stable>.N with
+        // versionCode <stableCode>+N. Requires the thousands versionCode
+        // scheme (stable releases at multiples of 1000, first used for 1.14.2
+        // = 141000) so every stable release outranks its preceding nightlies.
+        (project.findProperty("nightlyBuild") as String?)?.let { raw ->
+            val n = raw.toIntOrNull()
+            require(n != null && n in 1..999) { "nightlyBuild must be 1..999, got '$raw'" }
+            require(versionCode!! % 1000 == 0) {
+                "Nightly builds require the thousands versionCode scheme; found $versionCode"
+            }
+            versionCode = versionCode!! + n
+            versionName = "$versionName.$n"
+        }
+    }
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile     = file("${System.getProperty("user.home")}/.android/idlelodge-release.jks")
+            storePassword = System.getenv("IDLELODGE_STORE_PASSWORD") ?: ""
+            keyAlias      = "idlelodge"
+            keyPassword   = System.getenv("IDLELODGE_KEY_PASSWORD") ?: ""
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            signingConfig   = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    applicationVariants.all {
+        val vName = versionName
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.BaseVariantOutputImpl &&
+                buildType.name == "release"
+            ) {
+                outputFileName = "IdleLodge-v$vName.apk"
+            }
+        }
+    }
+
+    lint {
+        warningsAsErrors = false
+        warning += listOf("MissingTranslation", "MissingQuantity")
+    }
+
+    testOptions {
+        // Let Robolectric (Room migration tests) access Android resources.
+        unitTests.isIncludeAndroidResources = true
+    }
+}
+
+// Export Room schema files so migrations can be verified and reviewed in version control.
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+}
+
+dependencies {
+    // Core
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+
+    // Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    ksp(libs.androidx.hilt.compiler)
+
+    // AppCompat (per-app locale on API 21+)
+    implementation(libs.androidx.appcompat)
+
+    // kotlinx.serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Unit testing (JVM, no device required)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test.junit)
+
+    // Room migration testing under Robolectric (runs on the JVM, no emulator)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.ext.junit)
+}

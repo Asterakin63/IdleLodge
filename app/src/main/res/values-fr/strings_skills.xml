@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Skill names and descriptions ===== -->
+
+    <!-- Gathering skills -->
+    <string name="skill_mining_name">Carrière</string>
+    <string name="skill_mining_desc">Extraire la pierre brute et les métaux précieux de la terre pour élever le Temple.</string>
+    <string name="skill_fishing_name">Intendance</string>
+    <string name="skill_fishing_desc">Rassembler les provisions sur les marchés et les quais de Joppé, pour que les agapes ne manquent de rien.</string>
+    <string name="skill_woodcutting_name">Charpente</string>
+    <string name="skill_woodcutting_desc">Abattre et équarrir oliviers, acacias et cèdres du Liban, comme les compagnons charpentiers qui charpentèrent le Temple, et nourrir ses Lumières.</string>
+    <string name="skill_farming_name">Culture</string>
+    <string name="skill_farming_desc">Semer et récolter le blé, la vigne et l\'olivier : le froment, le vin et l\'huile de la loge.</string>
+    <string name="skill_firemaking_name">Illumination</string>
+    <string name="skill_firemaking_desc">Brûlez des bûches de votre inventaire pour allumer les Lumières et gagner des XP d\'Illumination. Chaque bûche brûlée laisse aussi des cendres, que vous pouvez disperser par la Réflexion pour obtenir un bonus d\'XP de Réflexion.</string>
+    <string name="skill_agility_name">Rituel</string>
+    <string name="skill_agility_desc">Pratiquez les voyages rituels pour réduire la durée des sessions dans toutes les compétences. Le niveau 99 retranche %1$d minutes à l\'heure (60 min → %2$d min), avec une réduction linéaire progressive à mesure que vous montez en niveau.</string>
+
+    <!-- Crafting skills -->
+    <string name="skill_smithing_name">Fonderie</string>
+    <string name="skill_smithing_desc">Fondez des minerais en lingots et coulez de beaux outils de métal, comme Hiram fondit les colonnes.</string>
+    <string name="skill_cooking_name">Agapes</string>
+    <string name="skill_cooking_desc">Préparez les agapes : on y mastique, on y charge les canons de poudre forte, et l\'on y reprend des PV pendant les Épreuves.</string>
+    <string name="skill_fletching_name">Écriture</string>
+    <string name="skill_fletching_desc">Taillez des plumes et rédigez des planches à partir de bûches et de becs de métal.</string>
+    <string name="skill_crafting_name">Orfèvrerie</string>
+    <string name="skill_crafting_desc">Façonnez bijoux d\'office et décors à partir de matériaux précieux.</string>
+    <string name="skill_runecrafting_name">Symbolique</string>
+    <string name="skill_runecrafting_desc">Tracez des symboles sur la pierre brute pour nourrir votre Sagesse.</string>
+    <string name="skill_herblore_name">Alchimie</string>
+    <string name="skill_herblore_desc">Distillez des élixirs à partir d\'herbes du jardin et de réactifs d\'épreuve pour vous fortifier face aux Épreuves. V.I.T.R.I.O.L. !</string>
+
+    <!-- Combat skills -->
+    <string name="skill_attack_name">Rigueur</string>
+    <string name="skill_attack_desc">Affine la précision de votre maillet et augmente vos chances de frapper juste.</string>
+    <string name="skill_strength_name">Force</string>
+    <string name="skill_strength_desc">Augmente la puissance maximale de chaque coup de maillet.</string>
+    <string name="skill_defense_name">Tempérance</string>
+    <string name="skill_defense_desc">Préserve votre sérénité et réduit les dégâts infligés par vos vices.</string>
+    <string name="skill_ranged_name">Éloquence</string>
+    <string name="skill_ranged_desc">Affrontez vos adversaires à distance, à l\'aide d\'une plume bien taillée et d\'une planche acérée.</string>
+    <string name="skill_magic_name">Sagesse</string>
+    <string name="skill_magic_desc">Invoquez la puissance des symboles. Les niveaux supérieurs débloquent des travaux plus puissants.</string>
+    <string name="skill_hitpoints_name">Vitalité</string>
+    <string name="skill_hitpoints_desc">Votre vitalité totale. Les niveaux supérieurs vous permettent de tenir plus longtemps lors des Épreuves.</string>
+    <string name="skill_prayer_name">Réflexion</string>
+    <string name="skill_prayer_desc">Méditez sur les ossements recueillis lors des Épreuves pour gagner des XP de Réflexion et débloquer des méditations plus puissantes au Cabinet de réflexion. Memento mori.</string>
+
+    <!-- ===== Skill unlock sheet labels ===== -->
+    <string name="label_lv">Niv. %1$d</string>
+    <string name="armory_req_level">Niv. %1$d</string>
+    <string name="skills_projected_xp_level">+%1$s XP → Niveau %2$d</string>
+    <string name="skills_agility_course_detail">Niv. %1$d  •  %2$d XP/parcours</string>
+    <string name="label_hp_passive">Passif — augmente la Vitalité max (PV)</string>
+    <string name="label_hp_scales">La Vitalité max (PV) augmente à chaque niveau</string>
+    <string name="label_hp_max">Vitalité max : %1$d</string>
+    <string name="label_xp_per_bone">%1$s (%2$d XP/ossement)</string>
+    <string name="label_xp_per_kill">%1$s (%2$d XP/victoire)</string>
+
+    <!-- ===== Tree names ===== -->
+    <string name="tree_tree_name">Arbre</string>
+    <string name="tree_oak_tree_name">Chêne</string>
+    <string name="tree_willow_tree_name">Olivier</string>
+    <string name="tree_maple_tree_name">Acacia</string>
+    <string name="tree_yew_tree_name">Cyprès</string>
+    <string name="tree_magic_tree_name">Cèdre</string>
+    <string name="tree_redwood_tree_name">Almug</string>
+    <!-- Elder Isle woodcutting targets -->
+    <string name="tree_coastal_pine_name">Pin de Joppé</string>
+    <string name="tree_grove_oak_name">Térébinthe</string>
+    <string name="tree_abyssal_tree_name">Ébénier</string>
+    <string name="tree_starwood_tree_name">Arbre-étoile</string>
+
+    <!-- ===== Agility course names and descriptions ===== -->
+    <string name="agility_beginner_course_name">Épreuve de la Terre</string>
+    <string name="agility_beginner_course_desc">Au sortir du Cabinet de réflexion, le ou la Cherchant·e fait ses premiers pas, les yeux bandés, vers la porte du Temple.</string>
+    <string name="agility_novice_course_name">Épreuve de l\'Air</string>
+    <string name="agility_novice_course_desc">Le premier voyage : une route rude et bruyante, semée d\'obstacles, à l\'image du monde profane.</string>
+    <string name="agility_apprentice_course_name">Épreuve de l\'Eau</string>
+    <string name="agility_apprentice_course_desc">Le deuxième voyage : un chemin plus aisé, qui s\'achève par une purification par l\'eau.</string>
+    <string name="agility_intermediate_course_name">Épreuve du Feu</string>
+    <string name="agility_intermediate_course_desc">Le troisième voyage, accompli en silence, qui s\'achève par une purification par le feu.</string>
+    <string name="agility_advanced_course_name">Pavé mosaïque</string>
+    <string name="agility_advanced_course_desc">L\'Apprenti·e fait le tour de la loge à pas mesurés, sur les carreaux noirs et blancs. Attention où vous posez le pied.</string>
+    <string name="agility_expert_course_name">Les Cinq Voyages</string>
+    <string name="agility_expert_course_desc">Les cinq voyages du Compagnon, chacun avec ses outils. Seuls les plus sereins les accomplissent sans faiblir.</string>
+    <string name="agility_elite_course_name">Escalier tournant</string>
+    <string name="agility_elite_course_desc">Trois, cinq et sept marches qui mettent votre équilibre à l\'épreuve à chaque tournant.</string>
+    <string name="agility_master_course_name">Chambre du Milieu</string>
+    <string name="agility_master_course_desc">En haut de l\'escalier, un passage exigeant vers la Chambre du Milieu, où l\'on reçoit son salaire.</string>
+    <string name="agility_veteran_course_name">À la recherche d\'Hiram</string>
+    <string name="agility_veteran_course_desc">Le voyage du Maître, d\'Occident en Orient, à la recherche du Maître disparu, jusqu\'à ce qu\'un rameau d\'acacia désigne le lieu.</string>
+    <string name="agility_champion_course_name">Chaîne d\'union</string>
+    <string name="agility_champion_course_desc">Un grand cercle où chaque maillon doit tenir. Il vous poussera dans vos retranchements.</string>
+    <string name="agility_heroic_course_name">Chemin du Zodiaque</string>
+    <string name="agility_heroic_course_desc">Une procession sous les douze signes, où seuls les plus dévoués osent s\'aventurer.</string>
+    <string name="agility_legendary_course_name">Voûte étoilée</string>
+    <string name="agility_legendary_course_desc">Une procession légendaire sous la voûte étoilée, dont les Frères et Sœurs parlent à voix basse.</string>
+    <string name="agility_mythic_course_name">Labyrinthe des bâtisseurs</string>
+    <string name="agility_mythic_course_desc">Un labyrinthe tracé par les anciens bâtisseurs, dont le chemin semble défier les lois de la géométrie.</string>
+    <string name="agility_divine_course_name">Voie de l\'Étoile flamboyante</string>
+    <string name="agility_divine_course_desc">Un chemin lumineux guidé par l\'Étoile flamboyante.</string>
+    <string name="agility_transcendent_course_name">Quête de la Parole perdue</string>
+    <string name="agility_transcendent_course_desc">L\'ultime voyage rituel, en quête de la Parole qui fut perdue.</string>
+    <!-- Elder Isle agility courses (train elder Agility to shorten isle sessions to 45 min at 99) -->
+    <string name="agility_elder_coastal_run_name">Procession du rivage</string>
+    <string name="agility_elder_coastal_run_desc">Une procession le long de la plage de l\'île, balafrée par les vagues. Les rochers bougent sous vos pieds au gré de la marée.</string>
+    <string name="agility_elder_grove_traverse_name">Procession des cèdres</string>
+    <string name="agility_elder_grove_traverse_desc">Un circuit de cordes et de corniches à travers la canopée illuminée de symboles de la Forêt de cèdres du Liban.</string>
+    <string name="agility_elder_volcano_scramble_name">Ascension du Pic</string>
+    <string name="agility_elder_volcano_scramble_desc">Une escalade sur les flancs fumants du Pic de la Fureur. La pierre se souvient d\'avoir été un autel.</string>
+    <string name="agility_elder_abyssal_ascent_name">Remontée de l\'Abîme</string>
+    <string name="agility_elder_abyssal_ascent_desc">Une voie verticale le long des parois fissurées des Profondeurs abyssales. Rares sont ceux qui atteignent la Lumière au sommet.</string>
+
+    <!-- ===== Session skill type labels ===== -->
+    <string name="skill_expedition_name">Voyages</string>
+    <string name="skill_boss_name">Grande Épreuve</string>
+    <string name="skill_mercantile_name">Négoce</string>
+    <string name="skill_mercantile_desc">Envoyez des caravanes marchandes sur les routes pour gagner des pièces et de l\'XP. Les niveaux supérieurs améliorent les prix d\'achat et de vente à l\'Économat et débloquent des marchandises exclusives de la Loge du Négoce.</string>
+</resources>

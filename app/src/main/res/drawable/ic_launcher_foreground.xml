@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Square and compasses on the adaptive-icon canvas (safe zone 21..87). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Square: corner pointing down -->
+    <path
+        android:strokeColor="#C9A94D"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="miter"
+        android:pathData="M29,59 L54,84 L79,59" />
+    <!-- Compasses: legs -->
+    <path
+        android:strokeColor="#FAD77B"
+        android:strokeWidth="4.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,30 L34,77 M54,30 L74,77" />
+    <!-- Compasses: hinge -->
+    <path
+        android:fillColor="#FAD77B"
+        android:pathData="M54,22 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0 z" />
+    <!-- Three-dot sign -->
+    <path
+        android:fillColor="#C9A94D"
+        android:pathData="M54,50 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0 z
+            M48,60 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0 z
+            M60,60 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0 z" />
+</vector>

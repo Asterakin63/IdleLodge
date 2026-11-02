@@ -1,0 +1,1749 @@
+v1.16.0
+• Seasonal events now rotate automatically every season, year after year
+• New winter event: Frostfall, with two expeditions, the Rime Wyrm boss, Snowball Toss and a new reward track
+• New spring event: Bloomtide, with two expeditions, the Thorn Queen boss, Garden Chimes and a new reward track
+• Sunspire Solstice now has a full 300-token reward track, more bounties and a Night Market
+• Each yearly run of an event awards its own banner
+• Daily quests now roll for Divine gear after all Dwarven gear is collected
+• Added Slovak language
+• Updated Czech, Ukrainian and Slovak translations
+
+v1.15.9
+• Added a Time elapsed row to the session summary
+• The Guild Hall now hides its quests tab once your guild reaches max level
+• Patient Angler II now shortens the fishing flow-state interval by 30 minutes (was 10)
+• Sigil Stones now boost small drops too, so each Topaz adds a real chance of an extra Ancient Sigil
+• Mining gem drop chance is now capped at 100%
+• Fixed an interrupted character switch being able to erase the character you were leaving
+• Fixed queued Elder Isle mining, woodcutting and fishing using your mainland XP
+• Fixed Elder Isle dungeons and bosses started directly using mainland session lengths
+• Updated German and Ukrainian translations
+
+v1.15.8
+• Redesigned the farming patch cards and replaced the fertilizer chips with a dropdown
+• The plant sheet now preselects the best ash you own
+• Potion and spell dropdowns now list the strongest options first
+• The Tower spell dropdown now shows locked spells greyed out, like the Combat tab
+• Added an inventory search box and a missing-only achievements filter to the Profile
+• Added boss defeats to the Collect summary when several sessions finish at once
+• The Quests tab now hides once every quest is complete
+• Fixed chained boss fights casting spells without using runes
+• Fixed dungeons never using up the runes your spells cast
+• Fixed Elder Isle XP previews and the Collect summary leaving out elder level scaling and Sapphire stones
+• Fixed Sapphire stones not showing in batch skill queue estimates and flat XP previews
+• Fixed the Collect summary adding Church XP to Elder Isle sessions
+• Fixed the Elder Isle queue end time using mainland session lengths
+• Fixed validated Elder Isle quests losing their progress after selling or smelting the items
+• Fixed the Champion of the Isle title not being awarded after killing the Last Elder
+• Fixed a spell above your Magic level staying selected after prestiging Magic
+• Fixed worker tasks keeping prepaid ashes when they ended without running
+• Fixed long save-slot ages overflowing the slot card
+• Fixed agility XP estimates going negative on courses far above your level
+• Updated Czech, French, German, Italian, Russian, Ukrainian and Vietnamese translations
+
+v1.15.7
+• Buffed Thieving: higher XP from every target, better base success, and failed attempts no longer stun you
+• Lockpicks now boost Thieving XP like other gathering tools
+• Fixed the Thieving list showing XP per attempt and ignoring lockpick and prestige success bonuses
+• Fixed fishing losing the base catch on minutes the bonus table hit
+• Fixed queued Elder Isle mining, woodcutting and fishing using mainland boosts
+• Fixed skill XP previews and queue estimates leaving out prestige XP bonuses
+• Fixed the session card, summary and skill previews disagreeing on XP with sigil and cape bonuses
+• Added Vietnamese as a language option
+• Updated Czech, German, Italian, Lithuanian and Ukrainian translations
+
+v1.15.6
+• Added Slayer and quest icons to Combat dungeons that hold a task or quest target
+• Added a button on the Slayer screen to queue dungeons for all active and foretold tasks
+• Added a Capes section to the Shop to buy back earned capes you no longer own
+• Added a confirmation when activating or extending a Church blessing
+• Added an optional dot on the Grand Monument when the daily touch is ready
+• Added a time remaining countdown to the seasonal event card on Home
+• Added a separate pet line for coin bonuses in the Collect summary
+• Added the active blessing XP bonus to skill rows
+• Fixed queued combat sessions using more food than you own when several went uncollected
+• Fixed queued Elder Isle dungeons using mainland combat levels
+• Fixed Elder Isle XP estimates including mainland boosts
+• Fixed repeating an Elder Isle session starting it as a mainland session
+• Fixed the house page not scrolling in portrait edit mode
+• Fixed carnival game names showing in English in the queue and banner
+• Fixed Slayer shop stats and requirements showing in English
+• Fixed Elder Isle dungeon descriptions claiming guaranteed Ancient Sigil drops
+• Fixed boss fights that ran out of time picking the winner without counting damage already dealt
+• Fixed queued Elder Isle sessions being dropped when your mainland level was below the requirement
+• Updated Italian translations
+
+v1.15.5
+• Added "Very Large" text size option between Large and Huge
+• Fixed skill names wrapping character-by-character at large font sizes
+• Fixed abandoning or cancelling crafting sessions refunding more materials than were consumed when preservation bonus was active
+• Fixed Elder Isle pet drops landing in inventory as items instead of registering as pets
+• Fixed Elder Isle combat not tracking kills for the bestiary or collection summary
+• Fixed Elder Isle combat not consuming or showing food, arrows, and runes used
+• Fixed Elder Isle dungeons not recording last run stats (kills, food, survived)
+• Fixed killing The Last Elder always showing "Defeated by" instead of victory
+• Fixed queued Elder Isle boss fights using mainland combat levels instead of isle levels
+• Fixed Elder Isle total level counting hidden mainland skills
+• Fixed Elder Isle skill screen showing mainland tool bonuses and pet boosts
+• Fixed Elder Isle XP and duration estimates on queued sessions using mainland boosts
+• Fixed quest notification badge staying visible while on Elder Isle
+• Fixed "Sell Old Gear" being slow with many item types
+• Fixed daily and weekly quest progress being reset early under rare timing conditions
+• Fixed Profile Bonuses tab not including Resourceful perk in prestige stat bonuses
+• Fixed tool names being truncated in the tabbed Profile view for longer translations
+• Fixed heirloom items sorting near Bronze tier in the equip picker instead of by actual power
+
+v1.15.4
+• Elder Isle sessions always credit XP to the elder pool, even if the isle flag desyncs mid-session.
+• Time zone changes no longer reset daily/weekly quests, guild dailies, or the bounty board.
+• Slayer Master view auto-refreshes when a background session completes.
+• Opening Ancient Treasures in bulk is much faster on large stacks.
+• Equip picker sorts by stat power instead of pickup order.
+• Elder Isle crafting no longer uses mainland tools, boosts, or pets, and pays XP to the elder pool.
+
+v1.15.3
+• Isle dungeon clears now correctly count toward story quest counters. Fought Beach & Cliffs but the "First Steps" quest stayed 0/8? Fixed — every successful isle dungeon run now increments the counter the way mainland dungeons already did.
+• Sea Serpent is now available on the Combat tab the moment the Dock is built, instead of also requiring Grand Monument tier 5 and total level 1500. The Dock (Construction 90) is a heavy enough gate on its own.
+• Isle skill sessions queued on the island no longer route their XP to the mainland pool if you sail back before the session actually fires. The isle flag is now stamped onto the queue entry at enqueue time, so a Coastal Run (or any isle activity) queued on the isle still pays into the elder pool even if the player returns to the mainland while it's waiting to start.
+
+v1.15.2
+• Isle dungeon clears now correctly count toward story quest counters. Fought Beach & Cliffs but the "First Steps" quest stayed 0/8? Fixed — every successful isle dungeon run now increments the counter the way mainland dungeons already did.
+• Sea Serpent is now available on the Combat tab the moment the Dock is built, instead of also requiring Grand Monument tier 5 and total level 1500. The Dock (Construction 90) is a heavy enough gate on its own.
+
+v1.15.1
+• Workers can no longer be assigned Elder Isle activities. Elder ores, trees, fish, agility courses, bars, and cooked food are now hidden from the worker skill sheets, closing an exploit where a mainland worker could mine Starforged Ore (and other isle-tier resources) for isle XP into the mainland pool.
+
+v1.15.0
+• Elder Isle: sail from your Dock at Construction 90, defeat the Sea Serpent, and unlock a second region with its own separate skill tracks, dungeons, and story arc
+• Elder skills level on their own XP pool that starts fresh at 1 and stays untouched by mainland prestige, boosts, gear, and pets
+• 12-quest main story chain across 4 acts, auto-completing as you meet each objective; 13 lore fragments unlock in the Lore Master as you progress
+• 8-piece Elder set is the isle's BIS armor, crafted from Elder Smithing plus Ancient Sigils looted rarely from isle dungeons and the Last Elder boss
+• Sigil Embedder in the Elder Armor Master sockets six colors of sigil stones into Elder gear for permanent XP, coin, loot, essence, Ancient Sigil, and Elder Bone bonuses that apply everywhere, isle and mainland alike
+• Elder Agility is trainable on the isle across four new courses; leveling it shortens isle session times from 60 down to 45 minutes at max
+• Assemble the full Elder set to unlock the Last Elder boss fight, which drops the Ancient Signet accessory (a new equipment slot) and awards the "Champion of the Elder Isle" title on first kill
+• 7 new elder pets drop across the isle dungeons and one from the Last Elder himself
+• Profile Skills tab gains a Mainland / Elder toggle once you have visited the isle
+• New sprites for Brood Empress, Obsidian Colossus, and the World Ender raid bosses
+
+v1.14.14
+• The Runecrafting sheet now shows the total runes a session will produce and correctly factors the level and ash catalyst multipliers into the projected XP, so a redwood-ashes run no longer under-reports either
+• Rotating a piece of furniture in the house editor no longer treats it as a new purchase; rotation variants share ownership and storage with the base piece
+• The Herblore potion sheet now lists every ash tier the player owns, dimming ones that don't cover the current quantity with an "owned / needed" indicator, instead of hiding them entirely
+• Character save-slot switching is now crash-safe: switches are serialized, a switch interrupted mid-way is automatically completed on the next app start, and starting a session collect while a switch is running is blocked with a "please wait" message
+
+v1.14.13
+• Bannered Feast tokens no longer climb past the feast's token goal
+• Boss fight timers on the Home and Skills screens now match the Combat screen's full-length fight clock
+• Session complete dialogs and queue previews now include prestige XP bonuses, matching the XP actually paid out (no XP was ever lost)
+• Fixed the first tap after scrolling in a bottom sheet being swallowed; sheet content no longer drags the sheet itself, and flinging down from the top of a list still closes it
+• New: choose how many backup files to keep per character (1 to 30); older backups are only pruned after the new one is written and verified
+• Combat screen skill rows now show XP as current / next-level like the Skills screen, with gear and prestige bonuses on their own row
+• Skills within 100k XP of level 99 now show the remaining XP to 99
+• Czech and French translation updates
+
+v1.14.12
+• Fix: the app now removes unreadable oversized sessions written by old versions (e.g. burying thousands of bones before 1.8.6) on startup, ending the permanent crash loop on opening
+• Fix: XP previews on the Home screen queue and worker cards now update live when XP boosts, blessings, or prestige bonuses change, instead of showing the value frozen when the session was queued
+• Fix: the queue end time now includes the remaining runs of an active multi-run dungeon or boss session, instead of counting only the current run
+• Fix: taps on skill sheet lists (thieving, crafting, runecrafting, mercantile, and the rest) no longer go dead for a moment after scrolling; the invisible tail of a scroll fling was swallowing the first tap
+• Performance: reordering or removing items in the Home screen queue is now instant; each change previously rewrote the entire save row twice and refreshed the UI twice
+• Fix: equipment picker rows and the combat skills header no longer break in languages with longer text (Italian etc.); the Equip button and XP values were being squeezed out of view and rows stretched tall
+• Fix: queueing a guild daily for a recipe above your level now says which level is required instead of the misleading "Not enough materials"
+• Fix: the Home screen boost list no longer collapses when it would hide only a single boost; with exactly 4 boosts all four are shown instead of a "+1 more" toggle that saved no space
+• New: sort the Shop's Sell tab by quantity or price in addition to the default name order
+• New: Missing filters in the Armory and Bestiary show only gear you haven't collected and enemies you haven't encountered
+• New: skills with fully maxed prestige now show (Max) beside their prestige stars on the Skills and Battle screens
+• New: the Combat Gear tab shows your total attack, strength, and defense for the selected combat style
+• French translations for the heirloom items and Midas Band
+
+v1.14.11
+• Fixed the Armory freezing the app for a few seconds when opened and on every filter tab change
+• Made 219 guild quest names translatable that were previously stuck in English
+• Fixed the bulk sell confirmation button accepting repeat taps during a large sale, causing extra "sold for 0 gold" notifications
+• Fixed first taps being swallowed after scrolling to the edge of a list (skill sheets, Mercantile, Prestige, and elsewhere)
+• Fixed the guild "Go to Skill" shortcut re-opening its skill menu when returning to the Skills screen
+• Fixed lag around the combat log during kill-heavy dungeon sessions
+• Seasonal bounty quest chips now appear in the Runecrafting and Firemaking crafting menus
+• Lantern Lights now awards its token at reaching round 6 as the hint promises, and the memory game got its own success message
+• Fixed offline queue catch-up losing hours when a fast-forwarded crafting session had a speed tool equipped (frying pan, tinderbox, hammer)
+• Fixed the queue schedule slipping when aggressive battery savers interrupted a session handoff in the background
+• My House now fits the screen in landscape on tablets instead of overflowing and blocking scrolling
+• New food eating order option: highest heal first, lowest heal first, or least quantity first
+• Blessings activate and gathering activities start on a single tap, without a confirmation dialog
+
+v1.14.10
+• The daily bounty refresh no longer replaces a Tithe you have fully stocked up for: holding the asked amount now counts as in-progress work, so the donation can't vanish overnight
+• The Combat screen's Gear tab now has its own translatable label, separate from the Profile Gear tab, so languages can translate each context correctly
+• The live combat log and kill tally now track exactly which enemy is being fought as types change mid-minute: kill counts no longer jump between enemy types or go down, and the enemy card and log name the right enemy
+• Notification bubbles no longer get stuck on screen when the same message arrives several times in a row (like rapidly queueing the same session); repeats now fold into the bubble already showing
+• Guild quests and daily requests now have a Go to Skill button that jumps straight to the matching skill, dungeon list, or Slayer master
+• The Monument's daily touch is far more generous: late-game boons (dragon bones, runite and platinum ore, magic logs, gems, rune essence, sharks) that grow with your monument stage, a 1 in 10 Ancient Treasure jackpot, and its blessing now lasts 2 hours or extends the blessing you already have
+• The Vault Guardian guards a new 1 in 1000 treasure: the Midas Band, a ring that grows stronger with every battle you survive
+
+v1.14.9
+• Overnight queued boss runs now fast-forward at each fight's real speed instead of billing every fight its full scheduled duration, so long repeat chains actually finish while you sleep
+• Boss kills now show up in the session collection popup's Kills list
+• Kills left over after completing a slayer task now roll into the next foretold task when it targets the same enemy
+• The Armory now sorts items by their translated names instead of their English names
+• Player and mercenary HP bars, combat log highlights, carnival target zones, race lock markers, and guild/quest checkmarks now follow the theme's colors and can be changed in the theme editor
+• Several fixed labels (A-Z sort, Wiki, Discord, Halfling, and two number formats) can now be translated
+• Combat level now counts your best attack style: the higher of melee, ranged, or magic, so training any style raises it
+• Seasonal event bounties now show quest indicators on skills, gathering, crafting, and farming lists, with the event's own icon, and appear in the skill sheet quest dialog with quick queueing
+• Turn-in event bounties (like Tithes) now show your full item count instead of stopping at the requested amount
+
+v1.14.8
+• Agility no longer asks you to prestige once there is nothing left to earn: its XP boost tiers now end alongside the Endurance upgrades
+• Seasonal bounty missions now open the dungeon their target enemy actually lives in, instead of always the event's first dungeon
+• Rapidly queueing mercantile trade routes now shows a confirmation for every tap; identical back-to-back confirmations used to be silently dropped, making the buttons feel unresponsive
+• Fixed a crash when opening Housing for players whose character stood in the two leftmost columns of their house
+• Total level now counts only the 23 real skills; older saves could show up to a few extra levels from a leftover internal entry created by combat quest rewards claimed before v1.1.5
+• Bulk sells now re-check every protection at the moment you confirm, so gear equipped, kept, or reserved by the queue can never be sold by a sale dialog that was opened before things changed
+• Selling can no longer silently remove worn gear: bulk sales refuse to touch equipped or loadout-remembered copies outright
+• The shop's sell tab now keeps a record of your last 5 bulk sales (Recent bulk sales), so lost-item reports can be checked against what was actually sold
+• Each task in the session queue now shows how long it will take next to its XP estimate
+• Event bounty slots are no longer locked to one task type: replacements are drawn from the whole bounty pool, so a bounty you can never do stops coming back every rotation
+• Added a paid bounty reroll: swap any active event bounty for a different one instantly for 50,000 coins
+
+v1.14.7
+• Fixed overlapping text in the spell selector when translated rune names made the rune count line too long
+• Monument touch now resets at your daily reset hour instead of midnight
+• Boss coin soft cap now resets at your daily reset hour instead of midnight
+• Slayer now appears under Combat instead of Support in the Profile skills list
+• Switching characters now immediately backs up the outgoing character to its own backup file
+• Repeating an Infinite Tower session no longer shows a meaningless XP estimate on queued floors
+• Fixed a farming exploit where planting and clearing crops with an XP bonus active netted free XP; planting XP is now flat and fully reclaimed on clearing
+• The bestiary now always lists every enemy and boss, including past and future event monsters, greyed out until first defeated
+• The bestiary's A-Z sort now orders enemies and bosses by their translated names instead of their English names
+• Daily/weekly/guild quest markers no longer disappear next to long translated activity names
+• The seasonal event banner on the Home screen stays tappable after reaching the token goal, so rewards can still be claimed
+• A newly started seasonal event re-shows the Home banner once for players who had hidden it
+• The Dungeons list now updates to the new seasonal event's dungeon without needing an app restart
+• Equip Best Gear no longer swaps your equipped tools
+• Seasonal event boss tokens are now capped at 25 per day, resetting at your daily reset hour
+• The event page now explains that each boss kill and dungeon run grants 1 token, and shows the boss daily limit
+• Renamed the Abyssal Rod to Abyssal Fishing Rod to match the other fishing rods
+• The Bronze Hoe now shows its farming stat like other bronze tools, and its description no longer claims a yield bonus it never had
+• Ancient Treasure can now be opened from the Profile inventory for coins and a chance at gems, and is protected from bulk junk selling
+
+v1.14.6.1
+• The What's New dialog now correctly lists the recent updates; the 1.14.6 hotfix entry was missing from it
+• Re-release of the 1.14.6 hotfix: collecting sessions and starting queued sessions froze the game indefinitely in 1.14.5; nothing was lost, and stuck sessions collect normally after updating
+
+v1.14.6
+• Hotfix: collecting sessions and starting queued sessions froze the game indefinitely in 1.14.5; nothing was lost, and all stuck sessions collect normally after updating
+
+v1.14.5
+Improvements
+• The combat arrow dropdown now shows each arrow's ranged strength, and the spell dropdown shows every spell with its Magic level requirement, including ones you haven't unlocked yet
+• Dangerous session actions are now red with bigger buttons to help avoid misclicks
+• Collection progress bars in the profile tabs now share one design, and Achievements gained a real progress bar
+• Active boosts now have a distinct icon per type, consistent formatting, and a larger tap area
+• Daily and Weekly quests now sit directly in the main quest tab bar instead of behind the Timed tab
+• Prestige tier numerals now go up to X, so tier 6 no longer shows as 'Precision 6'
+• The Infinite Tower now uses the same arrow and spell dropdowns as the Combat screen, showing arrow strength, rune stock, and spell requirements
+• Combat skill dialogs now have a Skill Tree button in the title row for quick access to that skill's tree
+• Very long durations now show years instead of piling up months (250mo reads as 20y 10mo)
+
+Bug Fixes
+• The notification icon in the status bar is now a clean shield silhouette instead of a distorted white blob
+• Changing the loadout when starting a slayer task is now remembered app-wide like the Combat screen's picker, instead of resetting for every task (thanks for the report)
+• Queued boss fights in Up Next now show the boss's own icon instead of a generic gamepad when the boss has no portrait art yet (thanks for the report)
+• The enemy panel in the combat log no longer shows the old emoji next to the enemy name; the portrait at the top of the page already covers it (thanks for the report)
+• The seasonal event screen now calls its boss a Boss instead of a Raid Boss, since raid bosses are their own thing now (thanks for the report)
+• The Ancient Guardian in the Ancient Temple hit much harder than everything else in the dungeon, which made the no-food challenge there mathematically hopeless even at max stats; its damage is now in line with its dungeon-mates, so the challenge is brutal but beatable with full HP boosts (thanks for the reports)
+• Queued boss sessions can no longer each roll the same unique heirloom drop; a rare drop sitting in an uncollected session now counts as owned when later sessions roll theirs, so the duplicate roll goes to something you don't have (thanks for the report)
+• The Mercenary Camp now shows your hired party with each contract's remaining time, so mercenaries can be dismissed even after the daily pool rolls over and they no longer appear in it (thanks for the report)
+• Heirlooms now gain XP based on the gear you actually started the session with, so swapping to an heirloom right before collecting no longer levels it for work it never did, and heirloom weapons only gain XP from fights in their own combat style (thanks for the report)
+• The armory now shows when an item's recipe is locked behind a prestige perk and a race, so the elven bows no longer look craftable by everyone (thanks for the report)
+• Sell Old Gear can no longer sell the last copy of gear referenced by a session waiting in your queue (thanks for the report)
+• The Recent Activity list now shows each boss's own icon instead of the generic gamepad (thanks for the report)
+• The Boss Hunter weekly quest now says 'Defeat 10 bosses' since solo bosses always counted, and the Grand Monument's stage 5 reward no longer calls the Vault Guardian a raid boss (thanks for the report)
+• The Gothic Ember now counts as a demon for kill quests, matching its description (thanks for the report)
+
+Translations
+• Updated Russian, Italian, Polish, and Chinese translations (thanks to the community translators)
+
+v1.14.4
+• Sell Old Gear no longer sells equipment saved in another combat style's loadout; gear remembered by any loadout now counts as equipped when selling (thanks for the report)
+• The Heirloom Greathammer and Heirloom Blade now show their attack, strength, and defense stats in the gear list like the bow and staff already did (thanks for the report)
+• Equip Best Gear now rates heirloom weapons and tools by their current stats instead of their max potential, so a fresh heirloom no longer replaces stronger gear (thanks for the report)
+• The prestige skill tree screens now use the same pixel art skill icons as the rest of the app instead of the old emoji in the header (thanks for the report)
+• Switching to a combat style whose weapon is two handed now removes the shield instead of showing both equipped and quietly saving the shield into that style's loadout (thanks for the report)
+• Equipping a shield now only unequips the active style's two handed weapon; other styles keep their weapons and drop the shield when you switch to them
+• Bows are now two handed and cannot be used with a shield; crossbows still can, and staffs are unaffected
+• The bone altar now honors the 48 hour double XP boost earned from prestiging, stacking with the shop boost up to 4x like everywhere else, and prestige Cape Mastery perks now boost altar XP too (thanks for the report)
+• Queued sessions started after a prestige now pay out their full XP as long as you still meet the activity's level requirement; actions you no longer qualify for are removed from the queue instead of running for nothing (thanks for the report)
+• Boss and raid fights now show the fight clock, counting down the full fight duration, so a faster playback from agility bonuses no longer looks like less time to beat the boss; the real completion time is still shown next to it (thanks for the report)
+
+v1.14.3
+• Added heirloom items: unique rare drops from the three raid bosses, one for every gathering and artisan tool plus attack, strength, ranged, and magic weapons
+• Heirlooms start at iron quality and permanently level up to 99 as you earn XP with them equipped, reaching stats 50% beyond the current best gear at max level
+• Prestiging a skill temporarily weakens its heirloom; full power returns at level 85, and the heirloom's own level is never lost
+• Heirlooms cannot be sold, and a raid boss never drops one you already own
+• Earned seasonal banners in My House now show the current translated event name instead of the name frozen when the banner was won (thanks for the report)
+• Cloud Kingdom now locks like every other dungeon when your combat level drops below its requirement after a prestige
+• The home screen Repeat button now respects dungeon and boss level requirements instead of letting you chain fights above your current level
+• The Shadow Dagger is now an attack style weapon like every other dagger, so it appears in the attack weapon picker
+• Spell, arrow, potion, and combat style picks no longer leak from one character to another when switching save slots; each character keeps their own saved loadout
+• Guild dailies now hand out every quest your skill level can actually do before falling back to higher-level ones, and any unavoidable top-up quests are the lowest tiers available instead of random (no more level 65 dailies right after a prestige)
+• Removed a stray placeholder line that appeared under the v1.14.2 header in the What's New panel
+• Switching characters now returns every tab to its main page and clears leftover screen state, so the bone altar no longer opens with the previous character's session tallies
+• Character names on the Characters screen no longer get squeezed to a few letters by the Ironman badge on small screens; the badge now sits on its own line under the full-width name
+• Dungeon enemies now spawn at their intended rates: a new enemy is rolled after every kill instead of one type dominating long stretches of a run (thanks for the report)
+• Dungeons queued from the Slayer screen now show the same XP estimate in the action queue as dungeons queued from the Combat screen
+• Repaired 43 Italian strings that were showing unrelated English or misplaced text in the mercantile perks, house editor, and elsewhere after a bad translation batch
+• Auto backups and save exports now include the character's slot and name in the file name (e.g. fantasyidler_auto_2_IronDragon), so each character keeps their own backup and switching characters no longer overwrites another character's file
+
+v1.14.2
+• House editor now shows the full cost of a new room (coins and materials) while placing it, and the Add room button labels its price as coins
+• New opt-in nightly build channel for playtesters, served from a separate repository
+• House editor palette cards no longer cut off long item and material names; they now wrap to two lines
+• The post-prestige 2x XP boost now stacks with the purchased 2x boost (4x on prestiged skills while both run), session dialogs show the correct per-skill multiplier, and active skill-specific boosts are listed in the home and profile boost box
+• The slayer foretell queue full label now shows your real slot capacity instead of always saying 3/3
+• Importing a save file is now all-or-nothing, so an interrupted import can no longer corrupt your save (thanks xRahul)
+• Ironman characters can no longer speed up sessions by changing the device clock (thanks xRahul)
+• Automatic backups are now written safely, so an interrupted backup can no longer destroy the previous one, and Settings shows the last backup status (thanks xRahul)
+• Skill screens now have a Skill Tree button that jumps straight to that skill's prestige tree (thanks Michaelomh)
+• Updated Italian, French, German, Russian, and Indonesian translations
+• House editor rework: place rooms and furniture freely as a draft, see the full cost on a Bill of Sale, and buy everything at once with Purchase Build; drafts persist until purchased or discarded
+• House blueprints: save up to 3 named layouts and load one back later to buy when you can afford it
+• House drafting ignores Construction level requirements; the level gate applies at purchase and is shown on the bill
+• Sell Old Gear now sells all unequipped equipment, not just outclassed pieces; equipped copies, locked items, skill capes, and the keep-one-of-each keeper are always protected
+• Skill trees now show the effects of other races' locked bonuses instead of ???, so you can judge whether a race change is worth it
+• Sessions queued before a prestige no longer pay out their pre-prestige XP after the reset; as with mid-session prestiges, the XP is voided while loot and coins still pay out
+• The 24 hour race change cooldown is now actually enforced, with the remaining wait shown in the change dialog
+• The worker crafting sheet's quantity box is now the same width as the player's, so large quantities no longer clip and scroll
+
+v1.14.1
+• Fixed the Profile button landing in the combat gear screen instead of the profile view after editing gear from the profile
+• Fixed the prestige-ready dot disappearing after 3 prestiges and never showing for ironman characters; it now shows whenever a skill can still earn prestige points
+• New characters no longer open the What's New panel and now keep your settings (theme, font size, home screen layout, compact numbers, and more) instead of resetting them
+• Reverted the 1.14.0 fling change that made skill activity sheets sluggish to close; swipe-down-to-dismiss behaves like 1.13 again
+• Prestige rework: XP tiers are now earned automatically with each prestige (all five tiers, every race); points spent on XP tiers are refunded
+• Racial tree bonuses are now kept when you change race, letting bonuses from different races stack up over time
+• New human race branch: Resourceful, adding a per-level bonus to tool efficiency and combat stats in nine skills
+• Prestige point caps recalculated: XP tiers no longer cost points, and non-ironman caps count every race's branches
+• House editor: new Move with arrows option on placed furniture shows a corner arrow pad for precise one-step nudges without your thumb covering the piece
+• Mercantile now shows its perks up front: the shop buy/sell price bonuses with the next unlock level, and the Merchant's Guild goods it opens up
+
+v1.14.0
+New Features:
+
+Prestige Overhaul
+• Prestiging a level 99 skill now awards points to spend in that skill's upgrade tree, with race-specific branches, hidden tiers to discover, a point respec, and a one-time conversion of your existing prestige stars
+• New paths to unlock across the skills, including Double Hit, Second Chance, Foresight, and Better Bows, plus a 48 hour 2x XP boost in a skill after prestiging it
+• Prestige achievements now follow the tree: buy your first upgrade, complete a full path, and master an entire skill tree
+
+Raid Bosses and Mercenaries
+• A new raid tier: three bosses (Obsidian Colossus, Brood Empress, The World Ender) that no lone hero can defeat, even in the best gear
+• Hire up to three mercenaries from a daily rotating pool, from budget sellswords to near-max champions. The raid boss spreads its attacks across your whole party
+
+Player Housing
+• Build your own house: buy, expand, and rearrange rooms with coins and materials as your Construction level grows, then furnish them with everything from beds and bookshelves to piles of gold, crafted from your own materials
+• Make it yours: half-tile placement, interior walls, floor and outdoor ground styles, seasonal event banners on the wall, your character at home in the middle of it, and one-tap sharing of a picture of your house
+
+Bug Fixes:
+• Guild Hall rows no longer squeeze the guild name and level badge when translations run long; the daily counter now wraps neatly on the right (thanks Michaelomh!)
+• The prayer skill cape now strengthens all church blessings (XP, defense, and coin blessings alike) instead of only a subset, and blessing strength shown in the church and stats bar reflects it (thanks lucasmdjl!)
+• The Coin Drake now actually drops from trade routes, and crafting and agility pets now drop from directly started sessions instead of only queued ones. All of these pets have a roughly 6% chance per session (thanks ben-dev-su!)
+• Screens animating out during navigation no longer accept taps, so you can't accidentally buy a carnival prize (or anything else) by tapping too early after leaving a screen
+• Skill menus no longer close mid-scroll: a fast downward fling that reached the top of the list could spill over into the pull-down-to-close gesture. Now only an actual finger pull can dismiss a menu
+• Guild daily requests now prefer a variety of items instead of repeating the same one; previously a guild rank whose only skill-reachable recipe was a single item (like the crafting guild's platinum diamond ring at rank 7) served that item four times a day, every day
+• The live combat log on Tower floors above 100 now uses the enemy's scaled stats, fixing the kill counter that crept up and dropped back every minute and showing the enemy's true HP bar and attack values
+• On Android 13+ the predictive back gesture no longer closes an entire skill menu from an inner page; back now steps to the recipe list first, and closes the menu only from the top level (thanks xRahul!)
+
+Translations:
+• Updated French, German, and Italian translations
+• Completed Simplified Chinese translations (thanks LawrenZzz!)
+
+v1.13.11
+• Void Staff is now the strongest staff in the game, above the Trident of the Seas, as befits the final tower milestone reward
+• Laborer crafting sheets now list material tiers by rank (bronze, iron, ...) instead of alphabetically, matching the regular skill screens
+• Coin amounts over 1M now floor instead of round, so the display never overstates what you have (99.96M no longer shows as 100.0M when you can't yet afford a 100M purchase) (thanks Michaelomh!)
+• Crop-ready notifications are now character aware: tapping one that belongs to another character opens the character selection screen instead of the active character's farm, and one character's planting or harvesting no longer cancels another's pending crop alarms
+• Amulet of the Void now lives up to its description, boosting every combat style and beating the Flame Heart Amulet, Necklace of Anguish, and Amulet of the Kraken as the top endgame necklace
+• Runecrafting ash catalysts you own but can't cover for the chosen quantity now show greyed out with an owned/needed count instead of silently disappearing from the list (1 ash covers 10 essence)
+• Guild dailies tab now says all of today's requests are complete instead of wrongly telling you to unlock dailies when you've finished them all with hide-completed on
+• The cape rack now applies the Farming Cape's harvest bonus passively like other gathering capes, no longer requiring the cape to be equipped
+• Chronos Spire speed reductions now actually shorten sessions: whole-minute rounding was swallowing the bonus entirely at many agility levels
+• Mercantile dispatch button no longer ignores taps when a finished session is waiting to be collected with a full queue
+• Farm crop picker now shows quest icons next to crops wanted by open guild quests and dailies (thanks Michaelomh!)
+• Boss and dungeon weapon loadout pickers now show combat-style icons (thanks Michaelomh!)
+• Guild hall visual refresh: skill icons, claimable-reward badges, and clearer per-guild progress text (thanks Michaelomh!)
+• More compact skill rows with a smaller prestige button (thanks Michaelomh!)
+• The Profile screen now shows the same stats bar as Home (thanks Michaelomh!)
+• Updated French, Italian, Russian, and German translations, and added the start of Catalan (thanks to all translators!)
+
+v1.13.10
+• Crafting quantity preview now includes XP boost, blessing, pet, and tool bonuses, matching the queue and what you actually receive
+• Bonuses tab rows no longer squeeze into unreadable columns on small screens
+• Session Active banner on the Skills page now translates activity names (courses, trade routes, trees, thieving targets)
+• Non-combat skill screens now show when the session queue is full instead of failing silently (thanks Michaelomh!)
+• The Profile screen now remembers which tab you were on when navigating away and back (thanks Michaelomh!)
+• Updated Italian and Russian translations (thanks to all translators!)
+• Equip Best now keeps your equipped item when an alternative only ties its stats (e.g. plateskirts vs greaves), instead of always swapping
+• The agility guild daily quick-add now queues as many sessions as the quest still needs (not just one), and always queues the quest's own course instead of your best unlocked one
+• New setting: choose the local hour when dailies, guild dailies, and weeklies reset (was fixed at 6 AM). Changing it never grants an extra reset
+• New character-switch button in the Home toolbar, shown once you have more than one character
+
+v1.13.9
+• New Slayer Plateskirt in the slayer shop and Tower Plateskirt in the floor 150 milestone, granted retroactively if you already claimed it (thanks wallsocket-boop!)
+• The Skills and Combat tabs now show a badge and count when a skill is ready to prestige, with a toggle in Settings to turn it off (thanks Michaelomh!)
+• Updated French, German, Italian, Russian, and Chinese translations (thanks MarcMush and all translators!)
+• Infinite Tower milestone descriptions are now translatable and use your language's item names
+• "Keep one of each item" now counts an equipped copy as the one kept, so spares sell down to the equipped one
+• Fixed the in-game changelog listing the same version twice
+• Combat sessions now record your HP and packed food at the start of the run, so leveling Hitpoints or changing gear food mid-run no longer shifts the live combat log
+• Fixed food eaten in the same combat tick reviving a character whose HP had already hit 0; hitting 0 HP now counts as a death
+• Fixed item names, session summaries, and notifications following the system language instead of the in-game language setting
+• Queued boss and dungeon sessions now use your current armor when they start; the weapon style, spell, and arrows chosen when queueing are kept
+• Eating now shows in the live combat log as it happens, and the HP bar reflects each bite instead of snapping up once a minute
+• Added a risk note when the eat-at threshold is set to 30% or lower
+• The active session card now shows boss artwork instead of an emoji
+• Fixed banner names wrapping mid-word on the Profile Banners page and cramped text on the character selection cards
+• Massive Chinese translation update: about 4,000 strings translated or revised (thanks LawrenZzz!)
+• Guild hall sections now list skills in the same order as the Skills page (thanks Michaelomh!)
+• Combat style chips on the Gear tab and skill headers on the Expeditions screen now show their skill icons (thanks Michaelomh!)
+• More French translations
+• The agility bonus on the Bonuses page now explains it is the extra saving from prestige on top of the level reduction, instead of looking like the total
+• The slayer task's queue button now picks the dungeon where the target spawns most often (hellhounds now hunt in Volcanic Depths, not Infernal Stronghold)
+
+v1.13.8
+• Fixed the Skills tab quest counter counting bury-any-bones guild quests once per bone type, making 4 remaining quests show as 20
+• Fixed the Golden Goose pet showing +10% XP in the pet collection; it now correctly shows +10% Coins
+• Made 166 item names translatable that were previously locked to English (thanks MarcMush!)
+• Many more texts now follow your language: session collect dialog titles, loot and reward names, queue and notification labels, quest chips in skill sheets, bestiary headers, armory requirements, combat styles, expedition lock text, event banners, carnival prizes, and the character race and gender line
+• Tree, trade route, agility course, and thieving target names now translate in session cards, the queue, and the profile
+• Duration unit letters (mo, w, d, h, m, s) can now be translated per language
+• Smithing, Cooking, Fletching, Crafting, and Herblore now show quest indicator icons on the Skills page, matching Firemaking and Runecrafting
+• Shop quantities, prices, and totals now use thousands separators, and a new Compact Numbers option in Settings abbreviates large item stacks (thanks fjordsec!)
+• Updated Italian and French translations
+• Climbing the beanstalk now shows a dialog that stays until dismissed and tells you which dungeon was unlocked, instead of a quickly disappearing message
+• The shop sell tab now has a search box, category filters, and alphabetical sorting
+• New "Keep one of each item" toggle in the shop sell tab: bulk and manual sales always leave one copy for your collection
+• Fixed repeated boss and dungeon runs barely progressing overnight when the system blocked the app's alarms; reopening the app now fast-forwards the whole chain through the time you were away
+• Profile page tabs can now be swiped between, like other sections of the game
+
+v1.13.7
+• Clearing a farm patch now names the crop in the confirmation dialog, and clearing a Magic Bean patch shows a message that the bean was returned to your inventory
+• Fixed Church XP blessings showing a raw formatting code instead of the actual XP multiplier
+• Added Polish and Lithuanian to the language picker
+• Fixed Spanish (Spain) translations never loading; selecting it silently fell back to generic Spanish
+• Czech, Irish, Chinese, Polish, and Lithuanian can now also be set from Android per-app language settings
+• Updated Czech and French translations
+
+v1.13.6
+• XP lamps now preview the level each skill would reach and warn when XP would be wasted past 99, with the skill picker organised into sections with icons (thanks Michaelomh!)
+• The foretell next slayer task button is disabled while no task is active so bones can't be wasted (thanks Michaelomh!)
+• Restored the official themes' intended colours that shifted after the Material 3 update (thanks CiaranGruber!)
+• Large community translation batches for French, Russian, Italian, Simplified Chinese, and Lithuanian (thanks Mortain and every submitter!)
+• Skill sheets for Mining, Fishing, Woodcutting, Firemaking, Runecrafting, and Prayer show how many of each resource you own, and the Skills legend explains the gold dot (thanks xRahul!)
+• Fixed skill sheet lists locking up mid scroll, and lists now remember your scroll position when opening and closing sheets and detail views (thanks xRahul!)
+• Carnival ring toss shows the target zone on the bar and grades your throw the instant your finger lands, so what you see is what you score
+• Construction late game: Redwood Planks (Fletching 85), Runite Nails (Smithing 85), and three redwood furniture recipes up to level 95 with better XP than the Magic Throne, plus two Builders Guild dailies for them. Every Construction level now takes 0.5% off Builder's Workshop upgrade costs, up to 49.5% at 99
+• Bosses now have pixel art portraits in the bestiary (a mystery silhouette until your first encounter), the boss list, the pre fight sheet, and the fight banner. Art Credits moved to its own Settings page with entries for the new art
+• The bestiary only lists seasonal event bosses and enemies while their event is running, so upcoming events aren't spoiled early
+• Dwarven gear from daily quests now has a pity system: every claimed daily without a drop improves the odds by 2 (1/100, then 1/98, and so on) until a piece drops, with your current odds shown live
+• Session queue: reorder entries by long-pressing and dragging, haptic feedback on the move arrows, every row shares one layout with a leading icon (boss fights show their portrait), and combat activities can no longer be started once the queue is full (thanks Michaelomh!)
+• Daily quest objectives read naturally again ("Cook 20 swordfish", plurals restored across all 24), and the Prayer sheet's quest marker appears on every bone type that counts toward bury quests
+• Merchants Guild fixes: high-rank dailies now require their intended 3/4/5 trades and 100k/200k coins instead of paying multi-trade rewards for a single trade, and the daily sharing a name with a guild quest is now "Quarter Master"
+• The gilded full helmet, platebody, and kiteshield each have their own description, and fixed doubled percent signs plus seed description line breaks
+• Fixed ghost "Session Complete" notifications and the queue skipping ahead when a stale background alarm fired for an already collected session (thanks xRahul!)
+• Character names are capped at 256 characters so extreme names can't break the profile screen (thanks Michaelomh!)
+• The fire raid boss is now the Gothic Ember (name suggested by fredphreak!), along with the Gothic Emberling pet, its whip and wings drops, and the Gothic Ember Bane quest line
+• Event bounties you haven't started re-roll at the 6:00 AM daily reset, and the board only offers bounties your skill levels can actually work on
+• New Settings toggle to hide the gold quest dots on the Skills tab, and the character selector now lists each character on its own row with their age ("Created 2mo 1w ago"), backfilled from your oldest quest completion for existing characters
+
+v1.13.5
+• Large translatability pass (thanks widowild1, Azerliap, and mh-tp for the detailed audit): agility course names, crafting recipe names, the shop's 2× XP boost name, bestiary stat labels and dungeon locations, carnival prize stats and item appraisal names, potion sequence letters (now translator-chosen per language so colours can't collide), farming picker labels and planting messages, daily quest monster names, combat log food names, expedition lore notes, Infinite Tower session names, and cape names in the bonuses tab now all follow your language
+• Added over 350 previously missing translatable entries (item descriptions, seed and crop names, expedition notes) so translators can cover the whole game
+• The Firemaking screen now lists every log type your level allows, showing a dimmed "0 in inventory" row when you've run out instead of hiding the log entirely, which made it look like the log type could no longer be burned
+• Started a Lithuanian (lietuvių) translation (thanks Motvisss!) and refreshed dozens of Italian translations (thanks Stark-Night!)
+
+v1.13.4
+• The 2× XP boost now costs 2.5M coins (down from 25M) but can no longer be stacked: a new boost can't be bought while one is running, and purchases are limited to one per week, resetting Monday 6am alongside weekly quests; previously stockpiled boost time is unaffected
+• Fixed the quest icons legend flashing over the home screen when tapping Settings quickly after returning from the Skills page: taps no longer register on a page that is still animating out, which could also open Settings unintentionally in the reverse direction
+• The Grand Monument's Eternal Flame quick-feed buttons now show clean single-line labels (+1M, +10M, +100M) instead of wrapping decimals across several lines inside the button
+• Inactive characters' sessions now keep running in real time instead of freezing when you switch save slots: the session in progress finishes while you're away, and queued actions catch up when you switch back, just as if the app had been closed; manually imported save files still restore with their remaining session time intact
+• Bone Altar taps now register instantly: the buried counter no longer lags behind fast tapping right after opening the altar or keeps counting after you stop, and taps still waiting to be saved are no longer lost when leaving the screen quickly
+• Cleaner, more compact skill rows: tool and pet bonuses share one line and the prestige stars and button sit inside the row (thanks Michaelomh!)
+• Prestiging mid-session no longer voids the session: it keeps running and pays out loot, coins, kills, and quest progress as normal, with only the XP forfeited (the XP forfeit still prevents banking high-level XP through a prestige)
+• Removed the stray dot at the end of every progress bar and the small gap between the filled and unfilled portions, both introduced by the Material library upgrade in 1.13.3
+• Mercantile and Agility guild quests need far fewer sessions (both ladders are now 1/4/8/12/18/25/34/45/60/75, down from up to 500 trades and 250 course runs): their progress is capped at roughly two sessions per hour no matter your gear or levels, so the top quests took several days of nonstop play where other guilds take a day or less; existing quest progress carries over
+• The Grand Monument's "All" feed button now asks for confirmation with the exact amount before donating, so a stray tap can't drain your entire coin balance; the fixed +1M/+10M/+100M buttons stay instant
+
+v1.13.3
+• New save manager under Settings > Characters: up to 3 character slots shown side by side with each character's sprite, levels, coins, and last-played time; create, switch, or delete characters, with the current character saved automatically and inactive characters' sessions paused until you return
+• New Ironman mode, chosen at character creation and permanent: all XP, yield, and coin boosts are inert, the shop only sells (no buying), and Inn workers can't be hired; ironman characters show a badge on the home screen, profile, and save slot
+• Every crop seed can now be pickpocketed from thieving NPCs, laddered by level (peasants carry potato and onion seeds, the high priest carries starfruit and void lotus), so farming no longer depends on the shop
+• The Merchant's Guild jewelry (rings of wealth, recoil, and suffering, the archers and seers rings, the amulet of strength, and the necklace of anguish) can now also be found as rare pickpocket loot from higher-level thieving targets
+• The Android back button now steps back to the item list inside skill sheets (crafting, prayer, runecrafting, firemaking, and worker crafting) instead of closing the whole sheet, matching the in-sheet back link
+• The craft quantity page now scrolls above the on-screen keyboard so the Craft / Add to Queue button is no longer hidden while typing a quantity
+• Bottom sheets no longer slide over the Android system navigation buttons when opening or closing (Material components library upgraded, which also brings predictive-back animations to sheets on Android 14+)
+• The live combat log now shows a running count of food eaten during the current dungeon, boss, or tower run, alongside the remaining count per food type
+• Construction furniture now sells for the salvage value of its materials instead of a flat 5 coins: the Magic Throne rises from about 6 coins to 850, with the other nine pieces rescaled to match their inputs
+• The Mercantile row on the Skills page now shows quest indicator icons for trade route and coin-earning quests, like every other skill
+
+v1.13.2
+• New in-app theme editor in Settings: recolour any theme with a colour picker, preview it live, save it as your own, and export it as a file to share (importable by others)
+• The guild cape is now awarded when the guild actually reaches level 10, instead of when the final guild quest is claimed at level 9
+• Trade route coin returns on the Mercantile screen now include your cape, prestige, and blessing bonuses, so the shown range matches what sessions actually pay
+• The quest panel's quick-add button now accounts for recipes that craft multiple items per action (e.g. 15 arrows per craft), matching the quest target chips instead of queueing far too many crafts
+
+v1.13.1
+• Fixed the action queue showing the wrong slot count when the Grand Monument is at Gilded or higher (the extra slot worked but displayed as 7/6)
+• Fixed the skill quest panel's quick-add button queueing woodcutting sessions as logs instead of the tree, which made them fail to start
+• The daily boss coin soft cap is now per boss: each boss pays full coins for its first 3 kills of the day instead of 3 kills total across all bosses
+• The bestiary now shows the reduced coin range that applies after the daily cap, and the loot summary notes when a boss coin drop was reduced
+• The Merchant pickpocket now drops real, edible Trout instead of the confusing sell-only "Cooked Trout" junk item
+• Fixed laggy typing in the craft-quantity field on the crafting, skill, and worker screens
+• Hoe farming efficiency is now stored and shown as a multiplier like all other tools (same in-game power, clearer stats)
+• The Vault Guardian boss no longer inherits kill counts from the Guild of Shadows enemy of the same name
+• Bows now show their accuracy as Ranged Atk in the armory and equipment pages instead of plain Atk (same combat power)
+• Long durations now display with months, weeks, and days instead of huge hour counts (e.g. 920h 54m becomes 1mo 1w 1d 8h 54m)
+• The active session card on the home screen now shows how many items the running crafting session will produce
+• Long-press an item in the shop's sell list to lock it against selling; locked items are greyed out with a lock icon and are skipped by Sell Junk and Sell Old Gear
+• The Bone Altar tap area now supports multi-touch, so two-thumb tapping registers every tap
+• Quest indicators now use five distinct icons (quest, daily, weekly, guild quest, guild daily) with a count when several quests of one type target the same item
+• The Skills overview now shows daily/weekly/guild-daily icons next to skills with ongoing timed quests, and an info button explains all the icons
+• Much more game text is now translatable and shown localized, including pet, boss, dungeon, and guild names (thanks CiaranGruber!)
+
+v1.13.1
+• Fixed the action queue showing the wrong slot count when the Grand Monument is at Gilded or higher (the extra slot worked but displayed as 7/6)
+• Fixed the skill quest panel's quick-add button queueing woodcutting sessions as logs instead of the tree, which made them fail to start
+• The daily boss coin soft cap is now per boss: each boss pays full coins for its first 3 kills of the day instead of 3 kills total across all bosses
+• The bestiary now shows the reduced coin range that applies after the daily cap, and the loot summary notes when a boss coin drop was reduced
+• The Merchant pickpocket now drops real, edible Trout instead of the confusing sell-only "Cooked Trout" junk item
+• Fixed laggy typing in the craft-quantity field on the crafting, skill, and worker screens
+• Hoe farming efficiency is now stored and shown as a multiplier like all other tools (same in-game power, clearer stats)
+• The Vault Guardian boss no longer inherits kill counts from the Guild of Shadows enemy of the same name
+• Bows now show their accuracy as Ranged Atk in the armory and equipment pages instead of plain Atk (same combat power)
+• Long durations now display with months, weeks, and days instead of huge hour counts (e.g. 920h 54m becomes 1mo 1w 1d 8h 54m)
+• The active session card on the home screen now shows how many items the running crafting session will produce
+• Long-press an item in the shop's sell list to lock it against selling; locked items are greyed out with a lock icon and are skipped by Sell Junk and Sell Old Gear
+• The Bone Altar tap area now supports multi-touch, so two-thumb tapping registers every tap
+• Quest indicators now use five distinct icons (quest, daily, weekly, guild quest, guild daily) with a count when several quests of one type target the same item
+• The Skills overview now shows daily/weekly/guild-daily icons next to skills with ongoing timed quests, and an info button explains all the icons
+• Much more game text is now translatable and shown localized, including pet, boss, dungeon, and guild names (thanks CiaranGruber!)
+
+v1.13.0
+• Added the Gloomharvest seasonal event (September 1 to November 30): earn 300 tokens across an expanded Bounty Board with farming and turn-in tasks, two expedition dungeons (The Hollowfen and The Blightwood), the Hollow King raid boss, and the Lantern Lights memory minigame
+• Added the Grand Monument to town: build five stages with coins (1M to 1B) for a farming patch, a daily boon, longer blessings, an extra queue slot, and the Golden Goose pet; light the Eternal Flame to unlock the Vault Guardian raid boss and the Patron of the Realm title
+• Fixed the theme setting squeezing its description text once the Midnight option was added; the theme buttons now sit below the text and wrap onto a second row when needed
+• Fixed the Chronos Spire session duration reduction not being reflected in the home screen queue countdown and duration estimates (thanks fjordsec!)
+• Prestiging Prayer now downgrades an active Church blessing to the strongest one your reset level allows (keeping its remaining time) instead of letting the high-level blessing keep running
+• Replaced the expired Discord invite in Settings with a permanent link
+• Fixed a crash when queueing very large runecrafting batches (thanks tdsotm!)
+• Rebalanced the Yew and Magic Longbows (faster, stronger) so they are genuine upgrades over shortbows at their level; Equip Best Gear now picks the Magic Longbow at Ranged 60+
+• Updated Russian and French translations (thanks pikki!)
+• Skill Capes and Guild Capes for the same skill now stack their bonuses (e.g. +10% and +5% combine to +15%), so guild rank stays rewarding after level 99 (thanks fjordsec!)
+• Prayer no longer appears in the Combat screen skill list (it lives under Support skills), and its description no longer wrongly claims it raises your combat level
+• The Midnight theme background is now true black, so AMOLED pixels actually turn off
+• The 48h 2x XP boost now costs 25,000,000 coins (was 250,000)
+• Raid boss coin drops now have a daily soft cap: the first 3 victorious kills each day pay full coins, later kills pay 25%. The boss screen shows how many full drops you have left today
+• Fixed the town achievement descriptions still saying "seven buildings" now that there are nine; they no longer state a count
+• Each skill's activity sheet now has a Quests button listing that skill's guild dailies plus daily and weekly quests, each with its name, description, and progress, plus a quick-add button that queues a session working toward it. Skills with any open quest get a gold dot on the Skills list (guilds at max rank are left unmarked)
+
+v1.12.14
+• Added the Artisan's Workshop town building (Construction 80/90/99): grants a 5/10/15% chance to preserve secondary crafting materials such as herblore and runecrafting ashes
+• Added the Chronos Spire town building (Construction 82/92/99): reduces player session durations by 2/4/6% (worker sessions unaffected)
+• Added a Midnight theme with a higher-contrast AMOLED palette so dark mode stays readable under Night Light
+• Rebalanced Agility Guild quests and dailies to use higher-level courses at higher tiers, and fixed quest descriptions that listed the wrong number of courses
+• Arrow options in the combat loadout picker now show how many you have in your inventory
+• Fixed the bottom Combat button not returning to the combat screen while in the Infinite Tower
+• Fixed the Infinite Tower weapon, arrow, spell, and potion setup disappearing while a tower session is active; selections now stay visible and apply to the next floor, and potions show owned quantities
+• Fixed scattering ashes counting toward the weekly "Bury 450 bones" quest
+• Renamed cooked fish and rat meat so all cooking outputs consistently read as cooked (e.g. "Cooked Shrimp"), in every language
+
+v1.12.13
+• Fixed Equip Best Gear on a Strength loadout again preferring accuracy-heavy armor like the Sovereign Crown over strength-focused armor like the Tower Helm
+• Fixed starting an Infinite Tower floor leaving the screen scrolled partway down the milestone list after the loadout pickers collapse; the view now returns to the top
+• Fixed the category and tier filter buttons on worker crafting activities (Forge, Fletching, Crafting and others) showing untranslated English instead of the localized names used on the player crafting screens
+• Fixed prestiging Magic leaving a now-too-high spell (e.g. Blood Wave) active and still used in fights; the active spell now resets to the best one available at the new level
+• Added the Slayers Guild to the Guild Hall: rank up by completing slayer tasks and defeating on-task enemies through 10 quest tiers and daily contracts, earning coins, Slayer XP, and bones, with the Slayers Guild Cape (+5% Slayer XP) at rank 10
+• Slayer capes now boost Slayer XP from task kills when equipped (or from the cape rack at tier 3)
+
+v1.12.12
+• The Agility Cape's bonus now shows as an XP bonus in Profile > Bonuses instead of a Yield bonus, matching the Armory
+• The Agility session-time row in Profile > Bonuses no longer wraps mid-word or overlaps its description text
+• The Prayer Cape's bonus now shows as a Boost bonus in Profile > Bonuses instead of a Yield bonus, matching the Armory
+• Fixed the Farming panel opening as a stuck sliver and closing itself on the first tap after a fresh app launch
+• Reorganized Fletching filters: categories are now Arrow, Bow, Plank, and Staff, and the second row only lists materials instead of mixing in product names
+• The Plank filter chip is now translated in all languages instead of always showing in English
+• Tower max HP milestone rewards now apply to all combat (dungeons, bosses, and regular fights), not just Tower climbs, including the survival and XP previews
+• The combat log now includes Tower HP rewards in the max HP it displays, so claimed rewards are visible immediately
+• Tower HP milestones now show their real value: +50 max HP per claim, in the Milestones list and Profile > Bonuses
+• In-app popup banners (queue confirmations, guild rewards, and similar) are announced by TalkBack and other screen readers again
+• Added Tower Boots (defense +58, requires Defense 70) to the floor 150 Tower milestone alongside the Tower Greaves; players who already claimed floor 150 receive them automatically on their next visit to the Tower
+• Agility activity previews now account for your grappling hook and pet boost, so the projected XP and level match what sessions actually pay out
+• Mining, Woodcutting, and Fishing activity previews now include pet XP boosts
+• Added the Builders Guild: a Construction guild with a 10-quest progression, 22 daily quests, and the Builders Guild Cape at guild level 10. Every quest is level-appropriate to its tier, and quest XP is doubled compared to other guilds since furniture is slow to build
+• Pick-a-Cup's shuffle now always plays at its intended speed instead of following the system Animator duration scale, which made cups invisible with animations off and the game trivial at 10x
+
+v1.12.11
+• Boss fights now end right after the killing blow instead of hanging at 0 HP for up to a minute
+• Final hits of a fight play at normal speed instead of slowing to one hit every 10+ seconds
+• Combat log lines now appear one at a time instead of clumping up every couple of seconds
+• Kill announcements and the defeated-so-far count now show at the moment the kill happens
+• Your character no longer keeps attacking after dropping to 0 HP in a dungeon
+• Dying during a queued dungeon repeat now ends the run at the death instead of waiting out the full timer
+• The Infinite Tower's enemy strength chip is hidden until stat scaling actually begins past floor 100
+• Cooking session labels for rat meat, chicken, mutton, and beef are now translatable and translated in all languages
+• Removed 32 unused duplicate spell name strings so translators no longer see them
+• Herblore recipe lists now count enhanced potions in the Owned tally instead of showing 0
+• Dismiss Worker is hidden while a finished session awaits collection, so rewards can't be discarded by accident
+• Worker card buttons now wrap onto a second line at large font sizes instead of being squashed
+• Ashes no longer show prayer quest targets or quest markers, since only bones count toward those quests
+• The back button works again while a notification banner is on screen instead of being blocked for a few seconds
+• Prestiging Strength now grants a bronze warhammer as the fallback weapon instead of an attack-style scimitar
+• Equip Best now scores ranged and magic weapons by their own stats and factors in attack speed
+• Combat loadouts no longer bleed into each other when switching styles; each style now remembers its full armor set
+
+v1.12.10
+• Fixed the Infinite Tower queue flickering/jumping around when a floor finished while others were still queued behind it
+• Infinite Tower now keeps climbing automatically after each floor you win, instead of stopping to wait for you to collect the reward first
+• Fixed dying in the Infinite Tower and collecting from the home screen resetting you all the way to floor 1 instead of your last checkpoint
+• Fixed the Ranged Cape, Archers Guild Cape, Magic Cape, and Mages Guild Cape not granting their intended ranged/magic combat bonuses (the ranged and archers capes were silently giving unused melee stats instead, and the magic capes were missing their accuracy bonus)
+• Fixed Equip Best Gear still favoring high-defense armor over your combat style's actual offensive stats (e.g. equipping the Defense Cape for an Attack or Strength loadout instead of the Attack/Strength Cape)
+• Fixed Repeat Action always queuing a single boss fight or dungeon run instead of matching the original session's fight/run count
+• Fixed a long chain of repeated boss fights or dungeon runs stalling in the background and only crediting a fraction of the wins toward quests, instead of catching up on all of them when you reopen the app
+• Fixed Mercantile session results showing an inflated coin blessing bonus that was never actually added to your coin balance
+• Fixed the "Queue ends in..." timer on the home screen undercounting queued boss fights and dungeon runs that had a repeat count above 1
+• Fixed the home screen stats bar and the Shop's Sell tab breaking into vertical, one-character-per-line text when using a larger system font size
+• Fixed the Master worker tier's efficiency being too low to beat the Journeyman tier, tying it with the cheaper Apprentice tier instead of being the best; Master's efficiency is now 2.5x and its crafting cap is 600 items per session
+• Added a pity system to the weekly quest Divine gear drop: missing it increases next week's odds by 50%, resetting after a drop; the Quests screen now shows your current odds, and you can never get a duplicate piece
+• Fixed starting a boss or dungeon fight sometimes requiring you to reselect a spell or potion even though it was already remembered from last time
+• Fixed the "Added to queue" message shown by Repeat Action only naming the skill (e.g. "Fishing") instead of the specific activity like the normal queue message does (e.g. "Fishing — Raw Salmon")
+• Fixed two Town achievement descriptions still referencing 6 town buildings instead of 7
+• Fixed the Shop showing a nonsensical "x0 in inventory" line under the 2x XP Boost, which isn't a stockable item
+• Fixed Equip Best Gear for Ranged and Magic loadouts still undervaluing damage-boosting gear in favor of accuracy-only gear that's actually weaker in practice
+
+v1.12.9
+• Fixed swipe-down-to-close not working on the Skills, Farming, and Mercantile sheets when the list didn't need scrolling or you swiped past the top/bottom; a second swipe once you're at the top now consistently closes the sheet
+• Fixed the "Harvest and Plant All" result popup in Farming showing a garbled title instead of a proper "All Patches Harvested!" message
+• Reworked the dungeon safety rating (Likely/Risky/Unlikely to survive) to run many randomized combat simulations instead of a single fixed run, so rare but dangerous enemies and bad-luck streaks are no longer hidden from the rating
+• Fixed the "Start eating at" HP percentage setting being ignored, causing food to be eaten far earlier than the configured threshold
+• Fixed Equip Best Gear favoring higher-defense armor over higher-strength armor when using a Strength combat style loadout
+• Fixed pet XP bonuses not being applied to Smithing, Cooking, Fletching, Crafting, Herblore, and Construction sessions
+• Added a Discord link to Settings > About
+
+v1.12.8
+• Added a run count picker to dungeons, so you can queue up to 24 runs against the same dungeon as a single queue slot, with live "Run 12/24" progress shown while it runs
+• Added per-combat-style gear loadouts (Combat tab, Gear): each style now automatically remembers its own weapon, armor, ranged arrow, and magic spell, so tapping a style chip instantly re-equips whatever you last used with it instead of leaving ranged/magic rings and necklaces on whatever a different style left behind; also added a configurable "start eating" HP percentage instead of the fixed 50% threshold, and Equip Best Gear now picks ranged/magic-appropriate armor instead of always favoring strength
+• Added checkpoints to the Infinite Tower every 25 floors, so dying now drops you back to your last checkpoint instead of all the way to floor 1
+• Fixed the Ring Toss minigame's timing bar never actually changing color inside the target zone (it was swapping between two colors that turned out to be identical); the bar now turns red while inside the target zone, matching Hammer Strike
+
+v1.12.7
+• Added owned item quantity display in skill crafting windows (Smithing, Cooking, Fletching, Crafting, Herblore, Construction, Runecrafting, Firemaking, and Worker Crafting)
+• Fixed collecting a large number of piled-up sessions (e.g. after queueing many boss fights) being slow and unresponsive, and fixed tapping Collect repeatedly during that time awarding the same rewards more than once
+
+• Fixed the Armory's "How to obtain" info showing an item's flavor text instead of how to get it for Dwarven gear, Divine gear, skill capes, and several dungeon-exclusive items (Shadow/Arcane Grappling Hook, Rogue's Lockpick, and others)
+• Fixed prestiging a combat skill (Attack, Strength, Defense, Ranged, Magic, Hitpoints, or Prayer) during an active fight leaving that fight to run on stale stats, which could later void it and wrongly show "Defeated by" the boss/dungeon even if you were never actually beaten; prestiging now properly ends the fight and refunds it, and a voided session can no longer show a misleading defeat message
+• Fixed a long queue of repeated boss fights losing track of how many fights had run (and undercounting the total) if a second queued item was waiting behind it and a fight's completion was delayed in the background
+
+v1.12.6
+• The custom notification banner can now be dismissed early with a tap, instead of blocking buttons underneath it until it times out
+• Added a fight count picker to boss battles, so you can queue up to 100 fights against the same boss as a single queue slot, with live "Fight 34/100" progress shown while it runs
+• Boss fight weapon, potion, arrow, and spell selection are now dropdowns instead of long lists, with potion effects, arrow counts, and spell rune costs still shown for each option
+• Fixed the Farming patches sheet stopping partway down the screen instead of filling it, cutting off patches near the bottom
+
+v1.12.5
+• Fixed the action queue getting stuck instead of automatically starting the next queued Infinite Tower floor after collecting one
+• Added many more daily guild quest variants so most guilds no longer repeat the exact same set of dailies every day
+• Replaced the app's queue/action notifications with a new custom themed banner, fixing messages sometimes cancelling each other out instead of showing in order, no longer blocking scrolling/swiping while shown, and no longer cutting off long messages
+• Fixed skill activity sheets (Smithing, Cooking, Mining, etc.) closing accidentally when scrolling their list too far
+• Fixed the Text Size setting barely affecting text inside trays/bottom sheets while scaling the rest of the UI correctly
+• Fixed the Ring Toss target zone marker not showing (and not matching Hard mode's narrower 52%-57% window)
+
+v1.12.4
+• Fixed Firemakers Guild quests describing burning logs as "burning ashes" instead of naming the actual wood being burned
+• Boss fights on the Home screen now show that boss's own icon instead of a generic gamepad icon; the Infinite Tower now shows a dedicated tower icon too
+• Fixed the Guild Hall's "quests left today" text squeezing other elements (like the level badge) into an unreadable narrow column in non-English languages; it now sits on its own line
+• Cleaned up leftover duplicate/unused arrow-tip item keys that were confusing translators
+• Made the selected tab on Combat, Skills, and Quests screens more resilient to resetting to the wrong tab after rotating your phone
+• Fixed the queue getting stuck and rearranging itself instead of running your tasks when multiple Infinite Tower floors were queued back to back while you were away
+• Fixed Carnival games showing a bogus XP and level-up preview on the active session card, even though Carnival doesn't grant skill XP
+• Fixed the Bone Altar combo bonus staying shown as active after leaving and coming back, even though the combo had long since expired
+• Fixed "added to queue" and similar confirmation messages getting stuck and reappearing later if you navigated away while they were showing, across Mercantile, Quests, and most other drawers and screens
+• Daily and weekly quest reset times, and the Inn and Guild Hall's daily refresh times, now respect your phone's 12/24-hour clock setting instead of always showing 12-hour time
+• Fixed equipped tool names on the Profile > Gear tab showing in English regardless of your selected language
+• Fixed the Divine Hoe having lower farming efficiency than the Runite Hoe, which made "Equip Best Gear" never pick it
+• Fixed some Guild Halls occasionally offering fewer than 4 daily quests by adding more quest variety and a safety net that fills in extra options when needed
+• Fixed skill capes (Attack, Strength, Defense, Ranged, Magic, HP) and the Warriors/Archers/Mages Guild capes not actually granting their described bonus XP in combat, and corrected their misleading descriptions to say what they really do
+• The Combat > Skills screen now also shows your permanent prestige stat bonus next to each skill, not just its gear bonus
+• Fixed queued dungeon/boss fights sometimes using your default weapon instead of the one actually selected, most noticeable after Android killed the app in the background; queued fights now also show an estimated XP preview like Repeat Action already did
+• Fixed dungeon risk ratings (safe/risky/deadly) not updating when you applied or removed a Church blessing, so a Defense blessing now actually lowers the shown risk like it should
+
+v1.12.3
+• Fixed the activity picker closing after starting or queueing a session; it now stays open so you can queue multiple activities in a row
+• Sped up planting multiple farming patches at once, matching the earlier harvest speed fix
+• Hardened "Equip Best Tools" to ignore any tool with zero quantity in inventory
+• Fixed "Added to queue"/"Queue is full" messages being hidden behind the still-open activity picker on Skills
+• Fixed the Armory mislabeling the Agility Cape's bonus as a Yield Bonus (it's actually an XP Bonus); Prayer Cape now shows a distinct Boost Bonus label
+• Fixed Firemaking's activity picker not returning to the log list after queueing a burn, matching other crafting skills
+• Fixed the Home screen's queue countdown ignoring Tinderbox efficiency for queued Firemaking sessions
+• Fixed Firemaking guild quest/daily indicators incorrectly showing up on the Prayer activity picker (both use "ashes" as an item key)
+• Fixed guild dailies handing out requests you can't currently fulfill after prestiging a skill (e.g. Smithing Guild still assigning Platinum/Runite bars right after your Smithing level resets)
+• Fixed ranged combat damage getting stuck at the first arrow tier fired instead of updating per arrow as your quiver runs through different tiers
+• Increased arrow strength bonuses to match the ranged damage shown when fletching them (e.g. Runite Arrows now correctly hit as hard in combat as advertised when crafted)
+• Fixed enhanced potions showing the same name as their regular version in English, Polish, and Russian, making them impossible to tell apart in the Shop and Inventory
+• Added arrow, spell, and potion selection to the Infinite Tower, matching Dungeons and Bosses
+• Added a per-guild daily status indicator to the Guild Hall list: a lock icon if not yet unlocked, a checkmark once today's dailies are done, or a count of how many are left
+
+v1.12.2
+• Re-added the Home screen stats bar (Combat Level, Total Level, Coins), redesigned as a single thin row instead of the previous stacked card, with compact Church blessing and 2x XP boost remaining-time indicators shown underneath when active
+• Added a "Stats Bar" toggle in Settings to hide the Home screen stats bar entirely
+• Fix: collecting a completed Dungeon, Boss, or Infinite Tower session could silently pay out zero XP and loot and, for Tower floors, fail to advance to the next floor; this happened whenever the encounter's difficulty exceeded a formula the game never actually required you to meet to start it. Rewards are now only withheld if a combat skill was genuinely prestiged mid-session
+• Fix: an Infinite Tower floor sitting uncollected could permanently block every other item queued behind it; blocked floors are now skipped over instead of jamming the whole queue
+• Fix: the "Queue ends in..." countdown could show 0 seconds while items were still queued, because it was reading the timestamp of an already-finished session instead of the active one
+• Fix: the session queue could get stuck with nothing running and nothing queued for the app to auto-resume; a background check now keeps retrying until the next item actually starts
+• Fix: harvesting or planting multiple Farming plots at once could take several seconds because each plot committed to the database separately; a full batch now commits in one go
+• Fix: some capes showed different stat bonuses in the Combat Gear tab than in the equip picker or Profile Armory tab (missing the cape's bonus line); all three now show identical stats
+• Fix: the Journal Button setting description still described the journal as a floating button, though it now lives in the home screen's top bar
+• Fix: the newer tools (Grappling Hook, Frying Pan, Hammer, Lockpick, Tinderbox) showed "No stat bonuses" in their item details instead of their efficiency bonus, in both the Combat Gear tab and the Profile Armory tab
+• Added a "Session End Time" toggle in Settings to hide the predicted completion clock time next to session and queue countdowns, for players who only want the plain countdown
+• Moved the Home screen display toggles (Recent Activity Log, Journal Button, Seasonal Events, Collapsible Town Grid, Character Viewer, Stats Bar, Session End Time) out of the main Settings list into a new "Home Screen" sub-page, so Settings isn't as crowded
+• Fix: Merchants Guild quests only said "Complete N trade routes" without naming which route, unlike Agility Guild quests which already named the specific course; trade route quests now name the specific route too
+• Fix: Herblore Guild dailies could hand out Overload Potion tasks (needs Herblore level 96) while you were still working through the Super Ranging/Super Magic Potion guild quests (levels 76-88), leaving no completable daily for a long stretch of progression; those potions now have their own daily tier, and Herblore dailies now check your actual skill level like other crafting guilds already do
+• Added a run counter to Boss entries in the Combat tab, showing your lifetime kill count for that boss right under its description (same as Dungeons already had)
+• The Worker card, on both the Home screen and the Worker Skills screen, now shows the total quantity assigned to a long-running job (e.g. "Assigned: 25,000 Iron Bar" or "Assigned: 100,000 Giant Bones"), so it's easy to remember the job size on jobs that run for hundreds of hours
+
+v1.12.1
+• Added a Character Viewer toggle in Settings, letting you hide your character sprite from the Home screen if you'd rather not see it
+• Fixed eyes, hair, and beard rendering misaligned on the option buttons in the Character Appearance creator for short races (Dwarf, Gnome, Halfling); the live preview sprite was already correct
+• Fixed Apprentice, Journeyman, and Master worker descriptions at the Inn to state they're dismissed after collecting, matching the Long Laborer and actual behavior
+• Fixed the Lockpick's tool bonus not showing on the Thieving row in the Skills tab
+• Fixed Weekly quests never being translated into other languages
+• Fixed the Infinite Tower's "Enemy strength" percentage showing a huge, stuck value instead of a smoothly increasing one
+• Added haptic feedback to the Bonfire Rhythm minigame's start button, matching the rest of the minigame
+• Fixed farming plots surviving a Reset Progression instead of being cleared along with everything else
+• Fixed the weapon selector highlighting your melee weapon instead of your actual active weapon (e.g. Magic) when starting a combat task
+• Collecting a finished session now only happens from the Home screen; the Skills and Combat screens no longer have their own separate (and occasionally buggy) Collect button
+• Fixed Firemaking quests and dailies never showing their quest indicator in the session selection menu
+• Fixed the Skills tab feeling slow and laggy, especially when opening a skill or task, by moving quest indicator calculations off the main thread
+• Skill session buttons no longer go dead silent when your queue is full; they now show the same "queue full" message as Dungeons and other activities
+• Prestiging Agility or Mercantile now tells you what you're actually getting: Agility shows the real session-time reduction at level 99, and Mercantile shows its extra coin-return bonus, instead of a generic XP-only message
+• Fixed the Profile Bonuses tab labeling combat skill prestige as an XP bonus when it's actually a flat stat bonus; also added missing rows for Agility's session-time reduction and Mercantile's coin-return bonus
+• Agility and Mercantile guild quests (both the one-time guild quests and recurring dailies) now require a specific course or trade route, matching every other guild, instead of accepting any session or trade
+• Rebalanced guild leveling: the number of daily requests needed per tier is roughly halved, and up to 4 guild dailies are now offered per guild per day (up from 2), cutting time-to-max roughly in half while restoring meaningful daily choice
+• Combat now always eats your best-tier equipped food first and only drops to a weaker tier once it runs out, instead of favoring weaker food to avoid overhealing
+• Raised the per-session food cap in dungeons and boss fights from 200 to 300 items
+• Session and queue countdowns now also show the clock time they'll finish at (e.g. "2h 30m 0s (1:00 PM)"), respecting your device's 12/24-hour setting
+• Removed the stats card from the Home screen (Combat Level and Coins are still visible on Combat and Profile; Total Level is still on Profile)
+• The Home screen's Town section (Shop, Inn, Guild, Church, Builder, Slayer, Carnival) is now a collapsible card by default, remembering whether you left it expanded or collapsed; added a "Collapsible Town Grid" toggle in Settings to turn this off and show it as a plain grid instead
+
+v1.12.0
+• Fix: the queue's estimated time on the Home screen didn't update after an Agility level up or switching tools; it now reflects your current Agility level and equipped gear
+• Reworked guild leveling: reputation is gone, and ranking up now requires completing a number of daily requests for that guild (in addition to the existing quest requirement), so progress always feels earned instead of stalling once your old reputation bar filled up
+• Rebalanced several rare tools so higher-rarity gear is never weaker than an easier-to-get tier (Divine Pickaxe/Axe, and the Fishing rod line)
+• Added Divine Hoe, Dwarven/Divine Hammer, Dwarven/Divine Tinderbox, Dwarven/Divine Frying Pan, and Shadow/Dwarven/Arcane/Divine Grappling Hooks, filling out rare-tool gaps across Farming, Smithing, Firemaking, Cooking, and Agility
+• Added a new Lockpick tool line for Thieving (Bronze through Runite, craftable via Smithing, plus Rogue's, Dwarven, Shadow, and Divine variants) that boosts pickpocket success chance
+• Added a Character Appearance creator (race, skin tone, eyes, hair, and beard) with a live sprite preview, plus a matching idle character shown next to your name on the Home screen
+
+v1.11.4
+• Rare boss and dungeon drops (and pets) now show in gold with a 🌟 on the Combat result sheet and Home collection summaries, so they stand out from common loot
+• Added quest indicators (⏰ for daily/weekly/guild dailies, 📜 for main/guild progression) next to items in every skill selection sheet, faded out when you don't have enough materials on hand to finish the quest
+• Fix: after prestiging past a blessing's Prayer level requirement, you could still extend that already-active blessing indefinitely; extending now requires the same Prayer level as activating
+• Fix: several screens applied top bar and bottom navigation padding inconsistently, wasting vertical space on some screens
+• Added a Polish translation
+• Fixed and completed the Indonesian and Brazilian Portuguese translations, which were missing enemy, item, quest, guild quest, skill, and notification strings
+• Fix: the "expedition started" banner (and the same banner on the skill task selection drawer) could get stuck and reappear later if you switched screens while it was showing, instead of dismissing like other banners
+• Fix: the Home screen's notes button could overlap the reorder/remove buttons on queued tasks; it's now a top bar icon next to Recent Activity instead of a floating button
+• Fix: the wiki pages for Firemaking, Smithing, Cooking, and Agility were missing their tool sections (Tinderboxes, Hammers, Frying Pans, and Grappling Hooks)
+• Bonfire Rhythm now shows a 3 second countdown before each attempt starts, so you have a moment to get ready
+• Added a Seasonal Events toggle in Settings, to hide the event banner on the home screen
+• Replaced skill emojis with proper icons (from Shikashi's Fantasy Icons Pack, credited in Settings) on the Skills, Combat, and Profile screens, session cards, the queue, and the Recent Activity log
+• Fix: the estimated completion time shown before queuing Smithing, Cooking, or Firemaking ignored your equipped tool (Hammer, Frying Pan, Tinderbox) entirely, so it could show several times longer than the actual session; the estimate now matches what you'll actually get
+• Renamed the Wild Dog enemy to Wild Monkey
+
+v1.11.3
+• Fix: starting a Mercantile trade route directly (with no other session already queued) ignored your Agility prestige bonus, giving a 40-minute session instead of the correct 30 minutes at Agility prestige 3; sessions started via the queue were always correct, and now direct starts match
+• Fix: collecting a crafting or gathering session from the Skills screen never counted toward Seasonal Event bounty tasks (e.g. "Brew Strength Potions"), so those bounties looked unfinishable no matter what you crafted; potions brewed with any ash catalyst also now count toward bounties, same as plain potions
+• Fix: when a ranged weapon's preferred arrow type ran out mid-session, combat jumped straight to your best remaining arrow tier instead of the next cheapest one, burning through valuable arrows unnecessarily
+• Fix: prestiging a skill right after a session finished (but before collecting it) let the old, higher-level session pay out its full rewards anyway, instantly re-leveling the freshly reset skill for free; these sessions are now voided and any materials used are refunded instead
+• Fix: Quest, Guild Quest, and Carnival/Slayer XP Lamp rewards were silently multiplied by your active XP boosts when credited, but the confirmation message only showed the flat, pre-bonus amount; it now shows the real total you received
+• Added Rune Essence to the Shop's buy list (it was craftable and sellable, but not purchasable, despite the wiki saying otherwise)
+• Fix: if you didn't collect an Infinite Tower floor before the next one auto-started, the game would silently re-run the same floor instead of progressing, and the queue's floor number previews could drift out of sync with what would actually run; floors now wait for collection before advancing, and the queue preview is now always accurate
+• Fix: kills from Infinite Tower floors never counted toward Slayer tasks, and collecting a Tower floor from the Combat screen specifically also missed weekly/daily quest and Guild progress; all three ways of collecting a Tower floor now credit Slayer, quests, dailies, and Guild progress consistently
+• Fix: the Armory and Equip picker showed every non-combat skill cape's bonus as "XP Bonus" (e.g. the Farming Guild Cape), when most of them actually boost item yield, not XP; the label now matches what the cape actually does
+• Fix: buying then immediately selling Copper Ore, Tin Ore, or Rune Essence at high Mercantile levels could turn a small profit instead of a loss, letting you generate unlimited free coins; selling now always costs at least 1 coin less than buying, at every Mercantile level
+
+v1.11.2
+• New: added Brazilian Portuguese as a selectable language
+• Fix: the seasonal bounty to "Fletch arrows to hold back the wisps" didn't say which arrow type it needed, now clarifies it requires Mithril arrows
+• Updated Italian translation for v1.11.1 strings
+• Updated French translation for improved clarity
+• Fix: the Church blessing confirmation showed a "bones available" number that looked inflated because it was a weighted total (bigger bones count for more) rather than a plain item count; now shows both your raw bone count and what it's worth toward the blessing cost
+• Fix: the Sunspire Solstice seasonal event's bounty tasks, minigame name, and event banner were not translatable into other languages; they're now proper localized strings
+• Fix: collecting several finished sessions at once could show only the expedition's results (and its lore note) in the popup, hiding the other sessions' rewards from the summary — all collected sessions now show together
+• Fix: the Hammer, Tinderbox, and Frying Pan tools were only speeding up XP gain in Smithing, Firemaking, and Cooking, not crafting time, so better tools didn't visibly speed up production; they now reduce crafting time too, matching how Pickaxe/Axe/Fishing Rod/Grappling Hook already work
+• Fix: collecting a session from the Skills screen showed the XP gained without your active XP boost, blessing, or prestige bonus applied, even though you were actually credited the correct (higher) amount; the popup now shows the true total, matching what collecting from the Home screen already showed
+• Fix: sending a hired worker to Runecraft with an ash catalyst equipped produced the same output as having no ash at all; workers now get the same ash bonus you do when crafting runes yourself
+• Fix: cancelling a Runecrafting or Herblore session (or removing one from the queue, or prestiging its skill) never returned the ash catalyst you'd used, even though every other material was refunded; ash is now returned along with everything else
+• Fix: queuing a Runecrafting session with an ash catalyst while another session was already running consumed the ash twice, once when queued and again when it actually started
+• Fix: ranged combat could burn through better arrow types you weren't using before touching your actually-selected arrows, since the fallback order always started from your best tier owned instead of your selection; your selected arrow (or equipped arrow for workers and the Infinite Tower) is now used up first
+• New: added haptic feedback to the Bonfire Rhythm minigame, matching the other Carnival minigames
+• New: added an Easy mode to Bonfire Rhythm with a longer reaction window, trading a longer cooldown between attempts for it
+
+v1.11.1
+• Fix: Infinite Tower could land you on the wrong floor after queuing several floors and letting them finish while the app was closed, since offline catch-up could mis-order which completed floor counted as current and some floors could be skipped entirely; collection now correctly drains every backlogged floor in order
+• Fix: Equip Best Gear could equip a lower-tier gathering/crafting tool (like a bronze hammer) over a higher-tier one you owned (like an iron hammer), since the four newest tool types weren't being scored by their actual efficiency
+• New: added a separate Equip Best Tools button to the Equipment tab on the Profile screen, so you can optimize just your gathering/crafting tools without touching your combat gear
+• Fix: the Runecrafting card could not be scrolled on some screen sizes, hiding the Start/Queue button once you had enough ash types to make the ash-catalyst list too tall to fit
+• Fix: crafting guild quests (cooking, smithing, fletching, etc.) always said "Craft" instead of the correct verb for that guild, now matching the wording used in regular quests
+• Fix: the four newest tools (Hammer, Tinderbox, Grappling Hook, Frying Pan) showed up under Armour instead of Tools in the Inventory tab
+• Fix: the Carnival's Higher/Lower game result (last card and tickets won) flashed and disappeared instantly instead of staying up until you tapped Continue
+• Fix: the Inn's hiring screen could show a hired worker's name as a generic daily preview name instead of their actual assigned name, occasionally making two different hired workers appear to share the same name
+• New: Titles added — earn a title for milestones like completing a skill's full quest chain, defeating every raid boss, completing a Seasonal Event, or mastering a guild, then equip one from the character edit sheet on the Profile screen to display as "Name the Title"
+• New: added an Art Credits section to the bottom of Settings, crediting the source of the Seasonal Banner artwork
+• Tweak: Journeyman and Master workers now craft faster (not just with a lower item cap) in proportion to their efficiency, and Journeyman's efficiency was raised from 1.25x to 1.5x, so both are now clearly worth their higher hire cost instead of matching or losing to the Apprentice
+
+v1.11.0
+• New: Seasonal Events added — real-calendar-dated events with a Bounty Board, Expedition, Raid Boss, and reflex minigame, all feeding one token currency toward a permanent Profile banner; launches with Season 1, "Sunspire Solstice" (Jun-Aug 2026)
+• New: Bounty Board tasks now rotate — completing one starts a 1-hour countdown before a different task from a wider pool takes its place; tapping "Go" on a bounty opens the relevant activity picker right on the event screen instead of navigating away, and craft-type bounties show a fill chip (like daily/guild quests) to queue the exact remaining amount
+• New: Profile Banners tab now shows every seasonal banner, earned or not — banners you haven't earned yet appear greyed out and labeled "(Unobtained)"; the active event's banner icon also shows on its Home screen card
+• Tweak: Farming crop XP and yields rebalanced per community feedback so newer crops keep pace with earlier ones for XP/hour — Onion, Cabbage, Pumpkin, Watermelon, Magic Herb, Dragon Fruit, Spirit Herb, Celestial Bloom, and Starfruit all increased; Strawberry's yield trimmed since it was a clear outlier
+• Fix: bow and staff gear bonuses were being dropped from ranged/magic damage in almost every real combat session (anything after your very first fight), so damage barely improved no matter which bow or arrows you used — gear now correctly boosts ranged and magic damage again
+• New: Journal added — a floating button on the Home screen for jotting down free-text notes/reminders, like what to queue next or what you're grinding toward; can be hidden in Settings
+• New: Queue Master town building — each tier adds +1 action queue slot (up to +3 at max tier), on top of the base 3
+• New: four new gathering/skilling tools — Hammer (Smithing), Tinderbox (Firemaking), Grappling Hook (Agility), and Frying Pan (Cooking), each with 6 tiers from bronze to runite, giving the same kind of speed/XP bonus as pickaxes and axes
+• Tweak: town achievement text now reflects six town buildings instead of five
+• Fix: Manta Ray and Sea Turtle now unlock in the same order in Fishing as they do in Cooking (Sea Turtle at 80, Manta Ray at 85)
+
+v1.10.13
+• Fix: Magic weapons no longer land attacks once you run out of the rune your spell needs, and no longer generate free runes out of thin air when you fight without any
+• Fix: Repeating an Infinite Tower floor while other floors are queued ahead no longer adds a duplicate floor label to the queue
+• Fix: Prestiging a skill now immediately swaps out any equipped gear you no longer meet the level requirement for, instead of leaving it stuck equipped until you tap Equip Best Gear
+
+v1.10.12
+• Fix: Infinite Tower's next floor button no longer locks up while a floor is already running, so floors can be queued back to back
+• Fix: Infinite Tower queue labels no longer show the wrong floor number after cancelling or losing a queued floor
+• Fix: Infinite Tower no longer awards Slayer XP from its enemies
+• Fix: Infinite Tower's rune check before starting a floor no longer overestimates how many runes you need
+• Fix: Skill capes are no longer suggested for sale by Sell Old Gear
+• Fix: Importing a save no longer shows a false "Invalid File" error, and workers no longer lose their in-progress or ready-to-collect job after a restore
+• Fix: Carnival active games no longer get stuck showing "Ready in 0h 0m"; the Play button now appears immediately when the cooldown ends
+• Fix: Carnival ticket estimates and cooldown times now correctly reflect Fairgrounds upgrades
+• Fix: Garden's tier progress and achievements now display correctly since it has fewer upgrade tiers than other town buildings
+
+v1.10.11
+• Fix: Removed impossible Spectral Knight slayer task (no such monster exists)
+• Fix: Carnival prize shop no longer lets Juggling Imp be re-bought after owning it
+• Fix: Herblore cape no longer misclassified under Materials in the shop; added missing Herblore, Thieving, Construction, and Slayer 99 skill capes
+• New: Added a contribute-from-inventory button to regular farming guild quests
+• Fix: Farming guild daily donations no longer advance progress if the item consumption fails
+• Balance: Rebalanced guild daily request amounts so completing one takes roughly similar effort across every guild
+• Fix: Firemaking, Runecrafting, and Prayer now show guild quest progress chips like other skills
+• Fix: Infinite Tower's floor button now updates correctly when queuing multiple attempts
+• Fix: Infinite Tower enemies now keep getting tougher past floor 100 instead of freezing, and the strength indicator reflects real enemy stats
+• Fix: Infinite Tower queue can no longer be exploited to skip floors by cancelling and requeuing
+• Fix: Firemaking and Runecrafting quest chips no longer sit flush against the screen edge
+• Fix: Merchant's Quarter (and other trade routes) can now actually pay out amounts near their advertised range instead of always landing near the average
+
+v1.10.10
+• Fixed Prayer XP from burying bones not including pet bonuses (e.g. Juggling Imp's all-skill boost)
+• Fixed queueing multiple Infinite Tower floors repeating the same floor instead of advancing (each queue tap now uses the last queued floor, not the currently running one)
+• Fixed Agility Prestige not reducing Crafting session duration (Smithing, Cooking, Fletching, Crafting, Herblore, Construction)
+
+v1.10.9
+• Fixed Higher or Lower minigame giving wrong answer on tied numbers (now regenerates until the next number differs)
+• Fixed Ancient Forest Ruins not unlocking after completing the Whispering Grove expedition (race condition in flag update now resolved atomically)
+• Fixed Bestiary qty column wrapping mid-number for large ranges like ×100–200 or coin ranges (column widened, single-line enforced)
+• Fixed Agility prestige not reducing session duration for combat dungeons, boss fights, Infinite Tower, expeditions, Slayer tasks, Carnival games, and Mercantile routes
+• Wrapped multi-step inventory/flag transactions in Carnival, Church, Farming, Slayer, and Town repositories with atomic mutex locks to prevent item or coin loss under concurrent writes
+
+v1.10.8
+• Guild gather quests now show the correct action verb (Mine, Catch, Chop, Harvest) instead of "Collect"
+• Added Farming Guild gather quest verb (Harvest)
+• Carnival ring toss hints now correctly display percentage symbols instead of %%
+• Juggling Imp from the Carnival shop now correctly goes to your pet list instead of your inventory
+• Pet bonuses from multiple pets now stack correctly — the full combined boost is applied everywhere
+• Worker ranged sessions now correctly use all available arrow tiers, not just the best one
+• Repeat Action on boss/dungeon sessions now correctly applies your active potion
+• Boss session summaries now show arrows, runes, and food consumed in the collection report
+
+v1.10.7
+• Fix: Mercantile Cape (level 99 reward) can now be equipped and is no longer sold as junk
+• Fix: Farming produce (pumpkin, strawberry, tomato, watermelon, etc.) no longer appears in Sell Junk
+• Fix: Tower kills now count toward weekly quests, daily quests, slayer tasks, and guild progress
+• Update: Inn description now clarifies that worker sessions do not count toward your quests
+
+v1.10.6
+• Fixed boss kills (King Black Dragon, Demon Lord) not counting toward dragon/demon daily and weekly quests
+• Fixed being unable to buy more than 1 of a cheap item when holding billions of coins
+
+v1.10.5
+• Fix: Forge Demons in the Ancient Forge now count toward demon kill quests
+• Fix: Enemy kills in the Infinite Tower now count toward quests (kill quests, guild quests, slayer tasks)
+• Fix: Tower now correctly uses your selected weapon style — previously it could start with the style from a previous floor if you hadn't re-tapped the selector
+• Carnival: Pick-a-Cup is now a skill game — watch the cups swap and track the gem (community contribution)
+• Carnival: Higher or Lower now shows you the last card number after your run ends, so you can see what you missed
+• Skills screen: your pet's XP bonus is now shown under the skill it affects
+• Armory: you can now sort equipment by Attack, Strength, Defense, or Level requirement
+• Builder's Workshop: new Garden building adds extra farm plots (up to +2 at tier 2, Construction level 55 required)
+• Fix: "Town Improver" and "Town of Legend" achievements now correctly reference five buildings instead of four
+
+v1.10.4
+• Fix Repeat Action for Construction sessions not carrying the item quantity
+• Fix Repeat Action quantity calculation using only the first frame instead of the full session total
+• Fix arrow fallback in queued combat sessions: when one arrow tier runs out the next tier is now used correctly
+• Fix Fletching "Plank" filter chip: tapping Plank now shows all plank types instead of only the basic Plank
+
+v1.10.3
+• Fix: quantity input fields in the shop, crafting, firemaking, runecrafting, and skill recipe sheets are now wide enough to show 5-digit numbers without clipping
+• Fix: when a staff provides infinite runes for a spell, the spell selector now shows "(infinite Blood Rune)" instead of showing nothing
+• Fix: weekly arrow-fletching quests (mithril, runite) no longer appear if your Smithing level is too low to craft the required arrowheads
+• New: four high-level Slayer enemies now exist in the world: Frost Wyvern (Frozen Citadel), Abyssal Guardian (Abyssal Throne), Shadow Thief (Guild of Shadows), Elder Lich (Abyssal Throne)
+• New: Dragon Boots can now drop from Green Dragons in the Dragon Lair (4% chance)
+• New: Firemaking and Runecrafting quantity pickers now show quest fill shortcuts, just like Smithing and Cooking
+
+v1.10.2
+• Fix: guild daily quests sometimes missing when opening the Guild Hall or collecting a farming harvest (race condition + skill level check bug)
+• Fix: item names in Sell Junk and Sell Old Equipment sheets now correctly use your chosen app language
+• Fix: carnival game result messages (ring toss, hammer strike, etc.) now correctly use your chosen app language
+• Fix: ranged combat now falls back to cheaper arrow tiers when your best arrows run out mid-session rather than attacking with nothing
+• Infinite Tower: added weapon type selection before starting a floor, matching the dungeon start screen
+• Infinite Tower: live combat log now displays during an active floor session, showing hits, misses, kills, XP, and drops
+• Fix: queueing a tower floor now captures the correct next floor at queue time, preventing repeated runs on the same floor
+• Infinite Tower: milestone item rewards significantly rebalanced to be best-in-slot tier, worthy of their floor requirements
+
+v1.10.1
+• Fix Sell Old Equipment excluding weapons and not suggesting extra copies of currently equipped items; fix ring comparisons ignoring ranged/magic bonuses (e.g. Archer's Ring and Seer's Ring were incorrectly treated as inferior to Ring of Recoil)
+• Fix queued sessions not starting automatically when the previous session completes (affected Skills, Combat, and Boss queue paths)
+• Fix tower sessions being silently deleted without granting XP or loot when collected from the Home screen alongside other sessions
+• Fix coins taking a double 10% death penalty in combat and Tower sessions (players were receiving 1% of coins instead of 10%)
+• Fix Infinite Tower not supporting the session queue (it now queues like any other activity when a session is already running)
+• Fix worker herblore not passing the selected ash catalyst, so workers were always crafting the unenhanced potion
+• Fix daily and weekly quest reward items sometimes not appearing in inventory due to a race condition with session collection
+
+v1.10.0
+• Fix item appraisal correct answer always appearing in the top-left position; choices are now shuffled each round
+• Fix agility session duration in the skills pane not reflecting prestige level; the displayed time now matches what actually queues
+• Add Infinite Tower: an endless combat gauntlet accessible from the Combat screen; survive each floor to advance, death resets to floor 1, best floor is permanent; 25 milestone rewards every 10 floors up to floor 250 including unique gear, passive XP/HP/coin bonuses, and the Void Staff (grants infinite runes for all spell types) at floor 250
+• Add six Tower achievements (First Step through Void Conqueror) and a Tower Legend achievement for claiming all milestones
+• Fix Town achievements incorrectly referencing three buildings instead of four
+
+
+v1.9.15
+• Fix guild daily quest progress resetting mid-day when a new guild was unlocked; other guilds' progress is now preserved
+• Fix slayer weapon picker showing Attack pre-selected regardless of last-used weapon slot
+• Increase dark wizard spawn weight in Undead Crypt so slayer tasks complete more reliably
+• Fix enhanced potions being included in Sell Junk
+• Fix fish cooking quests appearing as crafting suggestions on non-fish cooking screens
+• Fix guild quest crafting suggestions showing locked quests and incorrect amounts when the Guild Hall has been upgraded
+• Fix pick-a-cup cups not shuffling after the reveal; gem now moves to a random position before you guess
+• Add haptic feedback to all carnival game buttons (ring toss, hammer strike, colour sequence, item appraisal, pick-a-cup, higher-or-lower)
+
+v1.9.14
+• Hard mode potion sequence now uses 8 colours (Yellow and Pink added) so all 8 colour buttons are visible
+• Indonesian (Bahasa Indonesia) now appears as a selectable language option in Settings
+
+v1.9.13
+• Slayer: Foretell queue now shows a "+ Queue" button on each row so you can manually queue that dungeon at any time
+• Carnival: Fairgrounds building upgrades now boost idle session ticket chance (+5%/+10%/+15% per tier)
+• Carnival: Difficulty setting for each minigame is now remembered across sessions
+• Carnival: Potion Sequence now uses 6 colours for both the sequence length and the button palette (Normal: remember 6, Hard: remember 8)
+• Guild dailies: Fletchers Guild no longer assigns arrow-crafting tasks that require a higher Fletching or Smithing level than the player has
+• Thieving: Coins earned during a thieving session now correctly go to your coin balance instead of sitting in inventory
+• App icon: Monochrome/themed launcher mode now shows the correct shield-and-swords shape instead of a solid blob
+
+v1.9.12
+• Fix clearing a magic bean farming patch consuming the seed permanently; the seed is now returned and can be replanted
+• Fix bones quantity field in the prayer session sheet being too narrow to display large numbers
+v1.9.11
+• Fix agility prestige not reducing session time when starting a new session directly from the Skills screen
+• Fix worker efficiency multiplier incorrectly scaling crafting output (bars, planks, etc.) — efficiency now only applies to gathering
+• Fix bronze pickaxe disappearing from the Armory after selling; starting tools are always marked as found
+• Fix Hide Completed toggle resetting when leaving and returning to a Guild Hall screen
+• Fix gathering tool multipliers rounding incorrectly; iron pickaxe (1.5x) and other fractional-multiplier tools now give the correct ore/log/fish count per session
+• Fix 2H swords auto-unequipping the shield when equipped (and vice versa)
+• Fix dungeon and boss safety ratings ignoring equipped food when the food's heal value exceeds the player's current HP deficit
+• Add Deactivate button to the Church screen to cancel an active blessing early
+
+v1.9.10
+• Fix food overhealing display for prestiged Hitpoints players (simulator max HP now matches the HP bar)
+• Dungeons and boss fights now cap food consumption at 200 items per session (best-healing food used first); the difficulty indicator now runs the actual combat simulation for each dungeon (accounting for your attack and kill speed) instead of a defence-only estimate, so ratings reflect real survivability
+• Fix queue XP estimate from Skills tab not including pet bonuses, causing it to show less XP than the Repeat button
+• Fix active session XP display on Home screen ignoring 2x XP boost and Church blessing
+• Worker skill list: Agility moved to Support section to match the main Skills tab layout
+• Skills tab: "Crafting" section header renamed to "Crafting Skills" to distinguish it from the Crafting skill row
+• F-Droid: fix APK filename in metadata so the build server can locate the release APK
+• Settings: backup folder subtitle now shows the full folder path (e.g. Download/Backup) instead of just the last folder name, avoiding the appearance of the word "Backup" repeating
+• Fix Farming sheet opening at partial height when first tapped from the Skills tab; the sheet now always opens to full size regardless of whether data has loaded yet
+
+v1.9.9
+• Fix pet XP bonuses and prestige bonuses not applying to boss session rewards; both are now correctly applied when collecting a completed boss fight
+• Fix prestige XP bonus not applying to dungeon session rewards when collecting from either the Home or Combat screen
+• Fix "combat" pets (Dragon Whelp, Void Wisp) not counting toward the XP bonus applied during dungeon sessions; multiple combat pets now stack correctly
+• Fix worker cooking/crafting sheet showing English item names instead of the device language; now uses the same localized lookup as the regular skill sheets
+• Fix French translation of Builder's Workshop truncating to an offensive word on the Home screen; shortened to "Atelier"
+• Fix Farm dungeon enemy list showing "Cooked Chicken" instead of "Chicken"; dungeon info sheet now uses the correct enemy name lookup
+• Fix Thieving Guild daily quests being generated for NPCs the player cannot yet pickpocket; quests are now filtered to the player's current Thieving level
+• Fix dungeon last-run stats (kill count, food used, survived) not being saved when collecting sessions from the Home screen
+• Fix Fletching "Plank" filter showing only one item; all plank types now share a Plank category filter
+
+v1.9.8
+• Workers can now be assigned Construction and Thieving tasks (previously showed Coming Soon or did nothing)
+• Agility moved to the Support Skills section in the Skills tab, consistent with the Profile and Guild Hall screens
+• Automatic backup now includes active sessions (same as manual Export) and no longer writes corrupted files when overwriting an existing backup
+• Release APK is now named IdleFantasy-v[version].apk so downloaded copies are easier to identify and archive
+• Fix toast for adding a session to the queue disappearing behind the open skill sheet; the sheet now closes first so the message is visible
+• Fix stale queue toast appearing when navigating back to the Skills screen after the message was never shown
+• Pet discoveries now show a closable dialog instead of a toast so they are harder to miss; boss pets that were previously silent also now show the dialog
+• Guild Hall quests and dailies now have a filter toggle (top-right) to hide completed entries, shared with the main Quests screen hide-completed setting
+• All notification banners can now be dismissed by tapping the X instead of waiting for them to expire
+• Fix "Claim Weekly Bonus" button remaining visible after the reward has already been claimed
+• Carnival remembers the last-viewed tab when you navigate away and return
+• Queueing a dungeon from the Slayer screen now shows a weapon picker sheet when you have more than one weapon equipped, matching the Combat screen behaviour
+• Tap any enemy name in a dungeon's info sheet to see its HP, combat stats, and drop table
+• Combat Gear tab now shows stat bonuses (Atk, Str, Def, etc.) under each equipped item name
+• Dungeon list now shows a summary of your last run (kills and food used, or "died" if you didn't survive)
+
+v1.9.7
+• Fix red dot badge on Quests nav button not appearing when a Daily or Weekly Quest becomes ready to claim
+• Fix XP bonus multiplier being incorrectly applied to all combat skills when a prayer cape is equipped - the prayer cape bonus now applies only where it belongs (bone altar prayer sessions)
+• Bonuses tab now shows a Combined XP row (e.g. 2.86×) when both an XP Boost and a Church blessing are active, and separates per-skill XP bonuses from yield bonuses so it is clear what each bonus affects
+• Fix Smithing (and Worker Smithing) filter resetting the ore/tier chip when you then select an equipment type - the tier now stays selected as long as it applies to the new category
+• Restore F-Droid custom repo index files that were accidentally deleted by a contributor PR; Droid-ify and Neo Store users can update again
+• Skill capes no longer have a level requirement to equip - once you earn a cape by reaching level 99, you can equip it at any level (including after prestige)
+
+v1.9.6
+• Fix worker Runecrafting activity sheet showing wrong level prediction by correctly using the player's current Runecrafting XP instead of always starting from level 1
+• Fix crafting/cooking start button pushed off screen when many quest goal chips are visible by making the quantity picker sheet scrollable
+• Quest goal chips in crafting now only show the current quest in a chain — future quests are hidden until their prerequisite is complete (e.g. Cooking Fish IV won't appear while you're still on Cooking Fish III)
+• Red dot badge now appears on the Quests nav bar button whenever a quest is ready to be claimed
+• Inventory now has separate categories for Raw Food, Ammunition, Ores & Gems, Construction, and Seeds & Crops; tap the category filter chips at the top of the inventory to quickly filter to a single type
+• Fix skill cape bonus displaying as XP in the Armory and Bonuses tab for gathering and crafting capes; the bonus is correctly 10% more items per session, not XP
+• Crop planting picker now shows how many of each crop you already own alongside the seed count
+• Prestige system improvements: gathering and crafting skill capes now scale with prestige (Prestige 1 = +20% yield, Prestige 2 = +30%, Prestige 3 = +40%); agility prestige reduces session time further toward 30 min at level 99 Prestige 3; mercantile prestige grants +10% coin return per level from Grand Exchange sessions
+
+v1.9.5
+• Replaced the collapsible Town menu on the home screen with an always-visible grid: four equal-width buttons (Shop, Inn, Guild Hall, Church) on the top row, three centre-aligned buttons (Builder, Slayer, Carnival) on the bottom row.
+• Fix boss fights always counting as magic combat for guild quests — combat style is now tracked correctly so attack/strength bosses credit Warriors Guild and magic bosses credit Mages Guild
+• Fix Combat screen tab text misalignment when the Combat Log tab appears during an active session
+• Fix ranged and magic weapons showing incorrect (melee) attack and strength bonuses in the combat stats display
+• Fix kills made before dying in a dungeon now counting toward your active Slayer Master task
+• Fix inventory "Coins" appearing as a sellable item in the Shop
+
+v1.9.4
+• Fix "Repeat Session" on boss sessions always repeating as Melee style regardless of equipped weapon; now reads the stored active weapon slot (or falls back to equipped weapon) for correct combat style detection.
+• Fix XP breakdown in boss and dungeon session results showing incorrect "Blessing bonus" amounts; total XP now correctly factors in both the 2x boost and active blessing multiplier.
+• Fix skill cape XP bonus percentage in the Bonuses tab displaying as negative (e.g. -90% instead of +10%); the bonus fraction is now applied correctly.
+• Restructure the Bonuses tab to show per-skill combined XP bonuses; skill cape, pet, and prestige bonuses are now grouped by skill with the total multiplier and individual sources shown per skill.
+• Extract user-facing notification and snackbar strings into localisable string resources across ViewModels and screen files, with translations in all 8 supported languages.
+• When opening a recipe in the crafting screen, a "Quest targets" row now appears showing chips for any active quests, daily quests, weekly challenges, or guild dailies that require that item; tapping a chip sets the craft quantity to exactly the remaining amount needed.
+• Fix Mercantile trade route balance: Grand Exchange was always a net loss on average at level 99 and is now profitable; all routes have doubled per-minute spread so session outcomes are genuinely variable rather than practically fixed each run.
+• Fix "Equip Best Gear" to use weighted stat scoring: weapons prioritise attack bonus (hit chance) over strength and defence, while armour and jewellery prioritise defence over offensive stats.
+• Italian translation update by community contributor Stark-Night: remaining untranslated strings now localised, improved natural wording throughout, and several minor typos corrected.
+• "Sell Junk" and "Sell Old Gear" now show a confirmation sheet listing every item that would be sold with its quantity and coin value before anything is removed from inventory.
+• The Armory now remembers every item you have ever obtained; selling or consuming an item no longer removes it from your armory collection count.
+v1.9.3
+• Fix Magic Bean only appearing in the "Harvest and Plant All" crop picker; it now appears when planting a single plot too. When using "Plant All", the Magic Bean is planted in one plot and a message clarifies it can only grow in one plot at a time.
+• Fix weekly boss quests not progressing when a boss session is collected from the Home screen instead of the Combat screen.
+• Add a Bonuses tab to the Profile screen showing all active XP bonuses in one place: time-limited boosts (XP Boost, blessings), equipped skill cape, owned pets, and prestige bonuses. Only non-zero active bonuses are shown; an empty state message appears when there are none.
+v1.9.2
+• Fix Inn worker description to clarify that workers are hired for one job and dismissed after that session is collected
+• Fix weekly farming quest (Season's Harvest) showing no progress when harvesting crops with fertilizer applied
+• Fix skill detail view on Profile page showing only one item per level; all items unlocked at the same level now appear
+• Fix queued combat and boss fights getting the full food supply restored when chained via Repeat Action
+• Fix expedition and carnival sessions showing a false XP projection in the action queue
+• Fix construction materials (carved stone, etc.) being sold by Sell Junk
+
+v1.9.1
+• Fix: Carnival active game cooldowns now persist when you leave and return to the Carnival screen
+• Fix: Carnival tickets are no longer sold by the "Sell Junk" button
+• Fix: Guild daily combat progress earned from sessions collected after the 6am reset is no longer silently lost
+• Fix: Recent activity log now shows collected sessions in newest-first order
+• Fix: Dutch (nl) translation updated with 54 missing strings for Slayer and other features
+• Fix: French (fr) translation updated: 203 missing item names (weapons, armour, spells, capes, pets, boss descriptions) now display in French instead of English
+
+v1.9.0
+• New: Carnival added to town; queue idle minigames (Archery Range, Strongman Competition, Wizard's Duel, Fishing Derby) to earn carnival tickets, or play active games (Ring Toss, Hammer Strike, Potion Sequence, Item Appraisal) directly; spend tickets in the Prize Shop for exclusive stat gear (Trickster's Amulet, Strongman's Sigil, Carnival Cape) and the Juggling Imp pet
+• New: Magic Bean, a rare farming drop -- plant it and see what happens
+• Fix: Ranged weapons now correctly contribute their accuracy to hit chance (bows were contributing 0, causing very low hit rates)
+• New: Armory tab in Profile -- browse every piece of equipment, see stats for owned items and how to obtain items you are missing, including drop chance for enemy/boss drops
+• New: Bestiary and Armory now show a progress bar (X / Y encountered/obtained, %)
+• Redesign: Bestiary and Armory detail sheets now use proper stat tables and a 3-column drop table (Item / Qty / Chance); drop chances shown as percentages
+
+v1.8.13
+• Fix: Workers (Apprentice, Journeyman, Master) could queue more Firemaking logs than their craft limit; UI now also caps the quantity selector to the worker's limit
+• New: Max Combat (level 113) achievement added as the true combat cap; level 99 achievement renamed to Champion
+• Fix: Combat style and spell selection not remembered between dungeons; weapon slot and spell choices are now persisted and pre-selected when reopening the dungeon dialog
+• Fix: Ranged combat damage too low; bows now provide a ranged strength bonus scaled to their tier, making ranged damage comparable to melee at equivalent levels
+
+v1.8.12
+• Fix: Worker efficiency not applying to crafting skills — Journeyman and Master workers now produce more items per session than Apprentice, matching how efficiency already worked for gathering
+• New: Thieves Guild now appears in the Guild Hall
+• New: Added Royal Guard (lv 75) and Bishop (lv 85) as thieving NPCs
+
+v1.8.11
+• New: 6 high-level Slayer tasks added (levels 85-99): Void Stalker, Frost Wyvern, Abyssal Guardian, Shadow Thief, Spectral Knight, Elder Lich; fills the Slayer gap between level 80 and 99
+• New: Thieves Guild added to the Guild Hall (Gathering category): 10 progression quests chaining through all 8 NPC tiers from peasant to high priest, 15 rotating daily requests, and a Thieves Guild Cape capstone reward; Agility Guild moved to the Support Skills category
+• New: Agility skill moved to the Support Skills group in the Profile skills tab
+• New: Profile screen player info header now has a divider line separating it from the tab content area
+• New: Profile layout setting in Settings > Appearance: choose between the sidebar rail or the classic horizontal tab bar
+• New: Bestiary added to Profile screen: tracks lifetime kills per enemy and boss; tap any entry to see stats, combat style, HP, XP, drop table, and dungeon locations; unencountered entries show ??? until you fight them; sort alphabetically or by location
+• New: Daily and Weekly quests merged into a single Timed tab with sub-tabs; each sub-tab shows a blurb explaining its reward structure
+• New: Weekly challenge amounts increased by roughly 50%
+• Fix: pets earned before v1.8.6 that were incorrectly stored as inventory items now correctly appear as collected in the Pets section
+• Removed: Game Corner (Slots, High-Low, Lottery, Card Flip, Blackjack, Roulette, Scratch Card, Video Poker) and its exclusive Ring of Fortune and Amulet of Fortune drops
+• New: 10 skill pets added, one for each of agility, thieving, firemaking, herblore, runecrafting, crafting, fletching, smithing, mercantile, and construction (1/1000 drop per session)
+• New: Weekly challenges: 5 quests rotate every Monday at 6am, with scaled coin rewards and a 1/26 chance to receive divine gear when all five are claimed
+• New: 10 divine gear pieces added (sword, greatblade, helm, platebody, platelegs, shield, boots, pickaxe, axe, fishing rod), obtainable only from the weekly bonus
+
+v1.8.10
+• Pet migration fix: pets earned before v1.8.6 that were incorrectly stored as inventory items now correctly appear as collected in the Pets section
+• Removed the Game Corner
+
+v1.8.7
+• Selecting "Other" for gender now shows a text field to enter a custom gender description
+• Cancelling a repeated mercantile job from the queue now correctly refunds the coin cost
+• XP shown in the queue for gathering skills and agility now matches the Choose Activity screen
+v1.8.6
+• Fix: crash loop on startup when a very large quantity of bones or crafting items was queued (e.g. 5,000+ bones)
+• Fix: guild hall upgrade appeared to reduce your quest progress instead of just lowering the target
+• Fix: boss sessions now end the moment the boss or player dies instead of sitting at 0 HP for the rest of the timer; the countdown still shows the full duration so the outcome is not spoiled
+• Fix: Baby Balrog pet was obtainable from the Balrog raid but did nothing when received
+• Fix: hoe efficiency displayed as a percentage (e.g. +125%) instead of a multiplier (e.g. x2.25) in equipment stats, inconsistent with other tools
+• Fix: repeating a magic or ranged combat session would restart it using attack style instead
+• Fix: queued session XP projection did not account for active XP boost or church blessing
+• Fix: XP projection was missing entirely from sessions added via the Repeat button
+• Fix: farming patches planted before a prestige reset showed a harvest time of trillions of hours
+• Fix: overnight sessions and worker sessions could freeze instead of completing when the system delayed their alarms; the app now completes overdue sessions itself within a second of being opened
+• Fix: session completion alarms now fire exactly on time in the background without needing the Alarms and Reminders permission toggle
+• Fix: runite hoe farming efficiency corrected from 2.25 to 1.25 (data error)
+• Fix: construction quests showed "construction 50 Wooden Rack" instead of "Build 50 Wooden Rack"
+• Fix: strength-style melee attacks now roll against the enemy strength defense stat instead of attack defense
+• Fix: backup frequency selector no longer overflows the settings screen in some languages; now a dropdown
+• New: farming skill shows a red dot on the Skills screen when crops are ready to harvest
+• Translations: French fixes for the Russian language label, combat difficulty text, and the Recent Activity Log setting (now translatable in all languages)
+
+v1.8.5
+• Fixed dungeon names in the Slayer screen showing in the device's system language instead of the app's selected language
+• Church blessing duration now correctly shows the upgraded hours (30h/36h/48h) based on church level instead of always showing 24h
+• Added Wiki link to Settings > About section
+• Troll Bones can now be buried for Prayer XP (30 XP each)
+• Queue list now shows crafting quantities; multi-yield recipes (e.g. Iron Nails) also show total output (×100 → 1,500 items)
+• Active session card, worker card, and queue rows now show estimated XP gain and projected level after each session completes (e.g. +2,450 XP → Lv 34 (+1, 67%))
+• Magic spell selection on the dungeon and boss prep screens now shows how many runes you currently hold for each spell, highlighted red if you don't have enough to cast
+• Fixed the home screen guild claimable badge not lighting up for quests that became claimable due to a Guild Hall upgrade reducing the required amount
+
+v1.8.4
+• Fix: Guild Hall discount now correctly applies to the "Claim Reward" button and progress display on guild quests
+• Fix: Daily fishing quests for lobster and swordfish now only appear when you have the required fishing level to catch them
+• Queue items now show a subtitle: combat style (Attack/Strength/Ranged/Magic) for dungeon and boss sessions, and quantity (×40) for crafting, firemaking, prayer, and runecrafting sessions
+• Farming: the plant sheet now remembers your last-used fertilizer and pre-selects it (only if you still have it in inventory)
+
+v1.8.3
+• Fixed farming guild daily quests generating crops above the player's current farming level
+• Fixed the Skills tab disappearing from the combat screen during an active session
+• Fixed construction materials not being returned when cancelling a queued or active construction session
+• Fixed thieving sessions collected from the home screen not counting toward pickpocket quests
+v1.8.2
+• Fixed Firemaking appearing under Gathering instead of Crafting in the Guild Hall
+• Fixed guild daily quest progress being silently dropped when a daily refresh triggered during session collection
+• Fixed skill names in the Slayer lamp skill picker showing raw keys instead of translated names
+• Fixed all three town buildings showing "Town Building" as their title instead of their actual names
+• Fixed workers occasionally being assigned the same name
+• Added English names for equipment, food, and bosses for translators
+• Fixed Thieving and Construction missing from the skills tab on the profile screen
+• Dungeon difficulty label "Looks manageable" renamed to "You\'ve got this" and changed from gold to green
+• Fixed pet, boss, and achievement icons not being centered in their rows
+• Added notifications for when the XP boost and Church blessing expire
+• Fixed Thieving sessions queued after another skill disappearing instead of starting
+• Fixed missing Russian translations for town building names and buff notifications
+v1.8.1
+• Fixed prayer "Start Burying" button being hidden behind the keyboard
+• Fixed construction sessions disappearing from the queue without starting
+• Fixed iron, steel, and mithril nails not appearing under the Components filter in Smithing
+• Fixed wooden racks and other constructed items not counting toward Construction quests when collected from the home screen
+• Fixed agility sessions not counting toward agility guild quests when collected from the skills screen
+v1.8.0
+• New skill: Construction (Crafting) — build furniture from planks and nails to train up
+• New skill: Thieving (Gathering) — pickpocket NPCs each session; success rate scales with your level
+• Town building upgrades: spend Construction levels, coins, and materials to upgrade the Inn, Guild Hall, and Church
+• Inn upgrades (3 tiers): workers gain up to +30% XP per session
+• Guild Hall upgrades (3 tiers): guild quest requirements reduced by up to 30%
+• Church upgrades (3 tiers): blessings last up to 48h instead of 24h
+• New Construction and Thieving quests
+• New Town achievements for upgrading buildings
+
+v1.7.20
+• Fix: Queued boss sessions (2nd, 3rd, 4th...) now end immediately when the boss dies instead of staying stuck at 0 HP until the full timer expires
+• Fix: "Add Dungeon to Queue" on the Slayer Master screen now starts the session immediately if no session is currently active
+• New: Mining sheet shows estimated ore yield per session so you can plan ahead for smithing and quests
+• New: Tap an owned pet to give it some well-deserved affection
+
+v1.7.19
+• Fix: Worker firemaking time estimate now shows the correct per-log duration instead of the gathering session duration
+• Fix: Worker prayer assignment now shows the correct projected level based on the player's actual Prayer XP
+• Fix: Queued boss sessions now each run for their full duration; previously they all cascaded to completion in seconds when the boss died early
+• Fix: Bone altar combo bonus no longer shows a double percent sign
+• Fix: Start burying / Add to queue button stays visible when the keyboard is open in the prayer sheet
+v1.7.18
+• Fix: Enhanced potions crafted with ashes now count toward Herblore quests; previously only plain potions were recognised
+• Fix: Enhanced potions crafted with ashes now count toward Herblorists Guild progression and daily quests
+• Fix: Notifications now use the in-app language instead of the system language when a different language is selected in Settings
+v1.7.17
+• Fix: Hiring an Apprentice, Journeyman, or Master worker and tapping "Add Sessions" now correctly opens the skills page for that worker; previously it always opened slot 1 (Long Laborer) and silently discarded the queued session
+• Fix: "First Mastery" achievement now stays earned after prestiging a skill; any skill that has been prestiged must have previously reached level 99
+• Fix: Cancelling the last item in the session queue now correctly refunds coins and materials regardless of session timing
+• Fix: Magic jewelry (sapphire rings, amulets) and ranged equipment now correctly boost hit chance and spell damage in queued and worker combat sessions; previously only melee bonuses were applied regardless of combat style
+
+v1.7.16
+• New: Slayer Master screen now shows an "Add Dungeon to Queue" button on your active task; tap it to instantly queue the correct dungeon using your last-used weapon, spell, arrows, and potion; button is disabled when the queue is already full
+• Fix: Your selected spell is now remembered across app restarts; it is restored automatically when you return to the Combat screen
+• Fix: Your selected potion is now remembered across app restarts; it is restored automatically when you return to the Combat screen
+• Change: The spell picker now defaults to "Only Castable" mode, showing only spells your equipped staff supports or for which you have runes; tap the chip to show all spells
+• New: The Guild Hall button in the Town menu now shows a red badge with the number of claimable quest and daily rewards waiting across all guilds
+• Fix: The Town section on the home screen no longer collapses when the screen updates; it stays expanded until you tap it again
+• Fix: Firemaking (and other chained quests) now accumulate progress even when earlier prerequisite quests have not yet been claimed; claim order is still enforced at reward time
+• Fix: Queued firemaking sessions now correctly start after the previous session ends; logs were being consumed at queue time and then the session silently failed when it tried to consume them again
+• Fix: Scattering ashes at the Bone Altar (or via a prayer session) no longer counts toward "Bury X bones" quests or Prayer Guild progress; ashes still grant Prayer XP and daily prayer credit as intended
+• Fix: Expedition names in the session queue on the home screen now appear in the correct language instead of always showing English
+• Fix: Boss names, enemy names, and spell names in the Combat screen are now shown in the correct language
+• Fix: Equipment slot names (Head, Body, Weapon, etc.) in the gear panel are now shown in the correct language
+• Fix: Seeds in the shop now have fully translated names in all supported languages
+• Fix: The active session banner on the Skills screen now shows the activity name in the correct language instead of the raw English key
+• Fix: The Slayer active task card now shows the enemy name in the correct language
+• Fix: Daily food item names in the Inn are now shown in the correct language
+
+v1.7.15
+• New: Bone Altar — tap to bury bones for instant Prayer XP without starting a timed session; build a tap combo of 10 or more to earn a 50% XP bonus; accessible from the Prayer skill panel
+• Fix: Notifications now only fire at the end of an entire session queue again, not after every individual session
+• Fix: Mining Guild quest "Gold Standard" now appears before "Mithril Mandate" in the quest list, matching the correct progression order
+• Fix: Expedition notes now correctly increment each time one is found; previously a second database write was clobbering the note count
+• Fix: The Completionist achievement now correctly unlocks when all real skills reach level 99; old save data containing internal keys no longer permanently blocks it
+• Fix: Starting an expedition now shows a confirmation snackbar, matching the behaviour when adding one to the queue
+• Fix: Town menu labels in non-English locales no longer squeeze the location name off-screen; long descriptions are now truncated with an ellipsis
+• Fix: Combat log hit and miss messages are now fully translatable format strings, allowing non-English locales to reorder words naturally
+• Fix: Quest objective descriptions now use translated item, enemy, and dungeon names instead of hardcoded English text; all quest types generate their description dynamically so non-English locales see fully localised objectives
+
+v1.7.14
+• Fix: Queuing multiple combat or boss sessions with different weapons no longer causes later queued sessions to overwrite the weapon choice for earlier ones; each queued session now locks in its selected weapon slot at queue time
+• Fix: Melee boss sessions no longer instantly complete every time the app is restarted; the session now waits for the kill timer to elapse before becoming collectable
+• Fix: Ash catalysts selected for runecrafting are now consumed immediately when the session is queued, matching the behaviour of other crafting skills
+• Fix: Higher-tier ashes now grant progressively more bonus runes per essence (ashes +1, oak +2, willow +3, maple +4, yew +5, magic +6, redwood +7); previously oak through willow all gave the same bonus as basic ashes
+• Fix: Labourer firemaking sessions now run for the correct per-log duration instead of always taking the full 8-hour gathering window; Long Labourers take 2 minutes per log, all other tiers take 1 minute
+• Fix: Worker sessions no longer count toward quest progress of any kind; only the player's own sessions advance quests
+• Fix: Buying the 2x XP boost at a Mercantile-discounted price now correctly deducts the discounted amount instead of always requiring the full 250,000 coin base price
+• Fix: Hitpoints XP from raid bosses now correctly counts toward the Hitpoints skill level, prestige, and HP cape unlock; previously boss XP was written under a separate "hp" key that the skill system did not read
+• Fix: Completing multiple sessions at once (e.g. a dungeon followed by a boss fight) now correctly awards daily quest kill progress; kills from all sessions are now tallied together before updating the daily quests rather than being recorded one session at a time
+• Fix: Super potions (Super Strength, Super Attack, etc.) now count toward Herblore Guild daily tasks that request the base potion tier; the Overload Potion counts for any super or base potion guild daily
+• Fix: Collecting an expedition session that found a note alongside other completed sessions (e.g. a smithing session) no longer silently discards the other sessions; all rewards are now applied and the expedition note summary is shown
+• New: You now receive a notification every time a session completes, not only when the last queued session finishes; useful for knowing when a short queued task is done so you can add more before forgetting
+• New: Worker (Labourer) sessions now send a notification when they finish, matching the behaviour of regular sessions
+• New: Farming and Mercantile panels now open as swipe-down bottom sheets like all other skill panels, instead of requiring the back arrow to close
+• New: Adding an activity to the queue no longer closes the skill panel; the sheet stays open so multiple activities of the same type can be queued in one go
+
+v1.7.13
+• Fix: Worker session quest tracking no longer misattributes progress between the two worker slots; a race in the alarm receiver caused slot 2 completions to incorrectly advance slot 1's queue
+• Fix: App no longer crashes on startup when 900+ bones were queued for prayer burial; malformed or overlong sessions are now ended gracefully instead of triggering an exception
+• Fix: Boss sessions stuck at 0 HP after a force-close and restart are now automatically ended when the pre-simulated frames confirm the boss was already killed
+• Fix: Prestiges that drop your combat skill below a weapon's requirements no longer leave you gear-less; bronze starter gear is granted and equipped automatically if no valid alternative exists in your inventory
+• Fix: Selecting a potion before queuing a combat dungeon or boss session now correctly consumes and applies it when that session starts, rather than being silently ignored
+• New: 5 rare boss drops now have full equipment stats: Dragon Amulet, Ring of Dragon's Might (King Black Dragon), Kraken Tentacle, Amulet of the Kraken, Ring of the Seas (Kraken)
+• Fix: Gear picker now shows all stat requirements for items with multiple requirements (e.g. Flame Heart Amulet requiring both Attack 75 and Magic 75 now shows both, not just the first)
+• Fix: Mages Guild quest "Defeat the Kraken using Magic" now correctly counts magic boss kills even when the boss is killed in an early simulation frame
+• Fix: Tangleroot farming pet is now obtainable; patch harvests now correctly roll for the pet drop (1/1000 chance per harvest)
+• Fix: Queuing a combat session with a different weapon, spell, or arrows than the active session no longer pollutes the active session's stats display or causes the next queued session to inherit wrong gear
+
+v1.7.12
+• Fix: Runecrafting ash catalyst now shows the total runes you will receive per essence (base level multiplier + ash bonus) instead of only the ash bonus, so the displayed amount matches what is actually collected
+• Fix: Firemaking and Runecrafting sessions now correctly advance all quests and guild requests; the quest type mismatch that caused progress to be silently ignored has been resolved
+• New: Arrows and runes are no longer fully lost after a combat session; your Ranged or Magic level gives you a 25% to 75% chance to reclaim each arrow or rune used
+• New: The session completion screen now shows Arrows Consumed, Arrows Reclaimed, Runes Consumed, and Runes Reclaimed so you can see exactly what was spent and recovered
+• Fix: Boss sessions now correctly deduct arrows from your inventory on completion, matching the behaviour of dungeon sessions
+• Fix: XP bonus display when both a 2x boost and tithe blessing are active now shows the full multiplier chain (e.g. "232 x 2 x 1.25") instead of a misleading "(+116)" annotation
+• Fix: Recent Activity button moved from a floating action button to the top bar (next to Settings), so it no longer overlaps queued session cancel buttons when multiple sessions are queued
+• Fix: XP estimates in the Skills sheet for Mining, Woodcutting, Fishing, and Agility now correctly factor in the active 2x XP boost and prayer blessing multiplier
+• Fix: Archer's Ring and Seers' Ring now correctly display their Ranged/Magic attack bonuses, and those bonuses are now applied in combat (they were parsed from equipment data but silently ignored)
+
+v1.7.11
+• Fix: Guild quest and daily request names and descriptions are now localised; names use string resources with English placeholders ready for translators, descriptions are generated from localised templates
+• Fix: Agility course detail ("Lv. X • Y XP/lap") and crafting level requirement are now localised
+• Fix: Session summary "Coins" label is now localised
+• Fix: Cancelling a queued Firemaking session no longer duplicates logs; logs are now consumed from inventory when the session is queued, matching how Runecrafting and Prayer handle it
+• Fix: Firemaking quantity picker now shows the estimated session duration, matching other crafting skills
+• Fix: Recent Activity sheet title, empty-state text, and skill names are now localised; activity names are resolved from string resources at display time instead of being stored as English text
+• Fix: Skill unlock sheet (Profile > skill tap) now shows localised item, crop, course, and equipment names instead of English-only JSON display names; hitpoints milestones, bone XP, and slayer XP labels are also localised
+• Fix: Farming harvest notifications now show the crop name in the device language instead of always using English
+• Fix: Guild "Contribute from inventory" button is now localised
+• Fix: Several guild strings (no dailies hint, quest gate blocked) that were still showing in English in German, Spanish, French, and Turkish are now translated
+
+v1.7.10
+• Fix: Quest Champion achievement now requires completing all quests rather than a hardcoded count that had become stale as new quests were added
+• Fix: Firemaking and Runecrafting quests now appear under the Crafting tab instead of Gathering, matching their skill category
+• Fix: Firemaking quantity picker now shows the XP and projected level progression preview, matching other quantity-based skills
+• Fix: Berserker Ring, Archer's Ring, Seers' Ring, Ring of Wealth, Ring of Suffering, Amulet of Fury, Necklace of Anguish, and Tormented Necklace purchased from the Merchants Guild can now be equipped; they were missing from the equipment data and appeared as unequippable items in the inventory
+• Fix: Skill level circles on the Profile screen are now centred horizontally within each card
+• Fix: Tapping the Skills tab while in the Slayer screen now returns to the Skills list, matching the behaviour of Farming and Mercantile
+• Fix: Shop and Guild screens now support swiping between tabs
+
+v1.7.9
+• Fix: True offline progression -- if the app was closed for 1.5 sessions, opening it shows the second session already halfway through rather than starting fresh; all catch-up paths (alarm receiver, app open, race condition) now correctly backdate the next live session
+• New: Firemaking moved to the Crafting skill category and reworked to a quantity-based system: choose how many logs to burn (like Smithing or Cooking) instead of running a fixed 1-hour session
+• New: Ashes can now be used as fertilizer when planting farming crops, boosting harvest yield by 10% to 150% depending on ash tier; the growing patch card shows the applied bonus
+• New: Ashes can be added as a catalyst when brewing herblore potions, producing an Enhanced version with 2x the stat bonuses
+• New: Ashes can be added as a catalyst when runecrafting, producing 1 to 4 extra runes per essence depending on ash tier
+• Fix: Mages can now enter dungeons and boss fights without having a full session's worth of runes; available runes are consumed and the fight proceeds, matching how running out of arrows works for rangers
+• Fix: Demon Slayer I and II quest objectives corrected from "Defeat X Lesser Demons" to "Defeat the Demon Lord"; Demon Slayer III name and objective added (was missing from all locales)
+• Fix: King Black Dragon Slayer, Kraken Killer, and Balrog Bane quests I through III now show correct names and objectives in all languages (only tier IV had string resources previously)
+• Fix: Daily quest names and descriptions now display in the device language across all 7 supported locales
+• Fix: Session queue and active session card now show localised skill, item, dungeon, and boss names instead of raw English keys
+• Fix: Shop buy list now shows localised item names and descriptions; category headers are translated in all 7 languages
+• Fix: Buy and sell confirmation sheet now uses the localised item name in its title
+• Fix: Dungeon names in the session queue now use localised strings
+• Fix: Eight dungeons that were missing translations now have names and descriptions in all 7 languages: Collapsed Mine, Shadow Den, Abyssal Ruins, Ancient Forest Ruins, Ancient Forge, Arcane Ruins, Corrupted Sanctum, Drowned Temple
+• Fix: Merchants Guild quest progress (e.g. Budding Merchant) was not tracked when collecting trade route sessions from the Skills screen; only the Home screen collect path was wired up correctly
+
+v1.7.8
+• Fix: Dwarven Warhammer is now correctly strength-based; its equip requirement is now Strength 60 (was Attack 60 + Strength 60)
+• Fix: Farm animals (Chicken, Sheep, Cow) now deal zero damage; the Farm dungeon shows "Looks manageable" instead of "Likely to die"
+• Fix: Items purchased from the Merchants Guild (Ring of Wealth, Berserker Ring, Amulet of Fury, etc.) are no longer treated as junk and will not be auto-sold
+
+v1.7.7
+• New: Basic Staff added to the Equipment shop for 500 coins, so magic builds no longer require combat drops to get started
+• Fix: Prestiging a skill now cancels any active session and evicts queued actions for that skill, refunding materials and coins; previously queued high-XP actions could complete after the reset and slingshot the skill back up from level 1
+• New: Church now accepts all bone types (Big Bones, Giant Bones, Dragon Bones) in addition to regular bones; cheaper bones are consumed first, and the confirmation dialog shows your total bone equivalent across all types
+
+v1.7.6
+• Fix: Guild progression quests now correctly track activity after claiming a progression quest while already above the reputation threshold; previously guildQuestResetLevels was not set at claim time, causing the retroactive-reset check to re-run on every guild screen visit
+• Fix: Expeditions screen is now fully translated — skill section headers, dungeon names, dungeon descriptions, lore note counter, and lock reasons are all localised in German, Spanish, French, Italian, Dutch, and Turkish
+• Fix: Slayer tasks can no longer assign enemies that only appear in expedition-locked dungeons the player hasn't discovered yet; existing stuck tasks show a free Reroll button with an explanation
+• Fix: Agility expedition notes now appear on the Profile Notes tab (the skill was missing from the list)
+• Fix: Quests screen tabs no longer wrap text on smaller screens; switched to a scrollable tab row
+• Fix: Removed the large left-side gap on the Quests and Profile scrollable tab rows
+• New: Skills tab on the Profile screen redesigned as a 3-column card grid grouped by category (Gathering, Crafting, Support, Combat); each card shows the skill emoji, name, and a circular level indicator with a gold progress arc; tap any skill to see what unlocks at each level
+• New: Prestige system -- once a skill reaches level 99 it can be reset up to 3 times; each reset earns a permanent +10% XP bonus for that skill (gathering, crafting, support) or a +5 flat stat bonus for combat skills (Attack, Strength, Defense, Ranged, Magic, Hitpoints); prestige level is shown as gold stars next to the skill row
+• New: Four Prestige achievements -- First Reset, Mastered (any skill Prestige 3), Clean Slate (all skills Prestige 1), and True Prestige (all skills Prestige 3)
+v1.7.5
+• Fix: Workers - only the finished worker now shows the Collect button; previously completing one worker marked both as collectable
+• Fix: Guild quest progress no longer gets wiped on first guild screen visit after levelling up; affected all guilds above level 0 (combat, gathering, crafting)
+• Fix: Boss setup sheet is now scrollable; the Fight button was hidden off-screen when using a magic staff, and mid-tier spells such as Mind Strike were not reachable
+
+v1.7.4
+• Translation: Guild quest strings translated to French (Contribution by @widowild1)
+• New: Clipboard button on the home screen shows your last 10 completed sessions (toggleable in Settings)
+• New: Arrow selection in the dungeon and boss info sheets; choose which arrow tier to use instead of always consuming your best
+• Fix: Boss fights now correctly use ranged and magic combat styles; previously bosses always simulated as melee regardless of your weapon
+• New: Each boss has distinct ranged and magic defense values, making some combat styles more effective than others against specific bosses
+• Fix: Fletcher's Guild quests for Yew Longbow and Magic Longbow now work; both bows are craftable in the Fletching skill
+• New: Farming Guild daily quests now have a Contribute button to submit crops directly from your inventory
+• Balance: Farming Guild quest and daily quest amounts significantly reduced to be achievable within a day or two
+
+v1.7.3
+• Fix: Guild daily quests can no longer push reputation past the tier threshold while gate quests are incomplete
+• Fix: Quest progress for higher-tier guild quests no longer pre-accumulates before you reach that tier; progress resets to 0 when you advance to a new rank
+• New: Guild detail screen shows a warning and turns the rep bar red when gate quests must be completed before advancing
+• New: Guild Hall screen shows "Quest required to advance" on cards where progression is blocked
+• New: Inn food purchase dialog now lets you type or use +/- buttons to buy multiple of the same food at once
+• Update: Town description on the home screen now mentions the Slayer Master
+• New: Active 2× XP Boost now shows on the home screen with time remaining, similar to the church blessing indicator
+
+v1.7.2
+• Fix: Mercantile shop items (Ring of Recoil, Amulet of Strength) can now be equipped
+• Fix: Boss fights now show a weapon selector, matching the dungeon start screen
+• Fix: Collecting a session from the Skills screen now counts quest progress, daily quests, and guild progress correctly; firemaking logs are also consumed at collect time
+• Fix: Collecting one worker's completed session no longer cancels the other worker's active session
+• Update: German item translations (contributed by @selki-latah)
+• Update: French Slayer translations (contributed by @widowild1)
+
+v1.7.1
+• New: Agility expeditions added -- explore the Crumbling Watchtower (level 1) and Shattered Spire (level 40) to uncover lore and unlock two new combat dungeons: the Shadow Den and the Arcane Ruins
+• Fix: Slayer task kill progress now correctly counts when collecting a dungeon session from the Home screen
+• Fix: Daily quest "Cook 20 Swordfish" now requires cooking level 50, matching the actual recipe requirement
+• Fix: Copper Caverns expedition now always has a chance to yield copper ore regardless of mining level; updated description to reflect the mine's depleted state
+• Fix: Expedition lore note progress could exceed the maximum (e.g. 6/5) if two notes dropped in the same session
+• Fix: Dwarven gear daily reward description now correctly shows 1/100 drop chance (thanks @OlMon)
+• Fix: Importing a save now restores active sessions and queues as they were at export time, rather than losing or mis-timing them
+• Fix: Dragon Scimitar, Dragon Longsword, Hellfire Staff, and Trident of the Seas now correctly appear as equippable weapons instead of showing under Others
+• New: Potion effects are now shown in the dungeon and boss start screens
+• New: Quick link from the Profile Equipment tab to the Combat Gear screen
+• Fix: All bone types (Big Bones, Giant Bones, Dragon Bone) now count toward Prayer Guild quests; quest descriptions updated to say "of any type" to make this clear
+• New: Prayer sheet now lists bones from lowest to highest XP, so weaker bones are offered first
+• New: Two workers can now be hired simultaneously -- a Long Laborer fills the first slot (gathering only, no queue limit) and any tier of Skilled Worker fills the second slot independently
+• New: Hiring a worker now takes you straight to that worker's skill screen to start queuing sessions
+• New: Worker cards moved to the bottom of the Home screen, below your active session and queue
+
+v1.7.0
+• New: Slayer skill -- visit the Slayer Master in Town to receive tasks to kill specific enemies in dungeons
+• New: Completing Slayer tasks earns Slayer points; higher-level tasks award more points
+• New: Slayer shop sells XP lamps usable on any skill, plus exclusive Slayer gear (Slayer Helm, Abyssal Whip, Slayer Platebody, Slayer Platelegs)
+• New: Active task card shows which dungeons contain the target enemy
+• New: Six-tier Slayer quest chain added to the Combat quests tab
+• Fix: Crafting quantity sheet now shows total items produced (e.g. 30 Arrow Shafts) alongside the XP preview when output quantity is greater than 1
+• Fix: "Monster Hunter" quest chain was incorrectly named "Slayer" -- renamed to avoid conflict with the new Slayer task quests
+• Fix: Quest names now display correctly instead of falling back to the title-cased ID (e.g. "Balrog Bane I" instead of "Balrog Bane 1")
+• Fix: Dungeon Explorer VII (Imp Cavern) is now part of the Dungeon Explorer quest chain instead of appearing independently
+• Fix: Expedition dungeons are now hidden from the dungeon list until explicitly unlocked
+• New: Italian translation (contributed by @bruce965)
+• New: Dutch translation (contributed by @Fimlore)
+• Update: French translation improvements (contributed by @widowild1)
+
+v1.6.3
+• Fix: Guild daily and progression quest reward notifications now list the actual items awarded (e.g. "Raw Trout x30, Log x20") instead of a generic item count
+• New: Up/down arrows on queued sessions let you reorder them before they start
+• Fix: Cancelling a queued mercantile trade route now refunds the coin cost
+• Fix: XP level-up preview now appears in quantity pickers for smithing, cooking, fletching, crafting, and herblore (was only showing for prayer and runecrafting)
+• Fix: Shop now shows your mercantile buy discount on listed prices; discounted items display the original price struck through
+• New: Mercantile guild daily quests now include "earn X coins from trade routes" objectives alongside the existing "complete N routes" quests
+
+v1.6.2
+• Fix: Guild daily requests now unlock as soon as you earn any reputation in a guild, removing a softlock where completing all tier-0 quests left no way to earn the remaining rep needed to advance
+• New: Crafting, smithing, cooking, fletching, herblore, prayer, and runecrafting quantity pickers now show a level-up preview (e.g. +2,400 XP → Level 42) when the selected amount would push you to the next level
+• Balance: Mercantile XP per trade route reduced by ~4x; two Local Market sessions should now reach around level 10-15 rather than level 37
+
+v1.6.1
+• New: Church building added to the home screen; visit to activate a 24-hour blessing based on your Prayer level
+• New: Blessings come in three types: XP multiplier, Defense bonus, or Coin bonus; higher Prayer levels unlock stronger tiers up to level 99
+• New: Active blessing is shown in the Player Stats card on the home screen
+• New: Session results show per-skill XP blessing bonus inline (e.g. Attack +12,450 XP (+1,245))
+• New: Automatic backup in Settings; choose a folder and a schedule (hourly, daily at 5:00 AM, or weekly)
+• New: Shop, Inn, Guild Hall, and Church are now grouped under a single expandable Town button on the home screen
+• New: Guild level now requires both enough reputation AND completing the current tier's quests to advance
+• New: Guild Hall shows a gold "Dailies available" label on guilds with unclaimed daily tasks
+• New: Guild detail screen hints "Do dailies to increase your reputation" when quests are done but rep is short
+• New: The Farm dungeon is now a safe zone; you cannot die while farming
+• New: Mercantile skill added under a new Support category on the Skills screen; dispatch trade routes to earn variable coin returns and XP
+• New: Six trade routes available from level 1 to 99; each costs coins upfront with unpredictable returns ranging from a small loss to a solid windfall
+• New: Merchants Guild with 10 progression quests and daily tasks; complete trade routes to earn reputation
+• New: Higher Mercantile levels unlock exclusive shop items (rings, necklaces, rare herbs) and grant buy discounts and sell price bonuses up to 25% at level 99
+• New: Guild capes added; claim one from the level 9 quest in any guild for a 5% bonus to that guild's skill
+• New: Combat capes boost all combat stats by 5% (guild) or 10% (level 99); Prayer capes strengthen your active blessing; Mercantile cape improves shop prices and trade returns
+• Fix: Level 99 skill capes now actually grant their bonus (10% yield, XP, or stats depending on the skill)
+• Fix: Expedition lore notes now have a pity system; a drop is guaranteed after 10 consecutive runs with no note
+• Fix: Lore note drop rate reduced; notes are now a rare find during expeditions
+• Fix: Higher level agility courses now always give more XP per session than lower ones
+• Fix: Queued expeditions, dungeons, and bosses now show correctly in the queue (e.g. "Expedition — Copper Caverns" instead of "Copper Caverns — Copper Caverns")
+
+v1.6.1
+• New: Church building added to the home screen; visit to activate a 24-hour blessing based on your Prayer level
+• New: Blessings come in three types: XP multiplier, Defense bonus, or Coin bonus; higher Prayer levels unlock stronger tiers up to level 99
+• New: Active blessing is shown in the Player Stats card on the home screen
+• New: Session results show per-skill XP blessing bonus inline (e.g. Attack +12,450 XP (+1,245))
+• New: Automatic backup in Settings; choose a folder and a schedule (hourly, daily at 5:00 AM, or weekly)
+• New: Shop, Inn, Guild Hall, and Church are now grouped under a single expandable Town button on the home screen
+• New: Guild level now requires both enough reputation AND completing the current tier's quests to advance
+• New: Guild Hall shows a gold "Dailies available" label on guilds with unclaimed daily tasks
+• New: Guild detail screen hints "Do dailies to increase your reputation" when quests are done but rep is short
+• New: The Farm dungeon is now a safe zone; you cannot die while farming
+• New: Mercantile skill added under a new Support category on the Skills screen; dispatch trade routes to earn variable coin returns and XP
+• New: Six trade routes available from level 1 to 99; each costs coins upfront with unpredictable returns ranging from a small loss to a solid windfall
+• New: Merchants Guild with 10 progression quests and daily tasks; complete trade routes to earn reputation
+• New: Higher Mercantile levels unlock exclusive shop items (rings, necklaces, rare herbs) and grant buy discounts and sell price bonuses up to 25% at level 99
+• New: Guild capes added; claim one from the level 9 quest in any guild for a 5% bonus to that guild's skill
+• New: Combat capes boost all combat stats by 5% (guild) or 10% (level 99); Prayer capes strengthen your active blessing; Mercantile cape improves shop prices and trade returns
+• Fix: Level 99 skill capes now actually grant their bonus (10% yield, XP, or stats depending on the skill)
+• Fix: Expedition lore notes now have a pity system; a drop is guaranteed after 10 consecutive runs with no note
+• Fix: Lore note drop rate reduced; notes are now a rare find during expeditions
+• Fix: Higher level agility courses now always give more XP per session than lower ones
+• Fix: Queued expeditions, dungeons, and bosses now show correctly in the queue (e.g. "Expedition — Copper Caverns" instead of "Copper Caverns — Copper Caverns")
+
+v1.6.0
+• New: Expeditions, a new tab in the Skills screen with 6 skilling dungeons for Mining, Woodcutting, and Fishing
+• New: Lore notes system; rare notes drop during expeditions, collect enough to uncover what lies beyond
+• New: Notes tab on the Profile screen, discovered lore texts revealed in order as notes are found
+• New: Expedition sessions can be queued like any other skill session
+• New: Swipe left and right to switch tabs on the Skills, Combat, Quests, and Profile screens
+• Fix: Guild daily quests now appear immediately when unlocking Guild Level 1, instead of waiting until the next 6am reset
+• Fix: Font size setting is now a dropdown instead of overflowing buttons
+• Fix: Hide completed quests toggle now also hides claimed daily quests
+• Fix: Hide completed quests toggle is now saved and restored across app restarts
+• Fix: Restoring a save now auto-starts any queued sessions
+• Fix: Farming patch state is now included in save exports and restored on import
+
+v1.5.1
+• New: 77 new quests added — Firemaking, Runecrafting, Herblore, extended Slayer and boss chains, new enemy slayer chains, new dungeon and style challenge quests, and extended Iron Stomach and Treasure Hunter chains
+• New: Hide completed quests toggle in the Quests screen header
+• Fix: Quest display names now correctly show Roman numerals
+• Fix: Herblore quest progress now properly tracked from the Skills screen
+• Fix: Guild Hall claimable badge now appears on the correct guild
+• Fix: Farming harvests now count toward Farming Guild quest progress
+• New: Tapping a farming crop-ready notification now opens the Farming screen directly
+• Fix: Queued sessions no longer get stuck when the alarm and app-open advance the queue at the same time
+
+v1.5.1
+• New: 77 new quests added — Firemaking, Runecrafting, Herblore, extended Slayer and boss chains, new enemy slayer chains, new dungeon and style challenge quests, and extended Iron Stomach and Treasure Hunter chains
+• New: Hide completed quests toggle in the Quests screen header
+• Fix: Quest display names now correctly show Roman numerals
+• Fix: Herblore quest progress now properly tracked from the Skills screen
+• Fix: Guild Hall claimable badge now appears on the correct guild
+• Fix: Farming harvests now count toward Farming Guild quest progress
+• New: Tapping a farming crop-ready notification now opens the Farming screen directly
+• Fix: Queued sessions no longer get stuck when the alarm and app-open advance the queue at the same time
+
+v1.5.0
+• New: Guild Hall -- 16 guilds, one for each skill and combat style
+• New: Each guild has 10 progression quests and daily requests that reset at 6am
+• New: Guilds reward cross-skill materials, coins, and XP, so single-skill characters can access resources they would otherwise need other skills for
+• New: Warriors, Archers, and Mages guilds each track kills made with the matching combat style (melee, ranged, or magic)
+• Fix: Hiring a new Long Worker no longer shows a stale job from a previous hire
+• Fix: Removed incorrect queue indicator from the Worker screen
+• Fix: Long Worker crafting sessions now return the correct number of items instead of halving the output
+• Fix: Kill counter in the dungeon view now updates tick by tick as enemies die instead of once per minute
+• Fix: Combat log now shows a kill entry when an enemy is defeated, making kills distinguishable from hits
+• Fix: Arrows are now correctly consumed when completing combat sessions with a ranged weapon
+
+v1.4.3
+• New: Equip one weapon per combat style (Attack, Strength, Ranged, Magic) and choose which to use before entering a dungeon
+• Fix: Queued magic dungeons now deal correct damage (previously dealt 1 damage per hit)
+• Fix: Existing weapon is now automatically migrated to the correct new weapon slot on first launch
+• Fix: Arrow sell prices corrected -- finished arrows are now worth more than their components (shaft + tip)
+• Fix: Multi-session prayer summary now shows each bone type on its own row instead of one long squished line
+• Translation: French translation updated
+• New: Session start sheets now show estimated XP gain and projected level for each activity
+• Tweak: Dwarven gear drop chance increased from 1/500 to 1/100, and only missing pieces can drop (no duplicates)
+
+v1.4.2
+• New: App launcher icon
+• Fix: Combat difficulty ratings and achievement names/descriptions are now translatable
+• Improvement: Player-friendly README with screenshots
+
+v1.4.1
+• Translation: Spanish (Spain) (mdtrooper)
+• Translation: French completed + typo fixes (papjul)
+• Fix: Importing a save file that was exported more than once no longer fails
+• Rework: Worker hire costs reduced across all tiers (Long Laborer 5k, Apprentice 10k, Journeyman 20k, Master 50k)
+• Rework: Long Laborer now gathers at 0.5x efficiency and crafts at 2x the player's rate
+• Fix: Worker queue is now limited to one action at a time
+• Fix: Dismissing a worker now refunds the hire cost and returns queued materials
+• Fix: Worker crafting and prayer time estimates now display correctly
+• Fix: Arrows are now tracked per shot; abandoning a dungeon deducts only what was fired before you left, and completing one deducts only what was actually used
+• Fix: Ranged attacks now stop dealing damage once arrows run out mid-session
+• Fix: Repeat action now checks for available materials and deducts them when queuing; tapping it without enough resources shows an error instead of queuing for free
+• Fix: Collecting a session early no longer causes the next queued session to start twice
+• Fix: What's New dialog is now scrollable and no longer cuts off long changelogs
+• Fix: Updating across multiple versions now shows all missed changelogs, not just the latest
+• Fix: Repeat action queue label now shows the skill name correctly (e.g. Smithing — Iron Bar) instead of duplicating the item name
+• Improvement: Shop category headers now use the same styled background as the inventory screen
+• Fix: Daily quests tab is now the first tab on the Quests screen
+
+v1.4.0
+• New: Inn daily food menu; three cooked foods (small, medium, large heal) rotate each day at 6am
+• Fix: Sell prices corrected; gems, bars, crops, and monster drops now use fair category prices; marketplace buy price no longer undercuts the category floor
+• Rework: Worker tiers updated; Apprentice and Long Laborer are 1x efficiency, Journeyman 1.25x, Master 2x; crafting/prayer/runecrafting capped per tier; new Long Laborer tier has no crafting cap for very long sessions
+• Fix: Boss fights collected from the home screen now correctly show Victory or Defeat and award XP
+• Fix: Boss session now ends shortly after the player or boss dies instead of running to the full timer
+• Fix: King Black Dragon quests no longer overwrite Dragon Slayer quests
+• New: Hire a Worker at the Inn to gather resources or craft items while you play
+• New: Three worker tiers (Apprentice 8h, Journeyman 6h, Master 4h) with increasing efficiency
+• New: Got a long crafting grind? Queue it up for a worker and let them handle it while you play
+• Fix: Crafting, prayer, and runecrafting now consume materials when the session starts; abandoning a session returns them
+• Fix: Crafting and runecrafting sessions now correctly consume input materials on collect
+• Fix: Dungeons now cycle through all enemy types instead of repeating one enemy for the entire session
+
+v1.3.2
+• Fix: Boss fight timer now ends as soon as the fight concludes (win or loss)
+• Fix: French translation corrections (scimitars, arrow shaft, woodcutting)
+• Fix: French and Spanish added to system-level per-app language settings
+
+v1.3.1
+• Fix: Daily quests now filter to activities achievable at your current skill level
+• Fix: Daily cooking quests now correctly track progress (lobster, swordfish, etc.)
+• Fix: Daily coal mining quest now tracks correctly
+• Fix: Bandits and other dungeon enemies now spawn correctly in all dungeons
+• Fix: Fish sell prices corrected for mackerel, monkfish, sea turtle, and manta ray
+• Fix: German "add to session queue" button now right-aligned correctly
+• Translation: Turkish (ItsAzazelMorningstar)
+
+v1.3.0
+• New: Boss fights now show a live combat log and HP bar, just like dungeons
+• New: Food heals you during boss fights (uses the same food equipped for dungeons)
+• New: 12 boss quests — Dragon Slayer, Demon Slayer, Kraken Killer, Balrog Bane (1/5/25 kills each)
+• New: Daily quest system — 3 rotating quests each day, rewards 2,000 coins (rare: dwarven gear)
+• New: Dwarven Fishing Rod, Dwarven Hoe, and Dwarven Boots added
+• New: 3 new dungeon enemies — Fire Giant (Infernal Stronghold), Ancient Guardian and Lich (Ancient Temple)
+• New: Confirm dialog before abandoning a session
+• Fix: Boss stats rebalanced so they can be defeated solo at the required combat level
+• Fix: Arrows and runes are now consumed per attack attempt, not per kill
+• Translation: Spanish improvements (whyhuron)
+• Translation: French — corrected Undead Crypt name (Tathar)
+• Translation: German — ProfileScreen and SkillsScreen fully translated (selki-latah)
+
+v1.2.9
+• Fix: Combat sessions now carry enemy HP across minutes so kills always register regardless of player DPS
+• Fix: Large crafting/prayer sessions (fletching, smithing, cooking, crafting, herblore, runecrafting, prayer) no longer crash the app on next launch
+• Fix: Auto-trash gear now uses per-stat comparison so a ring with high defense is not sold when a ring with high attack is equipped
+• Fix: Fish cooking quests now only count cooked fish, not all cooked items
+• New: Fishing now works like mining — choose exactly which fish to catch regardless of fishing level
+
+v1.2.8
+• Fix: Herblore ingredients are now correctly consumed after a brewing session completes
+• Fix: Firemaking logs are now correctly consumed after a session completes
+• Fix: Skill capes are now retroactively awarded on app launch for skills already at level 99
+• Fix: Hoe efficiency values corrected to match other tool tiers (mithril hoe now 1.75x)
+• New: Crafting screens now show output quantity for bulk recipes (e.g. arrow tips)
+• New: Font size setting added to Settings — choose Normal, Large, or Huge
+
+v1.2.7
+• Fix: Farming tool bonus now displays correctly in the Skills screen
+• Fix: Queue estimated end time is now accurate for crafting, runecrafting, and prayer sessions
+• Fix: Ranged and magic weapons no longer show an irrelevant Strength bonus in item stats
+• Fix: Strength-style weapons (warhammmers, battleaxes) now correctly require Strength level instead of Attack
+• Fix: Bronze boots no longer disappear when unequipped on a new character
+• Fix: Prayer skill description corrected to reflect how the skill actually works
+• New: Quest objectives now display in your device language where translations are available
+• New: Dungeon names now display in your device language where translations are available
+• New: Combat skill rows are now tappable to view a short description of each skill
+• New: Crafting and Skills screens now show the combat style for weapon recipes
+
+v1.2.6
+• Farming tool bonus (hoe efficiency) now shown on the Skills screen
+• Coin balance now visible at the top of the Shop screen
+• Skills screen shows current XP / next level threshold inline
+• French translation added (thanks widowild1)
+• Spanish translation added (thanks whyhuron)
+
+v1.2.5
+• New: Level 99 skill capes awarded automatically with a notification when you reach max level
+• New: Dungeon run count displayed on the combat screen for each dungeon
+• New: Queue estimated end time shown at the bottom of the active queue card
+• New: Crafting bottom sheet shows how many of the output item you already own
+• Fix: Splash screen no longer flashes bright white when app is set to dark mode
+• Fix: Crafting list scroll position is now preserved when switching tabs or navigating away
+• Fix: Items reserved for queued tasks can no longer be sold in the shop
+• Improved item sell prices across all skills, scaling by material tier and equipment slot
+
+v1.2.4
+• Fix: Tapping the crop-ready notification now opens the app
+• Fix: Abandon button no longer shown after a session completes
+• Fix: Hoe correctly categorised as a tool (not armor) in the shop
+• New: Shop buy tab shows how many of each item you already own
+• New: Language selector now works on Android 11 and 12
+• New: Monochrome adaptive icon for themed launchers on Android 13+
+• Improved German translation
+
+v1.2.3
+• New: Quick-select buttons (1, 60, 180, Max, +/-10, +/-100) added to all quantity pickers in shop and crafting
+• Fix: Equip Best Gear now respects stat requirements and will not equip items you cannot use
+• Fix: Session queue getting stuck when the app is closed or the device is rebooted (#57)
+
+v1.2.2
+• New: German (Deutsch) translation added
+• New: Herblore potions now show their stat effects in the craft list
+• New: Onion Brew (+2 Attack, +1 Strength) and Carrot Brew (+2 Ranged) added to Herblore
+• New: Language selector is now a dropdown instead of chips
+• Fix: Farming hoes now correctly apply efficiency bonus to crop yield (#67)
+• Fix: Herblore no longer silently drops when queued after another craft (#71)
+• Fix: Harvesting crops now returns seeds (#72)
+• Fix: Bottom nav always returns to the root of a tab, not a saved sub-screen (#69)
+• Fix: Rapidly tapping the back button no longer causes a blank screen (#76)
+
+v1.2.1
+• New: Light theme and system theme option — choose in Settings → Appearance
+• Fix: Hoes (bronze through runite) are now craftable in the Smithing tab
+• Fix: Seeds are no longer sold by Sell Junk
+• Fix: Prayer and Runecrafting now correctly reserve queued materials — you can no longer queue more than you have
+
+v1.2.0
+• New: Farming skill — plant seeds in up to 5 patches, harvest crops for XP and materials after they grow (2–120 hours)
+• New: Seeds now available to buy in the Shop under Seeds & Farming
+• New: Hoe equipment slot (bronze through runite) — increases harvest yield
+• New: Herblore skill — brew 14 potions from farming herbs and dungeon drops to boost combat stats
+• New: Potion picker in dungeon and boss sheets — select a potion before entering for a flat stat boost (attack, strength, defense, ranged, or magic)
+• Fix: seed shop descriptions now show the required farming level on its own line
+• Fix: crafting queue no longer locks out materials when items are queued or in session
+• Fix: queued sessions no longer silently drop if auto-start fails after a session completes
+• Nerf: Agility sessions now scale 60 → 40 min at level 99 (was 60 → 33 min), XP per course halved
+
+v1.1.9
+• Fix session stuck on "Session Complete" with only Abandon button showing after timer hits zero
+• Fix queued sessions not auto-starting when alarm was delayed (battery saver / Doze mode)
+• Fix collect button not appearing until navigating away and back
+• Fix queued sessions occasionally starting out of order when collecting rewards
+
+v1.1.8
+• Fixed: crafting queue no longer locks out materials when items are queued or in session
+• Fixed: queued sessions no longer silently drop if auto-start fails after a session completes
+• New: session results are now shown individually per slot rather than batched together
+
+v1.1.7
+• Fixed: sapphire and emerald jewelry now correctly show attack and strength stats
+• New: silver jewelry now has emerald, ruby, and diamond variants
+• New: spell selection now has an "Only Castable" filter to show only spells you have runes for
+• New: a "What's New" dialog now appears once after each update
+
+v1.1.6
+• Fixed: cancelling an active session now correctly starts the next queued session
+• Fixed: bows and staves now show their attack and strength stats in the Fletching crafting list
+• New: while a combat session is active, a Dungeons tab appears so you can queue more dungeons without leaving the combat screen
+
+v1.1.5
+• Fixed: combat quest rewards (dungeons, Treasure Hunter, Iron Stomach, etc.) now actually grant XP — split evenly across all 7 combat-related skills
+• Fixed: Iron Stomach quests now progress when you clear the target dungeon without consuming any food
+• Fixed: quest claim button is now disabled until the previous tier is claimed; tapping a blocked claim now tells you which tier to claim first
+• Fixed: rune essence is now correctly consumed when collecting a runecrafting session from the Skills screen
+• New: boots are now craftable in Smithing — bronze through runite
+• New: Firemaking now drops tiered ashes (Ashes, Oak, Willow, Maple, Yew, Magic, Redwood) that scatter in the Prayer skill for scaling Prayer XP
+• New: crafting skill sheets (Smithing, Fletching, Crafting) now have filter chips — filter by category (Weapon, Armour, Bar, etc.) and material tier (Bronze, Iron, Steel, etc.)
+• Improved: all skill sheets now show a description of what the skill does
+
+v1.1.4
+• Fixed: gear equip sheet now scrolls when you have many items for a slot
+• Fixed: quest chains no longer advance higher tiers before lower tiers are completed
+• Fixed: cooking beef, chicken, and mutton now correctly counts toward cooking quests
+• Fixed: crafting queue now reserves materials — you can no longer queue more sessions than you have ingredients for
+
+v1.1.3
+• Live combat stats panel: watch HP change hit-by-hit as you fight
+• Enemy HP bar drains in real time and resets on each kill
+• Your HP bar updates as enemy attacks land, colour-coded by health level
+• Combat log shows the last 8 hits — what you hit, what hit you, and misses
+• Equipped food now shows remaining quantity and heal amount during a session
+• Drops and XP earned so far update each minute while in a dungeon
+
+v1.1.2
+• Fixed: combat session timer now shows the full session duration instead of the time until death
+• Activity selection sheets now show the session duration before you start
+• Time displays now use hours format for durations over 60 minutes (e.g. 1h 15m 30s)
+
+v1.1.1
+- Bug fix: selling an equipped item is now blocked with a warning rather than silently unequipping it
+- Bug fix: equipping gear now enforces level requirements and shows an error if you don't meet them
+- Crafting/Smithing/Fletching/Cooking recipe rows now show output stats (attack/defense/strength bonuses, healing, or damage) and level requirements with your current level
+- Bug fix: cancelling a prayer, runecrafting, or crafting session no longer loses your materials - bones, rune essence, and ingredients are only consumed when you collect the completed session
+- Bug fix: quest progress now accumulates correctly even if the prerequisite quest hasn't been claimed yet
+- Bug fix: armor bonuses now correctly apply in combat for all session types (direct, queued, and boss fights)
+- Combat screen: Attack, Strength, and Defence rows show your total gear bonus (+N from gear)
+- Skills screen: Mining, Woodcutting, and Fishing rows show your equipped tool efficiency
+- Dungeon list: each dungeon shows a survival estimate (Looks manageable / Risky / Likely to die) based on your current gear and food
+- Warning dialog appears before entering a dungeon if you have no food equipped
+- Shop sell tab: items are now grouped by category (Weapons, Armor, Tools, Food, Materials, Misc)
+- Combat sessions now end as soon as the player dies rather than running the full timer
+
+v1.1.0
+• Session queue: queue up to 3 sessions to run automatically while away
+• Batch collect: all completed queued sessions collected in one tap
+• Notification only fires when the full queue finishes, not between each session
+• Boots equipment slot with 7 tiers (bronze through dragon)
+• Activity sheets now scroll when many options are available (e.g. Agility courses)
+• Shop: type a quantity directly instead of tapping +/− repeatedly
+• Settings → About: link to the GitHub repository
+• Food consumed shown in combat session summary
+• Bug fix: abandoning a session no longer crashes the app
+
+v1.0.5
+• Sessions can now be collected after the app is killed by the OS — no more stuck uncollectable sessions
+• New character customization: set your character's Name, Gender, and Race from a one-time setup prompt or the Profile screen at any time
+• Home screen now greets you by your character's name
+
+v1.0.1
+• Save data export and import in Settings — back up your progress to a file and restore it at any time
+• Equip Best Gear button automatically equips the strongest items in your inventory
+• Skill emojis throughout the UI
+• Combat improvements and rebalancing
+• Reset Progression option in Settings
+
+v1.0
+Initial release.
+
+• 14 trainable skills with session-based XP
+• 12 dungeons with equipment and combat system
+• Crafting: Smithing, Cooking, Fletching, Jewellery
+• Prayer: bury bones for XP
+• 100+ quests with XP rewards
+• Pet drops with XP boosts
+• Achievements system
+• NPC shop (buy and sell)
+• Offline — no internet, no accounts, no ads

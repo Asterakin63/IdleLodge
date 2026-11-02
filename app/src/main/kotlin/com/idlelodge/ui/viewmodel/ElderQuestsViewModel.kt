@@ -1,0 +1,112 @@
+package com.idlelodge.ui.viewmodel
+
+import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.idlelodge.R
+import com.idlelodge.data.model.ElderQuests
+import com.idlelodge.data.model.PlayerFlags
+import com.idlelodge.repository.PlayerRepository
+import com.idlelodge.util.withAppLocale
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import javax.inject.Inject
+
+data class ElderQuestRow(
+    val quest: ElderQuests.Quest,
+    val progress: Int,
+    val complete: Boolean,
+    val unlocked: Boolean,
+)
+
+data class ElderQuestsState(
+    val rows: List<ElderQuestRow> = emptyList(),
+    val completedIds: Set<String> = emptySet(),
+    /** Set when a quest just auto-completed, so the Quests tab can pop a snackbar. */
+    val snackbarMessage: String? = null,
+)
+
+/**
+ * Watches player state; whenever a quest's predicate is met for the first time, it stamps
+ * the id into PlayerFlags.elderQuestsCompleted. Auto-completion means the player never
+ * has to "claim" a quest — like the mainland expedition/note flow.
+ */
+@HiltViewModel
+class ElderQuestsViewModel @Inject constructor(
+    private val playerRepo: PlayerRepository,
+    private val json: Json,
+    @ApplicationContext private val context: Context,
+) : ViewModel() {
+
+    private val _snack = MutableStateFlow<String?>(null)
+
+    val state: StateFlow<ElderQuestsState> = combine(
+        playerRepo.playerFlow.map { p ->
+            if (p == null) return@map ElderQuestsState()
+            val flags: PlayerFlags = try { json.decodeFromString(p.flags) } catch (_: Exception) { PlayerFlags() }
+            val inv: Map<String, Int> = try { json.decodeFromString(p.inventory) } catch (_: Exception) { emptyMap() }
+            val snap = ElderQuests.Snapshot(
+                dungeonRuns = flags.dungeonRuns,
+                enemyKills  = flags.enemyKills,
+                inventory   = inv,
+            )
+            val completed = flags.elderQuestsCompleted
+            val unlocked  = ElderQuests.unlockedIds(completed)
+            val rows = ElderQuests.CHAIN.map { q ->
+                ElderQuestRow(
+                    quest    = q,
+                    progress = ElderQuests.displayProgress(q, snap, completed),
+                    complete = q.id in completed,
+                    unlocked = q.id in unlocked,
+                )
+            }
+            ElderQuestsState(rows = rows, completedIds = completed)
+        },
+        _snack,
+    ) { base, snack -> base.copy(snackbarMessage = snack) }
+        .onEach { s ->
+            // Stamp any newly-met predicates into the persistent completed set. Re-reads
+            // player state through the repo (playerFlow is cold, no `.value` on it).
+            viewModelScope.launch {
+                val current = playerRepo.getFlags()
+                val invStr  = playerRepo.getOrCreatePlayer().inventory
+                val inv: Map<String, Int> = try { json.decodeFromString(invStr) } catch (_: Exception) { emptyMap() }
+                val snap = ElderQuests.Snapshot(
+                    dungeonRuns = current.dungeonRuns,
+                    enemyKills  = current.enemyKills,
+                    inventory   = inv,
+                )
+                val newly = ElderQuests.newlyCompleted(current.elderQuestsCompleted, snap)
+                // #2058: granting only on `newly` strands players whose quest already
+                // completed (or whose kill is recorded) while the title is missing.
+                // Qualify via completed set OR snapshot kill signal; Set add is idempotent.
+                val completedAfter = current.elderQuestsCompleted + newly
+                val qualifies = ElderQuests.qualifiesForIsleChampion(completedAfter, snap)
+                val needsRetro = qualifies && "isle_champion" !in current.unlockedTitles
+                if (newly.isNotEmpty() || needsRetro) {
+                    val titles = current.unlockedTitles + (if (qualifies) setOf("isle_champion") else emptySet())
+                    playerRepo.updateFlags(current.copy(
+                        elderQuestsCompleted = completedAfter,
+                        unlockedTitles       = titles,
+                    ))
+                    val questTitleRes = ElderQuests.CHAIN.firstOrNull { it.id in newly }?.titleRes
+                    if (questTitleRes != null) {
+                        val ctx = context.withAppLocale()
+                        _snack.value = ctx.getString(R.string.code_elder_quest_complete_snackbar, ctx.getString(questTitleRes))
+                    }
+                }
+            }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ElderQuestsState())
+
+    fun snackbarConsumed() { _snack.value = null }
+}

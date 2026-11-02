@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings extracted from Kotlin code (previously hard-coded). Prefix: code_ -->
+<resources>
+    <!-- Content descriptions -->
+    <string name="code_cd_move_up">Move up</string>
+    <string name="code_cd_move_down">Move down</string>
+    <string name="code_cd_remove_from_queue">Remove from queue</string>
+    <string name="code_cd_unequip">Unequip</string>
+    <string name="code_cd_back">Back</string>
+    <string name="code_cd_decrease">Decrease</string>
+    <string name="code_cd_increase">Increase</string>
+    <string name="code_cd_edit_character">Edit character</string>
+
+    <!-- Misc UI -->
+    <string name="code_profile_tab_mainland">Mainland</string>
+    <string name="code_profile_tab_isle">Isle</string>
+    <string name="code_label_lv_unknown">Lv ??</string>
+    <string name="code_enemy_stats_line">HP: %1$d   Rig: %2$d   Str: %3$d   Tmp: %4$d</string>
+    <string name="code_stat_damage_abbr">Dmg</string>
+    <string name="code_bone_altar_xp_in_inventory">%1$d XP  •  %2$d in inventory</string>
+    <string name="code_bone_altar_remaining_xp_base">%1$d remaining  •  %2$d XP base</string>
+    <string name="code_blessing_boost_xp">%1$s× XP in all skills</string>
+    <string name="code_blessing_boost_defense">+%1$d Tmp</string>
+    <string name="code_blessing_boost_coins">+%1$d%% coins</string>
+    <string name="code_quest_claim_tier_first">Claim tier %1$d: %2$s first</string>
+    <string name="code_quest_claim_previous_tier_first">Claim the previous tier first</string>
+    <string name="code_combat_select_spell_first">Select a spell before entering.</string>
+    <string name="code_combat_spell_level_required">Need %1$s %2$d for %3$s.</string>
+    <string name="code_armory_unknown_source">Unknown source</string>
+    <string name="code_tower_name">Jacob\'s Ladder</string>
+
+    <!-- Isle of the East: keystones (sigil stones) -->
+    <string name="code_sigil_effect_coins" formatted="false">+5% coin drops</string>
+    <string name="code_sigil_effect_xp" formatted="false">+5% XP gain</string>
+    <string name="code_sigil_effect_loot" formatted="false">+5% loot chance</string>
+    <string name="code_sigil_effect_ancient_sigil" formatted="false">+5% Ancient Sigil drops</string>
+    <string name="code_sigil_effect_elder_essence" formatted="false">+5% Ancient Essence gain</string>
+    <string name="code_sigil_effect_elder_bone" formatted="false">+5% Ancient Bone drops</string>
+
+    <!-- Isle of the East: Ancient regalia master -->
+    <string name="code_elder_set_progress">Ancient Regalia Progress</string>
+    <string name="code_elder_armor_master_hint">Ancient regalia is made through the Founding skill. Here you set keystones into the pieces you own.</string>
+    <string name="code_elder_armor_no_pieces">No Ancient regalia yet</string>
+    <string name="code_elder_armor_no_pieces_hint">Make your first piece of Ancient regalia through Founding to unlock keystone setting.</string>
+    <string name="code_elder_armor_owned">Owned: %1$d</string>
+    <plurals name="code_elder_armor_slots">
+        <item quantity="one">%1$d slot</item>
+        <item quantity="other">%1$d slots</item>
+    </plurals>
+    <string name="code_elder_armor_embedder_hint">Set keystones into your Ancient regalia for permanent bonuses. Swapping a keystone returns the previous one to your inventory.</string>
+
+    <!-- Isle of the East: shop -->
+    <string name="code_shop_cost">%1$d essence</string>
+    <string name="code_shop_bundle_name">%1$s bundle</string>
+    <string name="code_shop_bones_body">%1$d × %2$s. Fuel for the isle\'s rites and for reflection.</string>
+    <string name="code_shop_wood_body">%1$d × %2$s. A rare crafting material.</string>
+    <string name="code_shop_sigil_premium_name">%1$s (single, premium)</string>
+    <string name="code_shop_sigil_premium_body">%1$d × %2$s. Direct purchase at a heavy premium, for the final push toward a full set of Ancient regalia.</string>
+    <string name="code_shop_stone_body">One %1$s. Set it for %2$s.</string>
+
+    <!-- Isle of the East: home tracker -->
+    <string name="code_isle_piece_crafted">Crafted</string>
+    <string name="code_isle_piece_cost">5 Sigils + materials</string>
+    <string name="code_isle_full_set_assembled">Full regalia assembled. Challenge the Last Elder from the Trials tab.</string>
+    <string name="code_isle_story_title">The Isle Story</string>
+    <string name="code_isle_story_acts">%1$d / %2$d acts</string>
+    <string name="code_isle_story_intro">The Ancients sought eternal life through the Grand Ritual and were sealed away by their own work. Retrace their path across four acts.</string>
+    <string name="code_isle_story_placeholder">The full quest chain arrives in a later build. For now, overcoming the Last Elder unlocks the final act.</string>
+    <string name="code_isle_legacy_tabs_hint">The tabs at the bottom lead to the Ancient skills, trial grounds, quests and profile. Return to the mainland when done.</string>
+    <string name="code_isle_act1_title">The Landing</string>
+    <string name="code_isle_act2_title">The Buried Library</string>
+    <string name="code_isle_act3_title">The Sealing Site</string>
+    <string name="code_isle_act4_title">The Last Elder</string>
+    <string name="code_isle_act1_subtitle">Shores of Joppa — meet Rowan.</string>
+    <string name="code_isle_act2_subtitle_short">Cedar Forest — piece together the story.</string>
+    <string name="code_isle_act2_subtitle">Cedar Forest — piece together the Ancients\' story.</string>
+    <string name="code_isle_act3_subtitle">Peak of Fury — climb to the failing seal.</string>
+    <string name="code_isle_act4_subtitle_short">Abyssal Depths — face the Last Elder.</string>
+    <string name="code_isle_act4_subtitle">Abyssal Depths — face the last fallen Ancient.</string>
+
+    <!-- Isle of the East: quests -->
+    <string name="code_elder_isle_quests_title">Isle Quests</string>
+    <string name="code_elder_main_quest_chain">Main Quest Chain</string>
+    <string name="code_elder_quests_hint">Quests complete on their own when their objectives are met. Each completed act unlocks new parchments in the archives.</string>
+    <string name="code_elder_quest_status_complete">Complete</string>
+    <string name="code_elder_quest_status_locked">Locked</string>
+    <string name="code_elder_quest_reward">Reward: %1$s</string>
+    <string name="code_elder_quest_locked_hint">Complete the previous quest to unlock.</string>
+    <string name="code_elder_quest_complete_snackbar">Isle quest complete: %1$s</string>
+
+    <string name="code_elder_act1_label">Act I: The Landing</string>
+    <string name="code_elder_act2_label">Act II: The Buried Library</string>
+    <string name="code_elder_act3_label">Act III: The Sealing Site</string>
+    <string name="code_elder_act4_label">Act IV: The Last Elder</string>
+
+    <string name="code_elder_quest_first_steps_title">First Steps</string>
+    <string name="code_elder_quest_first_steps_objective">Clear the Shores of Joppa 8 times so Rowan can safely walk the shore.</string>
+    <string name="code_elder_quest_first_steps_reward">Reveals the isle\'s inhabited past.</string>
+    <string name="code_elder_quest_rowans_cache_title">Rowan\'s Cache</string>
+    <string name="code_elder_quest_rowans_cache_objective">Deliver 500 Mythrite Ore. Rowan needs it to repair her workshop.</string>
+    <string name="code_elder_quest_rowans_cache_reward">Unlocks notes on the isle\'s unnatural geology.</string>
+    <string name="code_elder_quest_first_cooking_title">Rations for the Voyage</string>
+    <string name="code_elder_quest_first_cooking_objective">Prepare 250 Tidepool Crab. Fresh food for the long trip inland.</string>
+    <string name="code_elder_quest_first_cooking_reward">Unlocks Act II. Reveals a fragment of the Ancients\' history.</string>
+    <string name="code_elder_quest_cutting_vines_title">Cutting the Vines</string>
+    <string name="code_elder_quest_cutting_vines_objective">Clear the Cedar Forest 15 times to reach the library ruins.</string>
+    <string name="code_elder_quest_cutting_vines_reward">A first glimpse of the Grand Ritual.</string>
+    <string name="code_elder_quest_library_salvage_title">Library Salvage</string>
+    <string name="code_elder_quest_library_salvage_objective">Gather 800 Abyssal Ore to shore up the collapsing shelves.</string>
+    <string name="code_elder_quest_library_salvage_reward">Rowan can now translate the Ancients\' script.</string>
+    <string name="code_elder_quest_first_armor_title">Match the Ancients</string>
+    <string name="code_elder_quest_first_armor_objective">Make 4 pieces of Coastal regalia. The Ancients wore something strikingly similar.</string>
+    <string name="code_elder_quest_first_armor_reward">Unlocks Act III. Rowan compares the pieces to what she has read.</string>
+    <string name="code_elder_quest_ascent_title">Ascent of the Peak</string>
+    <string name="code_elder_quest_ascent_objective">Clear the Peak of Fury 20 times to reach the ancient sealing altar.</string>
+    <string name="code_elder_quest_ascent_reward">The seal\'s location and shape.</string>
+    <string name="code_elder_quest_voidsteel_study_title">Voidsteel Study</string>
+    <string name="code_elder_quest_voidsteel_study_objective">Gather 1200 Voidsteel Ore. Its structure matches the seal\'s alloy.</string>
+    <string name="code_elder_quest_voidsteel_study_reward">Rowan works out how the seal is weakening.</string>
+    <string name="code_elder_quest_grove_gear_title">Grove Regalia</string>
+    <string name="code_elder_quest_grove_gear_objective">Make all 4 pieces of Grove regalia. Nearing the seal demands sturdier protection.</string>
+    <string name="code_elder_quest_grove_gear_reward">Unlocks Act IV. Rowan tells you what remains inside.</string>
+    <string name="code_elder_quest_descent_title">Descent</string>
+    <string name="code_elder_quest_descent_objective">Clear the Abyssal Depths 25 times to open the sealed chamber.</string>
+    <string name="code_elder_quest_descent_reward">The Last Elder\'s voice, faint at first, then clearer.</string>
+    <string name="code_elder_quest_full_set_title">Assemble the Full Ancient Regalia</string>
+    <string name="code_elder_quest_full_set_objective">Make all 8 pieces of Ancient regalia. Only the full set can withstand the seal.</string>
+    <string name="code_elder_quest_full_set_reward">The final revelation about the Ritual\'s true cost.</string>
+    <string name="code_elder_quest_face_last_elder_title">Face the Last Elder</string>
+    <string name="code_elder_quest_face_last_elder_objective">Overcome the Last Elder at the bottom of the Abyssal Depths.</string>
+    <string name="code_elder_quest_face_last_elder_reward">The Ancient Signet, the Isle Champion title, and Rowan\'s truth.</string>
+
+    <!-- Isle of the East: parchments (lore) -->
+    <string name="code_lore_fragments_title">Parchments</string>
+    <string name="code_lore_fragments_hint">Parchments unlock as you complete quests. Each one reveals a little more of what the Isle of the East is, and of what the Last Elder truly was.</string>
+
+    <string name="code_lore_prologue_title">Prologue: Rowan\'s Note</string>
+    <string name="code_lore_prologue_body">\"You who sail here, know this. I am the last living student of the old School of the Ancients. My tutors are silent stones. What I have learned, I offer to those brave enough to walk the isle. Read gently. Some of what waits below is not meant to be woken.\"</string>
+    <string name="code_lore_prologue_hint">Given by Rowan upon your first landing.</string>
+
+    <string name="code_lore_1a_title">I.a: The Coastline Was Once Kept</string>
+    <string name="code_lore_1a_body">\"The tide pools around the quay aren\'t natural. They were carved. Someone lined them with dressed stone. The stones are older than any temple I have visited on the mainland, and their edges are true to the square, the way old work rarely is. The isle was inhabited long before it was forgotten.\"</string>
+    <string name="code_lore_1a_hint">Rowan writes this after your first clears of the Shores.</string>
+
+    <string name="code_lore_1b_title">I.b: The Rock Remembers</string>
+    <string name="code_lore_1b_body">\"The mythrite you brought me is not natural ore. Its grain is too even, its colour too consistent. It reads as if it was grown, not formed. My grandmother taught me a rhyme: \'the isle builds the isle back, stone by patient stone.\' I never understood it. I am starting to.\"</string>
+    <string name="code_lore_1b_hint">Rowan writes this after receiving her mythrite cache.</string>
+
+    <string name="code_lore_1c_title">I.c: The Fish Are Old</string>
+    <string name="code_lore_1c_body">\"The tidepool crab you prepared has a taste I remember only from a single fish my grandmother once served. She called it \'a scale off the ancient shore.\' She would not say more. The isle\'s food is not just old. It is the same food, in the same shapes, kept somehow.\"</string>
+    <string name="code_lore_1c_hint">Rowan\'s kitchen notes after your banquet preparations.</string>
+
+    <string name="code_lore_2a_title">II.a: The Grove Was a Garden</string>
+    <string name="code_lore_2a_body">\"The roots grow in rows. The trees are the same trees, spaced exactly, tended by no one. This grove was a garden, someone\'s garden, and whoever tended it left their tools where they last rested. They\'re still sharp.\"</string>
+    <string name="code_lore_2a_hint">Rowan\'s notes after your Forest clears.</string>
+
+    <string name="code_lore_2b_title">II.b: A Ritual for Not Dying</string>
+    <string name="code_lore_2b_body">\"The library\'s oldest text describes a rite its writers called the Grand Ritual. It promised that those who performed it would not die. It does not say they would live. There is a difference. The text does not go on. I am not sure I want it to.\"</string>
+    <string name="code_lore_2b_hint">Recovered once you help Rowan shore up the library.</string>
+
+    <string name="code_lore_2c_title">II.c: The Order That Bore the Ritual</string>
+    <string name="code_lore_2c_body">\"They called themselves the Ancients. Not as a title of age, but of station: those who came first, and those who would still be here when everyone else was gone. Your Coastal regalia matches an illustration on the second wall. The measurements are identical. They wore what you wear now.\"</string>
+    <string name="code_lore_2c_hint">Rowan compares your first Coastal regalia to the library plates.</string>
+
+    <string name="code_lore_3a_title">III.a: The Peak Was Their Altar</string>
+    <string name="code_lore_3a_body">\"The summit is a ring. The ring is a seal. The stones of the ring are not carved. They are named. Each stone is one of the Ancients. There are hundreds of stones. That was, I think, once the whole order.\"</string>
+    <string name="code_lore_3a_hint">Rowan\'s map after your Peak clears.</string>
+
+    <string name="code_lore_3b_title">III.b: The Alloy That Holds</string>
+    <string name="code_lore_3b_body">\"Your Voidsteel and the seal\'s stones are the same substance. The Ancients bound themselves with what they quarried here. They literally cast their names into the alloy. This is how you contain something that will not stop wanting to live: you write your own name against its name, and hold.\"</string>
+    <string name="code_lore_3b_hint">Rowan compares Voidsteel ore to a shard of the seal.</string>
+
+    <string name="code_lore_3c_title">III.c: The One Who Would Not Lie Down</string>
+    <string name="code_lore_3c_body">\"Every Ancient walked to the ring and lay down as a stone. Every Ancient but one. The last of them refused, and so the others bound that one inside the seal instead of joining it. His stone would have been carved \'Merren.\' It\'s the same word my grandmother would sometimes say in her sleep, and never in the day.\"</string>
+    <string name="code_lore_3c_hint">Rowan reads to you from the sealing site\'s ledger.</string>
+
+    <string name="code_lore_4a_title">IV.a: The Chamber Is Flooding</string>
+    <string name="code_lore_4a_body">\"The caldera below the peak was dry when the seal was cast. It is now filling with sea. The seal is failing not because someone attacks it from the outside, but because the thing inside it has spent every one of the intervening centuries learning the seal\'s shape from within. When it breaks the seal, it breaks it with the seal\'s own hands.\"</string>
+    <string name="code_lore_4a_hint">Rowan writes this after your descents into the Abyss.</string>
+
+    <string name="code_lore_4b_title">IV.b: The Ritual\'s True Cost</string>
+    <string name="code_lore_4b_body">\"The Grand Ritual did not fail. It worked. Those who performed it lived. What it took, in exchange, was everything that made those lives worth living: their names, their kin, their remembered dead. The oldest Ancients were the emptiest. The Last Elder is the oldest of them all. He does not remember he was once Merren, or that Merren once had a granddaughter, or that this granddaughter is standing on this isle right now. Rowan wrote none of this down. She said it to me in one breath.\"</string>
+    <string name="code_lore_4b_hint">Rowan speaks this once you complete the full Ancient regalia.</string>
+
+    <string name="code_lore_4c_title">IV.c: Epilogue: What You Bring Back</string>
+    <string name="code_lore_4c_body">\"He did not know me. He knew my regalia, because he wore it once. He knew the seal, because he made it. When it came apart, when I brought the last of him down, he did what no other Ancient did: he remembered. Not my name. Not his. He remembered the taste of the crab I served him at the peak. My grandmother\'s recipe.\"\n\n\"That was enough. The isle recognises you now. The stones on the peak have one fewer name, and one more. Whatever you build after this is your own story.\"</string>
+    <string name="code_lore_4c_hint">Rowan\'s final letter after the Last Elder falls.</string>
+</resources>

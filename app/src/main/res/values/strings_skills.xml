@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Skill names and descriptions ===== -->
+
+    <!-- Gathering skills -->
+    <string name="skill_mining_name">Quarrying</string>
+    <string name="skill_mining_desc">Hew rough stone and precious metals from the earth to raise the Temple.</string>
+    <string name="skill_fishing_name">Provisioning</string>
+    <string name="skill_fishing_desc">Gather provisions at the markets and quays of Joppa, so the festive board lacks nothing.</string>
+    <string name="skill_woodcutting_name">Timberwork</string>
+    <string name="skill_woodcutting_desc">Fell and square olive, acacia and cedar of Lebanon, as the carpenter-fellows did to frame the Temple and feed its lights.</string>
+    <string name="skill_farming_name">Cultivation</string>
+    <string name="skill_farming_desc">Sow and harvest wheat, vines and olives: the corn, wine and oil of the lodge.</string>
+    <string name="skill_firemaking_name">Illumination</string>
+    <string name="skill_firemaking_desc">Burn logs from your inventory to kindle the Lights and gain Illumination XP. Each log burned also leaves ashes, which can be scattered through Reflection for bonus Reflection XP.</string>
+    <string name="skill_agility_name">Ritual</string>
+    <string name="skill_agility_desc">Practise the ritual journeys to shorten session times across all skills. Level 99 cuts %1$d minutes off the hour (60 min → %2$d min), with a smooth linear reduction as you level up.</string>
+
+    <!-- Crafting skills -->
+    <string name="skill_smithing_name">Founding</string>
+    <string name="skill_smithing_desc">Smelt ores into ingots and cast fine metal tools, as Hiram cast the pillars.</string>
+    <string name="skill_cooking_name">Banqueting</string>
+    <string name="skill_cooking_desc">Prepare the festive board: fraternal fare and toasts that restore HP during Trials.</string>
+    <string name="skill_fletching_name">Writing</string>
+    <string name="skill_fletching_desc">Craft quills and compose orations from logs and metal nibs.</string>
+    <string name="skill_crafting_name">Jewelcraft</string>
+    <string name="skill_crafting_desc">Fashion office jewels and regalia from precious materials.</string>
+    <string name="skill_runecrafting_name">Symbolism</string>
+    <string name="skill_runecrafting_desc">Trace symbols upon the rough ashlar to fuel your Wisdom.</string>
+    <string name="skill_herblore_name">Alchemy</string>
+    <string name="skill_herblore_desc">Distil elixirs from garden herbs and trial reagents to strengthen you for the Trials. V.I.T.R.I.O.L.!</string>
+
+    <!-- Combat skills -->
+    <string name="skill_attack_name">Rigor</string>
+    <string name="skill_attack_desc">Sharpens the precision of your gavel, increasing your chance to strike true.</string>
+    <string name="skill_strength_name">Strength</string>
+    <string name="skill_strength_desc">Increases the maximum force of each gavel blow.</string>
+    <string name="skill_defense_name">Temperance</string>
+    <string name="skill_defense_desc">Keeps you composed, reducing the damage your vices inflict.</string>
+    <string name="skill_ranged_name">Eloquence</string>
+    <string name="skill_ranged_desc">Confront your adversaries from afar with a well-cut quill and a sharp oration.</string>
+    <string name="skill_magic_name">Wisdom</string>
+    <string name="skill_magic_desc">Invoke the power of the symbols. Higher levels unlock stronger workings.</string>
+    <string name="skill_hitpoints_name">Vitality</string>
+    <string name="skill_hitpoints_desc">Your total vitality. Higher levels let you endure the Trials longer.</string>
+    <string name="skill_prayer_name">Reflection</string>
+    <string name="skill_prayer_desc">Meditate on bones gathered in the Trials to earn Reflection XP. Memento mori. Higher levels unlock stronger meditations in the Chamber of Reflection.</string>
+
+    <!-- ===== Skill unlock sheet labels ===== -->
+    <string name="label_lv">Lv %1$d</string>
+    <string name="armory_req_level">Lv. %1$d</string>
+    <string name="skills_projected_xp_level">+%1$s XP → Level %2$d</string>
+    <string name="skills_agility_course_detail">Lv. %1$d  •  %2$d XP/circuit</string>
+    <string name="label_hp_passive">Passive — raises max Vitality (HP)</string>
+    <string name="label_hp_scales">Max Vitality (HP) increases each level</string>
+    <string name="label_hp_max">Max Vitality: %1$d</string>
+    <string name="label_xp_per_bone">%1$s (%2$d XP/bone)</string>
+    <string name="label_xp_per_kill">%1$s (%2$d XP/victory)</string>
+
+    <!-- ===== Tree names ===== -->
+    <string name="tree_tree_name">Tree</string>
+    <string name="tree_oak_tree_name">Oak Tree</string>
+    <string name="tree_willow_tree_name">Olive Tree</string>
+    <string name="tree_maple_tree_name">Acacia Tree</string>
+    <string name="tree_yew_tree_name">Cypress Tree</string>
+    <string name="tree_magic_tree_name">Cedar Tree</string>
+    <string name="tree_redwood_tree_name">Almug Tree</string>
+    <!-- Elder Isle woodcutting targets -->
+    <string name="tree_coastal_pine_name">Joppa Pine</string>
+    <string name="tree_grove_oak_name">Terebinth</string>
+    <string name="tree_abyssal_tree_name">Ebony Tree</string>
+    <string name="tree_starwood_tree_name">Starwood Tree</string>
+
+    <!-- ===== Agility course names and descriptions ===== -->
+    <string name="agility_beginner_course_name">Trial by Earth</string>
+    <string name="agility_beginner_course_desc">Leaving the Chamber of Reflection, the Seeker takes the first blindfolded steps toward the door of the Temple.</string>
+    <string name="agility_novice_course_name">Trial by Air</string>
+    <string name="agility_novice_course_desc">The first journey: a rough, noisy road strewn with obstacles, like the world of the profane.</string>
+    <string name="agility_apprentice_course_name">Trial by Water</string>
+    <string name="agility_apprentice_course_desc">The second journey: a smoother path, ending in a purification by water.</string>
+    <string name="agility_intermediate_course_name">Trial by Fire</string>
+    <string name="agility_intermediate_course_desc">The third journey, made in silence, ending in a purification by fire.</string>
+    <string name="agility_advanced_course_name">Mosaic Pavement</string>
+    <string name="agility_advanced_course_desc">The Apprentice circles the lodge with measured steps across the black and white squares. Mind where you tread.</string>
+    <string name="agility_expert_course_name">The Five Journeys</string>
+    <string name="agility_expert_course_desc">The Fellowcraft\'s five journeys, each with its own tools. Only the most composed complete them without faltering.</string>
+    <string name="agility_elite_course_name">Winding Staircase</string>
+    <string name="agility_elite_course_desc">Three, five and seven steps that test your poise at every turn.</string>
+    <string name="agility_master_course_name">Middle Chamber</string>
+    <string name="agility_master_course_desc">At the top of the staircase, a demanding passage into the Middle Chamber, where the wages are paid.</string>
+    <string name="agility_veteran_course_name">In Search of Hiram</string>
+    <string name="agility_veteran_course_desc">The Master\'s journey from West to East, seeking the lost Master until a sprig of acacia marks the spot.</string>
+    <string name="agility_champion_course_name">Chain of Union</string>
+    <string name="agility_champion_course_desc">A great circle where every link must hold. It will push you to your limits.</string>
+    <string name="agility_heroic_course_name">Path of the Zodiac</string>
+    <string name="agility_heroic_course_desc">A procession beneath the twelve signs, where only the most dedicated dare to tread.</string>
+    <string name="agility_legendary_course_name">Starry Vault</string>
+    <string name="agility_legendary_course_desc">A legendary procession beneath the starry vault, spoken of in whispers among the Brethren.</string>
+    <string name="agility_mythic_course_name">Builders\' Labyrinth</string>
+    <string name="agility_mythic_course_desc">A labyrinth laid by the old builders, whose path seems to defy the laws of geometry.</string>
+    <string name="agility_divine_course_name">Way of the Blazing Star</string>
+    <string name="agility_divine_course_desc">A luminous path guided by the Blazing Star.</string>
+    <string name="agility_transcendent_course_name">Quest for the Lost Word</string>
+    <string name="agility_transcendent_course_desc">The ultimate ritual journey, in search of the Word that was lost.</string>
+    <!-- Elder Isle agility courses (train elder Agility to shorten isle sessions to 45 min at 99) -->
+    <string name="agility_elder_coastal_run_name">Shoreline Procession</string>
+    <string name="agility_elder_coastal_run_desc">A procession along the isle\'s wave-scarred beach. Rocks shift underfoot with the tide.</string>
+    <string name="agility_elder_grove_traverse_name">Cedar Procession</string>
+    <string name="agility_elder_grove_traverse_desc">A rope-and-ledge circuit through the symbol-lit canopy of the Cedar Forest of Lebanon.</string>
+    <string name="agility_elder_volcano_scramble_name">Ascent of the Peak</string>
+    <string name="agility_elder_volcano_scramble_desc">A climb across the smoking flanks of the Peak of Fury. The stone remembers being an altar.</string>
+    <string name="agility_elder_abyssal_ascent_name">Rising from the Abyss</string>
+    <string name="agility_elder_abyssal_ascent_desc">A vertical route up the pressure-cracked walls of the Abyssal Depths. Few reach the Light at the top.</string>
+
+    <!-- ===== Session skill type labels ===== -->
+    <string name="skill_expedition_name">Journeys</string>
+    <string name="skill_boss_name">Great Trial</string>
+    <string name="skill_mercantile_name">Commerce</string>
+    <string name="skill_mercantile_desc">Dispatch trade caravans along routes for coins and XP. Higher levels improve buy and sell prices at the Steward\'s Shop and unlock exclusive Lodge of Commerce goods.</string>
+</resources>

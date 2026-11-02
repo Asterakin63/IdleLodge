@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Square and compasses, scaled from the launcher foreground. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="9"
+        android:strokeLineCap="round"
+        android:pathData="M14,58 L54,98 L94,58 M54,24 L24,92 M54,24 L84,92" />
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M54,14 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 z" />
+</vector>

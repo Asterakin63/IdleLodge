@@ -1,0 +1,296 @@
+package com.idlelodge.ui.viewmodel
+
+import com.idlelodge.util.withAppLocale
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.idlelodge.data.json.TradeRouteData
+import com.idlelodge.data.json.XpRange
+import com.idlelodge.data.model.EquipSlot
+import com.idlelodge.data.model.OwnedPet
+import com.idlelodge.data.model.PlayerFlags
+import com.idlelodge.data.model.QueuedAction
+import com.idlelodge.data.model.SessionFrame
+import com.idlelodge.data.model.Skills
+import com.idlelodge.repository.BoostRepository
+import com.idlelodge.repository.ChurchRepository
+import com.idlelodge.repository.blessingPrayerCapeMult
+import com.idlelodge.repository.GameDataRepository
+import com.idlelodge.repository.PlayerRepository
+import com.idlelodge.repository.QueuedSessionStarter
+import com.idlelodge.repository.SessionRepository
+import com.idlelodge.repository.QuestRepository
+import com.idlelodge.repository.GuildRepository
+import com.idlelodge.repository.DailyQuestRepository
+import com.idlelodge.repository.WeeklyQuestRepository
+import com.idlelodge.repository.TownRepository
+import com.idlelodge.repository.resolveCapeMultiplier
+import com.idlelodge.simulator.MercantileSimulator
+import com.idlelodge.simulator.SkillSimulator
+import com.idlelodge.simulator.XpTable
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
+import javax.inject.Inject
+import android.content.Context
+import com.idlelodge.R
+import com.idlelodge.data.model.QuestProgress
+import com.idlelodge.util.GameStrings
+import dagger.hilt.android.qualifiers.ApplicationContext
+
+data class MercantileUiState(
+    val mercantileLevel: Int = 1,
+    val mercantileXp: Long = 0L,
+    val coins: Long = 0L,
+    val coinReturnMult: Float = 1f,
+    val tradeRoutes: List<TradeRouteData> = emptyList(),
+    val isLoading: Boolean = true,
+    val startingSession: Boolean = false,
+    val snackbarMessage: String? = null,
+    /** Bumped on every message set so identical consecutive messages still re-show (rapid queue taps). */
+    val snackbarNonce: Long = 0L,
+    val anySessionActive: Boolean = false,
+    val queueSize: Int = 0,
+    val maxQueueSize: Int = 3,
+    val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    /** Lowest Mercantile level that unlocks a Merchant's Guild shop item; 0 = none defined. */
+    val guildUnlockLevel: Int = 0,
+)
+
+@HiltViewModel
+class MercantileViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
+    @ApplicationContext private val context: Context,
+    private val playerRepo: PlayerRepository,
+    private val sessionRepo: SessionRepository,
+    private val gameData: GameDataRepository,
+    private val queuedSessionStarter: QueuedSessionStarter,
+    private val questRepo: QuestRepository,
+    private val guildRepo: GuildRepository,
+    private val dailyQuestRepo: DailyQuestRepository,
+    private val weeklyQuestRepo: WeeklyQuestRepository,
+    private val townRepo: TownRepository,
+    private val json: Json,
+) : ViewModel() {
+
+    private val _extra = MutableStateFlow(MercantileUiState())
+
+    val uiState: StateFlow<MercantileUiState> = combine(
+        playerRepo.playerFlow,
+        sessionRepo.activeSessionFlow,
+        questRepo.observeProgress(),
+        _extra,
+    ) { player, session, questProgress, extra ->
+        if (player == null) extra.copy(isLoading = true)
+        else {
+            val levels: Map<String, Int>  = json.decodeFromString(player.skillLevels)
+            val xp:     Map<String, Long> = json.decodeFromString(player.skillXp)
+            val flags   = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val level   = levels[Skills.MERCANTILE] ?: 1
+            val routes  = gameData.tradeRoutes.filter { it.levelRequired <= level }
+            // Mirror the collection-time coin math in HomeViewModel so the displayed
+            // return range matches what a session can actually pay out.
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
+            val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
+            val capeMult     = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
+            val prestigeMult = boostRepo.coinMultiplier(Skills.MERCANTILE, flags).toFloat()
+            val blessingCoinMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData), gameData.blessings) *
+                PlayerRepository.gooseCoinMultiplier(json.decodeFromString<List<OwnedPet>>(player.pets)).toFloat()
+            extra.copy(
+                isLoading        = false,
+                mercantileLevel  = level,
+                mercantileXp     = xp[Skills.MERCANTILE] ?: 0L,
+                coins            = player.coins,
+                coinReturnMult   = capeMult * prestigeMult * blessingCoinMult,
+                tradeRoutes      = routes,
+                anySessionActive = session != null,
+                queueSize        = flags.sessionQueue.size,
+                maxQueueSize     = playerRepo.maxQueueSize(flags),
+                activeQuests     = computeActiveQuests(questProgress, flags, player.coins),
+                guildUnlockLevel = guildUnlockLevel,
+            )
+        }
+    }.flowOn(Dispatchers.Default)
+     .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MercantileUiState())
+
+    private val guildUnlockLevel: Int by lazy {
+        gameData.marketplace["merchants_guild"]?.items?.values
+            ?.mapNotNull { item -> item.mercantileLevelRequired.takeIf { it > 0 } }
+            ?.minOrNull() ?: 0
+    }
+
+    fun startTradeRoute(routeId: String) {
+        viewModelScope.launch {
+            val route = gameData.tradeRoutes.firstOrNull { it.id == routeId } ?: return@launch
+            val player = playerRepo.getOrCreatePlayer()
+
+            if (player.coins < route.coinCost) {
+                postSnackbar(context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString()))
+                return@launch
+            }
+
+            val levels: Map<String, Int>  = json.decodeFromString(player.skillLevels)
+            val xp:     Map<String, Long> = json.decodeFromString(player.skillXp)
+            val agilityLevel = levels[Skills.AGILITY] ?: 1
+            val mercFlags: PlayerFlags = json.decodeFromString(player.flags)
+
+            if (sessionRepo.getActiveSession() != null) {
+                val spent = playerRepo.spendCoins(route.coinCost.toLong())
+                if (!spent) {
+                    postSnackbar(context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString()))
+                    return@launch
+                }
+                val startXp = xp[Skills.MERCANTILE] ?: 0L
+                val currentLevel = XpTable.levelForXp(startXp)
+                val sortedKeys = route.xpRanges.keys.mapNotNull { it.toIntOrNull() }.sorted()
+                val matchedKey = sortedKeys.lastOrNull { it <= currentLevel } ?: sortedKeys.firstOrNull()
+                val xpRange = matchedKey?.let { route.xpRanges[it.toString()] } ?: XpRange(1, 1)
+
+                val expectedRawXp = (xpRange.min + xpRange.max) * 30L
+                val xpQueueMult = if (mercFlags.ironman) 1.0 else (if (mercFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(mercFlags, blessingPrayerCapeMult(player, mercFlags, gameData), gameData.blessings)
+                val prestigeMult = 1.0 + boostRepo.prestigeXpPct(Skills.MERCANTILE, mercFlags) / 100.0
+                val estimatedXpGain = (expectedRawXp * xpQueueMult * prestigeMult).toLong()
+
+                val enqueued = playerRepo.enqueueAction(
+                    QueuedAction(
+                        skillName           = Skills.MERCANTILE,
+                        activityKey         = routeId,
+                        skillDisplayName    = "Mercantile",
+                        estimatedXpGain     = estimatedXpGain,
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, boostRepo.sessionFloorReductionMin(mercFlags), townRepo.playerSessionDurationMultiplier(mercFlags)),
+                        // Must record every multiplier baked into the estimate (prestige included),
+                        // or the Home screen's live rescale double-counts prestige (issue #1790).
+                        xpBoostMultAtQueue  = xpQueueMult * prestigeMult,
+                        coinRefund          = route.coinCost.toLong(),
+                    )
+                )
+                if (!enqueued) {
+                    playerRepo.addCoins(route.coinCost.toLong())
+                }
+                postSnackbar(if (enqueued)
+                    context.withAppLocale().getString(R.string.mercantile_added_to_queue, GameStrings.tradeRouteName(context, routeId))
+                else
+                    context.withAppLocale().getString(R.string.snackbar_queue_full))
+                return@launch
+            }
+
+            _extra.update { it.copy(startingSession = true) }
+            try {
+                val spent = playerRepo.spendCoins(route.coinCost.toLong())
+                if (!spent) {
+                    postSnackbar(context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString()))
+                    return@launch
+                }
+
+                val startXp = xp[Skills.MERCANTILE] ?: 0L
+                val result  = MercantileSimulator.simulate(
+                    route, startXp, agilityLevel,
+                    floorReductionMin = boostRepo.sessionFloorReductionMin(mercFlags),
+                    petDropKey        = gameData.pets.values.firstOrNull { it.boostedSkill == Skills.MERCANTILE }?.id,
+                    petDropChance     = 1.0 / 1000.0,
+                    chronosMultiplier = townRepo.playerSessionDurationMultiplier(mercFlags),
+                )
+                val framesJson = json.encodeToString(
+                    json.serializersModule.serializer<List<SessionFrame>>(),
+                    result.frames,
+                )
+                sessionRepo.startSession(
+                    skillName        = Skills.MERCANTILE,
+                    activityKey      = routeId,
+                    frames           = framesJson,
+                    durationMs       = result.durationMs,
+                    skillDisplayName = "Mercantile",
+                )
+            } catch (e: Exception) {
+                playerRepo.addCoins(route.coinCost.toLong())
+                postSnackbar(context.withAppLocale().getString(R.string.mercantile_route_start_failed, e.message ?: ""))
+            } finally {
+                _extra.update { it.copy(startingSession = false) }
+            }
+        }
+    }
+
+    fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
+
+    private fun postSnackbar(message: String) =
+        _extra.update { it.copy(snackbarMessage = message, snackbarNonce = it.snackbarNonce + 1) }
+
+    private fun computeActiveQuests(
+        questProgress: List<QuestProgress>,
+        flags: PlayerFlags,
+        coins: Long,
+    ): Map<String, List<QuestIndicator>> {
+        val result = mutableMapOf<String, MutableList<QuestIndicator>>()
+        val progressById = questProgress.associateBy { it.questId }
+
+        val activeDailies = dailyQuestRepo.getActiveDailyQuests(flags).filter { !it.claimed }
+        val activeWeeklies = weeklyQuestRepo.getActiveWeeklyQuests(flags).filter { !it.claimed }
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
+
+        fun addIndicator(key: String, category: QuestCategory, remaining: Int) {
+            val route = gameData.tradeRoutes.find { it.id == key }
+            val cost = route?.coinCost ?: 0
+            val isCompletable = coins >= (cost * remaining)
+            result.getOrPut("${Skills.MERCANTILE}:$key") { mutableListOf() }.add(QuestIndicator(category, isCompletable))
+        }
+
+        fun checkAndAdd(questType: String, questSkill: String, questTarget: String, questAmount: Int, questProgressVal: Int, category: QuestCategory) {
+            if (questSkill != Skills.MERCANTILE) return
+            val remaining = questAmount - questProgressVal
+            if (remaining <= 0) return
+
+            when (questType) {
+                "trade" -> {
+                    addIndicator(questTarget, category, remaining)
+                }
+            }
+        }
+
+        for ((id, quest) in gameData.quests) {
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            val prereqDone = quest.requiresPrevious == null ||
+                    progressById[quest.requiresPrevious]?.completed == true
+            if (!prereqDone) continue
+
+            checkAndAdd(quest.type, quest.skill, quest.target, quest.amount, prog?.progress ?: 0, QuestCategory.MAIN)
+        }
+
+        for ((id, quest) in gameData.guildQuests) {
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
+
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.GUILD)
+        }
+
+        for (daily in activeDailies) {
+            checkAndAdd(daily.template.type, daily.template.skill, daily.template.target, daily.template.amount, daily.progress, QuestCategory.DAILY)
+        }
+
+        for (weekly in activeWeeklies) {
+            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.WEEKLY)
+        }
+
+        for (id in activeGuildDailyIds) {
+            val template = guildPool[id] ?: continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
+        }
+
+        return result
+    }
+}

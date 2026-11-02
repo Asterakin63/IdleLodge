@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Quest names and objectives ===== -->
+    <!-- Translator note: quest names are short titles; objectives are action sentences. -->
+
+    <!-- Mining -->
+    <string name="quest_mining_1_name">Quarrying I</string>
+    <string name="quest_mining_1_objective">Quarry 500 Copper Ore</string>
+    <string name="quest_mining_2_name">Quarrying II</string>
+    <string name="quest_mining_2_objective">Quarry 750 Iron Ore</string>
+    <string name="quest_mining_3_name">Quarrying III</string>
+    <string name="quest_mining_3_objective">Quarry 1100 Coal</string>
+    <string name="quest_mining_4_name">Quarrying IV</string>
+    <string name="quest_mining_4_objective">Quarry 1650 Orichalcum Ore</string>
+    <string name="quest_mining_5_name">Quarrying V</string>
+    <string name="quest_mining_5_objective">Quarry 2450 Electrum Ore</string>
+    <string name="quest_mining_6_name">Quarrying VI</string>
+    <string name="quest_mining_6_objective">Quarry 3650 Shamir Ore</string>
+
+    <!-- Woodcutting -->
+    <string name="quest_woodcutting_1_name">Timberwork I</string>
+    <string name="quest_woodcutting_1_objective">Cut 500 Logs for the Temple</string>
+    <string name="quest_woodcutting_2_name">Timberwork II</string>
+    <string name="quest_woodcutting_2_objective">Cut 750 Oak Logs</string>
+    <string name="quest_woodcutting_3_name">Timberwork III</string>
+    <string name="quest_woodcutting_3_objective">Cut 1100 Olive Logs</string>
+    <string name="quest_woodcutting_4_name">Timberwork IV</string>
+    <string name="quest_woodcutting_4_objective">Cut 1650 Acacia Logs</string>
+    <string name="quest_woodcutting_5_name">Timberwork V</string>
+    <string name="quest_woodcutting_5_objective">Cut 2450 Cypress Logs</string>
+    <string name="quest_woodcutting_6_name">Timberwork VI</string>
+    <string name="quest_woodcutting_6_objective">Cut 3650 Cedar Logs</string>
+
+    <!-- Fishing -->
+    <string name="quest_fishing_1_name">Provisioning I</string>
+    <string name="quest_fishing_1_objective">Gather 500 provisions for the agapes</string>
+    <string name="quest_fishing_2_name">Provisioning II</string>
+    <string name="quest_fishing_2_objective">Gather 750 provisions for the agapes</string>
+    <string name="quest_fishing_3_name">Provisioning III</string>
+    <string name="quest_fishing_3_objective">Gather 1100 provisions for the agapes</string>
+    <string name="quest_fishing_4_name">Provisioning IV</string>
+    <string name="quest_fishing_4_objective">Gather 1650 provisions for the agapes</string>
+    <string name="quest_fishing_5_name">Provisioning V</string>
+    <string name="quest_fishing_5_objective">Gather 2450 provisions for the agapes</string>
+    <string name="quest_fishing_6_name">Provisioning VI</string>
+    <string name="quest_fishing_6_objective">Gather 3650 provisions for the agapes</string>
+
+    <!-- Smithing -->
+    <string name="quest_smithing_1_name">Founding I</string>
+    <string name="quest_smithing_1_objective">Cast 500 Bronze Ingots</string>
+    <string name="quest_smithing_2_name">Founding II</string>
+    <string name="quest_smithing_2_objective">Cast 750 Iron Ingots</string>
+    <string name="quest_smithing_3_name">Founding III</string>
+    <string name="quest_smithing_3_objective">Cast 1100 Steel Ingots</string>
+    <string name="quest_smithing_4_name">Founding IV</string>
+    <string name="quest_smithing_4_objective">Cast 1650 Orichalcum Ingots</string>
+    <string name="quest_smithing_5_name">Founding V</string>
+    <string name="quest_smithing_5_objective">Cast 2450 Electrum Ingots</string>
+    <string name="quest_smithing_6_name">Founding VI</string>
+    <string name="quest_smithing_6_objective">Cast 3650 Shamir Ingots</string>
+
+    <!-- Cooking - Fish -->
+    <string name="quest_cooking_fish_1_name">Banqueting — Fare I</string>
+    <string name="quest_cooking_fish_1_objective">Prepare 500 dishes for the Brethren</string>
+    <string name="quest_cooking_fish_2_name">Banqueting — Fare II</string>
+    <string name="quest_cooking_fish_2_objective">Prepare 750 dishes for the Brethren</string>
+    <string name="quest_cooking_fish_3_name">Banqueting — Fare III</string>
+    <string name="quest_cooking_fish_3_objective">Prepare 1100 dishes for the Brethren</string>
+    <string name="quest_cooking_fish_4_name">Banqueting — Fare IV</string>
+    <string name="quest_cooking_fish_4_objective">Prepare 1650 dishes for the Brethren</string>
+    <string name="quest_cooking_fish_5_name">Banqueting — Fare V</string>
+    <string name="quest_cooking_fish_5_objective">Prepare 2450 dishes for the Brethren</string>
+    <string name="quest_cooking_fish_6_name">Banqueting — Fare VI</string>
+    <string name="quest_cooking_fish_6_objective">Prepare 3650 dishes for the Brethren</string>
+
+    <!-- Cooking - Beef -->
+    <string name="quest_cooking_beef_1_name">Banqueting — Beef I</string>
+    <string name="quest_cooking_beef_1_objective">Cook 100 Beef</string>
+    <string name="quest_cooking_beef_2_name">Banqueting — Beef II</string>
+    <string name="quest_cooking_beef_2_objective">Cook 250 Beef</string>
+    <string name="quest_cooking_beef_3_name">Banqueting — Beef III</string>
+    <string name="quest_cooking_beef_3_objective">Cook 500 Beef</string>
+
+    <!-- Cooking - Chicken -->
+    <string name="quest_cooking_chicken_1_name">Banqueting — Chicken I</string>
+    <string name="quest_cooking_chicken_1_objective">Cook 100 Chicken</string>
+    <string name="quest_cooking_chicken_2_name">Banqueting — Chicken II</string>
+    <string name="quest_cooking_chicken_2_objective">Cook 250 Chicken</string>
+    <string name="quest_cooking_chicken_3_name">Banqueting — Chicken III</string>
+    <string name="quest_cooking_chicken_3_objective">Cook 500 Chicken</string>
+
+    <!-- Cooking - Mutton -->
+    <string name="quest_cooking_mutton_1_name">Banqueting — Mutton I</string>
+    <string name="quest_cooking_mutton_1_objective">Cook 100 Mutton</string>
+    <string name="quest_cooking_mutton_2_name">Banqueting — Mutton II</string>
+    <string name="quest_cooking_mutton_2_objective">Cook 250 Mutton</string>
+    <string name="quest_cooking_mutton_3_name">Banqueting — Mutton III</string>
+    <string name="quest_cooking_mutton_3_objective">Cook 500 Mutton</string>
+
+    <!-- Fletching -->
+    <string name="quest_fletching_1_name">Writing I</string>
+    <string name="quest_fletching_1_objective">Write 500 Bronze Orations</string>
+    <string name="quest_fletching_2_name">Writing II</string>
+    <string name="quest_fletching_2_objective">Write 750 Iron Orations</string>
+    <string name="quest_fletching_3_name">Writing III</string>
+    <string name="quest_fletching_3_objective">Write 1100 Steel Orations</string>
+    <string name="quest_fletching_4_name">Writing IV</string>
+    <string name="quest_fletching_4_objective">Write 1650 Orichalcum Orations</string>
+    <string name="quest_fletching_5_name">Writing V</string>
+    <string name="quest_fletching_5_objective">Write 2450 Electrum Orations</string>
+    <string name="quest_fletching_6_name">Writing VI</string>
+    <string name="quest_fletching_6_objective">Write 3650 Shamir Orations</string>
+
+    <!-- Prayer -->
+    <string name="quest_prayer_1_name">Reflection I</string>
+    <string name="quest_prayer_1_objective">Lay 500 bones to rest</string>
+    <string name="quest_prayer_2_name">Reflection II</string>
+    <string name="quest_prayer_2_objective">Lay 750 bones to rest</string>
+    <string name="quest_prayer_3_name">Reflection III</string>
+    <string name="quest_prayer_3_objective">Lay 1100 bones to rest</string>
+    <string name="quest_prayer_4_name">Reflection IV</string>
+    <string name="quest_prayer_4_objective">Lay 1650 bones to rest</string>
+    <string name="quest_prayer_5_name">Reflection V</string>
+    <string name="quest_prayer_5_objective">Lay 2450 bones to rest</string>
+    <string name="quest_prayer_6_name">Reflection VI</string>
+    <string name="quest_prayer_6_objective">Lay 3650 bones to rest</string>
+
+    <!-- Slayer -->
+    <string name="quest_combat_kills_1_name">Light Against Darkness I</string>
+    <string name="quest_combat_kills_1_objective">Overcome 100 adversaries</string>
+    <string name="quest_combat_kills_2_name">Light Against Darkness II</string>
+    <string name="quest_combat_kills_2_objective">Overcome 150 adversaries</string>
+    <string name="quest_combat_kills_3_name">Light Against Darkness III</string>
+    <string name="quest_combat_kills_3_objective">Overcome 200 adversaries</string>
+    <string name="quest_combat_kills_4_name">Light Against Darkness IV</string>
+    <string name="quest_combat_kills_4_objective">Overcome 300 adversaries</string>
+    <string name="quest_combat_kills_5_name">Light Against Darkness V</string>
+    <string name="quest_combat_kills_5_objective">Overcome 450 adversaries</string>
+    <string name="quest_combat_kills_6_name">Light Against Darkness VI</string>
+    <string name="quest_combat_kills_6_objective">Overcome 650 adversaries</string>
+    <string name="quest_slayer_1_name">Vigilance I</string>
+    <string name="quest_slayer_1_objective">Complete 5 Watch duties</string>
+    <string name="quest_slayer_2_name">Vigilance II</string>
+    <string name="quest_slayer_2_objective">Complete 15 Watch duties</string>
+    <string name="quest_slayer_3_name">Vigilance III</string>
+    <string name="quest_slayer_3_objective">Complete 40 Watch duties</string>
+    <string name="quest_slayer_4_name">Vigilance IV</string>
+    <string name="quest_slayer_4_objective">Complete 100 Watch duties</string>
+    <string name="quest_slayer_5_name">Vigilance V</string>
+    <string name="quest_slayer_5_objective">Complete 250 Watch duties</string>
+    <string name="quest_slayer_6_name">Vigilance VI</string>
+    <string name="quest_slayer_6_objective">Complete 500 Watch duties</string>
+
+    <!-- Dungeon exploration -->
+    <string name="quest_dungeon_farm_1_name">Path of Trials I</string>
+    <string name="quest_dungeon_farm_1_objective">Complete the Forecourt 5 times</string>
+    <string name="quest_dungeon_goblin_1_name">Path of Trials II</string>
+    <string name="quest_dungeon_goblin_1_objective">Complete the Cave of Envy 5 times</string>
+    <string name="quest_dungeon_spider_1_name">Path of Trials III</string>
+    <string name="quest_dungeon_spider_1_objective">Complete the Den of Lies 5 times</string>
+    <string name="quest_dungeon_bandit_1_name">Path of Trials IV</string>
+    <string name="quest_dungeon_bandit_1_objective">Complete the Profane Camp 5 times</string>
+    <string name="quest_dungeon_undead_1_name">Path of Trials V</string>
+    <string name="quest_dungeon_undead_1_objective">Complete the Crypt of the Sleepers 5 times</string>
+    <string name="quest_dungeon_fortress_1_name">Path of Trials VI</string>
+    <string name="quest_dungeon_fortress_1_objective">Complete the Ruins of the First Temple 5 times</string>
+    <string name="quest_dungeon_orc_1_name">Mastery of Trials I</string>
+    <string name="quest_dungeon_orc_1_objective">Complete the Stronghold of Brutes 5 times</string>
+    <string name="quest_dungeon_volcanic_1_name">Mastery of Trials II</string>
+    <string name="quest_dungeon_volcanic_1_objective">Complete the Depths of Wrath 5 times</string>
+    <string name="quest_dungeon_dragon_1_name">Mastery of Trials III</string>
+    <string name="quest_dungeon_dragon_1_objective">Complete the Lair of Tyranny 5 times</string>
+
+    <!-- Crafting -->
+    <string name="quest_crafting_1_name">Jewelcraft I</string>
+    <string name="quest_crafting_1_objective">Fashion 100 Silver Rings</string>
+    <string name="quest_crafting_2_name">Jewelcraft II</string>
+    <string name="quest_crafting_2_objective">Fashion 250 Gold Rings</string>
+    <string name="quest_crafting_3_name">Jewelcraft III</string>
+    <string name="quest_crafting_3_objective">Fashion 500 Platinum Rings</string>
+    <string name="quest_crafting_4_name">Jewelcraft IV</string>
+    <string name="quest_crafting_4_objective">Fashion 750 Silver Sapphire Rings</string>
+    <string name="quest_crafting_5_name">Jewelcraft V</string>
+    <string name="quest_crafting_5_objective">Fashion 1000 Gold Sapphire Rings</string>
+    <string name="quest_crafting_6_name">Jewelcraft VI</string>
+    <string name="quest_crafting_6_objective">Fashion 1500 Platinum Diamond Rings</string>
+
+    <!-- Monster slayer chains -->
+    <string name="quest_goblin_slayer_1_name">Bane of Envy I</string>
+    <string name="quest_goblin_slayer_1_objective">Overcome 50 Petty Envies</string>
+    <string name="quest_goblin_slayer_2_name">Bane of Envy II</string>
+    <string name="quest_goblin_slayer_2_objective">Overcome 100 Petty Envies</string>
+    <string name="quest_spider_slayer_1_name">Bane of Lies I</string>
+    <string name="quest_spider_slayer_1_objective">Overcome 40 Weavers of Lies</string>
+    <string name="quest_spider_slayer_2_name">Bane of Lies II</string>
+    <string name="quest_spider_slayer_2_objective">Overcome 80 Weavers of Lies</string>
+    <string name="quest_skeleton_slayer_1_name">Rest for the Restless I</string>
+    <string name="quest_skeleton_slayer_1_objective">Lay 35 Restless Skeletons to rest</string>
+    <string name="quest_skeleton_slayer_2_name">Rest for the Restless II</string>
+    <string name="quest_skeleton_slayer_2_objective">Lay 70 Restless Skeletons to rest</string>
+    <string name="quest_bandit_hunter_1_name">Guard of the Threshold I</string>
+    <string name="quest_bandit_hunter_1_objective">Overcome 30 Profane Thieves</string>
+    <string name="quest_bandit_hunter_2_name">Guard of the Threshold II</string>
+    <string name="quest_bandit_hunter_2_objective">Overcome 60 Profane Thieves</string>
+    <string name="quest_orc_slayer_1_name">Bane of Brutes I</string>
+    <string name="quest_orc_slayer_1_objective">Overcome 25 Brutes</string>
+    <string name="quest_orc_slayer_2_name">Bane of Brutes II</string>
+    <string name="quest_orc_slayer_2_objective">Overcome 50 Brutes</string>
+    <string name="quest_demon_slayer_1_name">Victory over Vice I</string>
+    <string name="quest_demon_slayer_1_objective">Overcome the Lord of Vices</string>
+    <string name="quest_demon_slayer_2_name">Victory over Vice II</string>
+    <string name="quest_demon_slayer_2_objective">Overcome the Lord of Vices 5 times</string>
+    <string name="quest_demon_slayer_3_name">Victory over Vice III</string>
+    <string name="quest_demon_slayer_3_objective">Overcome the Lord of Vices 25 times</string>
+    <string name="quest_dragon_slayer_1_name">Bane of the Green Dragon I</string>
+    <string name="quest_dragon_slayer_1_objective">Overcome 10 Green Dragons of Envy</string>
+    <string name="quest_dragon_slayer_2_name">Bane of the Green Dragon II</string>
+    <string name="quest_dragon_slayer_2_objective">Overcome 25 Green Dragons of Envy</string>
+
+    <!-- Combat style challenges -->
+    <string name="quest_melee_warrior_1_name">Way of the Gavel I</string>
+    <string name="quest_melee_warrior_1_objective">Complete the Cave of Envy using only the Gavel</string>
+    <string name="quest_melee_warrior_2_name">Way of the Gavel II</string>
+    <string name="quest_melee_warrior_2_objective">Complete the Profane Camp using only the Gavel</string>
+    <string name="quest_melee_warrior_3_name">Way of the Gavel III</string>
+    <string name="quest_melee_warrior_3_objective">Complete the Ruins of the First Temple using only the Gavel</string>
+    <string name="quest_ranger_elite_1_name">Way of Eloquence I</string>
+    <string name="quest_ranger_elite_1_objective">Complete the Cave of Envy using only Eloquence</string>
+    <string name="quest_ranger_elite_2_name">Way of Eloquence II</string>
+    <string name="quest_ranger_elite_2_objective">Complete the Profane Camp using only Eloquence</string>
+    <string name="quest_ranger_elite_3_name">Way of Eloquence III</string>
+    <string name="quest_ranger_elite_3_objective">Complete the Ruins of the First Temple using only Eloquence</string>
+    <string name="quest_mage_master_1_name">Way of Symbols I</string>
+    <string name="quest_mage_master_1_objective">Complete the Cave of Envy using only Symbols</string>
+    <string name="quest_mage_master_2_name">Way of Symbols II</string>
+    <string name="quest_mage_master_2_objective">Complete the Profane Camp using only Symbols</string>
+    <string name="quest_mage_master_3_name">Way of Symbols III</string>
+    <string name="quest_mage_master_3_objective">Complete the Ruins of the First Temple using only Symbols</string>
+
+    <!-- Iron Stomach (no food) challenges -->
+    <string name="quest_iron_stomach_1_name">Vow of Fasting I</string>
+    <string name="quest_iron_stomach_1_objective">Complete the Den of Lies without eating any food</string>
+    <string name="quest_iron_stomach_2_name">Vow of Fasting II</string>
+    <string name="quest_iron_stomach_2_objective">Complete the Crypt of the Sleepers without eating any food</string>
+    <string name="quest_iron_stomach_3_name">Vow of Fasting III</string>
+    <string name="quest_iron_stomach_3_objective">Complete the Stronghold of Brutes without eating any food</string>
+    <string name="quest_iron_stomach_4_name">Vow of Fasting IV</string>
+    <string name="quest_iron_stomach_4_objective">Complete the Lair of Tyranny without eating any food</string>
+
+    <!-- Treasure Hunter -->
+    <string name="quest_treasure_hunter_1_name">Gatherer of Relics I</string>
+    <string name="quest_treasure_hunter_1_objective">Collect 20 Weaver\'s Silk from trials</string>
+    <string name="quest_treasure_hunter_2_name">Gatherer of Relics II</string>
+    <string name="quest_treasure_hunter_2_objective">Collect 10 Envy\'s Mail from trials</string>
+    <string name="quest_treasure_hunter_3_name">Gatherer of Relics III</string>
+    <string name="quest_treasure_hunter_3_objective">Collect 5 Horns of Vice from trials</string>
+    <string name="quest_treasure_hunter_4_name">Gatherer of Relics IV</string>
+    <string name="quest_treasure_hunter_4_objective">Collect 3 Dragon Scales from trials</string>
+
+    <!-- Firemaking -->
+    <string name="quest_firemaking_1_name">Illumination I</string>
+    <string name="quest_firemaking_1_objective">Kindle 500 Logs</string>
+    <string name="quest_firemaking_2_name">Illumination II</string>
+    <string name="quest_firemaking_2_objective">Kindle 750 Oak Logs</string>
+    <string name="quest_firemaking_3_name">Illumination III</string>
+    <string name="quest_firemaking_3_objective">Kindle 1100 Olive Logs</string>
+    <string name="quest_firemaking_4_name">Illumination IV</string>
+    <string name="quest_firemaking_4_objective">Kindle 1650 Acacia Logs</string>
+    <string name="quest_firemaking_5_name">Illumination V</string>
+    <string name="quest_firemaking_5_objective">Kindle 2450 Cypress Logs</string>
+    <string name="quest_firemaking_6_name">Illumination VI</string>
+    <string name="quest_firemaking_6_objective">Kindle 3650 Cedar Logs</string>
+
+    <!-- Runecrafting -->
+    <string name="quest_runecrafting_1_name">Symbolism I</string>
+    <string name="quest_runecrafting_1_objective">Trace 500 Air Symbols</string>
+    <string name="quest_runecrafting_2_name">Symbolism II</string>
+    <string name="quest_runecrafting_2_objective">Trace 750 Water Symbols</string>
+    <string name="quest_runecrafting_3_name">Symbolism III</string>
+    <string name="quest_runecrafting_3_objective">Trace 1100 Earth Symbols</string>
+    <string name="quest_runecrafting_4_name">Symbolism IV</string>
+    <string name="quest_runecrafting_4_objective">Trace 1650 Fire Symbols</string>
+    <string name="quest_runecrafting_5_name">Symbolism V</string>
+    <string name="quest_runecrafting_5_objective">Trace 2450 Salt Symbols</string>
+    <string name="quest_runecrafting_6_name">Symbolism VI</string>
+    <string name="quest_runecrafting_6_objective">Trace 3650 Sulfur Symbols</string>
+
+    <!-- Herblore -->
+    <string name="quest_herblore_1_name">Alchemy I</string>
+    <string name="quest_herblore_1_objective">Brew 100 Infusions of Rigor</string>
+    <string name="quest_herblore_2_name">Alchemy II</string>
+    <string name="quest_herblore_2_objective">Mix 250 Elixirs of Temperance</string>
+    <string name="quest_herblore_3_name">Alchemy III</string>
+    <string name="quest_herblore_3_objective">Mix 500 Elixirs of Strength</string>
+    <string name="quest_herblore_4_name">Alchemy IV</string>
+    <string name="quest_herblore_4_objective">Mix 750 Elixirs of Eloquence</string>
+    <string name="quest_herblore_5_name">Alchemy V</string>
+    <string name="quest_herblore_5_objective">Mix 1000 Elixirs of Wisdom</string>
+    <string name="quest_herblore_6_name">Alchemy VI</string>
+    <string name="quest_herblore_6_objective">Mix 1500 Super Elixirs of Strength</string>
+
+    <!-- Construction -->
+    <string name="quest_construction_1_name">Architecture I</string>
+    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string>
+    <string name="quest_construction_2_name">Architecture II</string>
+    <string name="quest_construction_2_objective">Build 50 Oak Tables</string>
+    <string name="quest_construction_3_name">Architecture III</string>
+    <string name="quest_construction_3_objective">Build 50 Olive Cabinets</string>
+    <string name="quest_construction_4_name">Architecture IV</string>
+    <string name="quest_construction_4_objective">Build 50 Acacia Dressers</string>
+    <string name="quest_construction_5_name">Architecture V</string>
+    <string name="quest_construction_5_objective">Build 25 Cedar Thrones</string>
+    <string name="quest_construction_upgrade_inn_name">Renovate the Banquet Hall</string>
+    <string name="quest_construction_upgrade_inn_objective">Upgrade the Banquet Hall at least once</string>
+    <string name="quest_construction_upgrade_guild_name">Expand the House of Lodges</string>
+    <string name="quest_construction_upgrade_guild_objective">Upgrade the House of Lodges at least once</string>
+    <string name="quest_construction_upgrade_church_name">Restore the Chamber of Reflection</string>
+    <string name="quest_construction_upgrade_church_objective">Upgrade the Chamber of Reflection at least once</string>
+
+    <!-- Thieving -->
+    <string name="quest_thieving_1_name">Charity I</string>
+    <string name="quest_thieving_1_objective">Collect alms from Apprentices 100 times</string>
+    <string name="quest_thieving_2_name">Charity II</string>
+    <string name="quest_thieving_2_objective">Collect alms from Fellowcrafts 100 times</string>
+    <string name="quest_thieving_3_name">Charity III</string>
+    <string name="quest_thieving_3_objective">Collect alms from the Secretary 100 times</string>
+    <string name="quest_thieving_4_name">Charity IV</string>
+    <string name="quest_thieving_4_objective">Receive 5 Gold Pendants for the Widow\'s Box</string>
+    <string name="quest_thieving_5_name">Charity V</string>
+    <string name="quest_thieving_5_objective">Collect alms from the Worshipful Master 50 times</string>
+
+    <!-- Slayer extended -->
+    <string name="quest_combat_kills_7_name">Light Against Darkness VII</string>
+    <string name="quest_combat_kills_7_objective">Overcome 1000 adversaries</string>
+    <string name="quest_combat_kills_8_name">Light Against Darkness VIII</string>
+    <string name="quest_combat_kills_8_objective">Overcome 1500 adversaries</string>
+    <string name="quest_combat_kills_9_name">Light Against Darkness IX</string>
+    <string name="quest_combat_kills_9_objective">Overcome 2250 adversaries</string>
+    <string name="quest_combat_kills_10_name">Light Against Darkness X</string>
+    <string name="quest_combat_kills_10_objective">Overcome 3400 adversaries</string>
+    <string name="quest_combat_kills_11_name">Light Against Darkness XI</string>
+    <string name="quest_combat_kills_11_objective">Overcome 5100 adversaries</string>
+    <string name="quest_combat_kills_12_name">Light Against Darkness XII</string>
+    <string name="quest_combat_kills_12_objective">Overcome 7650 adversaries</string>
+
+    <!-- New monster slayer chains -->
+    <string name="quest_zombie_slayer_1_name">Awakening I</string>
+    <string name="quest_zombie_slayer_1_objective">Overcome 35 Sleepwalkers</string>
+    <string name="quest_zombie_slayer_2_name">Awakening II</string>
+    <string name="quest_zombie_slayer_2_objective">Overcome 70 Sleepwalkers</string>
+    <string name="quest_hellhound_slayer_1_name">Calming Wrath I</string>
+    <string name="quest_hellhound_slayer_1_objective">Overcome 25 Hounds of Wrath</string>
+    <string name="quest_hellhound_slayer_2_name">Calming Wrath II</string>
+    <string name="quest_hellhound_slayer_2_objective">Overcome 50 Hounds of Wrath</string>
+    <string name="quest_troll_slayer_1_name">Humility I</string>
+    <string name="quest_troll_slayer_1_objective">Overcome 20 Mountains of Pride</string>
+    <string name="quest_troll_slayer_2_name">Humility II</string>
+    <string name="quest_troll_slayer_2_objective">Overcome 40 Mountains of Pride</string>
+    <string name="quest_fire_giant_slayer_1_name">Mastering Fury I</string>
+    <string name="quest_fire_giant_slayer_1_objective">Overcome 15 Giants of Fury</string>
+    <string name="quest_fire_giant_slayer_2_name">Mastering Fury II</string>
+    <string name="quest_fire_giant_slayer_2_objective">Overcome 30 Giants of Fury</string>
+    <string name="quest_ancient_guardian_slayer_1_name">Trial of the Guardians I</string>
+    <string name="quest_ancient_guardian_slayer_1_objective">Overcome 10 Ancient Guardians</string>
+    <string name="quest_ancient_guardian_slayer_2_name">Trial of the Guardians II</string>
+    <string name="quest_ancient_guardian_slayer_2_objective">Overcome 20 Ancient Guardians</string>
+    <string name="quest_lich_slayer_1_name">Free Inquiry I</string>
+    <string name="quest_lich_slayer_1_objective">Overcome 10 Liches of Dogma</string>
+    <string name="quest_lich_slayer_2_name">Free Inquiry II</string>
+    <string name="quest_lich_slayer_2_objective">Overcome 20 Liches of Dogma</string>
+
+    <!-- Dungeon exploration extended -->
+    <string name="quest_dungeon_imp_1_name">Path of Trials VII</string>
+    <string name="quest_dungeon_imp_1_objective">Complete the Cavern of Mischief 5 times</string>
+    <string name="quest_dungeon_infernal_1_name">Mastery of Trials IV</string>
+    <string name="quest_dungeon_infernal_1_objective">Complete the Citadel of Vices 5 times</string>
+    <string name="quest_dungeon_ancient_1_name">Mastery of Trials V</string>
+    <string name="quest_dungeon_ancient_1_objective">Complete the Ancient Temple 5 times</string>
+
+    <!-- Boss extended -->
+    <string name="quest_kbd_slayer_1_objective">Overcome the Black Dragon of Tyranny</string>
+    <string name="quest_kbd_slayer_2_objective">Overcome the Black Dragon of Tyranny 5 times</string>
+    <string name="quest_kbd_slayer_3_objective">Overcome the Black Dragon of Tyranny 25 times</string>
+    <string name="quest_kbd_slayer_4_name">Bane of Tyranny IV</string>
+    <string name="quest_kbd_slayer_4_objective">Overcome the Black Dragon of Tyranny 50 times</string>
+    <string name="quest_demon_slayer_4_name">Victory over Vice IV</string>
+    <string name="quest_demon_slayer_4_objective">Overcome the Lord of Vices 50 times</string>
+    <string name="quest_kraken_killer_1_name">Ordo ab Chao I</string>
+    <string name="quest_kraken_killer_1_objective">Overcome the Kraken of Chaos</string>
+    <string name="quest_kraken_killer_2_name">Ordo ab Chao II</string>
+    <string name="quest_kraken_killer_2_objective">Overcome the Kraken of Chaos 5 times</string>
+    <string name="quest_kraken_killer_3_name">Ordo ab Chao III</string>
+    <string name="quest_kraken_killer_3_objective">Overcome the Kraken of Chaos 25 times</string>
+    <string name="quest_kraken_killer_4_name">Ordo ab Chao IV</string>
+    <string name="quest_kraken_killer_4_objective">Overcome the Kraken of Chaos 50 times</string>
+    <string name="quest_balrog_bane_1_name">Bane of Fanaticism I</string>
+    <string name="quest_balrog_bane_1_objective">Overcome the Ember of Fanaticism</string>
+    <string name="quest_balrog_bane_2_name">Bane of Fanaticism II</string>
+    <string name="quest_balrog_bane_2_objective">Overcome the Ember of Fanaticism 5 times</string>
+    <string name="quest_balrog_bane_3_name">Bane of Fanaticism III</string>
+    <string name="quest_balrog_bane_3_objective">Overcome the Ember of Fanaticism 25 times</string>
+    <string name="quest_balrog_bane_4_name">Bane of Fanaticism IV</string>
+    <string name="quest_balrog_bane_4_objective">Overcome the Ember of Fanaticism 50 times</string>
+    <string name="quest_sovereign_slayer_1_name">Let There Be Light I</string>
+    <string name="quest_sovereign_slayer_1_objective">Overcome the Sovereign of Darkness</string>
+    <string name="quest_sovereign_slayer_2_name">Let There Be Light II</string>
+    <string name="quest_sovereign_slayer_2_objective">Overcome the Sovereign of Darkness 5 times</string>
+    <string name="quest_sovereign_slayer_3_name">Let There Be Light III</string>
+    <string name="quest_sovereign_slayer_3_objective">Overcome the Sovereign of Darkness 25 times</string>
+    <string name="quest_sovereign_slayer_4_name">Let There Be Light IV</string>
+    <string name="quest_sovereign_slayer_4_objective">Overcome the Sovereign of Darkness 50 times</string>
+
+    <!-- Combat style challenges extended -->
+    <string name="quest_melee_warrior_4_name">Way of the Gavel IV</string>
+    <string name="quest_melee_warrior_4_objective">Complete the Stronghold of Brutes using only the Gavel</string>
+    <string name="quest_melee_warrior_5_name">Way of the Gavel V</string>
+    <string name="quest_melee_warrior_5_objective">Complete the Lair of Tyranny using only the Gavel</string>
+    <string name="quest_ranger_elite_4_name">Way of Eloquence IV</string>
+    <string name="quest_ranger_elite_4_objective">Complete the Stronghold of Brutes using only Eloquence</string>
+    <string name="quest_ranger_elite_5_name">Way of Eloquence V</string>
+    <string name="quest_ranger_elite_5_objective">Complete the Lair of Tyranny using only Eloquence</string>
+    <string name="quest_mage_master_4_name">Way of Symbols IV</string>
+    <string name="quest_mage_master_4_objective">Complete the Stronghold of Brutes using only Symbols</string>
+    <string name="quest_mage_master_5_name">Way of Symbols V</string>
+    <string name="quest_mage_master_5_objective">Complete the Lair of Tyranny using only Symbols</string>
+
+    <!-- Iron Stomach extended -->
+    <string name="quest_iron_stomach_5_name">Vow of Fasting V</string>
+    <string name="quest_iron_stomach_5_objective">Complete the Citadel of Vices without eating any food</string>
+    <string name="quest_iron_stomach_6_name">Vow of Fasting VI</string>
+    <string name="quest_iron_stomach_6_objective">Complete the Ancient Temple without eating any food</string>
+
+    <!-- Treasure Hunter extended -->
+    <string name="quest_treasure_hunter_5_name">Gatherer of Relics V</string>
+    <string name="quest_treasure_hunter_5_objective">Collect 10 Fangs of Wrath from trials</string>
+    <string name="quest_treasure_hunter_6_name">Gatherer of Relics VI</string>
+    <string name="quest_treasure_hunter_6_objective">Collect 15 Bones of Pride from trials</string>
+
+    <!-- Daily quest verbs -->
+    <string name="daily_verb_mining">Quarry</string>
+    <string name="daily_verb_fishing">Gather</string>
+    <string name="daily_verb_woodcutting">Chop</string>
+    <string name="daily_verb_smithing">Cast</string>
+    <string name="daily_verb_cooking">Cook</string>
+    <string name="daily_verb_combat">Overcome</string>
+
+    <!-- Daily quest names -->
+    <string name="quest_daily_mine_iron_name">Iron Vein</string>
+    <string name="quest_daily_mine_coal_name">Coal for the Furnace</string>
+    <string name="quest_daily_mine_mithril_name">Orichalcum Prospecting</string>
+    <string name="quest_daily_mine_runite_name">Shamir Rush</string>
+    <string name="quest_daily_fish_salmon_name">Fish Market at Dawn</string>
+    <string name="quest_daily_fish_lobster_name">Honey and Flour</string>
+    <string name="quest_daily_fish_swordfish_name">Poultry Market</string>
+    <string name="quest_daily_fish_shark_name">Manna and Quails</string>
+    <string name="quest_daily_wc_oak_name">Oak Felling</string>
+    <string name="quest_daily_wc_willow_name">Olive Grove Work</string>
+    <string name="quest_daily_wc_yew_name">Cypress Felling</string>
+    <string name="quest_daily_wc_magic_name">Cedars of Lebanon</string>
+    <string name="quest_daily_smith_iron_name">Iron Casting</string>
+    <string name="quest_daily_smith_mithril_name">Orichalcum Casting</string>
+    <string name="quest_daily_smith_adamantite_name">Art of Electrum</string>
+    <string name="quest_daily_smith_runite_name">Shamir Smelting</string>
+    <string name="quest_daily_cook_trout_name">Broth for the Agapes</string>
+    <string name="quest_daily_cook_salmon_name">Roast Bream</string>
+    <string name="quest_daily_cook_lobster_name">Feast of Honey</string>
+    <string name="quest_daily_cook_swordfish_name">Fowl Banquet</string>
+    <string name="quest_daily_kill_goblin_name">Taming Envy</string>
+    <string name="quest_daily_kill_bandit_name">Guarding the Threshold</string>
+    <string name="quest_daily_kill_demon_name">Facing Vice</string>
+    <string name="quest_daily_kill_dragon_name">Facing the Dragon</string>
+
+    <!-- Daily quest objectives — override the generated verb+item text, whose item names
+         read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
+    <string name="quest_daily_mine_iron_objective">Quarry 150 iron ore.</string>
+    <string name="quest_daily_mine_coal_objective">Quarry 300 coal.</string>
+    <string name="quest_daily_mine_mithril_objective">Quarry 50 orichalcum ore.</string>
+    <string name="quest_daily_mine_runite_objective">Quarry 20 shamir ore.</string>
+    <string name="quest_daily_fish_salmon_objective">Gather 120 sea bream.</string>
+    <string name="quest_daily_fish_lobster_objective">Gather 60 measures of honey and flour.</string>
+    <string name="quest_daily_fish_swordfish_objective">Gather 30 fatted fowl.</string>
+    <string name="quest_daily_fish_shark_objective">Gather 15 desert quails.</string>
+    <string name="quest_daily_wc_oak_objective">Chop 100 oak logs.</string>
+    <string name="quest_daily_wc_willow_objective">Chop 70 olive logs.</string>
+    <string name="quest_daily_wc_yew_objective">Chop 25 cypress logs.</string>
+    <string name="quest_daily_wc_magic_objective">Chop 10 cedar logs.</string>
+    <string name="quest_daily_smith_iron_objective">Cast 40 iron ingots.</string>
+    <string name="quest_daily_smith_mithril_objective">Cast 15 orichalcum ingots.</string>
+    <string name="quest_daily_smith_adamantite_objective">Cast 10 electrum ingots.</string>
+    <string name="quest_daily_smith_runite_objective">Cast 5 shamir ingots.</string>
+    <string name="quest_daily_cook_trout_objective">Prepare 100 vegetable broths for the agapes.</string>
+    <string name="quest_daily_cook_salmon_objective">Roast 80 sea bream for the agapes.</string>
+    <string name="quest_daily_cook_lobster_objective">Bake 40 honey cakes for the agapes.</string>
+    <string name="quest_daily_cook_swordfish_objective">Roast 20 fowl for the agapes.</string>
+    <string name="quest_daily_kill_goblin_objective">Overcome 80 Petty Envies.</string>
+    <string name="quest_daily_kill_bandit_objective">Overcome 50 Profane Thieves.</string>
+    <string name="quest_daily_kill_demon_objective">Overcome 20 Lesser Vices.</string>
+    <string name="quest_daily_kill_dragon_objective">Overcome 10 Green Dragons of Envy.</string>
+
+    <!-- Quest objective verb strings for craft skills -->
+    <string name="daily_verb_crafting">Fashion</string>
+    <string name="daily_verb_firemaking">Kindle</string>
+    <string name="daily_verb_fletching">Write</string>
+    <string name="daily_verb_herblore">Brew</string>
+    <string name="daily_verb_runecrafting">Trace</string>
+    <string name="daily_verb_prayer">Inter</string>
+    <string name="daily_verb_construction">Build</string>
+    <string name="daily_verb_farming">Harvest</string>
+
+    <!-- Quest objective format strings -->
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
+    <string name="quest_obj_prayer">Lay %1$d bones of any kind to rest</string>
+    <string name="quest_obj_kill">Overcome %1$d adversaries</string>
+    <string name="quest_obj_kill_enemy">Overcome %1$d %2$s</string>
+    <string name="quest_obj_dungeon">Complete %1$s %2$d times</string>
+    <string name="quest_obj_dungeon_once">Complete %1$s</string>
+    <string name="quest_obj_boss">Overcome %1$s %2$d times</string>
+    <string name="quest_obj_boss_once">Overcome %1$s</string>
+    <string name="quest_obj_dungeon_melee_only">Complete %1$s using only the Gavel</string>
+    <string name="quest_obj_dungeon_ranged_only">Complete %1$s using only Eloquence</string>
+    <string name="quest_obj_dungeon_magic_only">Complete %1$s using only Symbols</string>
+    <string name="quest_obj_dungeon_no_food">Complete %1$s without eating any food</string>
+    <string name="quest_obj_collect">Collect %1$d %2$s from trials</string>
+    <string name="quest_obj_slayer_task">Complete %1$d Watch duties</string>
+
+    <string name="skilling_dungeon_shattered_spire_note_1">Charred stone and melted glass for a hundred metres in every direction. The pillar that stood here did not fall — it was torn apart.</string>
+    <string name="skilling_dungeon_shattered_spire_note_2">A torn page from an adept\'s journal: \'The Great Work exceeds all projections. Wisdom can wait. We must press on.\'</string>
+    <string name="skilling_dungeon_shattered_spire_note_3">Hermetic diagrams etched into the surviving stones — a circle of protection, poorly squared, clearly overstressed.</string>
+    <string name="skilling_dungeon_shattered_spire_note_4">A passage has been blasted open downward. Automatons still move in the dark below, following old instructions.</string>
+    <string name="skilling_dungeon_shattered_spire_note_5">The passage descends into intact chambers beneath the rubble. The Ruins of the Hermetic School still function, after a fashion.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_1">Like ignorance itself, the water here has no bottom. Strange lights pulse from impossible depths.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_2">Fish pulled from the deep glow faintly and dissolve within minutes. What fed on them?</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_3">A torn map marks this lagoon with a single word: \'DO NOT FISH.\' The hand that wrote it was trembling.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_4">Something rises to the surface and sinks again. Massive. Ancient. Curious.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_5">The dark water parts. The Abyssal Ruins loom below — vast, alien, and older than any temple raised by human hands.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_1">Two stone pillars rise from the grotto floor like a drowned echo of Jakin and Boaz, carved with script no living scholar can read.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_2">The fish scatter without warning — something large passes below.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_3">A waterlogged journal drifts by: \'The temple they found beneath the water was not abandoned. It was waiting.\'</string>
+    <string name="skilling_dungeon_sunken_grotto_note_4">A submerged archway pulses with faint ancient light, its keystone still in place. The current pulls toward it.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_5">The archway is clear. The Drowned Temple lies beyond — something old keeps watch within.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_1">Ancient walls carved with masons\' marks pulse faintly. The operative masons who cut this place are long gone.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_2">A colossal forge stands at the passage end, its fires somehow still burning after centuries — fires that once cast bronze for the Temple.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_3">Iron golems stand dormant in the alcoves. Their eyes flicker as you quarry nearby.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_4">The marks around the forge are a warning — something was bound here, and it grows restless.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_5">The golems rise fully to life. Hiram\'s Forge awakens — its guardians await those brave enough to enter.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_1">The trees here bleed shadow where cut. The wood writhes and resists the axe.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_2">A shadow beast watches from the canopy. It does not attack — it only observes.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_3">Old sanctum stones show through the twisted trunks, their sacred marks scratched out. Something still lives there.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_4">The corruption spreads as you work. The canopy hungers for the light it has lost.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_5">The canopy parts. The Defiled Sanctum rises from the shadow-wood — its doors open, waiting.</string>
+    <string name="skilling_dungeon_whispering_grove_note_1">The acacias here whisper in a language older than any known tongue. Some say they remember where the Master was laid.</string>
+    <string name="skilling_dungeon_whispering_grove_note_2">Stone foundations visible beneath the roots — the remains of a lodge built long before the forest.</string>
+    <string name="skilling_dungeon_whispering_grove_note_3">A hermit\'s warning carved in bark: \'The clearing at the grove\'s heart is not what it was. Stay away.\'</string>
+    <string name="skilling_dungeon_whispering_grove_note_4">Corrupted vines reach toward you as you chop. The grove resists your presence.</string>
+    <string name="skilling_dungeon_whispering_grove_note_5">A gap in the canopy reveals ruins at the grove\'s heart. The Ruins of the Cedar Forest call to be explored.</string>
+    <string name="skilling_dungeon_thieves_den_note_1">A crumpled ledger page: names, dates, and sums. Someone has been tracking bribes paid to a figure called the Warden.</string>
+    <string name="skilling_dungeon_thieves_den_note_2">Scratched into the wall: \'For those who prove themselves — the Sanctum awaits. No oath, no questions.\'</string>
+    <string name="skilling_dungeon_thieves_den_note_3">A torn letter warning a member to stay away from the eastern tunnels. No reason is given.</string>
+    <string name="skilling_dungeon_thieves_den_note_4">A wax-sealed map fragment. The seal is a crude forgery of a square and compasses, set crooked.</string>
+    <string name="skilling_dungeon_thieves_den_note_5">The last passage opens into a vaulted chamber. At the far end, a reinforced door bears the same false seal. The Sanctum of False Brothers lies beyond.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_1">Fresh rope marks on the windowsills. Someone climbs this tower of confused tongues regularly.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_2">A hidden cache inside a cracked wall: lockpicks, a short blade, and a coded ledger.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_3">The ledger is a tally of stolen goods and split payments. The ruffians operate out of somewhere beneath the hill.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_4">A trapdoor in the floor, recently oiled, its hinges silent. Worn boot prints surround it.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_5">The trapdoor opens onto a carved stairway going deep into the earth. The Den of Shadows waits below.</string>
+    <string name="skilling_dungeon_copper_caverns_note_1">Scratches mark the gallery walls, too deep and wide for any pick.</string>
+    <string name="skilling_dungeon_copper_caverns_note_2">Old quarrying tools, twisted and bent. Whatever was here left in a hurry.</string>
+    <string name="skilling_dungeon_copper_caverns_note_3">A quarryman\'s torn note: \'We broke through to something below. The overseer sealed the lower shaft. He won\'t say why.\'</string>
+    <string name="skilling_dungeon_copper_caverns_note_4">Tremors from below. Dust falls from the ceiling in slow waves. Something stirs.</string>
+    <string name="skilling_dungeon_copper_caverns_note_5">The sealed shaft gives way. A vast cavern opens beneath — the Collapsed Quarry lies ahead.</string>
+    <string name="skilling_dungeon_shadow_vault_note_1">A dossier on every Master Builder in the City. Someone has been watching the workshops for years.</string>
+    <string name="skilling_dungeon_shadow_vault_note_2">A vault door, partially ajar. Inside — crates of stolen tools, aprons, and sealed scroll cases.</string>
+    <string name="skilling_dungeon_shadow_vault_note_3">One scroll case is different from the others. It bears the seal of the Temple works. It is empty.</string>
+    <string name="skilling_dungeon_shadow_vault_note_4">A private journal: \'The Conspiracy does not seek the Light. It seeks the Master\'s Word — taken by force, never earned.\'</string>
+    <string name="skilling_dungeon_shadow_vault_note_5">The deepest vault is not locked. It is guarded. What waits inside is the Conspiracy\'s darkest secret — and its most dangerous protectors.</string>
+</resources>

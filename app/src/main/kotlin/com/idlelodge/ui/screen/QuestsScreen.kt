@@ -1,0 +1,771 @@
+package com.idlelodge.ui.screen
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.Switch
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import com.idlelodge.BuildConfig
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import android.content.Context
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import com.idlelodge.R
+import com.idlelodge.data.json.DailyQuestTemplate
+import com.idlelodge.data.json.QuestData
+import com.idlelodge.repository.DailyQuestWithProgress
+import com.idlelodge.ui.viewmodel.QuestWithProgress
+import com.idlelodge.ui.viewmodel.QuestsViewModel
+import com.idlelodge.repository.WeeklyQuestWithProgress
+import com.idlelodge.util.GameStrings
+import com.idlelodge.util.formatCoins
+import com.idlelodge.util.formatXp
+import com.idlelodge.util.toClockTime
+
+private val TAB_GROUPS = listOf("Daily", "Weekly", "Gathering", "Crafting", "Combat", "Special")
+
+@Composable
+private fun tabGroupLabel(group: String): String = when (group) {
+    "Gathering" -> stringResource(R.string.label_gathering_skills)
+    "Crafting"  -> stringResource(R.string.label_crafting_skills)
+    "Combat"    -> stringResource(R.string.label_combat)
+    "Special"   -> stringResource(R.string.label_special)
+    "Daily"     -> stringResource(R.string.label_daily)
+    "Weekly"    -> stringResource(R.string.label_weekly)
+    else        -> group
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun QuestsScreen(
+    viewModel: QuestsViewModel = hiltViewModel(),
+    isleLocationVm: com.idlelodge.ui.viewmodel.ElderIsleLocationViewModel = hiltViewModel(),
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val isleState by isleLocationVm.state.collectAsState()
+    if (isleState.onElderIsle) {
+        // On isle, Quests tab renders as "Lore" — the four-act story.
+        ElderIsleQuestsScreen(isleLocationVm = isleLocationVm)
+        return
+    }
+    val state by viewModel.uiState.collectAsState()
+
+    AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.nav_quests)) },
+                actions = {
+                    Row(
+                        modifier = Modifier
+                            .clickable { viewModel.toggleHideCompleted() }
+                            .padding(end = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text  = stringResource(R.string.label_hide_completed),
+                            style = MaterialTheme.typography.labelSmall,
+                        )
+                        Spacer(Modifier.width(4.dp))
+                        Switch(
+                            checked = state.hideCompleted,
+                            onCheckedChange = { viewModel.toggleHideCompleted() },
+                        )
+                    }
+                },
+            )
+        },
+    ) { padding ->
+        if (state.isLoading) {
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+            return@Scaffold
+        }
+
+        val tabGroups = if (state.hideCompleted) {
+            TAB_GROUPS.filter { it == "Daily" || it == "Weekly" || !state.questsByGroup[it].isNullOrEmpty() }
+        } else TAB_GROUPS
+        var savedPage by rememberSaveable { mutableIntStateOf(0) }
+        val pagerState = rememberPagerState(
+            initialPage = savedPage.coerceAtMost(tabGroups.lastIndex),
+            pageCount   = { tabGroups.size },
+        )
+        LaunchedEffect(Unit) {
+            if (pagerState.currentPage != savedPage) pagerState.scrollToPage(savedPage)
+        }
+        LaunchedEffect(pagerState.currentPage) { savedPage = pagerState.currentPage }
+        val scope = rememberCoroutineScope()
+
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(padding),
+        ) {
+            ScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 0.dp) {
+                tabGroups.forEachIndexed { index, group ->
+                    val claimableInGroup = if (group == "Daily") {
+                        state.dailyQuests.count { it.progress >= it.template.amount && !it.claimed }
+                    } else if (group == "Weekly") {
+                        state.weeklyQuests.count { it.progress >= it.template.amount && !it.claimed }
+                    } else {
+                        (state.questsByGroup[group] ?: emptyList()).count { it.isClaimable }
+                    }
+                    Tab(
+                        selected = pagerState.currentPage == index,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(index) } },
+                        text = {
+                            val baseLabel = tabGroupLabel(group)
+                            val label = if (claimableInGroup > 0) "$baseLabel ($claimableInGroup)" else baseLabel
+                            Text(
+                                text  = label,
+                                style = MaterialTheme.typography.labelMedium,
+                            )
+                        },
+                    )
+                }
+            }
+
+            HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+                val currentGroup = tabGroups[page]
+                if (currentGroup == "Daily") {
+                    DailyQuestsContent(
+                        quests         = state.dailyQuests,
+                        nextReset      = state.nextDailyReset,
+                        hideCompleted       = state.hideCompleted,
+                        dropDenominator = state.dwarvenDropDenominator,
+                        dropIsDivine    = state.dailyDropIsDivine,
+                        onClaimQuest   = { viewModel.claimDailyQuest(it) },
+                        onNavigateToSkill = onNavigateToSkill,
+                    )
+                } else if (currentGroup == "Weekly") {
+                    WeeklyQuestsContent(
+                        quests        = state.weeklyQuests,
+                        nextReset     = state.nextWeeklyReset,
+                        hideCompleted       = state.hideCompleted,
+                        weeklyBonusClaimed  = state.weeklyBonusClaimed,
+                        divineDropChance    = state.divineDropChance,
+                        onClaimQuest  = { viewModel.claimWeeklyQuest(it) },
+                        onClaimBonus  = { viewModel.claimWeeklyBonus() },
+                        onNavigateToSkill = onNavigateToSkill,
+                    )
+                } else {
+                    val quests = state.questsByGroup[currentGroup] ?: emptyList()
+                    if (quests.isEmpty()) {
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .padding(32.dp),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(
+                                text  = stringResource(R.string.quests_none_in_category),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    } else {
+                        LazyColumn(Modifier.fillMaxSize()) {
+                            items(quests, key = { it.quest.id }) { questWithProgress ->
+                                QuestRow(
+                                    questWithProgress = questWithProgress,
+                                    onClaimReward     = { viewModel.claimReward(questWithProgress.quest.id) },
+                                    onDebugReset      = { viewModel.debugResetQuest(questWithProgress.quest.id) },
+                                    onNavigateToSkill = onNavigateToSkill,
+                                )
+                                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                            }
+                            item { Spacer(Modifier.height(16.dp)) }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Daily quests content
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun DailyQuestsContent(
+    quests: List<DailyQuestWithProgress>,
+    nextReset: Long,
+    hideCompleted: Boolean = false,
+    dropDenominator: Int? = null,
+    dropIsDivine: Boolean = false,
+    onClaimQuest: (String) -> Unit,
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val visibleQuests = if (hideCompleted) quests.filter { !it.claimed } else quests
+    val context = LocalContext.current
+    LazyColumn(Modifier.fillMaxSize()) {
+        item {
+            Text(
+                text     = if (dropDenominator != null)
+                    stringResource(if (dropIsDivine) R.string.label_daily_info_pity_divine else R.string.label_daily_info_pity, dropDenominator)
+                else
+                    stringResource(R.string.label_daily_info_complete),
+                style    = MaterialTheme.typography.bodySmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+            )
+            HorizontalDivider()
+        }
+        if (visibleQuests.isEmpty()) {
+            item {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text  = stringResource(R.string.quests_none_in_category),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+        } else {
+            items(visibleQuests, key = { it.template.id }) { q ->
+                DailyQuestCard(
+                    quest           = q,
+                    dropDenominator = dropDenominator,
+                    dropIsDivine    = dropIsDivine,
+                    onClaim         = { onClaimQuest(q.template.id) },
+                    onNavigateToSkill = onNavigateToSkill,
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+            }
+        }
+        item {
+            Text(
+                text     = stringResource(R.string.label_daily_reset, nextReset.toClockTime(context)),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+            )
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Weekly quests content
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun WeeklyQuestsContent(
+    quests: List<WeeklyQuestWithProgress>,
+    nextReset: Long,
+    hideCompleted: Boolean = false,
+    weeklyBonusClaimed: Boolean = false,
+    divineDropChance: Double? = null,
+    onClaimQuest: (String) -> Unit,
+    onClaimBonus: () -> Unit,
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val visibleQuests = if (hideCompleted) quests.filter { !it.claimed } else quests
+    val allQuestsClaimed = quests.isNotEmpty() && quests.all { it.claimed }
+    val context = LocalContext.current
+    val infoText = if (divineDropChance != null) {
+        stringResource(R.string.label_weekly_info, "%.1f%%".format(divineDropChance * 100))
+    } else {
+        stringResource(R.string.label_weekly_info_complete)
+    }
+
+    LazyColumn(Modifier.fillMaxSize()) {
+        item {
+            Text(
+                text     = infoText,
+                style    = MaterialTheme.typography.bodySmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+            )
+            HorizontalDivider()
+        }
+        if (visibleQuests.isEmpty()) {
+            item {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text  = stringResource(R.string.quests_none_in_category),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+        } else {
+            items(visibleQuests, key = { it.template.id }) { q ->
+                WeeklyQuestCard(
+                    quest             = q,
+                    onClaim           = { onClaimQuest(q.template.id) },
+                    onNavigateToSkill = onNavigateToSkill,
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+            }
+        }
+        if (allQuestsClaimed && !weeklyBonusClaimed) {
+            item {
+                Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+                    Text(
+                        text = stringResource(R.string.weekly_bonus_title),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Button(onClick = onClaimBonus, modifier = Modifier.fillMaxWidth()) {
+                        Text(stringResource(R.string.weekly_bonus_claim))
+                    }
+                }
+            }
+        }
+        item {
+            Text(
+                text     = stringResource(R.string.label_weekly_reset, nextReset.toClockTime(context)),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+            )
+        }
+    }
+}
+
+internal fun buildDailyObjective(context: Context, template: DailyQuestTemplate): String =
+    buildDailyObjective(context, template.skill, template.target, template.amount, template.description)
+
+internal fun buildDailyObjective(context: Context, skill: String, target: String, amount: Int, fallback: String): String {
+    val verbResId = when (skill) {
+        "mining"      -> R.string.daily_verb_mining
+        "fishing"     -> R.string.daily_verb_fishing
+        "woodcutting" -> R.string.daily_verb_woodcutting
+        "smithing"    -> R.string.daily_verb_smithing
+        "cooking"     -> R.string.daily_verb_cooking
+        "combat"      -> R.string.daily_verb_combat
+        else          -> return fallback
+    }
+    val verb = context.getString(verbResId)
+    // Combat dailies target an enemy key, not an item key — weekly quests
+    // already localize these; dailies showed raw English names (issue #1146).
+    val item = if (skill == "combat") GameStrings.enemyName(context, target)
+               else GameStrings.itemName(context, target)
+    return "$verb $amount $item."
+}
+
+private fun buildQuestObjective(context: Context, quest: QuestData): String {
+    fun verb(skill: String): String {
+        val id = context.resources.getIdentifier("daily_verb_$skill", "string", context.packageName)
+        return if (id != 0) context.getString(id) else skill.replace('_', ' ')
+    }
+    return when (quest.type) {
+        "gather", "gather_any" -> context.getString(
+            R.string.quest_obj_gather,
+            verb(quest.skill), quest.amount, GameStrings.itemName(context, quest.target),
+        )
+        "craft", "craft_any" -> context.getString(
+            R.string.quest_obj_craft,
+            verb(quest.skill), quest.amount, GameStrings.itemName(context, quest.target),
+        )
+        "prayer"     -> context.getString(R.string.quest_obj_prayer, quest.amount)
+        "kill"       -> context.getString(R.string.quest_obj_kill, quest.amount)
+        "kill_enemy" -> context.getString(R.string.quest_obj_kill_enemy, quest.amount, GameStrings.enemyName(context, quest.target))
+        "dungeon"    -> if (quest.amount == 1)
+            context.getString(R.string.quest_obj_dungeon_once, GameStrings.dungeonName(context, quest.target))
+        else
+            context.getString(R.string.quest_obj_dungeon, GameStrings.dungeonName(context, quest.target), quest.amount)
+        "boss"       -> if (quest.amount == 1)
+            context.getString(R.string.quest_obj_boss_once, GameStrings.bossName(context, quest.target))
+        else
+            context.getString(R.string.quest_obj_boss, GameStrings.bossName(context, quest.target), quest.amount)
+        "dungeon_melee_only"  -> context.getString(R.string.quest_obj_dungeon_melee_only, GameStrings.dungeonName(context, quest.target))
+        "dungeon_ranged_only" -> context.getString(R.string.quest_obj_dungeon_ranged_only, GameStrings.dungeonName(context, quest.target))
+        "dungeon_magic_only"  -> context.getString(R.string.quest_obj_dungeon_magic_only, GameStrings.dungeonName(context, quest.target))
+        "dungeon_no_food"     -> context.getString(R.string.quest_obj_dungeon_no_food, GameStrings.dungeonName(context, quest.target))
+        "collect"             -> context.getString(R.string.quest_obj_collect, quest.amount, GameStrings.itemName(context, quest.target))
+        "slayer_task"         -> context.getString(R.string.quest_obj_slayer_task, quest.amount)
+        else                  -> quest.description
+    }
+}
+
+@Composable
+private fun DailyQuestCard(
+    quest: DailyQuestWithProgress,
+    dropDenominator: Int? = null,
+    dropIsDivine: Boolean = false,
+    onClaim: () -> Unit,
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val context    = LocalContext.current
+    val isComplete = quest.progress >= quest.template.amount
+    val isClaimed  = quest.claimed
+    val name      = GameStrings.questName(context, quest.template.id, quest.template.displayName)
+    val objective = GameStrings.questObjective(context, quest.template.id)
+        .takeIf { it.isNotBlank() }
+        ?: buildDailyObjective(context, quest.template)
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text       = name,
+                style      = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                modifier   = Modifier.weight(1f),
+            )
+            TextButton(
+                onClick        = { onNavigateToSkill(quest.template.skill) },
+                modifier       = Modifier.heightIn(max = 24.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+            ) {
+                Text(stringResource(R.string.guild_go_to_skill))
+            }
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text  = objective,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+
+        if (!isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            val fraction = (quest.progress.toFloat() / quest.template.amount.toFloat()).coerceIn(0f, 1f)
+            LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
+                progress = { fraction },
+                modifier = Modifier.fillMaxWidth(),
+                color    = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(Modifier.height(4.dp))
+            val displayProgress = quest.progress.coerceAtMost(quest.template.amount)
+            Text(
+                text  = "$displayProgress / ${quest.template.amount}",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+
+        if (isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector        = Icons.Filled.CheckCircle,
+                    contentDescription = stringResource(R.string.label_completed),
+                    tint               = MaterialTheme.colorScheme.tertiary,
+                    modifier           = Modifier
+                        .height(18.dp)
+                        .width(18.dp),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text       = stringResource(R.string.label_completed),
+                    style      = MaterialTheme.typography.labelMedium,
+                    color      = MaterialTheme.colorScheme.tertiary,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
+        } else if (isComplete) {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text  = if (dropDenominator != null)
+                    stringResource(if (dropIsDivine) R.string.label_daily_reward_pity_divine else R.string.label_daily_reward_pity, dropDenominator)
+                else
+                    stringResource(R.string.label_daily_reward_complete),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(Modifier.height(6.dp))
+            Button(
+                onClick  = onClaim,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.label_claim_reward))
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Quest row
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun QuestRow(
+    questWithProgress: QuestWithProgress,
+    onClaimReward: () -> Unit,
+    onDebugReset: () -> Unit,
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val context = LocalContext.current
+    val quest   = questWithProgress.quest
+    val dimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+
+    val notStarted = questWithProgress.progress == 0 && !questWithProgress.completed
+    val titleColor = if (notStarted) dimColor else MaterialTheme.colorScheme.onSurface
+    val descColor  = if (notStarted) dimColor else MaterialTheme.colorScheme.onSurfaceVariant
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        // Title
+        val displayName = GameStrings.questName(context, quest.id, quest.name)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text       = displayName,
+                style      = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                color      = titleColor,
+                modifier   = Modifier.weight(1f),
+            )
+            TextButton(
+                onClick        = { onNavigateToSkill(quest.skill) },
+                modifier       = Modifier.heightIn(max = 24.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+            ) {
+                Text(stringResource(R.string.guild_go_to_skill))
+            }
+        }
+        // Description / objective
+        val objective = GameStrings.questObjective(context, quest.id).takeIf { it.isNotBlank() }
+            ?: buildQuestObjective(context, quest)
+        if (objective.isNotBlank()) {
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text  = objective,
+                style = MaterialTheme.typography.bodySmall,
+                color = descColor,
+            )
+        }
+
+        // Progress bar + text (only when in-progress or claimable)
+        if (!questWithProgress.completed && questWithProgress.progress > 0) {
+            Spacer(Modifier.height(8.dp))
+            LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
+                progress  = { questWithProgress.progressFraction },
+                modifier  = Modifier.fillMaxWidth(),
+                color     = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(Modifier.height(4.dp))
+            val displayProgress = questWithProgress.progress.coerceAtMost(quest.amount)
+            Text(
+                text  = "$displayProgress / ${quest.amount}",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+
+        // Completed state
+        if (questWithProgress.completed) {
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector      = Icons.Filled.CheckCircle,
+                    contentDescription = stringResource(R.string.label_completed),
+                    tint             = MaterialTheme.colorScheme.tertiary,
+                    modifier         = Modifier
+                        .height(18.dp)
+                        .width(18.dp),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text  = stringResource(R.string.label_completed),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.tertiary,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
+        }
+
+        if (BuildConfig.DEBUG && (questWithProgress.completed || questWithProgress.progress > 0)) {
+            TextButton(onDebugReset) {
+                Text("Reset")
+            }
+        }
+
+        // Claimable state
+        if (questWithProgress.isClaimable) {
+            Spacer(Modifier.height(10.dp))
+            val rewards = quest.rewards
+            val rewardParts = buildList {
+                if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
+                if (rewards.coins > 0) add(stringResource(R.string.reward_part_coins_plain, rewards.coins.toLong().formatCoins()))
+                rewards.items.forEach { (itemKey, qty) ->
+                    add("${GameStrings.itemName(context, itemKey)} ×$qty")
+                }
+            }
+            if (rewardParts.isNotEmpty()) {
+                Text(
+                    text  = rewardParts.joinToString(" · "),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+                Spacer(Modifier.height(6.dp))
+            }
+            Button(
+                onClick  = onClaimReward,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.label_claim_reward))
+            }
+        }
+    }
+}
+
+@Composable
+private fun WeeklyQuestCard(
+    quest: WeeklyQuestWithProgress,
+    onClaim: () -> Unit,
+    onNavigateToSkill: (String) -> Unit = {},
+) {
+    val context    = LocalContext.current
+    val isComplete = quest.progress >= quest.template.amount
+    val isClaimed  = quest.claimed
+    val name      = GameStrings.questName(context, quest.template.id, quest.template.displayName)
+    val objective = GameStrings.questDesc(context, quest.template.id)
+        .takeIf { it.isNotBlank() }
+        ?: quest.template.description
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text       = name,
+                style      = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                modifier   = Modifier.weight(1f),
+            )
+            TextButton(
+                onClick        = { onNavigateToSkill(quest.template.skill) },
+                modifier       = Modifier.heightIn(max = 24.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+            ) {
+                Text(stringResource(R.string.guild_go_to_skill))
+            }
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text  = objective,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+
+        if (!isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            val fraction = (quest.progress.toFloat() / quest.template.amount.toFloat()).coerceIn(0f, 1f)
+            LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
+                progress = { fraction },
+                modifier = Modifier.fillMaxWidth(),
+                color    = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(Modifier.height(4.dp))
+            val displayProgress = quest.progress.coerceAtMost(quest.template.amount)
+            Text(
+                text  = "$displayProgress / ${quest.template.amount}",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+
+        if (isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector        = Icons.Filled.CheckCircle,
+                    contentDescription = stringResource(R.string.label_completed),
+                    tint               = MaterialTheme.colorScheme.tertiary,
+                    modifier           = Modifier
+                        .height(18.dp)
+                        .width(18.dp),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text       = stringResource(R.string.label_completed),
+                    style      = MaterialTheme.typography.labelMedium,
+                    color      = MaterialTheme.colorScheme.tertiary,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
+        } else if (isComplete) {
+            Spacer(Modifier.height(6.dp))
+            Button(
+                onClick  = onClaim,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.label_claim_reward))
+            }
+        }
+    }
+}

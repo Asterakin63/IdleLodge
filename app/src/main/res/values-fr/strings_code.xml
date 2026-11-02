@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chaînes extraites du code Kotlin (auparavant codées en dur). Préfixe : code_ -->
+<resources>
+    <!-- Descriptions d'accessibilité -->
+    <string name="code_cd_move_up">Monter</string>
+    <string name="code_cd_move_down">Descendre</string>
+    <string name="code_cd_remove_from_queue">Retirer de la file</string>
+    <string name="code_cd_unequip">Retirer</string>
+    <string name="code_cd_back">Retour</string>
+    <string name="code_cd_decrease">Diminuer</string>
+    <string name="code_cd_increase">Augmenter</string>
+    <string name="code_cd_edit_character">Modifier le personnage</string>
+
+    <!-- Interface diverse -->
+    <string name="code_profile_tab_mainland">Continent</string>
+    <string name="code_profile_tab_isle">Île</string>
+    <string name="code_label_lv_unknown">Niv. ??</string>
+    <string name="code_enemy_stats_line">PV : %1$d   Rig. : %2$d   For. : %3$d   Tem. : %4$d</string>
+    <string name="code_stat_damage_abbr">Dég.</string>
+    <string name="code_bone_altar_xp_in_inventory">%1$d XP  •  %2$d en inventaire</string>
+    <string name="code_bone_altar_remaining_xp_base">Reste : %1$d  •  %2$d XP de base</string>
+    <string name="code_blessing_boost_xp">XP de toutes les compétences ×%1$s</string>
+    <string name="code_blessing_boost_defense">+%1$d Tempérance</string>
+    <string name="code_blessing_boost_coins">+%1$d %% de pièces</string>
+    <string name="code_quest_claim_tier_first">Réclamez d\'abord le palier %1$d : %2$s</string>
+    <string name="code_quest_claim_previous_tier_first">Réclamez d\'abord le palier précédent</string>
+    <string name="code_combat_select_spell_first">Choisissez un sort avant d\'entrer.</string>
+    <string name="code_combat_spell_level_required">Niveau %2$d en %1$s requis pour %3$s.</string>
+    <string name="code_armory_unknown_source">Source inconnue</string>
+    <string name="code_tower_name">Échelle de Jacob</string>
+
+    <!-- Île d'Orient : clés de voûte -->
+    <string name="code_sigil_effect_coins" formatted="false">+5 % de pièces trouvées</string>
+    <string name="code_sigil_effect_xp" formatted="false">+5 % d\'XP gagnée</string>
+    <string name="code_sigil_effect_loot" formatted="false">+5 % de chances de butin</string>
+    <string name="code_sigil_effect_ancient_sigil" formatted="false">+5 % de Sceaux anciens trouvés</string>
+    <string name="code_sigil_effect_elder_essence" formatted="false">+5 % d\'Essence ancienne gagnée</string>
+    <string name="code_sigil_effect_elder_bone" formatted="false">+5 % d\'Ossements anciens trouvés</string>
+
+    <!-- Île d'Orient : maître des Décors anciens -->
+    <string name="code_elder_set_progress">Progression des Décors anciens</string>
+    <string name="code_elder_armor_master_hint">Les Décors anciens se façonnent par la Fonderie. Ici, vous sertissez des clés de voûte dans les pièces que vous possédez.</string>
+    <string name="code_elder_armor_no_pieces">Aucun Décor ancien pour l\'instant</string>
+    <string name="code_elder_armor_no_pieces_hint">Façonnez votre première pièce de Décors anciens par la Fonderie pour débloquer le sertissage des clés de voûte.</string>
+    <string name="code_elder_armor_owned">En stock : %1$d</string>
+    <plurals name="code_elder_armor_slots">
+        <item quantity="one">%1$d emplacement</item>
+        <item quantity="many">%1$d emplacements</item>
+        <item quantity="other">%1$d emplacements</item>
+    </plurals>
+    <string name="code_elder_armor_embedder_hint">Sertissez des clés de voûte dans vos Décors anciens pour obtenir des bonus permanents. Remplacer une clé de voûte remet la précédente dans votre inventaire.</string>
+
+    <!-- Île d'Orient : boutique -->
+    <string name="code_shop_cost">%1$d d\'essence</string>
+    <string name="code_shop_bundle_name">Lot : %1$s</string>
+    <string name="code_shop_bones_body">%1$d × %2$s. De quoi nourrir les rites de l\'Île et la réflexion.</string>
+    <string name="code_shop_wood_body">%1$d × %2$s. Un matériau d\'artisanat rare.</string>
+    <string name="code_shop_sigil_premium_name">%1$s (à l\'unité, premium)</string>
+    <string name="code_shop_sigil_premium_body">%1$d × %2$s. Achat direct à prix fort, pour le dernier effort vers des Décors anciens complets.</string>
+    <string name="code_shop_stone_body">%1$s à l\'unité. À sertir pour %2$s.</string>
+
+    <!-- Île d'Orient : suivi sur l'accueil -->
+    <string name="code_isle_piece_crafted">Façonné</string>
+    <string name="code_isle_piece_cost">5 Sceaux + matériaux</string>
+    <string name="code_isle_full_set_assembled">Décors complets réunis. Défiez le Dernier Ancien depuis l\'onglet Épreuves.</string>
+    <string name="code_isle_story_title">L\'histoire de l\'Île</string>
+    <string name="code_isle_story_acts">%1$d / %2$d actes</string>
+    <string name="code_isle_story_intro">Les Anciens ont cherché la vie éternelle par le Grand Rituel et ont été scellés par leur propre œuvre. Retracez leur chemin en quatre actes.</string>
+    <string name="code_isle_story_placeholder">La chaîne de quêtes complète arrivera dans une version ultérieure. Pour l\'instant, triompher du Dernier Ancien débloque l\'acte final.</string>
+    <string name="code_isle_legacy_tabs_hint">Les onglets du bas mènent aux compétences anciennes, aux lieux d\'épreuve, aux quêtes et au profil. Revenez sur le continent une fois terminé.</string>
+    <string name="code_isle_act1_title">Le Débarquement</string>
+    <string name="code_isle_act2_title">La Bibliothèque enfouie</string>
+    <string name="code_isle_act3_title">Le Site du Sceau</string>
+    <string name="code_isle_act4_title">Le Dernier Ancien</string>
+    <string name="code_isle_act1_subtitle">Rivages de Joppé — rencontrez Rowan.</string>
+    <string name="code_isle_act2_subtitle_short">Forêt de cèdres — reconstituez l\'histoire.</string>
+    <string name="code_isle_act2_subtitle">Forêt de cèdres — reconstituez l\'histoire des Anciens.</string>
+    <string name="code_isle_act3_subtitle">Pic de la Fureur — montez jusqu\'au sceau défaillant.</string>
+    <string name="code_isle_act4_subtitle_short">Profondeurs abyssales — affrontez le Dernier Ancien.</string>
+    <string name="code_isle_act4_subtitle">Profondeurs abyssales — affrontez le dernier Ancien déchu.</string>
+
+    <!-- Île d'Orient : quêtes -->
+    <string name="code_elder_isle_quests_title">Quêtes de l\'Île</string>
+    <string name="code_elder_main_quest_chain">Quête principale</string>
+    <string name="code_elder_quests_hint">Les quêtes s\'accomplissent d\'elles-mêmes lorsque leurs objectifs sont atteints. Chaque acte achevé débloque de nouveaux parchemins dans les archives.</string>
+    <string name="code_elder_quest_status_complete">Accomplie</string>
+    <string name="code_elder_quest_status_locked">Verrouillée</string>
+    <string name="code_elder_quest_reward">Récompense : %1$s</string>
+    <string name="code_elder_quest_locked_hint">Accomplissez la quête précédente pour la débloquer.</string>
+    <string name="code_elder_quest_complete_snackbar">Quête de l\'Île accomplie : %1$s</string>
+
+    <string name="code_elder_act1_label">Acte I : Le Débarquement</string>
+    <string name="code_elder_act2_label">Acte II : La Bibliothèque enfouie</string>
+    <string name="code_elder_act3_label">Acte III : Le Site du Sceau</string>
+    <string name="code_elder_act4_label">Acte IV : Le Dernier Ancien</string>
+
+    <string name="code_elder_quest_first_steps_title">Premiers pas</string>
+    <string name="code_elder_quest_first_steps_objective">Terminez les Rivages de Joppé 8 fois pour que Rowan puisse longer la côte sans danger.</string>
+    <string name="code_elder_quest_first_steps_reward">Révèle le passé habité de l\'Île.</string>
+    <string name="code_elder_quest_rowans_cache_title">La réserve de Rowan</string>
+    <string name="code_elder_quest_rowans_cache_objective">Livrez 500 minerais de mythrite. Rowan en a besoin pour réparer son atelier.</string>
+    <string name="code_elder_quest_rowans_cache_reward">Débloque des notes sur l\'étrange géologie de l\'Île.</string>
+    <string name="code_elder_quest_first_cooking_title">Vivres pour le voyage</string>
+    <string name="code_elder_quest_first_cooking_objective">Préparez 250 crabes des flaques. De quoi se nourrir pendant le long trajet vers l\'intérieur des terres.</string>
+    <string name="code_elder_quest_first_cooking_reward">Débloque l\'acte II. Révèle un fragment de l\'histoire des Anciens.</string>
+    <string name="code_elder_quest_cutting_vines_title">Tailler les lianes</string>
+    <string name="code_elder_quest_cutting_vines_objective">Terminez la Forêt de cèdres 15 fois pour atteindre les ruines de la bibliothèque.</string>
+    <string name="code_elder_quest_cutting_vines_reward">Un premier aperçu du Grand Rituel.</string>
+    <string name="code_elder_quest_library_salvage_title">Sauver la bibliothèque</string>
+    <string name="code_elder_quest_library_salvage_objective">Rassemblez 800 minerais abyssaux pour étayer les rayonnages qui s\'effondrent.</string>
+    <string name="code_elder_quest_library_salvage_reward">Rowan peut désormais traduire l\'écriture des Anciens.</string>
+    <string name="code_elder_quest_first_armor_title">À l\'image des Anciens</string>
+    <string name="code_elder_quest_first_armor_objective">Façonnez 4 pièces du décor côtier. Les Anciens portaient quelque chose d\'étrangement semblable.</string>
+    <string name="code_elder_quest_first_armor_reward">Débloque l\'acte III. Rowan compare les pièces à ce qu\'elle a lu.</string>
+    <string name="code_elder_quest_ascent_title">L\'ascension du Pic</string>
+    <string name="code_elder_quest_ascent_objective">Terminez le Pic de la Fureur 20 fois pour atteindre l\'antique autel du sceau.</string>
+    <string name="code_elder_quest_ascent_reward">L\'emplacement et la forme du sceau.</string>
+    <string name="code_elder_quest_voidsteel_study_title">Étude de l\'acier du Néant</string>
+    <string name="code_elder_quest_voidsteel_study_objective">Rassemblez 1200 minerais d\'acier du Néant. Sa structure correspond à l\'alliage du sceau.</string>
+    <string name="code_elder_quest_voidsteel_study_reward">Rowan comprend comment le sceau s\'affaiblit.</string>
+    <string name="code_elder_quest_grove_gear_title">Le décor du Bosquet</string>
+    <string name="code_elder_quest_grove_gear_objective">Façonnez les 4 pièces du décor du Bosquet. L\'approche du sceau exige une protection plus solide.</string>
+    <string name="code_elder_quest_grove_gear_reward">Débloque l\'acte IV. Rowan vous révèle ce qui demeure à l\'intérieur.</string>
+    <string name="code_elder_quest_descent_title">La descente</string>
+    <string name="code_elder_quest_descent_objective">Terminez les Profondeurs abyssales 25 fois pour ouvrir la chambre scellée.</string>
+    <string name="code_elder_quest_descent_reward">La voix du Dernier Ancien, faible d\'abord, puis plus distincte.</string>
+    <string name="code_elder_quest_full_set_title">Réunir les Décors anciens</string>
+    <string name="code_elder_quest_full_set_objective">Façonnez les 8 pièces des Décors anciens. Seul l\'ensemble complet peut résister au sceau.</string>
+    <string name="code_elder_quest_full_set_reward">L\'ultime révélation sur le véritable prix du Rituel.</string>
+    <string name="code_elder_quest_face_last_elder_title">Affronter le Dernier Ancien</string>
+    <string name="code_elder_quest_face_last_elder_objective">Triomphez du Dernier Ancien au fond des Profondeurs abyssales.</string>
+    <string name="code_elder_quest_face_last_elder_reward">La Chevalière ancienne, un titre honorifique de l\'Île et la vérité de Rowan.</string>
+
+    <!-- Île d'Orient : parchemins -->
+    <string name="code_lore_fragments_title">Parchemins</string>
+    <string name="code_lore_fragments_hint">Les parchemins se débloquent au fil des quêtes. Chacun révèle un peu plus de ce qu\'est l\'Île d\'Orient, et de ce que fut réellement le Dernier Ancien.</string>
+
+    <string name="code_lore_prologue_title">Prologue : le mot de Rowan</string>
+    <string name="code_lore_prologue_body">« Vous qui abordez ici, sachez ceci. Je suis la dernière élève vivante de l\'antique École des Anciens. Mes maîtres sont des pierres silencieuses. Ce que j\'ai appris, je l\'offre à qui aura le courage d\'arpenter l\'Île. Lisez avec douceur. Une part de ce qui attend en contrebas ne doit pas être réveillée. »</string>
+    <string name="code_lore_prologue_hint">Remis par Rowan dès votre arrivée.</string>
+
+    <string name="code_lore_1a_title">I.a : Le rivage était entretenu</string>
+    <string name="code_lore_1a_body">« Les flaques autour du quai ne sont pas naturelles. Elles ont été taillées. Quelqu\'un les a bordées de pierre appareillée. Ces pierres sont plus anciennes que tous les temples que j\'ai visités sur le continent, et leurs arêtes sont d\'équerre, comme l\'ouvrage ancien l\'est rarement. L\'Île était habitée bien avant d\'être oubliée. »</string>
+    <string name="code_lore_1a_hint">Rowan l\'écrit après vos premières victoires sur les Rivages.</string>
+
+    <string name="code_lore_1b_title">I.b : La roche se souvient</string>
+    <string name="code_lore_1b_body">« La mythrite que vous m\'avez apportée n\'est pas un minerai naturel. Son grain est trop régulier, sa couleur trop constante. On dirait qu\'elle a poussé plutôt qu\'elle ne s\'est formée. Ma grand-mère m\'avait appris une comptine : \"l\'Île rebâtit l\'Île, pierre après patiente pierre\". Je ne l\'avais jamais comprise. Je commence à la comprendre. »</string>
+    <string name="code_lore_1b_hint">Rowan l\'écrit après avoir reçu sa réserve de mythrite.</string>
+
+    <string name="code_lore_1c_title">I.c : Les poissons sont anciens</string>
+    <string name="code_lore_1c_body">« Le crabe des flaques que vous avez préparé a un goût que je ne connais que d\'un seul poisson, servi un jour par ma grand-mère. Elle l\'appelait \"une écaille du rivage ancien\". Elle n\'en a pas dit plus. La nourriture de l\'Île n\'est pas seulement ancienne. C\'est la même nourriture, sous les mêmes formes, conservée on ne sait comment. »</string>
+    <string name="code_lore_1c_hint">Les notes de cuisine de Rowan après vos préparatifs d\'agapes.</string>
+
+    <string name="code_lore_2a_title">II.a : Le bosquet était un jardin</string>
+    <string name="code_lore_2a_body">« Les racines poussent en rangées. Les arbres sont les mêmes arbres, espacés avec exactitude, entretenus par personne. Ce bosquet était un jardin, le jardin de quelqu\'un, et celui ou celle qui l\'entretenait a laissé ses outils là où ils reposaient. Ils sont encore affûtés. »</string>
+    <string name="code_lore_2a_hint">Les notes de Rowan après vos passages dans la Forêt.</string>
+
+    <string name="code_lore_2b_title">II.b : Un rituel pour ne pas mourir</string>
+    <string name="code_lore_2b_body">« Le plus ancien texte de la bibliothèque décrit un rite que ses auteurs nommaient le Grand Rituel. Il promettait à ceux qui l\'accompliraient qu\'ils ne mourraient pas. Il ne dit pas qu\'ils vivraient. Il y a une différence. Le texte s\'arrête là. Je ne suis pas sûre de vouloir qu\'il continue. »</string>
+    <string name="code_lore_2b_hint">Retrouvé une fois que vous aidez Rowan à étayer la bibliothèque.</string>
+
+    <string name="code_lore_2c_title">II.c : L\'ordre qui porta le Rituel</string>
+    <string name="code_lore_2c_body">« Ils se nommaient les Anciens. Non pour leur âge, mais pour leur rang : ceux qui vinrent les premiers, et ceux qui seraient encore là quand tous les autres auraient disparu. Votre décor côtier correspond à une illustration du deuxième mur. Les mesures sont identiques. Ils portaient ce que vous portez aujourd\'hui. »</string>
+    <string name="code_lore_2c_hint">Rowan compare votre premier décor côtier aux planches de la bibliothèque.</string>
+
+    <string name="code_lore_3a_title">III.a : Le Pic était leur autel</string>
+    <string name="code_lore_3a_body">« Le sommet est un cercle. Le cercle est un sceau. Les pierres du cercle ne sont pas sculptées. Elles sont nommées. Chaque pierre est l\'un des Anciens. Il y a des centaines de pierres. C\'était, je crois, l\'ordre tout entier. »</string>
+    <string name="code_lore_3a_hint">La carte de Rowan après vos ascensions du Pic.</string>
+
+    <string name="code_lore_3b_title">III.b : L\'alliage qui retient</string>
+    <string name="code_lore_3b_body">« Votre acier du Néant et les pierres du sceau sont une même substance. Les Anciens se sont liés avec ce qu\'ils extrayaient d\'ici. Ils ont littéralement coulé leurs noms dans l\'alliage. Voilà comment on contient une chose qui ne cesse jamais de vouloir vivre : on écrit son propre nom contre le sien, et l\'on tient bon. »</string>
+    <string name="code_lore_3b_hint">Rowan compare le minerai d\'acier du Néant à un éclat du sceau.</string>
+
+    <string name="code_lore_3c_title">III.c : Celui qui refusa de s\'étendre</string>
+    <string name="code_lore_3c_body">« Chaque Ancien a marché jusqu\'au cercle et s\'y est étendu pour devenir pierre. Chaque Ancien, sauf un. Le dernier d\'entre eux a refusé, et les autres l\'ont alors enfermé dans le sceau au lieu de l\'y laisser se joindre. Sa pierre aurait porté le nom de \"Merren\". C\'est le mot que ma grand-mère prononçait parfois dans son sommeil, et jamais le jour. »</string>
+    <string name="code_lore_3c_hint">Rowan vous lit le registre du site du sceau.</string>
+
+    <string name="code_lore_4a_title">IV.a : La chambre est inondée</string>
+    <string name="code_lore_4a_body">« La caldeira sous le pic était sèche quand le sceau fut coulé. Elle se remplit aujourd\'hui d\'eau de mer. Le sceau ne cède pas parce qu\'on l\'attaque du dehors, mais parce que ce qu\'il renferme a passé chacun des siècles écoulés à apprendre sa forme de l\'intérieur. Quand il brisera le sceau, il le brisera avec les propres mains du sceau. »</string>
+    <string name="code_lore_4a_hint">Rowan l\'écrit après vos descentes dans l\'Abîme.</string>
+
+    <string name="code_lore_4b_title">IV.b : Le véritable prix du Rituel</string>
+    <string name="code_lore_4b_body">« Le Grand Rituel n\'a pas échoué. Il a fonctionné. Ceux qui l\'ont accompli ont vécu. Ce qu\'il a pris en échange, c\'est tout ce qui rendait ces vies dignes d\'être vécues : leurs noms, leurs proches, le souvenir de leurs morts. Les plus anciens des Anciens étaient les plus vides. Le Dernier Ancien est le plus ancien de tous. Il ne se souvient pas qu\'il fut autrefois Merren, ni que Merren eut une petite-fille, ni que cette petite-fille se tient sur cette île en ce moment même. Rowan n\'en a rien écrit. Elle me l\'a dit d\'un seul souffle. »</string>
+    <string name="code_lore_4b_hint">Rowan vous le confie une fois les Décors anciens complets.</string>
+
+    <string name="code_lore_4c_title">IV.c : Épilogue : ce que vous rapportez</string>
+    <string name="code_lore_4c_body">« Il ne m\'a pas reconnue. Il a reconnu mon décor, parce qu\'il l\'avait porté jadis. Il a reconnu le sceau, parce qu\'il l\'avait façonné. Quand celui-ci s\'est défait, quand j\'ai abattu ce qui restait de lui, il a fait ce qu\'aucun autre Ancien n\'avait fait : il s\'est souvenu. Pas de mon nom. Pas du sien. Il s\'est souvenu du goût du crabe que je lui avais servi au sommet. La recette de ma grand-mère. »\n\n« Cela a suffi. L\'Île vous reconnaît désormais. Les pierres du pic portent un nom de moins, et un de plus. Ce que vous bâtirez ensuite sera votre propre histoire. »</string>
+    <string name="code_lore_4c_hint">La dernière lettre de Rowan, après la chute du Dernier Ancien.</string>
+</resources>

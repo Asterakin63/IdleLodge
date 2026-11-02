@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Quest names and objectives ===== -->
+    <!-- Translator note: quest names are short titles; objectives are action sentences. -->
+
+    <!-- Mining -->
+    <string name="quest_mining_1_name">Carrière I</string>
+    <string name="quest_mining_1_objective">Extraire 500 minerais de cuivre</string>
+    <string name="quest_mining_2_name">Carrière II</string>
+    <string name="quest_mining_2_objective">Extraire 750 minerais de fer</string>
+    <string name="quest_mining_3_name">Carrière III</string>
+    <string name="quest_mining_3_objective">Extraire 1100 blocs de charbon</string>
+    <string name="quest_mining_4_name">Carrière IV</string>
+    <string name="quest_mining_4_objective">Extraire 1650 minerais d\'orichalque</string>
+    <string name="quest_mining_5_name">Carrière V</string>
+    <string name="quest_mining_5_objective">Extraire 2450 minerais d\'électrum</string>
+    <string name="quest_mining_6_name">Carrière VI</string>
+    <string name="quest_mining_6_objective">Extraire 3650 minerais de shamir</string>
+
+    <!-- Woodcutting -->
+    <string name="quest_woodcutting_1_name">Charpente I</string>
+    <string name="quest_woodcutting_1_objective">Couper 500 bûches pour le Temple</string>
+    <string name="quest_woodcutting_2_name">Charpente II</string>
+    <string name="quest_woodcutting_2_objective">Couper 750 bûches de chêne</string>
+    <string name="quest_woodcutting_3_name">Charpente III</string>
+    <string name="quest_woodcutting_3_objective">Couper 1100 bûches d\'olivier</string>
+    <string name="quest_woodcutting_4_name">Charpente IV</string>
+    <string name="quest_woodcutting_4_objective">Couper 1650 bûches d\'acacia</string>
+    <string name="quest_woodcutting_5_name">Charpente V</string>
+    <string name="quest_woodcutting_5_objective">Couper 2450 bûches de cyprès</string>
+    <string name="quest_woodcutting_6_name">Charpente VI</string>
+    <string name="quest_woodcutting_6_objective">Couper 3650 bûches de cèdre</string>
+
+    <!-- Fishing -->
+    <string name="quest_fishing_1_name">Intendance I</string>
+    <string name="quest_fishing_1_objective">Rassembler 500 provisions pour les agapes</string>
+    <string name="quest_fishing_2_name">Intendance II</string>
+    <string name="quest_fishing_2_objective">Rassembler 750 provisions pour les agapes</string>
+    <string name="quest_fishing_3_name">Intendance III</string>
+    <string name="quest_fishing_3_objective">Rassembler 1100 provisions pour les agapes</string>
+    <string name="quest_fishing_4_name">Intendance IV</string>
+    <string name="quest_fishing_4_objective">Rassembler 1650 provisions pour les agapes</string>
+    <string name="quest_fishing_5_name">Intendance V</string>
+    <string name="quest_fishing_5_objective">Rassembler 2450 provisions pour les agapes</string>
+    <string name="quest_fishing_6_name">Intendance VI</string>
+    <string name="quest_fishing_6_objective">Rassembler 3650 provisions pour les agapes</string>
+
+    <!-- Smithing -->
+    <string name="quest_smithing_1_name">Fonderie I</string>
+    <string name="quest_smithing_1_objective">Couler 500 lingots de bronze</string>
+    <string name="quest_smithing_2_name">Fonderie II</string>
+    <string name="quest_smithing_2_objective">Couler 750 lingots de fer</string>
+    <string name="quest_smithing_3_name">Fonderie III</string>
+    <string name="quest_smithing_3_objective">Couler 1100 lingots d\'acier</string>
+    <string name="quest_smithing_4_name">Fonderie IV</string>
+    <string name="quest_smithing_4_objective">Couler 1650 lingots d\'orichalque</string>
+    <string name="quest_smithing_5_name">Fonderie V</string>
+    <string name="quest_smithing_5_objective">Couler 2450 lingots d\'électrum</string>
+    <string name="quest_smithing_6_name">Fonderie VI</string>
+    <string name="quest_smithing_6_objective">Couler 3650 lingots de shamir</string>
+
+    <!-- Cooking - Fish -->
+    <string name="quest_cooking_fish_1_name">Agapes — Mets I</string>
+    <string name="quest_cooking_fish_1_objective">Préparer 500 mets pour les Frères et Sœurs</string>
+    <string name="quest_cooking_fish_2_name">Agapes — Mets II</string>
+    <string name="quest_cooking_fish_2_objective">Préparer 750 mets pour les Frères et Sœurs</string>
+    <string name="quest_cooking_fish_3_name">Agapes — Mets III</string>
+    <string name="quest_cooking_fish_3_objective">Préparer 1100 mets pour les Frères et Sœurs</string>
+    <string name="quest_cooking_fish_4_name">Agapes — Mets IV</string>
+    <string name="quest_cooking_fish_4_objective">Préparer 1650 mets pour les Frères et Sœurs</string>
+    <string name="quest_cooking_fish_5_name">Agapes — Mets V</string>
+    <string name="quest_cooking_fish_5_objective">Préparer 2450 mets pour les Frères et Sœurs</string>
+    <string name="quest_cooking_fish_6_name">Agapes — Mets VI</string>
+    <string name="quest_cooking_fish_6_objective">Préparer 3650 mets pour les Frères et Sœurs</string>
+
+    <!-- Cooking - Beef -->
+    <string name="quest_cooking_beef_1_name">Agapes — Bœuf I</string>
+    <string name="quest_cooking_beef_1_objective">Cuisiner 100 morceaux de bœuf</string>
+    <string name="quest_cooking_beef_2_name">Agapes — Bœuf II</string>
+    <string name="quest_cooking_beef_2_objective">Cuisiner 250 morceaux de bœuf</string>
+    <string name="quest_cooking_beef_3_name">Agapes — Bœuf III</string>
+    <string name="quest_cooking_beef_3_objective">Cuisiner 500 morceaux de bœuf</string>
+
+    <!-- Cooking - Chicken -->
+    <string name="quest_cooking_chicken_1_name">Agapes — Poulet I</string>
+    <string name="quest_cooking_chicken_1_objective">Cuisiner 100 morceaux de poulet</string>
+    <string name="quest_cooking_chicken_2_name">Agapes — Poulet II</string>
+    <string name="quest_cooking_chicken_2_objective">Cuisiner 250 morceaux de poulet</string>
+    <string name="quest_cooking_chicken_3_name">Agapes — Poulet III</string>
+    <string name="quest_cooking_chicken_3_objective">Cuisiner 500 morceaux de poulet</string>
+
+    <!-- Cooking - Mutton -->
+    <string name="quest_cooking_mutton_1_name">Agapes — Mouton I</string>
+    <string name="quest_cooking_mutton_1_objective">Cuisiner 100 morceaux de mouton</string>
+    <string name="quest_cooking_mutton_2_name">Agapes — Mouton II</string>
+    <string name="quest_cooking_mutton_2_objective">Cuisiner 250 morceaux de mouton</string>
+    <string name="quest_cooking_mutton_3_name">Agapes — Mouton III</string>
+    <string name="quest_cooking_mutton_3_objective">Cuisiner 500 morceaux de mouton</string>
+
+    <!-- Fletching -->
+    <string name="quest_fletching_1_name">Écriture I</string>
+    <string name="quest_fletching_1_objective">Rédiger 500 planches de bronze</string>
+    <string name="quest_fletching_2_name">Écriture II</string>
+    <string name="quest_fletching_2_objective">Rédiger 750 planches de fer</string>
+    <string name="quest_fletching_3_name">Écriture III</string>
+    <string name="quest_fletching_3_objective">Rédiger 1100 planches d\'acier</string>
+    <string name="quest_fletching_4_name">Écriture IV</string>
+    <string name="quest_fletching_4_objective">Rédiger 1650 planches d\'orichalque</string>
+    <string name="quest_fletching_5_name">Écriture V</string>
+    <string name="quest_fletching_5_objective">Rédiger 2450 planches d\'électrum</string>
+    <string name="quest_fletching_6_name">Écriture VI</string>
+    <string name="quest_fletching_6_objective">Rédiger 3650 planches de shamir</string>
+
+    <!-- Prayer -->
+    <string name="quest_prayer_1_name">Réflexion I</string>
+    <string name="quest_prayer_1_objective">Inhumer 500 ossements</string>
+    <string name="quest_prayer_2_name">Réflexion II</string>
+    <string name="quest_prayer_2_objective">Inhumer 750 ossements</string>
+    <string name="quest_prayer_3_name">Réflexion III</string>
+    <string name="quest_prayer_3_objective">Inhumer 1100 ossements</string>
+    <string name="quest_prayer_4_name">Réflexion IV</string>
+    <string name="quest_prayer_4_objective">Inhumer 1650 ossements</string>
+    <string name="quest_prayer_5_name">Réflexion V</string>
+    <string name="quest_prayer_5_objective">Inhumer 2450 ossements</string>
+    <string name="quest_prayer_6_name">Réflexion VI</string>
+    <string name="quest_prayer_6_objective">Inhumer 3650 ossements</string>
+
+    <!-- Slayer -->
+    <string name="quest_combat_kills_1_name">Lumière contre Ténèbres I</string>
+    <string name="quest_combat_kills_1_objective">Surmonter 100 adversaires</string>
+    <string name="quest_combat_kills_2_name">Lumière contre Ténèbres II</string>
+    <string name="quest_combat_kills_2_objective">Surmonter 150 adversaires</string>
+    <string name="quest_combat_kills_3_name">Lumière contre Ténèbres III</string>
+    <string name="quest_combat_kills_3_objective">Surmonter 200 adversaires</string>
+    <string name="quest_combat_kills_4_name">Lumière contre Ténèbres IV</string>
+    <string name="quest_combat_kills_4_objective">Surmonter 300 adversaires</string>
+    <string name="quest_combat_kills_5_name">Lumière contre Ténèbres V</string>
+    <string name="quest_combat_kills_5_objective">Surmonter 450 adversaires</string>
+    <string name="quest_combat_kills_6_name">Lumière contre Ténèbres VI</string>
+    <string name="quest_combat_kills_6_objective">Surmonter 650 adversaires</string>
+    <string name="quest_slayer_1_name">Vigilance I</string>
+    <string name="quest_slayer_1_objective">Accomplir 5 missions de couverture</string>
+    <string name="quest_slayer_2_name">Vigilance II</string>
+    <string name="quest_slayer_2_objective">Accomplir 15 missions de couverture</string>
+    <string name="quest_slayer_3_name">Vigilance III</string>
+    <string name="quest_slayer_3_objective">Accomplir 40 missions de couverture</string>
+    <string name="quest_slayer_4_name">Vigilance IV</string>
+    <string name="quest_slayer_4_objective">Accomplir 100 missions de couverture</string>
+    <string name="quest_slayer_5_name">Vigilance V</string>
+    <string name="quest_slayer_5_objective">Accomplir 250 missions de couverture</string>
+    <string name="quest_slayer_6_name">Vigilance VI</string>
+    <string name="quest_slayer_6_objective">Accomplir 500 missions de couverture</string>
+
+    <!-- Dungeon exploration -->
+    <string name="quest_dungeon_farm_1_name">Chemin des épreuves I</string>
+    <string name="quest_dungeon_farm_1_objective">Terminer le Parvis 5 fois</string>
+    <string name="quest_dungeon_goblin_1_name">Chemin des épreuves II</string>
+    <string name="quest_dungeon_goblin_1_objective">Terminer la Grotte de l\'Envie 5 fois</string>
+    <string name="quest_dungeon_spider_1_name">Chemin des épreuves III</string>
+    <string name="quest_dungeon_spider_1_objective">Terminer le Repaire des Mensonges 5 fois</string>
+    <string name="quest_dungeon_bandit_1_name">Chemin des épreuves IV</string>
+    <string name="quest_dungeon_bandit_1_objective">Terminer le Camp des profanes 5 fois</string>
+    <string name="quest_dungeon_undead_1_name">Chemin des épreuves V</string>
+    <string name="quest_dungeon_undead_1_objective">Terminer la Crypte des Dormeurs 5 fois</string>
+    <string name="quest_dungeon_fortress_1_name">Chemin des épreuves VI</string>
+    <string name="quest_dungeon_fortress_1_objective">Terminer les Ruines du Premier Temple 5 fois</string>
+    <string name="quest_dungeon_orc_1_name">Maîtrise des épreuves I</string>
+    <string name="quest_dungeon_orc_1_objective">Terminer le Bastion des Brutes 5 fois</string>
+    <string name="quest_dungeon_volcanic_1_name">Maîtrise des épreuves II</string>
+    <string name="quest_dungeon_volcanic_1_objective">Terminer les Profondeurs de la Colère 5 fois</string>
+    <string name="quest_dungeon_dragon_1_name">Maîtrise des épreuves III</string>
+    <string name="quest_dungeon_dragon_1_objective">Terminer l\'Antre de la Tyrannie 5 fois</string>
+
+    <!-- Crafting -->
+    <string name="quest_crafting_1_name">Orfèvrerie I</string>
+    <string name="quest_crafting_1_objective">Façonner 100 bagues en argent</string>
+    <string name="quest_crafting_2_name">Orfèvrerie II</string>
+    <string name="quest_crafting_2_objective">Façonner 250 bagues en or</string>
+    <string name="quest_crafting_3_name">Orfèvrerie III</string>
+    <string name="quest_crafting_3_objective">Façonner 500 bagues en platine</string>
+    <string name="quest_crafting_4_name">Orfèvrerie IV</string>
+    <string name="quest_crafting_4_objective">Façonner 750 bagues en argent serties de saphir</string>
+    <string name="quest_crafting_5_name">Orfèvrerie V</string>
+    <string name="quest_crafting_5_objective">Façonner 1000 bagues en or serties de saphir</string>
+    <string name="quest_crafting_6_name">Orfèvrerie VI</string>
+    <string name="quest_crafting_6_objective">Façonner 1500 bagues en platine serties de diamant</string>
+
+    <!-- Monster slayer chains -->
+    <string name="quest_goblin_slayer_1_name">Fléau de l\'Envie I</string>
+    <string name="quest_goblin_slayer_1_objective">Surmonter 50 Petites Envies</string>
+    <string name="quest_goblin_slayer_2_name">Fléau de l\'Envie II</string>
+    <string name="quest_goblin_slayer_2_objective">Surmonter 100 Petites Envies</string>
+    <string name="quest_spider_slayer_1_name">Fléau du Mensonge I</string>
+    <string name="quest_spider_slayer_1_objective">Surmonter 40 Tisseuses de mensonges</string>
+    <string name="quest_spider_slayer_2_name">Fléau du Mensonge II</string>
+    <string name="quest_spider_slayer_2_objective">Surmonter 80 Tisseuses de mensonges</string>
+    <string name="quest_skeleton_slayer_1_name">Repos des errants I</string>
+    <string name="quest_skeleton_slayer_1_objective">Apaiser 35 Squelettes errants</string>
+    <string name="quest_skeleton_slayer_2_name">Repos des errants II</string>
+    <string name="quest_skeleton_slayer_2_objective">Apaiser 70 Squelettes errants</string>
+    <string name="quest_bandit_hunter_1_name">Garde du seuil I</string>
+    <string name="quest_bandit_hunter_1_objective">Surmonter 30 Voleurs profanes</string>
+    <string name="quest_bandit_hunter_2_name">Garde du seuil II</string>
+    <string name="quest_bandit_hunter_2_objective">Surmonter 60 Voleurs profanes</string>
+    <string name="quest_orc_slayer_1_name">Fléau des Brutes I</string>
+    <string name="quest_orc_slayer_1_objective">Surmonter 25 Brutes</string>
+    <string name="quest_orc_slayer_2_name">Fléau des Brutes II</string>
+    <string name="quest_orc_slayer_2_objective">Surmonter 50 Brutes</string>
+    <string name="quest_demon_slayer_1_name">Victoire sur les Vices I</string>
+    <string name="quest_demon_slayer_1_objective">Surmonter le Seigneur des Vices</string>
+    <string name="quest_demon_slayer_2_name">Victoire sur les Vices II</string>
+    <string name="quest_demon_slayer_2_objective">Surmonter le Seigneur des Vices 5 fois</string>
+    <string name="quest_demon_slayer_3_name">Victoire sur les Vices III</string>
+    <string name="quest_demon_slayer_3_objective">Surmonter le Seigneur des Vices 25 fois</string>
+    <string name="quest_dragon_slayer_1_name">Fléau du Dragon vert I</string>
+    <string name="quest_dragon_slayer_1_objective">Surmonter 10 Dragons verts de l\'Envie</string>
+    <string name="quest_dragon_slayer_2_name">Fléau du Dragon vert II</string>
+    <string name="quest_dragon_slayer_2_objective">Surmonter 25 Dragons verts de l\'Envie</string>
+
+    <!-- Combat style challenges -->
+    <string name="quest_melee_warrior_1_name">Voie du Maillet I</string>
+    <string name="quest_melee_warrior_1_objective">Terminer la Grotte de l\'Envie en n\'utilisant que le Maillet</string>
+    <string name="quest_melee_warrior_2_name">Voie du Maillet II</string>
+    <string name="quest_melee_warrior_2_objective">Terminer le Camp des profanes en n\'utilisant que le Maillet</string>
+    <string name="quest_melee_warrior_3_name">Voie du Maillet III</string>
+    <string name="quest_melee_warrior_3_objective">Terminer les Ruines du Premier Temple en n\'utilisant que le Maillet</string>
+    <string name="quest_ranger_elite_1_name">Voie de l\'Éloquence I</string>
+    <string name="quest_ranger_elite_1_objective">Terminer la Grotte de l\'Envie en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_ranger_elite_2_name">Voie de l\'Éloquence II</string>
+    <string name="quest_ranger_elite_2_objective">Terminer le Camp des profanes en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_ranger_elite_3_name">Voie de l\'Éloquence III</string>
+    <string name="quest_ranger_elite_3_objective">Terminer les Ruines du Premier Temple en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_mage_master_1_name">Voie des Symboles I</string>
+    <string name="quest_mage_master_1_objective">Terminer la Grotte de l\'Envie en n\'utilisant que les Symboles</string>
+    <string name="quest_mage_master_2_name">Voie des Symboles II</string>
+    <string name="quest_mage_master_2_objective">Terminer le Camp des profanes en n\'utilisant que les Symboles</string>
+    <string name="quest_mage_master_3_name">Voie des Symboles III</string>
+    <string name="quest_mage_master_3_objective">Terminer les Ruines du Premier Temple en n\'utilisant que les Symboles</string>
+
+    <!-- Iron Stomach (no food) challenges -->
+    <string name="quest_iron_stomach_1_name">Vœu de jeûne I</string>
+    <string name="quest_iron_stomach_1_objective">Terminer le Repaire des Mensonges sans consommer de nourriture</string>
+    <string name="quest_iron_stomach_2_name">Vœu de jeûne II</string>
+    <string name="quest_iron_stomach_2_objective">Terminer la Crypte des Dormeurs sans consommer de nourriture</string>
+    <string name="quest_iron_stomach_3_name">Vœu de jeûne III</string>
+    <string name="quest_iron_stomach_3_objective">Terminer le Bastion des Brutes sans consommer de nourriture</string>
+    <string name="quest_iron_stomach_4_name">Vœu de jeûne IV</string>
+    <string name="quest_iron_stomach_4_objective">Terminer l\'Antre de la Tyrannie sans consommer de nourriture</string>
+
+    <!-- Treasure Hunter -->
+    <string name="quest_treasure_hunter_1_name">Collecte de reliques I</string>
+    <string name="quest_treasure_hunter_1_objective">Recueillir 20 soies de tisseuse lors des épreuves</string>
+    <string name="quest_treasure_hunter_2_name">Collecte de reliques II</string>
+    <string name="quest_treasure_hunter_2_objective">Recueillir 10 mailles de l\'Envie lors des épreuves</string>
+    <string name="quest_treasure_hunter_3_name">Collecte de reliques III</string>
+    <string name="quest_treasure_hunter_3_objective">Recueillir 5 cornes du Vice lors des épreuves</string>
+    <string name="quest_treasure_hunter_4_name">Collecte de reliques IV</string>
+    <string name="quest_treasure_hunter_4_objective">Recueillir 3 écailles de dragon lors des épreuves</string>
+
+    <!-- Firemaking -->
+    <string name="quest_firemaking_1_name">Illumination I</string>
+    <string name="quest_firemaking_1_objective">Embraser 500 bûches</string>
+    <string name="quest_firemaking_2_name">Illumination II</string>
+    <string name="quest_firemaking_2_objective">Embraser 750 bûches de chêne</string>
+    <string name="quest_firemaking_3_name">Illumination III</string>
+    <string name="quest_firemaking_3_objective">Embraser 1100 bûches d\'olivier</string>
+    <string name="quest_firemaking_4_name">Illumination IV</string>
+    <string name="quest_firemaking_4_objective">Embraser 1650 bûches d\'acacia</string>
+    <string name="quest_firemaking_5_name">Illumination V</string>
+    <string name="quest_firemaking_5_objective">Embraser 2450 bûches de cyprès</string>
+    <string name="quest_firemaking_6_name">Illumination VI</string>
+    <string name="quest_firemaking_6_objective">Embraser 3650 bûches de cèdre</string>
+
+    <!-- Runecrafting -->
+    <string name="quest_runecrafting_1_name">Symbolique I</string>
+    <string name="quest_runecrafting_1_objective">Tracer 500 Symboles de l\'Air</string>
+    <string name="quest_runecrafting_2_name">Symbolique II</string>
+    <string name="quest_runecrafting_2_objective">Tracer 750 Symboles de l\'Eau</string>
+    <string name="quest_runecrafting_3_name">Symbolique III</string>
+    <string name="quest_runecrafting_3_objective">Tracer 1100 Symboles de la Terre</string>
+    <string name="quest_runecrafting_4_name">Symbolique IV</string>
+    <string name="quest_runecrafting_4_objective">Tracer 1650 Symboles du Feu</string>
+    <string name="quest_runecrafting_5_name">Symbolique V</string>
+    <string name="quest_runecrafting_5_objective">Tracer 2450 Symboles du Sel</string>
+    <string name="quest_runecrafting_6_name">Symbolique VI</string>
+    <string name="quest_runecrafting_6_objective">Tracer 3650 Symboles du Soufre</string>
+
+    <!-- Herblore -->
+    <string name="quest_herblore_1_name">Alchimie I</string>
+    <string name="quest_herblore_1_objective">Préparer 100 Infusions de Rigueur</string>
+    <string name="quest_herblore_2_name">Alchimie II</string>
+    <string name="quest_herblore_2_objective">Mélanger 250 Élixirs de Tempérance</string>
+    <string name="quest_herblore_3_name">Alchimie III</string>
+    <string name="quest_herblore_3_objective">Mélanger 500 Élixirs de Force</string>
+    <string name="quest_herblore_4_name">Alchimie IV</string>
+    <string name="quest_herblore_4_objective">Mélanger 750 Élixirs d\'Éloquence</string>
+    <string name="quest_herblore_5_name">Alchimie V</string>
+    <string name="quest_herblore_5_objective">Mélanger 1000 Élixirs de Sagesse</string>
+    <string name="quest_herblore_6_name">Alchimie VI</string>
+    <string name="quest_herblore_6_objective">Mélanger 1500 Super Élixirs de Force</string>
+
+    <!-- Construction -->
+    <string name="quest_construction_1_name">Architecture I</string>
+    <string name="quest_construction_1_objective">Bâtir 50 étagères en bois</string>
+    <string name="quest_construction_2_name">Architecture II</string>
+    <string name="quest_construction_2_objective">Bâtir 50 tables en chêne</string>
+    <string name="quest_construction_3_name">Architecture III</string>
+    <string name="quest_construction_3_objective">Bâtir 50 armoires en olivier</string>
+    <string name="quest_construction_4_name">Architecture IV</string>
+    <string name="quest_construction_4_objective">Bâtir 50 commodes en acacia</string>
+    <string name="quest_construction_5_name">Architecture V</string>
+    <string name="quest_construction_5_objective">Bâtir 25 trônes en cèdre</string>
+    <string name="quest_construction_upgrade_inn_name">Rénover la Salle humide</string>
+    <string name="quest_construction_upgrade_inn_objective">Améliorer la Salle humide au moins une fois</string>
+    <string name="quest_construction_upgrade_guild_name">Agrandir la Maison des Loges</string>
+    <string name="quest_construction_upgrade_guild_objective">Améliorer la Maison des Loges au moins une fois</string>
+    <string name="quest_construction_upgrade_church_name">Restaurer le Cabinet de réflexion</string>
+    <string name="quest_construction_upgrade_church_objective">Améliorer le Cabinet de réflexion au moins une fois</string>
+
+    <!-- Thieving -->
+    <string name="quest_thieving_1_name">Bienfaisance I</string>
+    <string name="quest_thieving_1_objective">Solliciter 100 fois l\'obole des Apprentis</string>
+    <string name="quest_thieving_2_name">Bienfaisance II</string>
+    <string name="quest_thieving_2_objective">Solliciter 100 fois l\'obole des Compagnons</string>
+    <string name="quest_thieving_3_name">Bienfaisance III</string>
+    <string name="quest_thieving_3_objective">Solliciter 100 fois l\'obole du Secrétaire</string>
+    <string name="quest_thieving_4_name">Bienfaisance IV</string>
+    <string name="quest_thieving_4_objective">Recevoir 5 pendentifs en or pour le Tronc de la Veuve</string>
+    <string name="quest_thieving_5_name">Bienfaisance V</string>
+    <string name="quest_thieving_5_objective">Solliciter 50 fois l\'obole du Vénérable Maître</string>
+
+    <!-- Slayer extended -->
+    <string name="quest_combat_kills_7_name">Lumière contre Ténèbres VII</string>
+    <string name="quest_combat_kills_7_objective">Surmonter 1000 adversaires</string>
+    <string name="quest_combat_kills_8_name">Lumière contre Ténèbres VIII</string>
+    <string name="quest_combat_kills_8_objective">Surmonter 1500 adversaires</string>
+    <string name="quest_combat_kills_9_name">Lumière contre Ténèbres IX</string>
+    <string name="quest_combat_kills_9_objective">Surmonter 2250 adversaires</string>
+    <string name="quest_combat_kills_10_name">Lumière contre Ténèbres X</string>
+    <string name="quest_combat_kills_10_objective">Surmonter 3400 adversaires</string>
+    <string name="quest_combat_kills_11_name">Lumière contre Ténèbres XI</string>
+    <string name="quest_combat_kills_11_objective">Surmonter 5100 adversaires</string>
+    <string name="quest_combat_kills_12_name">Lumière contre Ténèbres XII</string>
+    <string name="quest_combat_kills_12_objective">Surmonter 7650 adversaires</string>
+
+    <!-- New monster slayer chains -->
+    <string name="quest_zombie_slayer_1_name">Éveil I</string>
+    <string name="quest_zombie_slayer_1_objective">Surmonter 35 Somnambules</string>
+    <string name="quest_zombie_slayer_2_name">Éveil II</string>
+    <string name="quest_zombie_slayer_2_objective">Surmonter 70 Somnambules</string>
+    <string name="quest_hellhound_slayer_1_name">Apaiser la Colère I</string>
+    <string name="quest_hellhound_slayer_1_objective">Surmonter 25 Chiens de la Colère</string>
+    <string name="quest_hellhound_slayer_2_name">Apaiser la Colère II</string>
+    <string name="quest_hellhound_slayer_2_objective">Surmonter 50 Chiens de la Colère</string>
+    <string name="quest_troll_slayer_1_name">Humilité I</string>
+    <string name="quest_troll_slayer_1_objective">Surmonter 20 Orgueils des cimes</string>
+    <string name="quest_troll_slayer_2_name">Humilité II</string>
+    <string name="quest_troll_slayer_2_objective">Surmonter 40 Orgueils des cimes</string>
+    <string name="quest_fire_giant_slayer_1_name">Maîtrise de la Fureur I</string>
+    <string name="quest_fire_giant_slayer_1_objective">Surmonter 15 Géants de la Fureur</string>
+    <string name="quest_fire_giant_slayer_2_name">Maîtrise de la Fureur II</string>
+    <string name="quest_fire_giant_slayer_2_objective">Surmonter 30 Géants de la Fureur</string>
+    <string name="quest_ancient_guardian_slayer_1_name">Épreuve des Gardiens I</string>
+    <string name="quest_ancient_guardian_slayer_1_objective">Surmonter 10 Gardiens anciens</string>
+    <string name="quest_ancient_guardian_slayer_2_name">Épreuve des Gardiens II</string>
+    <string name="quest_ancient_guardian_slayer_2_objective">Surmonter 20 Gardiens anciens</string>
+    <string name="quest_lich_slayer_1_name">Libre examen I</string>
+    <string name="quest_lich_slayer_1_objective">Surmonter 10 Liches du Dogme</string>
+    <string name="quest_lich_slayer_2_name">Libre examen II</string>
+    <string name="quest_lich_slayer_2_objective">Surmonter 20 Liches du Dogme</string>
+
+    <!-- Dungeon exploration extended -->
+    <string name="quest_dungeon_imp_1_name">Chemin des épreuves VII</string>
+    <string name="quest_dungeon_imp_1_objective">Terminer la Caverne de la Malice 5 fois</string>
+    <string name="quest_dungeon_infernal_1_name">Maîtrise des épreuves IV</string>
+    <string name="quest_dungeon_infernal_1_objective">Terminer la Citadelle des Vices 5 fois</string>
+    <string name="quest_dungeon_ancient_1_name">Maîtrise des épreuves V</string>
+    <string name="quest_dungeon_ancient_1_objective">Terminer le Temple ancien 5 fois</string>
+
+    <!-- Boss extended -->
+    <string name="quest_kbd_slayer_1_objective">Surmonter le Dragon noir de la Tyrannie</string>
+    <string name="quest_kbd_slayer_2_objective">Surmonter le Dragon noir de la Tyrannie 5 fois</string>
+    <string name="quest_kbd_slayer_3_objective">Surmonter le Dragon noir de la Tyrannie 25 fois</string>
+    <string name="quest_kbd_slayer_4_name">Fléau de la Tyrannie IV</string>
+    <string name="quest_kbd_slayer_4_objective">Surmonter le Dragon noir de la Tyrannie 50 fois</string>
+    <string name="quest_demon_slayer_4_name">Victoire sur les Vices IV</string>
+    <string name="quest_demon_slayer_4_objective">Surmonter le Seigneur des Vices 50 fois</string>
+    <string name="quest_kraken_killer_1_name">Ordo ab Chao I</string>
+    <string name="quest_kraken_killer_1_objective">Surmonter le Kraken du Chaos</string>
+    <string name="quest_kraken_killer_2_name">Ordo ab Chao II</string>
+    <string name="quest_kraken_killer_2_objective">Surmonter le Kraken du Chaos 5 fois</string>
+    <string name="quest_kraken_killer_3_name">Ordo ab Chao III</string>
+    <string name="quest_kraken_killer_3_objective">Surmonter le Kraken du Chaos 25 fois</string>
+    <string name="quest_kraken_killer_4_name">Ordo ab Chao IV</string>
+    <string name="quest_kraken_killer_4_objective">Surmonter le Kraken du Chaos 50 fois</string>
+    <string name="quest_balrog_bane_1_name">Fléau du Fanatisme I</string>
+    <string name="quest_balrog_bane_1_objective">Surmonter la Braise du Fanatisme</string>
+    <string name="quest_balrog_bane_2_name">Fléau du Fanatisme II</string>
+    <string name="quest_balrog_bane_2_objective">Surmonter la Braise du Fanatisme 5 fois</string>
+    <string name="quest_balrog_bane_3_name">Fléau du Fanatisme III</string>
+    <string name="quest_balrog_bane_3_objective">Surmonter la Braise du Fanatisme 25 fois</string>
+    <string name="quest_balrog_bane_4_name">Fléau du Fanatisme IV</string>
+    <string name="quest_balrog_bane_4_objective">Surmonter la Braise du Fanatisme 50 fois</string>
+    <string name="quest_sovereign_slayer_1_name">Que la Lumière soit I</string>
+    <string name="quest_sovereign_slayer_1_objective">Surmonter le Souverain des Ténèbres</string>
+    <string name="quest_sovereign_slayer_2_name">Que la Lumière soit II</string>
+    <string name="quest_sovereign_slayer_2_objective">Surmonter 5 fois le Souverain des Ténèbres</string>
+    <string name="quest_sovereign_slayer_3_name">Que la Lumière soit III</string>
+    <string name="quest_sovereign_slayer_3_objective">Surmonter 25 fois le Souverain des Ténèbres</string>
+    <string name="quest_sovereign_slayer_4_name">Que la Lumière soit IV</string>
+    <string name="quest_sovereign_slayer_4_objective">Surmonter 50 fois le Souverain des Ténèbres</string>
+
+    <!-- Combat style challenges extended -->
+    <string name="quest_melee_warrior_4_name">Voie du Maillet IV</string>
+    <string name="quest_melee_warrior_4_objective">Terminer le Bastion des Brutes en n\'utilisant que le Maillet</string>
+    <string name="quest_melee_warrior_5_name">Voie du Maillet V</string>
+    <string name="quest_melee_warrior_5_objective">Terminer l\'Antre de la Tyrannie en n\'utilisant que le Maillet</string>
+    <string name="quest_ranger_elite_4_name">Voie de l\'Éloquence IV</string>
+    <string name="quest_ranger_elite_4_objective">Terminer le Bastion des Brutes en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_ranger_elite_5_name">Voie de l\'Éloquence V</string>
+    <string name="quest_ranger_elite_5_objective">Terminer l\'Antre de la Tyrannie en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_mage_master_4_name">Voie des Symboles IV</string>
+    <string name="quest_mage_master_4_objective">Terminer le Bastion des Brutes en n\'utilisant que les Symboles</string>
+    <string name="quest_mage_master_5_name">Voie des Symboles V</string>
+    <string name="quest_mage_master_5_objective">Terminer l\'Antre de la Tyrannie en n\'utilisant que les Symboles</string>
+
+    <!-- Iron Stomach extended -->
+    <string name="quest_iron_stomach_5_name">Vœu de jeûne V</string>
+    <string name="quest_iron_stomach_5_objective">Terminer la Citadelle des Vices sans consommer de nourriture</string>
+    <string name="quest_iron_stomach_6_name">Vœu de jeûne VI</string>
+    <string name="quest_iron_stomach_6_objective">Terminer le Temple ancien sans consommer de nourriture</string>
+
+    <!-- Treasure Hunter extended -->
+    <string name="quest_treasure_hunter_5_name">Collecte de reliques V</string>
+    <string name="quest_treasure_hunter_5_objective">Recueillir 10 Crocs de la Colère lors des épreuves</string>
+    <string name="quest_treasure_hunter_6_name">Collecte de reliques VI</string>
+    <string name="quest_treasure_hunter_6_objective">Recueillir 15 os de l\'Orgueil lors des épreuves</string>
+
+    <!-- Daily quest verbs -->
+    <string name="daily_verb_mining">Extraire</string>
+    <string name="daily_verb_fishing">Rassembler</string>
+    <string name="daily_verb_woodcutting">Couper</string>
+    <string name="daily_verb_smithing">Couler</string>
+    <string name="daily_verb_cooking">Cuisiner</string>
+    <string name="daily_verb_combat">Surmonter</string>
+
+    <!-- Daily quest names -->
+    <string name="quest_daily_mine_iron_name">Filon de fer</string>
+    <string name="quest_daily_mine_coal_name">Charbon pour le fourneau</string>
+    <string name="quest_daily_mine_mithril_name">Prospection d\'orichalque</string>
+    <string name="quest_daily_mine_runite_name">Ruée vers le shamir</string>
+    <string name="quest_daily_fish_salmon_name">Criée de l\'aube</string>
+    <string name="quest_daily_fish_lobster_name">Miel et farine</string>
+    <string name="quest_daily_fish_swordfish_name">Marché aux volailles</string>
+    <string name="quest_daily_fish_shark_name">La manne et les cailles</string>
+    <string name="quest_daily_wc_oak_name">Abattage du chêne</string>
+    <string name="quest_daily_wc_willow_name">Travail à l\'oliveraie</string>
+    <string name="quest_daily_wc_yew_name">Coupe de cyprès</string>
+    <string name="quest_daily_wc_magic_name">Cèdres du Liban</string>
+    <string name="quest_daily_smith_iron_name">Coulée de fer</string>
+    <string name="quest_daily_smith_mithril_name">Coulée d\'orichalque</string>
+    <string name="quest_daily_smith_adamantite_name">Art de l\'électrum</string>
+    <string name="quest_daily_smith_runite_name">Fonte du shamir</string>
+    <string name="quest_daily_cook_trout_name">Bouillon pour les agapes</string>
+    <string name="quest_daily_cook_salmon_name">Daurade au four</string>
+    <string name="quest_daily_cook_lobster_name">Festin de miel</string>
+    <string name="quest_daily_cook_swordfish_name">Banquet de volailles</string>
+    <string name="quest_daily_kill_goblin_name">Dompter l\'Envie</string>
+    <string name="quest_daily_kill_bandit_name">Garder le seuil</string>
+    <string name="quest_daily_kill_demon_name">Affronter le vice</string>
+    <string name="quest_daily_kill_dragon_name">Face au dragon</string>
+
+    <!-- Daily quest objectives — override the generated verb+item text, whose item names
+         read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
+    <string name="quest_daily_mine_iron_objective">Extrayez 150 minerais de fer.</string>
+    <string name="quest_daily_mine_coal_objective">Extrayez 300 blocs de charbon.</string>
+    <string name="quest_daily_mine_mithril_objective">Extrayez 50 minerais d\'orichalque.</string>
+    <string name="quest_daily_mine_runite_objective">Extrayez 20 minerais de shamir.</string>
+    <string name="quest_daily_fish_salmon_objective">Rassemblez 120 daurades.</string>
+    <string name="quest_daily_fish_lobster_objective">Rassemblez 60 mesures de miel et de farine.</string>
+    <string name="quest_daily_fish_swordfish_objective">Rassemblez 30 volailles grasses.</string>
+    <string name="quest_daily_fish_shark_objective">Rassemblez 15 cailles du désert.</string>
+    <string name="quest_daily_wc_oak_objective">Coupez 100 bûches de chêne.</string>
+    <string name="quest_daily_wc_willow_objective">Coupez 70 bûches d\'olivier.</string>
+    <string name="quest_daily_wc_yew_objective">Coupez 25 bûches de cyprès.</string>
+    <string name="quest_daily_wc_magic_objective">Coupez 10 bûches de cèdre.</string>
+    <string name="quest_daily_smith_iron_objective">Coulez 40 lingots de fer.</string>
+    <string name="quest_daily_smith_mithril_objective">Coulez 15 lingots d\'orichalque.</string>
+    <string name="quest_daily_smith_adamantite_objective">Coulez 10 lingots d\'électrum.</string>
+    <string name="quest_daily_smith_runite_objective">Coulez 5 lingots de shamir.</string>
+    <string name="quest_daily_cook_trout_objective">Préparez 100 bouillons de légumes pour les agapes.</string>
+    <string name="quest_daily_cook_salmon_objective">Rôtissez 80 daurades pour les agapes.</string>
+    <string name="quest_daily_cook_lobster_objective">Enfournez 40 gâteaux au miel pour les agapes.</string>
+    <string name="quest_daily_cook_swordfish_objective">Rôtissez 20 volailles pour les agapes.</string>
+    <string name="quest_daily_kill_goblin_objective">Surmontez 80 Petites Envies.</string>
+    <string name="quest_daily_kill_bandit_objective">Surmontez 50 Voleurs profanes.</string>
+    <string name="quest_daily_kill_demon_objective">Surmontez 20 Vices mineurs.</string>
+    <string name="quest_daily_kill_dragon_objective">Surmontez 10 Dragons verts de l\'Envie.</string>
+
+    <!-- Quest objective verb strings for craft skills -->
+    <string name="daily_verb_crafting">Façonner</string>
+    <string name="daily_verb_firemaking">Embraser</string>
+    <string name="daily_verb_fletching">Rédiger</string>
+    <string name="daily_verb_herblore">Préparer</string>
+    <string name="daily_verb_runecrafting">Tracer</string>
+    <string name="daily_verb_prayer">Inhumer</string>
+    <string name="daily_verb_construction">Bâtir</string>
+    <string name="daily_verb_farming">Récolter</string>
+
+    <!-- Quest objective format strings -->
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
+    <string name="quest_obj_prayer">Inhumer %1$d ossements de tout type</string>
+    <string name="quest_obj_kill">Surmonter %1$d adversaires</string>
+    <string name="quest_obj_kill_enemy">Surmonter %1$d %2$s</string>
+    <string name="quest_obj_dungeon">Terminer %1$s %2$d fois</string>
+    <string name="quest_obj_dungeon_once">Terminer %1$s</string>
+    <string name="quest_obj_boss">Surmonter %1$s %2$d fois</string>
+    <string name="quest_obj_boss_once">Surmonter %1$s</string>
+    <string name="quest_obj_dungeon_melee_only">Terminer %1$s en n\'utilisant que le Maillet</string>
+    <string name="quest_obj_dungeon_ranged_only">Terminer %1$s en n\'utilisant que l\'Éloquence</string>
+    <string name="quest_obj_dungeon_magic_only">Terminer %1$s en n\'utilisant que les Symboles</string>
+    <string name="quest_obj_dungeon_no_food">Terminer %1$s sans consommer de nourriture</string>
+    <string name="quest_obj_collect">Recueillir %1$d %2$s lors des épreuves</string>
+    <string name="quest_obj_slayer_task">Accomplir %1$d missions de couverture</string>
+
+    <string name="skilling_dungeon_shattered_spire_note_1">De la pierre calcinée et du verre fondu sur une centaine de mètres à la ronde. Le pilier qui se dressait ici n\'est pas tombé — il a été déchiré.</string>
+    <string name="skilling_dungeon_shattered_spire_note_2">Une page arrachée au journal d\'un adepte : « Le Grand Œuvre dépasse toutes les prévisions. La sagesse attendra. Nous devons poursuivre. »</string>
+    <string name="skilling_dungeon_shattered_spire_note_3">Des diagrammes hermétiques gravés dans les pierres encore debout — un cercle de protection mal équarri, manifestement soumis à une tension excessive.</string>
+    <string name="skilling_dungeon_shattered_spire_note_4">Un passage a été ouvert par explosion vers le bas. Des automates se déplacent encore dans les ténèbres en contrebas, suivant d\'anciennes instructions.</string>
+    <string name="skilling_dungeon_shattered_spire_note_5">Le passage descend vers des salles intactes sous les décombres. Les Ruines de l\'École hermétique fonctionnent encore, tant bien que mal.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_1">Comme l\'ignorance elle-même, l\'eau ici est sans fond. D\'étranges lumières palpitent depuis des profondeurs impossibles.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_2">Les poissons remontés des profondeurs luisent faiblement et se dissolvent en quelques minutes. Qu\'est-ce qui s\'en nourrissait ?</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_3">Une carte déchirée signale ce lagon par un seul mot : « NE PAS PÊCHER ». La main qui l\'a écrit tremblait.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_4">Quelque chose remonte à la surface et replonge. Massif. Ancien. Curieux.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_5">Les eaux sombres s\'écartent. Les Ruines abyssales se dressent en contrebas — vastes, étrangères, plus anciennes que tout temple bâti de main humaine.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_1">Deux piliers de pierre s\'élèvent du sol de la grotte, tel un écho englouti de Jakin et Boaz, gravés d\'une écriture qu\'aucun érudit vivant ne sait déchiffrer.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_2">Les poissons se dispersent sans prévenir — une forme imposante passe en dessous.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_3">Un journal détrempé passe à la dérive : « Le temple qu\'ils ont découvert sous les eaux n\'était pas abandonné. Il attendait. »</string>
+    <string name="skilling_dungeon_sunken_grotto_note_4">Une arche submergée palpite d\'une faible lueur antique, sa clé de voûte toujours en place. Le courant attire vers elle.</string>
+    <string name="skilling_dungeon_sunken_grotto_note_5">L\'arche est dégagée. Le Temple englouti se trouve au-delà — une présence ancienne veille à l\'intérieur.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_1">Les murs anciens, couverts de marques de tâcherons, palpitent faiblement. Les maçons opératifs qui ont taillé ce lieu ont disparu depuis longtemps.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_2">Une forge colossale se dresse au bout du passage, ses feux brûlant encore, on ne sait comment, après des siècles — ces feux mêmes qui coulèrent jadis le bronze du Temple.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_3">Des golems de fer se tiennent immobiles dans les alcôves. Leurs yeux vacillent lorsque vous extrayez la pierre à proximité.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_4">Les marques autour de la forge sont un avertissement — quelque chose a été enchaîné ici, et cette chose s\'agite.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_5">Les golems s\'éveillent pleinement. La Forge d\'Hiram se réveille — ses gardiens attendent quiconque aura le courage d\'y pénétrer.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_1">Ici, les arbres saignent de l\'ombre là où ils sont entaillés. Le bois se tord et résiste à la hache.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_2">Une bête des ténèbres guette depuis la canopée. Elle n\'attaque pas — elle se contente d\'observer.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_3">De vieilles pierres de sanctuaire apparaissent entre les troncs tordus, leurs marques sacrées grattées. Quelque chose y vit encore.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_4">La corruption se propage à mesure que vous travaillez. La canopée a soif de la lumière qu\'elle a perdue.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_5">La canopée s\'écarte. Le Sanctuaire profané émerge de la forêt d\'ombre — ses portes s\'ouvrent, dans l\'attente.</string>
+    <string name="skilling_dungeon_whispering_grove_note_1">Ici, les acacias murmurent dans une langue plus ancienne que toute langue connue. On dit qu\'ils se souviennent de l\'endroit où reposa le Maître.</string>
+    <string name="skilling_dungeon_whispering_grove_note_2">Des fondations en pierre visibles sous les racines — les vestiges d\'une loge bâtie bien avant la forêt.</string>
+    <string name="skilling_dungeon_whispering_grove_note_3">Une mise en garde d\'ermite gravée dans l\'écorce : « La clairière au cœur du bosquet n\'est plus ce qu\'elle était. Tenez-vous à l\'écart. »</string>
+    <string name="skilling_dungeon_whispering_grove_note_4">Des lianes corrompues s\'étendent vers vous tandis que vous abattez du bois. Le bosquet résiste à votre présence.</string>
+    <string name="skilling_dungeon_whispering_grove_note_5">Une trouée dans la canopée dévoile des ruines au cœur du bosquet. Les Ruines de la forêt de cèdres invitent à l\'exploration.</string>
+    <string name="skilling_dungeon_thieves_den_note_1">Une page de registre froissée : des noms, des dates et des sommes. Quelqu\'un a consigné des pots-de-vin versés à une figure appelée le Geôlier.</string>
+    <string name="skilling_dungeon_thieves_den_note_2">Gravé sur le mur : « Pour qui fait ses preuves — le Sanctuaire attend. Ni serment, ni questions. »</string>
+    <string name="skilling_dungeon_thieves_den_note_3">Une lettre déchirée avertissant un membre de se tenir à l\'écart des tunnels de l\'est. Aucune raison n\'est donnée.</string>
+    <string name="skilling_dungeon_thieves_den_note_4">Un fragment de carte scellé à la cire. Le sceau est une grossière contrefaçon d\'équerre et de compas, posés de travers.</string>
+    <string name="skilling_dungeon_thieves_den_note_5">Le dernier passage débouche sur une salle voûtée. Au fond, une porte renforcée porte le même faux sceau. Le Sanctuaire des Faux Frères se trouve au-delà.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_1">Des traces de corde fraîches sur les appuis de fenêtre. Quelqu\'un escalade régulièrement cette tour aux langues confondues.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_2">Une cache dissimulée dans un mur fissuré : des crochets, une lame courte et un registre codé.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_3">Le registre consigne les biens volés et le partage des gains. Les scélérats opèrent depuis un lieu situé sous la colline.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_4">Une trappe dans le sol, récemment huilée, aux gonds silencieux. Des traces de bottes usées l\'entourent.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_5">La trappe s\'ouvre sur un escalier taillé qui s\'enfonce profondément dans la terre. L\'Antre des Ombres attend en contrebas.</string>
+    <string name="skilling_dungeon_copper_caverns_note_1">Des éraflures marquent les parois de la galerie, trop profondes et trop larges pour avoir été faites au pic.</string>
+    <string name="skilling_dungeon_copper_caverns_note_2">De vieux outils de carrier, tordus et déformés. Quiconque se trouvait ici est parti dans la précipitation.</string>
+    <string name="skilling_dungeon_copper_caverns_note_3">La note déchirée d\'un carrier : « Nous avons percé jusqu\'à quelque chose, en contrebas. Le contremaître a condamné le puits inférieur. Il refuse de dire pourquoi. »</string>
+    <string name="skilling_dungeon_copper_caverns_note_4">Des secousses viennent d\'en bas. De la poussière tombe du plafond en lentes vagues. Quelque chose s\'éveille.</string>
+    <string name="skilling_dungeon_copper_caverns_note_5">Le puits condamné cède. Une vaste caverne s\'ouvre en contrebas — la Carrière effondrée vous attend.</string>
+    <string name="skilling_dungeon_shadow_vault_note_1">Un dossier sur chaque Maître d\'œuvre de la Cité. Quelqu\'un surveille les ateliers depuis des années.</string>
+    <string name="skilling_dungeon_shadow_vault_note_2">Une porte de chambre forte, entrouverte. À l\'intérieur — des caisses d\'outils et de tabliers volés, ainsi que des étuis à parchemins scellés.</string>
+    <string name="skilling_dungeon_shadow_vault_note_3">Un étui à parchemin se distingue des autres. Il porte le sceau du chantier du Temple. Il est vide.</string>
+    <string name="skilling_dungeon_shadow_vault_note_4">Un journal intime : « La Conjuration ne cherche pas la Lumière. Elle veut la Parole du Maître — arrachée par la force, jamais méritée. »</string>
+    <string name="skilling_dungeon_shadow_vault_note_5">La plus profonde des chambres fortes n\'est pas verrouillée. Elle est gardée. Ce qui s\'y trouve est le plus sombre secret de la Conjuration — ainsi que ses protecteurs les plus redoutables.</string>
+</resources>

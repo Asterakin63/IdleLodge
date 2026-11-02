@@ -1,0 +1,89 @@
+package com.idlelodge.ui.screen.skills
+
+import android.content.Context
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.idlelodge.R
+import com.idlelodge.data.json.ThievingNpcData
+import com.idlelodge.data.model.Skills
+import com.idlelodge.simulator.ThievingSimulator
+import com.idlelodge.util.GameStrings
+import com.idlelodge.ui.viewmodel.QuestIndicator
+
+
+@Composable
+internal fun ThievingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
+    npcs: Map<String, ThievingNpcData>,
+    thievingLevel: Int,
+    currentXp: Long,
+    isStarting: Boolean,
+    hasActiveSession: Boolean,
+    isQueueFull: Boolean,
+    sessionDurationMs: Long,
+    context: Context,
+    npcEfficiency: Map<String, Float> = emptyMap(),
+    petBoostPct: Int = 0,
+    xpBonusMult: Float = 1f,
+    successBonus: Double = 0.0,
+    activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    onSelect: (String) -> Unit,
+) {
+    val scrollState = rememberScrollState()
+    Column(Modifier.padding(bottom = 24.dp)) {
+        Text(
+            text     = stringResource(R.string.label_choose_activity),
+            style    = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+        )
+        Text(
+            text     = stringResource(R.string.skill_thieving_desc),
+            style    = MaterialTheme.typography.bodySmall,
+            color    = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+        )
+        guildDailyButton?.invoke()
+        if (sessionDurationMs > 0) {
+            Text(
+                text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),
+                style    = MaterialTheme.typography.bodySmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+            )
+        }
+        HorizontalDivider()
+        Column(Modifier.verticalScroll(scrollState, flingBehavior = rememberTapFriendlyFlingBehavior())) {
+            npcs.values
+                .sortedBy { it.levelRequired }
+                .forEach { npc ->
+                    val efficiency = npcEfficiency[npc.key] ?: 1.0f
+                    val successChance = (ThievingSimulator.successChance(thievingLevel, npc.levelRequired, efficiency, successBonus) * 100).toInt()
+                    val xpGain = (ThievingSimulator.expectedSessionXp(npc, thievingLevel, efficiency, successBonus, petBoostPct) * xpBonusMult).toLong()
+                    ActivityRow(
+                        name             = GameStrings.thievingNpcName(context, npc.key),
+                        detail           = stringResource(
+                            R.string.thieving_npc_detail,
+                            npc.levelRequired,
+                            npc.baseXp,
+                            successChance,
+                        ),
+                        projectedLabel   = projectedXpLabel(currentXp, xpGain),
+                        isStarting       = isStarting,
+                        hasActiveSession = hasActiveSession,
+                        isQueueFull      = isQueueFull,
+                        questIndicators  = activeQuests["${Skills.THIEVING}:${npc.key}"] ?: emptyList(),
+                        onClick          = { onSelect(npc.key) },
+                    )
+                }
+        }
+    }
+}

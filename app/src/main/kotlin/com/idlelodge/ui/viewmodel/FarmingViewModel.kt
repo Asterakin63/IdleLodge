@@ -1,0 +1,318 @@
+package com.idlelodge.ui.viewmodel
+
+import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.idlelodge.R
+import com.idlelodge.data.json.CropData
+import com.idlelodge.data.model.FarmingPatch
+import com.idlelodge.data.model.PlayerFlags
+import com.idlelodge.data.model.QuestProgress
+import com.idlelodge.data.model.Skills
+import com.idlelodge.repository.FarmingRepository
+import com.idlelodge.repository.GameDataRepository
+import com.idlelodge.repository.GuildRepository
+import com.idlelodge.repository.PlayerRepository
+import com.idlelodge.repository.QuestRepository
+import com.idlelodge.repository.SeasonalEventRepository
+import com.idlelodge.repository.TownRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import com.idlelodge.util.GameStrings
+import com.idlelodge.util.withAppLocale
+import javax.inject.Inject
+
+// ---------------------------------------------------------------------------
+// UI state
+// ---------------------------------------------------------------------------
+
+data class FarmingUiState(
+    val farmingLevel:   Int                    = 1,
+    val farmingXp:      Long                   = 0L,
+    val patchCount:     Int                    = 3,
+    val patches:        List<FarmingPatch>     = emptyList(),
+    val inventory:      Map<String, Int>       = emptyMap(),
+    /** patchNumber.toString() → ash key applied as fertilizer. */
+    val fertilizer:     Map<String, String>    = emptyMap(),
+    val availableCrops: List<CropData>         = emptyList(),
+    val allCrops:       Map<String, CropData>  = emptyMap(),
+    val questIndicators: Map<String, List<QuestIndicator>> = emptyMap(),
+    /** Epoch-ms "now" updated every 10 seconds for time-remaining calculations. */
+    val now:            Long                   = System.currentTimeMillis(),
+    val snackbarMessage: String?               = null,
+    val isLoading:      Boolean                = true,
+    /** Non-null when the plant sheet should be open for a specific patch number. */
+    val plantingPatchNumber: Int?              = null,
+    /** Ash key last used as fertilizer; pre-selected when the plant sheet opens. */
+    val lastFertilizerKey: String?             = null,
+    /** Just-harvested result, shown briefly then cleared. */
+    val harvestResult: HarvestResult?          = null,
+    /** True once the magic bean has been planted; used to hide it from the seed picker permanently. */
+    val magicBeanPlanted: Boolean              = false,
+    /** Shows the persistent beanstalk-climbed dialog until the player dismisses it. */
+    val showBeanClimbDialog: Boolean           = false,
+    val showSessionEndTime: Boolean            = true,
+)
+
+data class HarvestResult(
+    val cropName: String,
+    val itemsGained: Map<String, Int>,
+    val xpGained: Long,
+    val isBulk: Boolean = false,
+)
+
+// ---------------------------------------------------------------------------
+// ViewModel
+// ---------------------------------------------------------------------------
+
+@HiltViewModel
+class FarmingViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val farmingRepo: FarmingRepository,
+    private val playerRepo: PlayerRepository,
+    private val guildRepo: GuildRepository,
+    private val gameData: GameDataRepository,
+    private val townRepo: TownRepository,
+    private val questRepo: QuestRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
+    private val json: Json,
+) : ViewModel() {
+
+    private val _extra = MutableStateFlow(FarmingUiState())
+
+    /** Ticks every 10 seconds so time-remaining labels stay live. */
+    private val nowFlow = flow {
+        while (true) {
+            emit(System.currentTimeMillis())
+            delay(10_000L)
+        }
+    }
+
+    val uiState: StateFlow<FarmingUiState> = combine(
+        playerRepo.playerFlow,
+        farmingRepo.observePatches(),
+        nowFlow,
+        _extra,
+        questRepo.observeProgress(),
+    ) { player, patches, now, extra, questProgress ->
+        if (player == null) return@combine extra.copy(isLoading = true, now = now)
+
+        val levels: Map<String, Int>  = json.decodeFromString(player.skillLevels)
+        val xpMap:  Map<String, Long> = json.decodeFromString(player.skillXp)
+        val inv:    Map<String, Int>  = json.decodeFromString(player.inventory)
+        val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+
+        val farmingLevel = levels[Skills.FARMING] ?: 1
+        val farmingXp    = xpMap[Skills.FARMING]  ?: 0L
+        val patchCount   = farmingRepo.patchCountForLevel(farmingLevel) + townRepo.extraFarmPlots(flags)
+
+        val availableCrops = gameData.crops.values
+            .filter { it.levelRequired <= farmingLevel }
+            .filter { it.id != "magic_bean" || (!flags.magicBeanPlanted && (inv["magic_bean"] ?: 0) > 0) }
+            .sortedBy { it.levelRequired }
+
+        extra.copy(
+            isLoading        = false,
+            farmingLevel     = farmingLevel,
+            farmingXp        = farmingXp,
+            patchCount       = patchCount,
+            patches          = patches,
+            inventory        = inv,
+            availableCrops   = availableCrops,
+            allCrops         = gameData.crops,
+            questIndicators  = computeQuestIndicators(questProgress, flags),
+            fertilizer       = flags.farmingFertilizer,
+            lastFertilizerKey = flags.lastFertilizerKey,
+            magicBeanPlanted = flags.magicBeanPlanted,
+            showSessionEndTime = flags.showSessionEndTime,
+            now              = now,
+        )
+    }.flowOn(Dispatchers.Default)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FarmingUiState())
+
+    // ------------------------------------------------------------------
+
+    fun openPlantSheet(patchNumber: Int) = _extra.update { it.copy(plantingPatchNumber = patchNumber) }
+    fun closePlantSheet()               = _extra.update { it.copy(plantingPatchNumber = null) }
+
+    fun harvestAndPlantAll() {
+        viewModelScope.launch {
+            val now = System.currentTimeMillis()
+            val finishedPatches = uiState.value.patches.filter { it.cropType != "magic_bean" && it.remainingMs(gameData.crops, now) <= 0 }
+
+            if (finishedPatches.isNotEmpty()) {
+                val playerBefore = playerRepo.getOrCreatePlayer()
+                val invBefore = json.decodeFromString<Map<String, Int>>(playerBefore.inventory)
+                val xpBefore = json.decodeFromString<Map<String, Long>>(playerBefore.skillXp)[Skills.FARMING] ?: 0L
+
+                farmingRepo.harvestPatches(finishedPatches.map { it.patchNumber })
+
+                val playerAfter = playerRepo.getOrCreatePlayer()
+                val invAfter = json.decodeFromString<Map<String, Int>>(playerAfter.inventory)
+                val xpAfter = json.decodeFromString<Map<String, Long>>(playerAfter.skillXp)[Skills.FARMING] ?: 0L
+
+                val gained = invAfter.mapValues { (k, v) -> v - (invBefore[k] ?: 0) }.filter { it.value > 0 }
+                guildRepo.recordGuildGathering(Skills.FARMING, gained)
+                _extra.update { it.copy(harvestResult = HarvestResult(context.withAppLocale().getString(R.string.farming_harvest_and_plant), gained, xpAfter - xpBefore, isBulk = true)) }
+                delay(300)
+            }
+
+            val emptyPatches = farmingRepo.getEmptyPatches(uiState.value.patchCount)
+            if (emptyPatches.isNotEmpty()) {
+                _extra.update { it.copy(plantingPatchNumber = -1) }
+            } else if (finishedPatches.isEmpty()) {
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_no_crops_ready)) }
+            }
+        }
+    }
+
+    fun plantCrop(patchNumber: Int, crop: CropData, ashKey: String? = null) {
+        viewModelScope.launch {
+            closePlantSheet()
+            val flags = playerRepo.getFlags()
+            if (flags.lastFertilizerKey != ashKey) {
+                playerRepo.updateFlags(flags.copy(lastFertilizerKey = ashKey))
+            }
+            val seedName = GameStrings.itemName(context.withAppLocale(), crop.seedName)
+
+            if (patchNumber == -1) {
+                delay(300)
+                val emptyPatches = farmingRepo.getEmptyPatches(uiState.value.patchCount)
+
+                if (crop.id == "magic_bean") {
+                    val planted = emptyPatches.firstOrNull()?.let { farmingRepo.plantCrop(it, crop, ashKey) } ?: false
+                    val msg = if (planted) context.withAppLocale().getString(R.string.farming_magic_bean_one_plot)
+                              else context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)
+                    _extra.update { it.copy(snackbarMessage = msg) }
+                } else {
+                    val plantedCount = farmingRepo.plantCrops(emptyPatches, crop, ashKey)
+                    // Bulk planting stops at whichever runs out first: seeds or the chosen fertilizer.
+                    val inv = playerRepo.getInventory()
+                    val shortName = if (ashKey != null && (inv[crop.seedName] ?: 0) > 0) GameStrings.itemName(context.withAppLocale(), ashKey) else seedName
+                    val msg = if (plantedCount == 0) {
+                        if (emptyPatches.isEmpty()) context.withAppLocale().getString(R.string.farming_no_empty_patches)
+                        else context.withAppLocale().getString(R.string.farming_no_seeds_inventory, shortName)
+                    } else {
+                        val base = context.withAppLocale().getString(R.string.farming_planted, plantedCount, seedName)
+                        if (plantedCount < emptyPatches.size) "$base - ${context.withAppLocale().getString(R.string.farming_no_seeds_inventory, shortName)}" else base
+                    }
+                    _extra.update { it.copy(snackbarMessage = msg) }
+                }
+            } else {
+                if (!farmingRepo.plantCrop(patchNumber, crop, ashKey)) {
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)) }
+                }
+            }
+        }
+    }
+
+    fun climbBeanstalk(patchNumber: Int) {
+        viewModelScope.launch {
+            farmingRepo.climbBeanstalk(patchNumber)
+            // A dialog rather than a banner: the unlock is easy to miss after a 30-day
+            // grow if the message auto-dismisses (Discord report, Aug 2026).
+            _extra.update { it.copy(showBeanClimbDialog = true) }
+        }
+    }
+
+    fun beanClimbDialogConsumed() = _extra.update { it.copy(showBeanClimbDialog = false) }
+
+    fun harvestPatch(patchNumber: Int) {
+        viewModelScope.launch {
+            val patch = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber } ?: return@launch
+            val cropKey = patch.cropType ?: return@launch
+            if (cropKey == "magic_bean") return@launch
+            if (gameData.crops[cropKey] == null) return@launch
+
+            // Snapshot inventory before harvest to compute diff
+            val invBefore: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
+            val xpBefore = (json.decodeFromString<Map<String, Long>>(playerRepo.getOrCreatePlayer().skillXp))[Skills.FARMING] ?: 0L
+
+            farmingRepo.harvestPatch(patchNumber)
+
+            val player   = playerRepo.getOrCreatePlayer()
+            val invAfter: Map<String, Int> = json.decodeFromString(player.inventory)
+            val xpAfter  = (json.decodeFromString<Map<String, Long>>(player.skillXp))[Skills.FARMING] ?: 0L
+
+            val gained = invAfter.mapValues { (k, v) -> v - (invBefore[k] ?: 0) }.filter { it.value > 0 }
+            guildRepo.recordGuildGathering(Skills.FARMING, gained)
+            _extra.update {
+                it.copy(harvestResult = HarvestResult(GameStrings.cropName(context, cropKey), gained, xpAfter - xpBefore))
+            }
+        }
+    }
+
+    fun clearPatch(patchNumber: Int) {
+        viewModelScope.launch {
+            val wasBean = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber }?.cropType == "magic_bean"
+            farmingRepo.clearPatch(patchNumber)
+            if (wasBean) _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_bean_cleared)) }
+        }
+    }
+
+    fun harvestResultConsumed() = _extra.update { it.copy(harvestResult = null) }
+    fun snackbarConsumed()      = _extra.update { it.copy(snackbarMessage = null) }
+
+    private fun computeQuestIndicators(
+        questProgress: List<QuestProgress>,
+        flags: PlayerFlags,
+    ): Map<String, List<QuestIndicator>> {
+        val result = mutableMapOf<String, MutableList<QuestIndicator>>()
+        val progressById = questProgress.associateBy { it.questId }
+        val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+
+        fun addIndicator(cropId: String, category: QuestCategory, questId: String, customEmoji: String? = null) {
+            result.getOrPut(cropId) { mutableListOf() }.add(QuestIndicator(category, isCompletable = true, questId = questId, customEmoji = customEmoji))
+        }
+
+        for ((id, quest) in gameData.guildQuests) {
+            if (quest.guild != Skills.FARMING || quest.type != "gather") continue
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
+
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            if (effectiveAmount - (prog?.progress ?: 0) <= 0) continue
+            addIndicator(quest.target, QuestCategory.GUILD, id)
+        }
+
+        for (id in activeGuildDailyIds) {
+            val template = guildPool[id] ?: continue
+            if (template.guild != Skills.FARMING || template.type != "gather") continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            if (template.amount - progress <= 0) continue
+            addIndicator(template.target, QuestCategory.GUILD_DAILY, id)
+        }
+
+        // Seasonal Event Bounties
+        val eventEmoji = seasonalEventRepo.activeEvent()?.iconEmoji ?: QuestCategory.SEASONAL.emoji
+        for (bounty in seasonalEventRepo.getActiveBounties(flags)) {
+            val task = bounty.task
+            if (task.skill != Skills.FARMING || bounty.progress >= task.amount) continue
+            addIndicator(task.target, QuestCategory.SEASONAL, task.id, eventEmoji)
+        }
+
+        return result
+    }
+}
+
+/** Remaining ms until a patch is ready. Negative means ready. */
+fun FarmingPatch.remainingMs(crops: Map<String, CropData>, now: Long): Long {
+    val plantedAt = plantedAt ?: return Long.MAX_VALUE
+    val crop      = crops[cropType] ?: return Long.MAX_VALUE
+    return (plantedAt + crop.growthTimeMs) - now
+}

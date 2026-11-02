@@ -1,0 +1,1098 @@
+package com.idlelodge.ui.screen
+
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.MotionDurationScale
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.idlelodge.R
+import com.idlelodge.data.json.CarnivalPrize
+import com.idlelodge.data.model.Skills
+import com.idlelodge.ui.components.LampSkillDialog
+import com.idlelodge.ui.viewmodel.ActiveGameState
+import com.idlelodge.ui.viewmodel.AppraisalQuad
+import com.idlelodge.ui.viewmodel.CarnivalViewModel
+import com.idlelodge.ui.viewmodel.Difficulty
+import com.idlelodge.util.GameStrings
+import com.idlelodge.util.withAppLocale
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
+import com.idlelodge.data.json.EquipmentData
+import com.idlelodge.simulator.CarnivalSimulator
+import com.idlelodge.ui.viewmodel.AppraisalPair
+import com.idlelodge.ui.viewmodel.CarnivalUiState
+import kotlin.time.Duration.Companion.milliseconds
+
+private val COMBAT_CAPE_SKILLS = setOf(
+    "attack", "strength", "defense", "ranged", "magic", "hp",
+    "warriors", "archers", "mages",
+)
+
+private val POTION_COLORS = listOf(
+    Color(0xFF4CAF50), // green
+    Color(0xFF2196F3), // blue
+    Color(0xFFF44336), // red
+    Color(0xFF9C27B0), // purple
+    Color(0xFFFF9800), // orange (hard mode)
+    Color(0xFF00BCD4), // cyan   (hard mode)
+)
+
+// One single-letter string per potion color, translator-controlled so every
+// language can pick six DISTINCT letters (in French "Violet" and "Vert" would
+// otherwise both abbreviate to V - issue #1146).
+private val POTION_LETTER_RES = listOf(
+    R.string.carnival_potion_letter_green,
+    R.string.carnival_potion_letter_blue,
+    R.string.carnival_potion_letter_red,
+    R.string.carnival_potion_letter_purple,
+    R.string.carnival_potion_letter_orange,
+    R.string.carnival_potion_letter_cyan,
+)
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CarnivalScreen(
+    onBack: () -> Unit = {},
+    viewModel: CarnivalViewModel = hiltViewModel(),
+) {
+    val state by viewModel.uiState.collectAsState()
+
+    AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
+
+    state.pendingLampPrizeKey?.let { prizeKey ->
+        val prize = viewModel.prizesMap[prizeKey]
+        if (prize != null) {
+            LampSkillDialog(
+                skillLevels     = state.skillLevels,
+                skillXp         = state.skillXp,
+                sessionXpGain   = prize.xpAmount,
+                onSkillSelected = viewModel::redeemLamp,
+                onDismiss       = viewModel::dismissLampPicker,
+            )
+        }
+    }
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Column {
+                        Text(stringResource(R.string.carnival_title))
+                        Text(
+                            text  = stringResource(R.string.carnival_ticket_balance, state.ticketBalance),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    }
+                },
+            )
+        },
+    ) { innerPadding ->
+        if (state.isLoading) {
+            Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+            return@Scaffold
+        }
+
+        val pagerState    = rememberPagerState(pageCount = { 3 }, initialPage = state.selectedTab)
+        val coroutineScope = rememberCoroutineScope()
+
+        LaunchedEffect(pagerState.currentPage) {
+            viewModel.selectTab(pagerState.currentPage)
+        }
+
+        Column(modifier = Modifier.padding(innerPadding)) {
+            TabRow(selectedTabIndex = pagerState.currentPage) {
+                Tab(
+                    selected = pagerState.currentPage == 0,
+                    onClick  = { coroutineScope.launch { pagerState.animateScrollToPage(0) } },
+                    text     = { Text(stringResource(R.string.carnival_idle_tab)) },
+                )
+                Tab(
+                    selected = pagerState.currentPage == 1,
+                    onClick  = { coroutineScope.launch { pagerState.animateScrollToPage(1) } },
+                    text     = { Text(stringResource(R.string.carnival_active_tab)) },
+                )
+                Tab(
+                    selected = pagerState.currentPage == 2,
+                    onClick  = { coroutineScope.launch { pagerState.animateScrollToPage(2) } },
+                    text     = { Text(stringResource(R.string.carnival_shop_tab)) },
+                )
+            }
+
+            HorizontalPager(
+                state    = pagerState,
+                modifier = Modifier.fillMaxSize(),
+            ) { page ->
+                when (page) {
+                    0 -> IdleGamesTab(state.skillLevels, state.tierBonus, state.capeMultiplier, state.queueSize, state.maxQueueSize, viewModel)
+                    1 -> ActiveGamesTab(state, viewModel)
+                    2 -> PrizeShopTab(state, viewModel)
+                }
+            }
+        }
+    }
+}
+
+// ── Idle Games ─────────────────────────────────────────────────────────────────
+
+private data class IdleGameDef(
+    val activityKey: String,
+    val titleRes: Int,
+    val descRes: Int,
+    val skillKey: String,
+)
+
+private val IDLE_GAMES = listOf(
+    IdleGameDef("archery_range",         R.string.carnival_archery_range,         R.string.carnival_idle_desc_archery,    Skills.RANGED),
+    IdleGameDef("strongman_competition", R.string.carnival_strongman_competition, R.string.carnival_idle_desc_strongman,  Skills.STRENGTH),
+    IdleGameDef("wizards_duel",          R.string.carnival_wizards_duel,          R.string.carnival_idle_desc_wizard,     Skills.MAGIC),
+    IdleGameDef("fishing_derby",         R.string.carnival_fishing_derby,         R.string.carnival_idle_desc_fishing,    Skills.FISHING),
+)
+
+@Composable
+private fun IdleGamesTab(
+    skillLevels: Map<String, Int>,
+    tierBonus: Float,
+    capeMultiplier: Float,
+    queueSize: Int,
+    maxQueueSize: Int,
+    viewModel: CarnivalViewModel,
+) {
+    val context = LocalContext.current
+    Column(
+        modifier            = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text(
+            text  = stringResource(R.string.carnival_idle_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        IDLE_GAMES.forEach { game ->
+            val skillLevel  = skillLevels[game.skillKey] ?: 1
+            val myTickets = CarnivalSimulator.estimateTickets(skillLevel, tierBonus, capeMultiplier)
+            Surface(
+                shape    = RoundedCornerShape(12.dp),
+                color    = MaterialTheme.colorScheme.surfaceVariant,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier              = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment     = Alignment.CenterVertically,
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text       = stringResource(game.titleRes),
+                                style      = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.SemiBold,
+                            )
+                            Text(
+                                text  = stringResource(game.descRes),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                        Column(horizontalAlignment = Alignment.End, modifier = Modifier.padding(start = 8.dp)) {
+                            Text(
+                                text  = stringResource(R.string.carnival_skill_level, GameStrings.skillName(context, game.skillKey), skillLevel),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Text(
+                                text  = stringResource(R.string.carnival_ticket_yield, myTickets),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    Button(
+                        onClick  = { viewModel.queueIdleGame(game.activityKey, context.withAppLocale().getString(game.titleRes)) },
+                        enabled  = queueSize < maxQueueSize,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.carnival_queue))
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ── Active Games ───────────────────────────────────────────────────────────────
+
+@Composable
+private fun ActiveGamesTab(
+    state: CarnivalUiState,
+    viewModel: CarnivalViewModel,
+) {
+    Column(
+        modifier            = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        RingTossCard(state.ringTossState, state.ringTossDifficulty, viewModel)
+        HammerStrikeCard(state.hammerStrikeState, state.hammerStrikeDifficulty, viewModel)
+        PotionSequenceCard(state.potionSequenceState, state.potionSequenceDifficulty, viewModel)
+        ItemAppraisalCard(
+            gameState  = state.itemAppraisalState,
+            difficulty = state.itemAppraisalDifficulty,
+            quad       = state.currentAppraisalQuad,
+            pair       = state.currentAppraisalPair,
+            viewModel  = viewModel,
+        )
+        if (state.carnivalGameCount >= 5) {
+            ShellGameCard(state.shellGameState, state.shellGameDifficulty, viewModel)
+        } else {
+            LockedGameCard(R.string.carnival_shell_game, R.string.carnival_shell_locked)
+        }
+        if (state.carnivalGameCount >= 6) {
+            HigherOrLowerCard(state.higherLowerState, state.higherLowerDifficulty, viewModel)
+        } else {
+            LockedGameCard(R.string.carnival_higher_lower, R.string.carnival_higher_lower_locked)
+        }
+    }
+}
+
+@Composable
+private fun GameCard(
+    titleRes: Int,
+    descRes: Int,
+    content: @Composable () -> Unit,
+) {
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(stringResource(titleRes), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
+            Text(stringResource(descRes), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            HorizontalDivider()
+            content()
+        }
+    }
+}
+
+@Composable
+private fun LockedGameCard(titleRes: Int, reasonRes: Int) {
+    Surface(
+        shape    = RoundedCornerShape(12.dp),
+        color    = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(stringResource(titleRes), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(reasonRes), style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DifficultySelector(
+    difficulty: Difficulty,
+    onDifficultyChange: (Difficulty) -> Unit,
+) {
+    Row(
+        modifier              = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment     = Alignment.CenterVertically,
+    ) {
+        Text(
+            text  = stringResource(R.string.carnival_difficulty_label),
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        SingleChoiceSegmentedButtonRow(modifier = Modifier.width(200.dp)) {
+            SegmentedButton(
+                selected = difficulty == Difficulty.NORMAL,
+                onClick  = { onDifficultyChange(Difficulty.NORMAL) },
+                shape    = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
+            ) { Text(stringResource(R.string.carnival_difficulty_normal)) }
+            SegmentedButton(
+                selected = difficulty == Difficulty.HARD,
+                onClick  = { onDifficultyChange(Difficulty.HARD) },
+                shape    = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
+            ) { Text(stringResource(R.string.carnival_difficulty_hard)) }
+        }
+    }
+}
+
+@Composable
+private fun CooldownRow(gameKey: String, resumesAtMs: Long, viewModel: CarnivalViewModel) {
+    var remainingMs by remember { mutableStateOf(resumesAtMs - System.currentTimeMillis()) }
+    LaunchedEffect(resumesAtMs) {
+        while (remainingMs > 0) {
+            delay(1_000.milliseconds)
+            remainingMs = resumesAtMs - System.currentTimeMillis()
+        }
+        viewModel.clearCooldownIfExpired(gameKey)
+    }
+    val totalSeconds = (remainingMs / 1_000L).coerceAtLeast(0L)
+    val minutes   = totalSeconds / 60L
+    val seconds = totalSeconds % 60L
+    Text(
+        text  = stringResource(R.string.carnival_cooldown, minutes, seconds),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, viewModel: CarnivalViewModel) {
+    GameCard(R.string.carnival_ring_toss, R.string.carnival_active_ring_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setRingTossDifficulty)
+                val hint = if (difficulty == Difficulty.HARD)
+                    stringResource(R.string.carnival_ring_hard_hint)
+                else
+                    stringResource(R.string.carnival_ring_target_hint)
+                Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                Button(onClick = viewModel::startRingToss, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.TimingActive -> {
+                val haptic = LocalHapticFeedback.current
+                var position by remember { mutableFloatStateOf(0f) }
+                var direction by remember { mutableIntStateOf(1) }
+                LaunchedEffect(Unit) {
+                    while (true) {
+                        delay(16L)
+                        position += direction * 0.008f
+                        if (position >= 1f) { position = 1f; direction = -1 }
+                        if (position <= 0f) { position = 0f; direction = 1 }
+                    }
+                }
+                val targetStart = if (difficulty == Difficulty.HARD) 0.52f else 0.45f
+                val targetEnd   = if (difficulty == Difficulty.HARD) 0.57f else 0.55f
+                val inZone      = position in targetStart..targetEnd
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    BoxWithConstraints(modifier = Modifier.fillMaxWidth().height(24.dp)) {
+                        LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
+                            progress         = { position },
+                            modifier         = Modifier.fillMaxWidth().height(24.dp).clip(RoundedCornerShape(4.dp)),
+                            color            = if (inZone) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                            trackColor       = MaterialTheme.colorScheme.surfaceVariant,
+                        )
+                        // Drawn after the indicator so its opaque track doesn't hide this marker.
+                        // Padding must precede width: the offset has to displace the box, not
+                        // shrink its content to nothing (issue #1372).
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.CenterStart)
+                                .padding(start = maxWidth * targetStart)
+                                .width(maxWidth * (targetEnd - targetStart))
+                                .height(24.dp)
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
+                        )
+                    }
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        val hint = if (difficulty == Difficulty.HARD)
+                            stringResource(R.string.carnival_ring_hard_hint)
+                        else
+                            stringResource(R.string.carnival_ring_target_hint)
+                        Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                    }
+                    // Grade the throw where the bar was when the finger LANDED: onClick only
+                    // fires on release, and at 0.5 bar-widths per second that delay alone can
+                    // carry the position out of the target zone (issue #1372).
+                    val throwInteractions = remember { MutableInteractionSource() }
+                    var pressedPosition by remember { mutableFloatStateOf(-1f) }
+                    LaunchedEffect(throwInteractions) {
+                        throwInteractions.interactions.collect { interaction ->
+                            if (interaction is PressInteraction.Press) pressedPosition = position
+                        }
+                    }
+                    Button(
+                        onClick  = {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            val thrown = if (pressedPosition >= 0f) pressedPosition else position
+                            pressedPosition = -1f
+                            viewModel.submitRingToss(thrown)
+                        },
+                        interactionSource = throwInteractions,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.carnival_throw))
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("ring_toss", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun HammerStrikeCard(gameState: ActiveGameState, difficulty: Difficulty, viewModel: CarnivalViewModel) {
+    GameCard(R.string.carnival_hammer_strike, R.string.carnival_active_hammer_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setHammerStrikeDifficulty)
+                Button(onClick = viewModel::startHammerStrike, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.TimingActive -> {
+                val haptic = LocalHapticFeedback.current
+                var power by remember { mutableFloatStateOf(0f) }
+                var rising by remember { mutableStateOf(true) }
+                LaunchedEffect(Unit) {
+                    while (true) {
+                        delay(16L)
+                        power += if (rising) 0.012f else -0.006f
+                        if (power >= 1f) { power = 1f; rising = false }
+                        if (power <= 0f) { power = 0f; rising = true }
+                    }
+                }
+                val perfectThreshold = if (difficulty == Difficulty.HARD) 0.87f else 0.80f
+                val goodThreshold    = if (difficulty == Difficulty.HARD) 0.60f else 0.50f
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_power_label),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    LinearProgressIndicator(
+                        gapSize = 0.dp,
+                        drawStopIndicator = {},
+                        progress   = { power },
+                        modifier   = Modifier.fillMaxWidth().height(28.dp).clip(RoundedCornerShape(4.dp)),
+                        color      = when {
+                            power >= perfectThreshold -> MaterialTheme.colorScheme.error
+                            power >= goodThreshold    -> MaterialTheme.colorScheme.primary
+                            else                      -> MaterialTheme.colorScheme.primary
+                        },
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                    )
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                        Text(stringResource(R.string.carnival_hammer_miss_zone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.carnival_hammer_good_zone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                        Text(stringResource(R.string.carnival_hammer_perfect_zone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                    }
+                    Button(
+                        onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitHammerStrike(power) },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.carnival_strike))
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("hammer_strike", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun PotionSequenceCard(gameState: ActiveGameState, difficulty: Difficulty, viewModel: CarnivalViewModel) {
+    GameCard(R.string.carnival_potion_sequence, R.string.carnival_active_sequence_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setPotionSequenceDifficulty)
+                Button(onClick = viewModel::startPotionSequence, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.SequenceShowing -> {
+                val seq     = gameState.sequence
+                val current = gameState.currentIndex
+                LaunchedEffect(current) {
+                    delay(1_000L)
+                    viewModel.advancePotionSequence()
+                }
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(stringResource(R.string.carnival_sequence_watch), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                    val chunkSize = 4
+                    seq.chunked(chunkSize).forEachIndexed { rowIdx, chunk ->
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            chunk.forEachIndexed { localIdx, colorIdx ->
+                                val i = rowIdx * chunkSize + localIdx
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(CircleShape)
+                                        .background(if (i == current) POTION_COLORS[colorIdx] else POTION_COLORS[colorIdx].copy(alpha = 0.3f))
+                                        .border(if (i == current) 2.dp else 0.dp, MaterialTheme.colorScheme.onSurface, CircleShape),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    if (i == current) {
+                                        Text(
+                                            text  = stringResource(POTION_LETTER_RES[colorIdx]),
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White,
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.SequenceInput -> {
+                val inputCount = gameState.userInput.size
+                val colorCount = 6
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_sequence_input, inputCount + 1, gameState.sequence.size),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    // First row: first 3 colors
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        (0 until minOf(3, colorCount)).forEach { colorIdx ->
+                            PotionButton(colorIdx) { viewModel.submitPotionInput(colorIdx) }
+                        }
+                    }
+                    // Second row: remaining colors
+                    if (colorCount > 3) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            (3 until colorCount).forEach { colorIdx ->
+                                PotionButton(colorIdx) { viewModel.submitPotionInput(colorIdx) }
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("potion_sequence", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+@Composable
+private fun PotionButton(colorIdx: Int, onClick: () -> Unit) {
+    val haptic = LocalHapticFeedback.current
+    Box(
+        modifier = Modifier
+            .size(56.dp)
+            .clip(CircleShape)
+            .background(POTION_COLORS[colorIdx])
+            .border(2.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f), CircleShape),
+        contentAlignment = Alignment.Center,
+    ) {
+        Surface(
+            onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); onClick() },
+            color   = Color.Transparent,
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Text(
+                    text  = stringResource(POTION_LETTER_RES[colorIdx]),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ItemAppraisalCard(
+    gameState: ActiveGameState,
+    difficulty: Difficulty,
+    quad: AppraisalQuad?,
+    pair: AppraisalPair?,
+    viewModel: CarnivalViewModel,
+) {
+    GameCard(R.string.carnival_item_appraisal, R.string.carnival_active_appraisal_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setItemAppraisalDifficulty)
+                Button(onClick = viewModel::startItemAppraisal, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.AppraisalPlaying -> {
+                val haptic = LocalHapticFeedback.current
+                if (difficulty == Difficulty.HARD && quad != null) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text       = stringResource(R.string.carnival_appraisal_which),
+                            style      = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign  = TextAlign.Center,
+                            modifier   = Modifier.fillMaxWidth(),
+                        )
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(0) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[0]), textAlign = TextAlign.Center)
+                            }
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(1) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[1]), textAlign = TextAlign.Center)
+                            }
+                        }
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(2) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[2]), textAlign = TextAlign.Center)
+                            }
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(3) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[3]), textAlign = TextAlign.Center)
+                            }
+                        }
+                    }
+                } else if (pair != null) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text       = stringResource(R.string.carnival_appraisal_which),
+                            style      = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign  = TextAlign.Center,
+                            modifier   = Modifier.fillMaxWidth(),
+                        )
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(0) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, pair.itemA), textAlign = TextAlign.Center)
+                            }
+                            OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(1) }, modifier = Modifier.weight(1f)) {
+                                Text(GameStrings.itemName(LocalContext.current, pair.itemB), textAlign = TextAlign.Center)
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("item_appraisal", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ShellGameCard(gameState: ActiveGameState, difficulty: Difficulty, viewModel: CarnivalViewModel) {
+    GameCard(R.string.carnival_shell_game, R.string.carnival_active_shell_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setShellGameDifficulty)
+                Button(onClick = viewModel::startShellGame, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.ShellGameShowing -> {
+                val cupCount = gameState.cupCount
+                val gemPos   = gameState.gemPos
+                LaunchedEffect(Unit) {
+                    delay(2_000L)
+                    viewModel.advanceShellGame()
+                }
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_shell_showing, gemPos + 1),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        (0 until cupCount).forEach { i ->
+                            Surface(
+                                shape  = RoundedCornerShape(8.dp),
+                                color  = if (i == gemPos) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                                modifier = Modifier.size(56.dp),
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(
+                                        text  = if (i == gemPos) "💎" else "🥤",
+                                        style = MaterialTheme.typography.bodyLarge,
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.ShellGameSwapping -> {
+                val cupCount  = gameState.cupCount
+                val swaps     = gameState.swaps
+                val isHard    = cupCount == 4
+                val animMs    = if (isHard) 160 else 340
+                val pauseMs   = if (isHard) 50L  else 130L
+                val density   = LocalDensity.current
+                val stepPx    = with(density) { 64.dp.toPx() }
+                val offsets   = remember(gameState) { Array(cupCount) { Animatable(0f) } }
+                LaunchedEffect(swaps) {
+                    // The shuffle is the gameplay itself, so it must ignore the system animator
+                    // duration scale: at 0 the cups never move, at 10x the game is trivial
+                    withContext(object : MotionDurationScale {
+                        override val scaleFactor: Float get() = 1f
+                    }) {
+                        var gemSlot = gameState.gemPos
+                        for ((a, b) in swaps) {
+                            val dist = (b - a) * stepPx
+                            coroutineScope {
+                                launch { offsets[a].animateTo( dist, animationSpec = tween(animMs)) }
+                                launch { offsets[b].animateTo(-dist, animationSpec = tween(animMs)) }
+                            }
+                            offsets[a].snapTo(0f)
+                            offsets[b].snapTo(0f)
+                            if (gemSlot == a) gemSlot = b else if (gemSlot == b) gemSlot = a
+                            delay(pauseMs)
+                        }
+                        viewModel.finishShellGame(gemSlot)
+                    }
+                }
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text       = stringResource(R.string.carnival_shell_watch),
+                        style      = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        (0 until cupCount).forEach { slotIdx ->
+                            Surface(
+                                shape    = RoundedCornerShape(8.dp),
+                                color    = MaterialTheme.colorScheme.surface,
+                                modifier = Modifier
+                                    .size(56.dp)
+                                    .graphicsLayer { translationX = offsets[slotIdx].value },
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(text = "🥤", style = MaterialTheme.typography.bodyLarge)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.ShellGamePicking -> {
+                val cupCount = gameState.cupCount
+                val haptic = LocalHapticFeedback.current
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_shell_pick),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        (0 until cupCount).forEach { i ->
+                            OutlinedButton(
+                                onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitShellGuess(i) },
+                                modifier = Modifier.size(56.dp).padding(0.dp),
+                            ) {
+                                Text(
+                                    text  = "${i + 1}",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("shell_game", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun HigherOrLowerCard(gameState: ActiveGameState, difficulty: Difficulty, viewModel: CarnivalViewModel) {
+    GameCard(R.string.carnival_higher_lower, R.string.carnival_active_higher_desc) {
+        when (gameState) {
+            is ActiveGameState.Ready -> {
+                DifficultySelector(difficulty, viewModel::setHigherLowerDifficulty)
+                Button(onClick = viewModel::startHigherOrLower, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.carnival_play))
+                }
+            }
+            is ActiveGameState.HigherOrLowerPlaying -> {
+                val totalRounds = gameState.numbers.size - 1
+                val current = gameState.numbers[gameState.currentIdx]
+                val haptic = LocalHapticFeedback.current
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_higher_lower_score, gameState.correctCount, gameState.currentIdx),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Text(
+                        text       = stringResource(R.string.carnival_higher_lower_current, current),
+                        style      = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color      = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        text  = stringResource(R.string.carnival_higher_lower_round, gameState.currentIdx + 1, totalRounds),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(
+                            onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitHigherOrLower(true) },
+                            modifier = Modifier.weight(1f),
+                        ) {
+                            Text(stringResource(R.string.carnival_higher_lower_btn_higher))
+                        }
+                        OutlinedButton(
+                            onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitHigherOrLower(false) },
+                            modifier = Modifier.weight(1f),
+                        ) {
+                            Text(stringResource(R.string.carnival_higher_lower_btn_lower))
+                        }
+                    }
+                }
+            }
+            is ActiveGameState.HigherOrLowerResult -> {
+                Column(
+                    modifier            = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        text  = stringResource(R.string.carnival_higher_lower_last_card, gameState.lastNumber),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        text  = stringResource(R.string.carnival_higher_lower_result, gameState.totalCorrect, gameState.totalRounds, gameState.tickets),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Button(onClick = viewModel::confirmHigherOrLowerResult, modifier = Modifier.fillMaxWidth()) {
+                        Text(stringResource(R.string.carnival_higher_lower_continue))
+                    }
+                }
+            }
+            is ActiveGameState.OnCooldown -> CooldownRow("higher_lower", gameState.resumesAtMs, viewModel)
+            else -> {}
+        }
+    }
+}
+
+// ── Prize Shop ─────────────────────────────────────────────────────────────────
+
+@Composable
+private fun PrizeShopTab(
+    state: CarnivalUiState,
+    viewModel: CarnivalViewModel,
+) {
+    Column(
+        modifier            = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        viewModel.prizes.forEach { prize ->
+            PrizeRow(
+                prize      = prize,
+                tickets    = state.ticketBalance,
+                alreadyOwned = prize.key in state.ownedPrizeKeys,
+                equipData  = if (prize.type == "equipment") viewModel.gameData.equipment[prize.key] else null,
+                onRedeem   = { viewModel.redeem(prize.key) },
+            )
+            HorizontalDivider()
+        }
+    }
+}
+
+@Composable
+private fun PrizeRow(
+    prize: CarnivalPrize,
+    tickets: Int,
+    alreadyOwned: Boolean,
+    equipData: EquipmentData?,
+    onRedeem: () -> Unit,
+) {
+    val context = LocalContext.current
+
+    Row(
+        modifier              = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment     = Alignment.Top,
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text       = GameStrings.carnivalPrizeName(context, prize.type, prize.key, prize.displayName),
+                style      = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+            )
+            if (equipData != null) {
+                val statParts = buildList {
+                    if (equipData.attackBonus   > 0) add(stringResource(R.string.carnival_stat_atk, equipData.attackBonus))
+                    if (equipData.strengthBonus > 0) add(stringResource(R.string.carnival_stat_str, equipData.strengthBonus))
+                    if (equipData.defenseBonus  > 0) add(stringResource(R.string.carnival_stat_def, equipData.defenseBonus))
+                    if ((equipData.capeBonus) > 0f) {
+                        val skillName = if (equipData.capeSkill != null) "${GameStrings.skillName(context, equipData.capeSkill)} " else ""
+                        val bonus = (equipData.capeBonus * 100).toInt()
+                        val label = when(equipData.capeSkill) {
+                            in COMBAT_CAPE_SKILLS -> stringResource(R.string.carnival_stat_xp, skillName, bonus)
+                            else -> stringResource(R.string.carnival_stat_yield, skillName, bonus)
+                        }
+                        add(label)
+                    }
+                }
+                if (statParts.isNotEmpty()) {
+                    Text(
+                        text  = statParts.joinToString("  "),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                val reqs = equipData.requirements
+                if (reqs.isNotEmpty()) {
+                    Text(
+                        text  = stringResource(R.string.slayer_requires, reqs.entries.joinToString { (s, l) -> "${GameStrings.skillName(context, s)} $l" }),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            } else {
+                Text(
+                    text  = GameStrings.carnivalPrizeDesc(context, prize.type, prize.key, prize.description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Column(
+            horizontalAlignment = Alignment.End,
+            modifier            = Modifier.padding(start = 8.dp),
+        ) {
+            Text(
+                text       = stringResource(R.string.carnival_ticket_cost, prize.ticketCost),
+                style      = MaterialTheme.typography.bodyMedium,
+                color      = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(Modifier.height(4.dp))
+            Button(
+                onClick  = onRedeem,
+                enabled  = !alreadyOwned && tickets >= prize.ticketCost,
+            ) {
+                Text(
+                    if (alreadyOwned) stringResource(R.string.slayer_owned)
+                    else stringResource(R.string.carnival_redeem)
+                )
+            }
+        }
+    }
+}
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Notification channel metadata ===== -->
+    <string name="notif_channel_sessions_name">Work Alerts</string>
+    <string name="notif_channel_sessions_desc">Notifications when your work sessions are complete</string>
+    <string name="notif_channel_farming_name">Cultivation Alerts</string>
+    <string name="notif_channel_farming_desc">Notifications when your crops are ripe for harvest</string>
+
+    <!-- ===== Session complete ===== -->
+    <string name="notif_session_complete_title">Work Complete!</string>
+    <!-- Translator note: %1$s = localised skill name (e.g. "Mining") -->
+    <string name="notif_session_complete_body">Your %1$s work is done. Tap to collect your wages.</string>
+
+    <!-- ===== Buff alerts ===== -->
+    <string name="notif_channel_buffs_name">Boon Alerts</string>
+    <string name="notif_channel_buffs_desc">Notifications when your active boons expire</string>
+    <string name="notif_xp_boost_expired_title">XP Boost Expired</string>
+    <string name="notif_xp_boost_expired_body">Your 2x XP boost has run out. Visit the Steward\'s Shop to reactivate it.</string>
+    <string name="notif_blessing_expired_title">Meditation Faded</string>
+    <string name="notif_blessing_expired_body">Your meditation has faded. Return to the Chamber of Reflection to renew it.</string>
+
+    <!-- ===== Farming ready ===== -->
+    <string name="notif_farming_ready_title">Harvest Ready!</string>
+    <!-- Translator note: %1$s = localised crop name (e.g. "Wheat"). Adjust grammar as needed for your language. -->
+    <string name="notif_farming_ready_body">Your %1$s is ripe for harvest.</string>
+    <!-- Plural variant used when multiple patches are ready -->
+    <!-- Translator note: %1$d = number of patches ready -->
+    <string name="notif_farming_ready_body_multi">%1$d plots are ripe for harvest.</string>
+</resources>
